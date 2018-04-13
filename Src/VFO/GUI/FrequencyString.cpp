@@ -12,7 +12,7 @@
 namespace VFO
 {
 
-FrequencyString::FrequencyString(uint16_t x, uint16_t y, Background *b)
+FrequencyString::FrequencyString(uint8_t x, uint8_t y, Background *b)
 {
 	_back = b;
 	_x = x;
@@ -26,12 +26,12 @@ void FrequencyString::setBackground(Background *back)
 	memset(_longBuf, 0, sizeof(_longBuf));
 }
 
-void FrequencyString::draw(unsigned long freq)
+void FrequencyString::draw(uint32_t freq)
 {
 	char buff[12];
 
 	valToStr(freq, buff, sizeof(buff), '.');
-	uint16_t x_offs;
+	uint8_t x_offs;
 	for (uint8_t i = 0; i < sizeof(buff) - 2; i++)
 	{
 		if (buff[i] != _longBuf[i])

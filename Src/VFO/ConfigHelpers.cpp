@@ -7,7 +7,8 @@
 
 #include "ConfigHelpers.h"
 
-namespace VFO {
+namespace VFO
+{
 
 int32_t _getCalibration()
 {
@@ -18,6 +19,7 @@ void _setCalibration(int32_t value)
 {
 	_mainController->getConfig()->setCalibration(value);
 }
+
 int32_t _getIFrequency()
 {
 	return _mainController->getConfig()->getIFrequency();

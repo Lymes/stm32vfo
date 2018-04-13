@@ -83,7 +83,6 @@ void VFOController::reset()
 {
 	_conf->setFrequency(7125000);
 	_conf->setCalibration(0);
-	_conf->setStep(0);
 	_conf->setIFrequency(11500000);
 	_conf->setBFrequency(4000000);
 	_conf->setBrightness(255);

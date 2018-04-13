@@ -47,8 +47,8 @@ GradientBox::GradientBox(uint8_t x, uint8_t y, uint8_t w, uint8_t h)
 
 uint16_t GradientBox::getBackColor(uint8_t x, uint8_t y)
 {
-	uint16_t absY = y - _y;
-	uint16_t absX = x - _x;
+	uint8_t absY = y - _y;
+	uint8_t absX = x - _x;
 	RGB rowStart =
 	{
 			(uint8_t) (upLeft.r + (downLeft.r - upLeft.r) * absY / _h),
@@ -165,7 +165,7 @@ void GradientBox::clear(uint8_t x, uint8_t y, uint8_t w, uint8_t h)
 }
 
 
-uint16_t backgroundColor(void *ptr, uint16_t x, uint16_t y)
+uint16_t backgroundColor(void *ptr, uint8_t x, uint8_t y)
 {
 	return ((Background *) ptr)->getBackColor(x, y);
 }

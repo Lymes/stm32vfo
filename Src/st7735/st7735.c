@@ -639,7 +639,7 @@ void ST7735_PutStr7x11(uint8_t X, uint8_t Y, char *str, uint16_t color,
 }
 
 void ST7735_PutStr7x11Ex(uint8_t X, uint8_t Y, char *str, uint16_t color,
-		void *ptr, uint16_t (*bgcolor)(void *, uint16_t, uint16_t))
+		void *ptr, uint16_t (*bgcolor)(void *, uint8_t, uint8_t))
 {
 	while (*str)
 	{
@@ -662,7 +662,7 @@ void ST7735_PutStr7x11Ex(uint8_t X, uint8_t Y, char *str, uint16_t color,
 }
 
 void ST7735_PutChar7x11Ex(uint16_t X, uint16_t Y, uint8_t chr, uint16_t color,
-		void *ptr, uint16_t (*bgcolor)(void *, uint16_t, uint16_t))
+		void *ptr, uint16_t (*bgcolor)(void *, uint8_t, uint8_t))
 {
 	uint16_t i, j;
 	uint8_t buffer[11];
@@ -729,7 +729,7 @@ void ST7735_PutChar7x11Ex(uint16_t X, uint16_t Y, uint8_t chr, uint16_t color,
 
 void ST7735_PutChar5x7Ex(uint8_t scale, uint16_t X, uint16_t Y, uint8_t chr,
 		uint16_t color, void *ptr,
-		uint16_t (*bgcolor)(void *, uint16_t, uint16_t))
+		uint16_t (*bgcolor)(void *, uint8_t, uint8_t))
 {
 	uint16_t i, j;
 	uint8_t buffer[5];
@@ -831,7 +831,7 @@ void ST7735_PutChar5x7Ex(uint8_t scale, uint16_t X, uint16_t Y, uint8_t chr,
 
 void ST7735_PutStr5x7Ex(uint8_t scale, uint8_t X, uint8_t Y, char *str,
 		uint16_t color, void *ptr,
-		uint16_t (*bgcolor)(void *, uint16_t, uint16_t))
+		uint16_t (*bgcolor)(void *, uint8_t, uint8_t))
 {
 	// scale equals 1 drawing faster
 	if (scale == 1)

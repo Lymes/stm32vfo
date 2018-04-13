@@ -16,11 +16,11 @@ namespace VFO
 class FrequencyString
 {
 	uint8_t _longBuf[12];
-	uint16_t _x, _y;
+	uint8_t _x, _y;
 	Background *_back;
 
 public:
-	FrequencyString(uint16_t x, uint16_t y, Background *b);
+	FrequencyString(uint8_t x, uint8_t y, Background *b);
 
 	void setBackground(Background *back);
 

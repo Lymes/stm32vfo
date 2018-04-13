@@ -99,10 +99,9 @@ void GUIMainView::drawBackground()
 
 void GUIMainView::pushEncoderIncrement(int16_t increment)
 {
-	uint16_t step = _mainController->getConfig()->getStep();
 	uint32_t freq = _mainController->getConfig()->getFrequency();
 
-	freq += increment * (step + 1) * 10;
+	freq += increment * 10;
 	_mainController->setFrequency(freq);
 	_freqString->draw(freq);
 }
