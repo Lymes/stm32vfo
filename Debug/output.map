@@ -7107,7 +7107,7 @@ LOAD /Applications/Ac6/SystemWorkbench.app/Contents/Eclipse/plugins/fr.ac6.mcu.e
                 0x0000000008000000                g_pfnVectors
                 0x000000000800010c                . = ALIGN (0x4)
 
-.text           0x0000000008000110     0x66f0
+.text           0x0000000008000110     0x6738
                 0x0000000008000110                . = ALIGN (0x4)
  *(.text)
  .text          0x0000000008000110       0x6c /Applications/Ac6/SystemWorkbench.app/Contents/Eclipse/plugins/fr.ac6.mcu.externaltools.arm-none.macos64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7-m/crtbegin.o
@@ -7373,603 +7373,614 @@ LOAD /Applications/Ac6/SystemWorkbench.app/Contents/Eclipse/plugins/fr.ac6.mcu.e
                 0x0000000008002bd4       0x24 Src/VFO/GUIMainView.o
                 0x0000000008002bd4                VFO::GUIMainView::draw()
  .text._ZN3VFO12GUISetupViewD2Ev
-                0x0000000008002bf8       0x2c Src/VFO/GUISetupView.o
+                0x0000000008002bf8       0x34 Src/VFO/GUISetupView.o
                 0x0000000008002bf8                VFO::GUISetupView::~GUISetupView()
                 0x0000000008002bf8                VFO::GUISetupView::~GUISetupView()
  .text._ZN3VFO12GUISetupViewD0Ev
-                0x0000000008002c24       0x14 Src/VFO/GUISetupView.o
-                0x0000000008002c24                VFO::GUISetupView::~GUISetupView()
+                0x0000000008002c2c       0x14 Src/VFO/GUISetupView.o
+                0x0000000008002c2c                VFO::GUISetupView::~GUISetupView()
  .text._ZN3VFO12GUISetupView4initEv
-                0x0000000008002c38      0x12c Src/VFO/GUISetupView.o
-                0x0000000008002c38                VFO::GUISetupView::init()
+                0x0000000008002c40      0x12c Src/VFO/GUISetupView.o
+                0x0000000008002c40                VFO::GUISetupView::init()
  .text._ZN3VFO12GUISetupViewC2Ev
-                0x0000000008002d64       0x30 Src/VFO/GUISetupView.o
-                0x0000000008002d64                VFO::GUISetupView::GUISetupView()
-                0x0000000008002d64                VFO::GUISetupView::GUISetupView()
+                0x0000000008002d6c       0x30 Src/VFO/GUISetupView.o
+                0x0000000008002d6c                VFO::GUISetupView::GUISetupView()
+                0x0000000008002d6c                VFO::GUISetupView::GUISetupView()
  .text._ZN3VFO12GUISetupViewC2EPNS_9SetupItemEPS0_
-                0x0000000008002d94       0x2c Src/VFO/GUISetupView.o
-                0x0000000008002d94                VFO::GUISetupView::GUISetupView(VFO::SetupItem*, VFO::GUISetupView*)
-                0x0000000008002d94                VFO::GUISetupView::GUISetupView(VFO::SetupItem*, VFO::GUISetupView*)
- .text._ZN3VFO12GUISetupView14drawBackButtonEb
-                0x0000000008002dc0       0xac Src/VFO/GUISetupView.o
-                0x0000000008002dc0                VFO::GUISetupView::drawBackButton(bool)
- .text._ZN3VFO12GUISetupView12updateValuesEv
-                0x0000000008002e6c       0xbc Src/VFO/GUISetupView.o
-                0x0000000008002e6c                VFO::GUISetupView::updateValues()
- .text._ZN3VFO12GUISetupView11setSelectedEh
-                0x0000000008002f28       0xd0 Src/VFO/GUISetupView.o
-                0x0000000008002f28                VFO::GUISetupView::setSelected(unsigned char)
- .text._ZN3VFO12GUISetupView20pushEncoderIncrementEs
-                0x0000000008002ff8       0x8e Src/VFO/GUISetupView.o
-                0x0000000008002ff8                VFO::GUISetupView::pushEncoderIncrement(short)
+                0x0000000008002d9c       0x2c Src/VFO/GUISetupView.o
+                0x0000000008002d9c                VFO::GUISetupView::GUISetupView(VFO::SetupItem*, VFO::GUISetupView*)
+                0x0000000008002d9c                VFO::GUISetupView::GUISetupView(VFO::SetupItem*, VFO::GUISetupView*)
  .text._ZN3VFO12GUISetupView16setSelectedChildEPS0_
-                0x0000000008003086       0x1a Src/VFO/GUISetupView.o
-                0x0000000008003086                VFO::GUISetupView::setSelectedChild(VFO::GUISetupView*)
- .text._ZN3VFO12GUISetupView14menuKeyPressedEv
-                0x00000000080030a0       0xa4 Src/VFO/GUISetupView.o
-                0x00000000080030a0                VFO::GUISetupView::menuKeyPressed()
+                0x0000000008002dc8       0x1a Src/VFO/GUISetupView.o
+                0x0000000008002dc8                VFO::GUISetupView::setSelectedChild(VFO::GUISetupView*)
+ *fill*         0x0000000008002de2        0x2 
+ .text._ZN3VFO12GUISetupView15drawWindowTitleEv
+                0x0000000008002de4       0x44 Src/VFO/GUISetupView.o
+                0x0000000008002de4                VFO::GUISetupView::drawWindowTitle()
+ .text._ZN3VFO12GUISetupView13drawItemTitleEhb
+                0x0000000008002e28       0x90 Src/VFO/GUISetupView.o
+                0x0000000008002e28                VFO::GUISetupView::drawItemTitle(unsigned char, bool)
  .text._ZN3VFO12GUISetupView14drawBackgroundEv
-                0x0000000008003144       0x50 Src/VFO/GUISetupView.o
-                0x0000000008003144                VFO::GUISetupView::drawBackground()
+                0x0000000008002eb8       0x32 Src/VFO/GUISetupView.o
+                0x0000000008002eb8                VFO::GUISetupView::drawBackground()
+ *fill*         0x0000000008002eea        0x2 
+ .text._ZN3VFO12GUISetupView9drawValueEhbb
+                0x0000000008002eec       0xa4 Src/VFO/GUISetupView.o
+                0x0000000008002eec                VFO::GUISetupView::drawValue(unsigned char, bool, bool)
+ .text._ZN3VFO12GUISetupView12updateValuesEv
+                0x0000000008002f90       0x2a Src/VFO/GUISetupView.o
+                0x0000000008002f90                VFO::GUISetupView::updateValues()
+ *fill*         0x0000000008002fba        0x2 
+ .text._ZN3VFO12GUISetupView14menuKeyPressedEv
+                0x0000000008002fbc       0xa4 Src/VFO/GUISetupView.o
+                0x0000000008002fbc                VFO::GUISetupView::menuKeyPressed()
+ .text._ZN3VFO12GUISetupView14drawBackButtonEb
+                0x0000000008003060       0xac Src/VFO/GUISetupView.o
+                0x0000000008003060                VFO::GUISetupView::drawBackButton(bool)
+ .text._ZN3VFO12GUISetupView11setSelectedEh
+                0x000000000800310c       0x44 Src/VFO/GUISetupView.o
+                0x000000000800310c                VFO::GUISetupView::setSelected(unsigned char)
+ .text._ZN3VFO12GUISetupView20pushEncoderIncrementEs
+                0x0000000008003150       0x8e Src/VFO/GUISetupView.o
+                0x0000000008003150                VFO::GUISetupView::pushEncoderIncrement(short)
  .text._ZN3VFO12GUISetupView4drawEv
-                0x0000000008003194       0x1a Src/VFO/GUISetupView.o
-                0x0000000008003194                VFO::GUISetupView::draw()
- *fill*         0x00000000080031ae        0x2 
+                0x00000000080031de       0x1a Src/VFO/GUISetupView.o
+                0x00000000080031de                VFO::GUISetupView::draw()
  .text._ZN3VFO7GUIViewC2Ev
-                0x00000000080031b0        0xc Src/VFO/GUIView.o
-                0x00000000080031b0                VFO::GUIView::GUIView()
-                0x00000000080031b0                VFO::GUIView::GUIView()
+                0x00000000080031f8        0xc Src/VFO/GUIView.o
+                0x00000000080031f8                VFO::GUIView::GUIView()
+                0x00000000080031f8                VFO::GUIView::GUIView()
  .text._ZN3VFO7GUIViewD2Ev
-                0x00000000080031bc        0x2 Src/VFO/GUIView.o
-                0x00000000080031bc                VFO::GUIView::~GUIView()
-                0x00000000080031bc                VFO::GUIView::~GUIView()
- *fill*         0x00000000080031be        0x2 
+                0x0000000008003204        0x2 Src/VFO/GUIView.o
+                0x0000000008003204                VFO::GUIView::~GUIView()
+                0x0000000008003204                VFO::GUIView::~GUIView()
+ *fill*         0x0000000008003206        0x2 
  .text._ZN3VFO13VFOControllerD2Ev
-                0x00000000080031c0       0x2c Src/VFO/VFOController.o
-                0x00000000080031c0                VFO::VFOController::~VFOController()
-                0x00000000080031c0                VFO::VFOController::~VFOController()
+                0x0000000008003208       0x2c Src/VFO/VFOController.o
+                0x0000000008003208                VFO::VFOController::~VFOController()
+                0x0000000008003208                VFO::VFOController::~VFOController()
  .text._ZN3VFO13VFOControllerD0Ev
-                0x00000000080031ec       0x14 Src/VFO/VFOController.o
-                0x00000000080031ec                VFO::VFOController::~VFOController()
+                0x0000000008003234       0x14 Src/VFO/VFOController.o
+                0x0000000008003234                VFO::VFOController::~VFOController()
  .text._Z41__static_initialization_and_destruction_0ii
-                0x0000000008003200       0x20 Src/VFO/VFOController.o
+                0x0000000008003248       0x20 Src/VFO/VFOController.o
  .text._ZN3VFO13VFOControllerC2Ev
-                0x0000000008003220       0x74 Src/VFO/VFOController.o
-                0x0000000008003220                VFO::VFOController::VFOController()
-                0x0000000008003220                VFO::VFOController::VFOController()
+                0x0000000008003268       0x74 Src/VFO/VFOController.o
+                0x0000000008003268                VFO::VFOController::VFOController()
+                0x0000000008003268                VFO::VFOController::VFOController()
  .text._ZN3VFO13VFOController5beginEv
-                0x0000000008003294        0xa Src/VFO/VFOController.o
-                0x0000000008003294                VFO::VFOController::begin()
+                0x00000000080032dc        0xa Src/VFO/VFOController.o
+                0x00000000080032dc                VFO::VFOController::begin()
  .text._ZN3VFO13VFOController14menuKeyPressedEv
-                0x000000000800329e        0xa Src/VFO/VFOController.o
-                0x000000000800329e                VFO::VFOController::menuKeyPressed()
+                0x00000000080032e6        0xa Src/VFO/VFOController.o
+                0x00000000080032e6                VFO::VFOController::menuKeyPressed()
  .text._ZN3VFO13VFOController9showSetupEv
-                0x00000000080032a8        0xa Src/VFO/VFOController.o
-                0x00000000080032a8                VFO::VFOController::showSetup()
+                0x00000000080032f0        0xa Src/VFO/VFOController.o
+                0x00000000080032f0                VFO::VFOController::showSetup()
  .text._ZN3VFO13VFOController8showMainEv
-                0x00000000080032b2        0xa Src/VFO/VFOController.o
-                0x00000000080032b2                VFO::VFOController::showMain()
+                0x00000000080032fa        0xa Src/VFO/VFOController.o
+                0x00000000080032fa                VFO::VFOController::showMain()
  .text._ZN3VFO13VFOController20pushEncoderIncrementEs
-                0x00000000080032bc        0xa Src/VFO/VFOController.o
-                0x00000000080032bc                VFO::VFOController::pushEncoderIncrement(short)
+                0x0000000008003304        0xa Src/VFO/VFOController.o
+                0x0000000008003304                VFO::VFOController::pushEncoderIncrement(short)
  .text._ZN3VFO13VFOController18storeConfigurationEv
-                0x00000000080032c6        0xa Src/VFO/VFOController.o
-                0x00000000080032c6                VFO::VFOController::storeConfiguration()
+                0x000000000800330e        0xa Src/VFO/VFOController.o
+                0x000000000800330e                VFO::VFOController::storeConfiguration()
  .text._ZN3VFO13VFOController5resetEv
-                0x00000000080032d0       0x44 Src/VFO/VFOController.o
-                0x00000000080032d0                VFO::VFOController::reset()
+                0x0000000008003318       0x44 Src/VFO/VFOController.o
+                0x0000000008003318                VFO::VFOController::reset()
  .text._ZN3VFO13VFOController18triggerMemoryWriteEv
-                0x0000000008003314       0x1c Src/VFO/VFOController.o
-                0x0000000008003314                VFO::VFOController::triggerMemoryWrite()
+                0x000000000800335c       0x1c Src/VFO/VFOController.o
+                0x000000000800335c                VFO::VFOController::triggerMemoryWrite()
  .text._ZN3VFO13VFOController12setFrequencyEm
-                0x0000000008003330       0x2c Src/VFO/VFOController.o
-                0x0000000008003330                VFO::VFOController::setFrequency(unsigned long)
+                0x0000000008003378       0x2c Src/VFO/VFOController.o
+                0x0000000008003378                VFO::VFOController::setFrequency(unsigned long)
  .text._ZN3VFO13VFOController16checkMemoryStateEv
-                0x000000000800335c       0x34 Src/VFO/VFOController.o
-                0x000000000800335c                VFO::VFOController::checkMemoryState()
+                0x00000000080033a4       0x34 Src/VFO/VFOController.o
+                0x00000000080033a4                VFO::VFOController::checkMemoryState()
  .text._GLOBAL__sub_I__ZN3VFO13VFOControllerC2Ev
-                0x0000000008003390        0xe Src/VFO/VFOController.o
+                0x00000000080033d8        0xe Src/VFO/VFOController.o
  .text._ZN3VFO9BitmapBoxD2Ev
-                0x000000000800339e        0x2 Src/VFO/GUI/Background.o
-                0x000000000800339e                VFO::BitmapBox::~BitmapBox()
-                0x000000000800339e                VFO::BitmapBox::~BitmapBox()
+                0x00000000080033e6        0x2 Src/VFO/GUI/Background.o
+                0x00000000080033e6                VFO::BitmapBox::~BitmapBox()
+                0x00000000080033e6                VFO::BitmapBox::~BitmapBox()
  .text._ZN3VFO11GradientBoxD2Ev
-                0x00000000080033a0        0x2 Src/VFO/GUI/Background.o
-                0x00000000080033a0                VFO::GradientBox::~GradientBox()
-                0x00000000080033a0                VFO::GradientBox::~GradientBox()
+                0x00000000080033e8        0x2 Src/VFO/GUI/Background.o
+                0x00000000080033e8                VFO::GradientBox::~GradientBox()
+                0x00000000080033e8                VFO::GradientBox::~GradientBox()
  .text._ZN3VFO9BitmapBox12getBackColorEhh
-                0x00000000080033a2       0x12 Src/VFO/GUI/Background.o
-                0x00000000080033a2                VFO::BitmapBox::getBackColor(unsigned char, unsigned char)
+                0x00000000080033ea       0x12 Src/VFO/GUI/Background.o
+                0x00000000080033ea                VFO::BitmapBox::getBackColor(unsigned char, unsigned char)
  .text._ZN3VFO11GradientBox12getBackColorEhh
-                0x00000000080033b4       0xca Src/VFO/GUI/Background.o
-                0x00000000080033b4                VFO::GradientBox::getBackColor(unsigned char, unsigned char)
+                0x00000000080033fc       0xca Src/VFO/GUI/Background.o
+                0x00000000080033fc                VFO::GradientBox::getBackColor(unsigned char, unsigned char)
  .text._ZN3VFO11GradientBoxD0Ev
-                0x000000000800347e        0xe Src/VFO/GUI/Background.o
-                0x000000000800347e                VFO::GradientBox::~GradientBox()
+                0x00000000080034c6        0xe Src/VFO/GUI/Background.o
+                0x00000000080034c6                VFO::GradientBox::~GradientBox()
  .text._ZN3VFO9BitmapBoxD0Ev
-                0x000000000800348c        0xe Src/VFO/GUI/Background.o
-                0x000000000800348c                VFO::BitmapBox::~BitmapBox()
- *fill*         0x000000000800349a        0x2 
+                0x00000000080034d4        0xe Src/VFO/GUI/Background.o
+                0x00000000080034d4                VFO::BitmapBox::~BitmapBox()
+ *fill*         0x00000000080034e2        0x2 
  .text._ZN3VFO11GradientBoxC2Ehhhh
-                0x000000000800349c       0x58 Src/VFO/GUI/Background.o
-                0x000000000800349c                VFO::GradientBox::GradientBox(unsigned char, unsigned char, unsigned char, unsigned char)
-                0x000000000800349c                VFO::GradientBox::GradientBox(unsigned char, unsigned char, unsigned char, unsigned char)
+                0x00000000080034e4       0x58 Src/VFO/GUI/Background.o
+                0x00000000080034e4                VFO::GradientBox::GradientBox(unsigned char, unsigned char, unsigned char, unsigned char)
+                0x00000000080034e4                VFO::GradientBox::GradientBox(unsigned char, unsigned char, unsigned char, unsigned char)
  .text._ZN3VFO11GradientBox4drawEv
-                0x00000000080034f4      0x160 Src/VFO/GUI/Background.o
-                0x00000000080034f4                VFO::GradientBox::draw()
+                0x000000000800353c      0x160 Src/VFO/GUI/Background.o
+                0x000000000800353c                VFO::GradientBox::draw()
  .text._ZN3VFO11GradientBox4drawEhhhh
-                0x0000000008003654       0x14 Src/VFO/GUI/Background.o
-                0x0000000008003654                VFO::GradientBox::draw(unsigned char, unsigned char, unsigned char, unsigned char)
+                0x000000000800369c       0x14 Src/VFO/GUI/Background.o
+                0x000000000800369c                VFO::GradientBox::draw(unsigned char, unsigned char, unsigned char, unsigned char)
  .text._ZN3VFO11GradientBox5clearEhhhh
-                0x0000000008003668      0x174 Src/VFO/GUI/Background.o
-                0x0000000008003668                VFO::GradientBox::clear(unsigned char, unsigned char, unsigned char, unsigned char)
+                0x00000000080036b0      0x174 Src/VFO/GUI/Background.o
+                0x00000000080036b0                VFO::GradientBox::clear(unsigned char, unsigned char, unsigned char, unsigned char)
  .text._ZN3VFO15backgroundColorEPvhh
-                0x00000000080037dc        0xa Src/VFO/GUI/Background.o
-                0x00000000080037dc                VFO::backgroundColor(void*, unsigned char, unsigned char)
+                0x0000000008003824        0xa Src/VFO/GUI/Background.o
+                0x0000000008003824                VFO::backgroundColor(void*, unsigned char, unsigned char)
  .text._ZN3VFO15FrequencyStringC2EhhPNS_10BackgroundE
-                0x00000000080037e6       0x14 Src/VFO/GUI/FrequencyString.o
-                0x00000000080037e6                VFO::FrequencyString::FrequencyString(unsigned char, unsigned char, VFO::Background*)
-                0x00000000080037e6                VFO::FrequencyString::FrequencyString(unsigned char, unsigned char, VFO::Background*)
+                0x000000000800382e       0x14 Src/VFO/GUI/FrequencyString.o
+                0x000000000800382e                VFO::FrequencyString::FrequencyString(unsigned char, unsigned char, VFO::Background*)
+                0x000000000800382e                VFO::FrequencyString::FrequencyString(unsigned char, unsigned char, VFO::Background*)
  .text._ZN3VFO15FrequencyString13setBackgroundEPNS_10BackgroundE
-                0x00000000080037fa        0xc Src/VFO/GUI/FrequencyString.o
-                0x00000000080037fa                VFO::FrequencyString::setBackground(VFO::Background*)
- *fill*         0x0000000008003806        0x2 
+                0x0000000008003842        0xc Src/VFO/GUI/FrequencyString.o
+                0x0000000008003842                VFO::FrequencyString::setBackground(VFO::Background*)
+ *fill*         0x000000000800384e        0x2 
  .text._ZN3VFO15FrequencyString4drawEm
-                0x0000000008003808       0x74 Src/VFO/GUI/FrequencyString.o
-                0x0000000008003808                VFO::FrequencyString::draw(unsigned long)
+                0x0000000008003850       0x74 Src/VFO/GUI/FrequencyString.o
+                0x0000000008003850                VFO::FrequencyString::draw(unsigned long)
  .text._ZN3VFO8valToStrElPcjc
-                0x000000000800387c       0xb0 Src/VFO/GUI/Utils.o
-                0x000000000800387c                VFO::valToStr(long, char*, unsigned int, char)
+                0x00000000080038c4       0xb0 Src/VFO/GUI/Utils.o
+                0x00000000080038c4                VFO::valToStr(long, char*, unsigned int, char)
  .text._ZN3VFO14utf8to1251DestEPKcPcj
-                0x000000000800392c       0x72 Src/VFO/GUI/Utils.o
-                0x000000000800392c                VFO::utf8to1251Dest(char const*, char*, unsigned int)
+                0x0000000008003974       0x72 Src/VFO/GUI/Utils.o
+                0x0000000008003974                VFO::utf8to1251Dest(char const*, char*, unsigned int)
  .text._ZN3VFO10utf8to1251EPc
-                0x000000000800399e       0x6a Src/VFO/GUI/Utils.o
-                0x000000000800399e                VFO::utf8to1251(char*)
+                0x00000000080039e6       0x6a Src/VFO/GUI/Utils.o
+                0x00000000080039e6                VFO::utf8to1251(char*)
  .text._Z17KBDCallBack_Setupii
-                0x0000000008003a08       0x18 Src/VFO.o
-                0x0000000008003a08                KBDCallBack_Setup(int, int)
+                0x0000000008003a50       0x18 Src/VFO.o
+                0x0000000008003a50                KBDCallBack_Setup(int, int)
  .text.HAL_SYSTICK_Callback
-                0x0000000008003a20        0x8 Src/VFO.o
-                0x0000000008003a20                HAL_SYSTICK_Callback
+                0x0000000008003a68        0x8 Src/VFO.o
+                0x0000000008003a68                HAL_SYSTICK_Callback
  .text.vfoSystick
-                0x0000000008003a28        0x2 Src/VFO.o
-                0x0000000008003a28                vfoSystick
- *fill*         0x0000000008003a2a        0x2 
+                0x0000000008003a70        0x2 Src/VFO.o
+                0x0000000008003a70                vfoSystick
+ *fill*         0x0000000008003a72        0x2 
  .text._Z9_vfoSetupv
-                0x0000000008003a2c       0x48 Src/VFO.o
-                0x0000000008003a2c                _vfoSetup()
+                0x0000000008003a74       0x48 Src/VFO.o
+                0x0000000008003a74                _vfoSetup()
  .text.vfoSetup
-                0x0000000008003a74        0x8 Src/VFO.o
-                0x0000000008003a74                vfoSetup
+                0x0000000008003abc        0x8 Src/VFO.o
+                0x0000000008003abc                vfoSetup
  .text._Z17_vfoLoopIterationv
-                0x0000000008003a7c       0x3c Src/VFO.o
-                0x0000000008003a7c                _vfoLoopIteration()
+                0x0000000008003ac4       0x3c Src/VFO.o
+                0x0000000008003ac4                _vfoLoopIteration()
  .text.vfoLoopIteration
-                0x0000000008003ab8        0x8 Src/VFO.o
-                0x0000000008003ab8                vfoLoopIteration
+                0x0000000008003b00        0x8 Src/VFO.o
+                0x0000000008003b00                vfoLoopIteration
  .text.MX_GPIO_Init
-                0x0000000008003ac0       0x80 Src/main.o
+                0x0000000008003b08       0x80 Src/main.o
  .text.MX_SPI2_Init
-                0x0000000008003b40       0x6c Src/main.o
+                0x0000000008003b88       0x6c Src/main.o
  .text._Error_Handler
-                0x0000000008003bac        0x2 Src/main.o
-                0x0000000008003bac                _Error_Handler
- *fill*         0x0000000008003bae        0x2 
+                0x0000000008003bf4        0x2 Src/main.o
+                0x0000000008003bf4                _Error_Handler
+ *fill*         0x0000000008003bf6        0x2 
  .text.MX_ADC1_Init
-                0x0000000008003bb0       0x5c Src/main.o
+                0x0000000008003bf8       0x5c Src/main.o
  .text.MX_TIM4_Init
-                0x0000000008003c0c       0x70 Src/main.o
+                0x0000000008003c54       0x70 Src/main.o
  .text.MX_I2C2_Init
-                0x0000000008003c7c       0x40 Src/main.o
+                0x0000000008003cc4       0x40 Src/main.o
  .text.SystemClock_Config
-                0x0000000008003cbc       0xa0 Src/main.o
-                0x0000000008003cbc                SystemClock_Config
- .text.main     0x0000000008003d5c       0x44 Src/main.o
-                0x0000000008003d5c                main
+                0x0000000008003d04       0xa0 Src/main.o
+                0x0000000008003d04                SystemClock_Config
+ .text.main     0x0000000008003da4       0x44 Src/main.o
+                0x0000000008003da4                main
  .text.HAL_MspInit
-                0x0000000008003da0       0x90 Src/stm32f1xx_hal_msp.o
-                0x0000000008003da0                HAL_MspInit
+                0x0000000008003de8       0x90 Src/stm32f1xx_hal_msp.o
+                0x0000000008003de8                HAL_MspInit
  .text.HAL_ADC_MspInit
-                0x0000000008003e30       0x44 Src/stm32f1xx_hal_msp.o
-                0x0000000008003e30                HAL_ADC_MspInit
+                0x0000000008003e78       0x44 Src/stm32f1xx_hal_msp.o
+                0x0000000008003e78                HAL_ADC_MspInit
  .text.HAL_I2C_MspInit
-                0x0000000008003e74       0x4c Src/stm32f1xx_hal_msp.o
-                0x0000000008003e74                HAL_I2C_MspInit
+                0x0000000008003ebc       0x4c Src/stm32f1xx_hal_msp.o
+                0x0000000008003ebc                HAL_I2C_MspInit
  .text.HAL_TIM_Encoder_MspInit
-                0x0000000008003ec0       0x48 Src/stm32f1xx_hal_msp.o
-                0x0000000008003ec0                HAL_TIM_Encoder_MspInit
+                0x0000000008003f08       0x48 Src/stm32f1xx_hal_msp.o
+                0x0000000008003f08                HAL_TIM_Encoder_MspInit
  .text.NMI_Handler
-                0x0000000008003f08        0x2 Src/stm32f1xx_it.o
-                0x0000000008003f08                NMI_Handler
+                0x0000000008003f50        0x2 Src/stm32f1xx_it.o
+                0x0000000008003f50                NMI_Handler
  .text.HardFault_Handler
-                0x0000000008003f0a        0x2 Src/stm32f1xx_it.o
-                0x0000000008003f0a                HardFault_Handler
+                0x0000000008003f52        0x2 Src/stm32f1xx_it.o
+                0x0000000008003f52                HardFault_Handler
  .text.MemManage_Handler
-                0x0000000008003f0c        0x2 Src/stm32f1xx_it.o
-                0x0000000008003f0c                MemManage_Handler
+                0x0000000008003f54        0x2 Src/stm32f1xx_it.o
+                0x0000000008003f54                MemManage_Handler
  .text.BusFault_Handler
-                0x0000000008003f0e        0x2 Src/stm32f1xx_it.o
-                0x0000000008003f0e                BusFault_Handler
+                0x0000000008003f56        0x2 Src/stm32f1xx_it.o
+                0x0000000008003f56                BusFault_Handler
  .text.UsageFault_Handler
-                0x0000000008003f10        0x2 Src/stm32f1xx_it.o
-                0x0000000008003f10                UsageFault_Handler
+                0x0000000008003f58        0x2 Src/stm32f1xx_it.o
+                0x0000000008003f58                UsageFault_Handler
  .text.SVC_Handler
-                0x0000000008003f12        0x2 Src/stm32f1xx_it.o
-                0x0000000008003f12                SVC_Handler
+                0x0000000008003f5a        0x2 Src/stm32f1xx_it.o
+                0x0000000008003f5a                SVC_Handler
  .text.DebugMon_Handler
-                0x0000000008003f14        0x2 Src/stm32f1xx_it.o
-                0x0000000008003f14                DebugMon_Handler
+                0x0000000008003f5c        0x2 Src/stm32f1xx_it.o
+                0x0000000008003f5c                DebugMon_Handler
  .text.PendSV_Handler
-                0x0000000008003f16        0x2 Src/stm32f1xx_it.o
-                0x0000000008003f16                PendSV_Handler
+                0x0000000008003f5e        0x2 Src/stm32f1xx_it.o
+                0x0000000008003f5e                PendSV_Handler
  .text.SysTick_Handler
-                0x0000000008003f18       0x10 Src/stm32f1xx_it.o
-                0x0000000008003f18                SysTick_Handler
+                0x0000000008003f60       0x10 Src/stm32f1xx_it.o
+                0x0000000008003f60                SysTick_Handler
  .text.SystemInit
-                0x0000000008003f28       0x4c Src/system_stm32f1xx.o
-                0x0000000008003f28                SystemInit
+                0x0000000008003f70       0x4c Src/system_stm32f1xx.o
+                0x0000000008003f70                SystemInit
  .text.EE_VerifyPageFullyErased
-                0x0000000008003f74       0x24 Src/eeprom/eeprom.o
+                0x0000000008003fbc       0x24 Src/eeprom/eeprom.o
  .text.EE_FindValidPage
-                0x0000000008003f98       0x50 Src/eeprom/eeprom.o
+                0x0000000008003fe0       0x50 Src/eeprom/eeprom.o
  .text.EE_VerifyPageFullWriteVariable
-                0x0000000008003fe8       0x5c Src/eeprom/eeprom.o
+                0x0000000008004030       0x5c Src/eeprom/eeprom.o
  .text.EE_Format
-                0x0000000008004044       0x5c Src/eeprom/eeprom.o
+                0x000000000800408c       0x5c Src/eeprom/eeprom.o
  .text.EE_ReadVariable
-                0x00000000080040a0       0x44 Src/eeprom/eeprom.o
-                0x00000000080040a0                EE_ReadVariable
- .text.EE_Init  0x00000000080040e4      0x264 Src/eeprom/eeprom.o
-                0x00000000080040e4                EE_Init
+                0x00000000080040e8       0x44 Src/eeprom/eeprom.o
+                0x00000000080040e8                EE_ReadVariable
+ .text.EE_Init  0x000000000800412c      0x264 Src/eeprom/eeprom.o
+                0x000000000800412c                EE_Init
  .text.EE_PageTransfer
-                0x0000000008004348       0xc4 Src/eeprom/eeprom.o
+                0x0000000008004390       0xc4 Src/eeprom/eeprom.o
  .text.EE_WriteVariable
-                0x000000000800440c       0x1a Src/eeprom/eeprom.o
-                0x000000000800440c                EE_WriteVariable
- *fill*         0x0000000008004426        0x2 
+                0x0000000008004454       0x1a Src/eeprom/eeprom.o
+                0x0000000008004454                EE_WriteVariable
+ *fill*         0x000000000800446e        0x2 
  .text._Z10KBD_addKeyP12GPIO_TypeDefiiPFviiE
-                0x0000000008004428       0x50 Src/kbd/kbd.o
-                0x0000000008004428                KBD_addKey(GPIO_TypeDef*, int, int, void (*)(int, int))
+                0x0000000008004470       0x50 Src/kbd/kbd.o
+                0x0000000008004470                KBD_addKey(GPIO_TypeDef*, int, int, void (*)(int, int))
  .text._Z16KBD_ISR_Callbackv
-                0x0000000008004478      0x17c Src/kbd/kbd.o
-                0x0000000008004478                KBD_ISR_Callback()
- *fill*         0x00000000080045f4        0x4 
+                0x00000000080044c0      0x17c Src/kbd/kbd.o
+                0x00000000080044c0                KBD_ISR_Callback()
+ *fill*         0x000000000800463c        0x4 
  .text._ZN6Si5351C2Eh
-                0x00000000080045f8       0x54 Src/si5351/si5351.o
-                0x00000000080045f8                Si5351::Si5351(unsigned char)
-                0x00000000080045f8                Si5351::Si5351(unsigned char)
+                0x0000000008004640       0x54 Src/si5351/si5351.o
+                0x0000000008004640                Si5351::Si5351(unsigned char)
+                0x0000000008004640                Si5351::Si5351(unsigned char)
  .text._ZN6Si535112set_ref_freqEm16si5351_pll_input
-                0x000000000800464c       0x7c Src/si5351/si5351.o
-                0x000000000800464c                Si5351::set_ref_freq(unsigned long, si5351_pll_input)
+                0x0000000008004694       0x7c Src/si5351/si5351.o
+                0x0000000008004694                Si5351::set_ref_freq(unsigned long, si5351_pll_input)
  .text._ZN6Si535117si5351_write_bulkEhhPh
-                0x00000000080046c8       0x54 Src/si5351/si5351.o
-                0x00000000080046c8                Si5351::si5351_write_bulk(unsigned char, unsigned char, unsigned char*)
+                0x0000000008004710       0x54 Src/si5351/si5351.o
+                0x0000000008004710                Si5351::si5351_write_bulk(unsigned char, unsigned char, unsigned char*)
  .text._ZN6Si535112si5351_writeEhh
-                0x000000000800471c       0x68 Src/si5351/si5351.o
-                0x000000000800471c                Si5351::si5351_write(unsigned char, unsigned char)
+                0x0000000008004764       0x68 Src/si5351/si5351.o
+                0x0000000008004764                Si5351::si5351_write(unsigned char, unsigned char)
  .text._ZN6Si53519pll_resetE10si5351_pll
-                0x0000000008004784       0x1e Src/si5351/si5351.o
-                0x0000000008004784                Si5351::pll_reset(si5351_pll)
- *fill*         0x00000000080047a2        0x2 
+                0x00000000080047cc       0x1e Src/si5351/si5351.o
+                0x00000000080047cc                Si5351::pll_reset(si5351_pll)
+ *fill*         0x00000000080047ea        0x2 
  .text._ZN6Si535111si5351_readEh
-                0x00000000080047a4       0x9c Src/si5351/si5351.o
-                0x00000000080047a4                Si5351::si5351_read(unsigned char)
+                0x00000000080047ec       0x9c Src/si5351/si5351.o
+                0x00000000080047ec                Si5351::si5351_read(unsigned char)
  .text._ZN6Si535113output_enableE12si5351_clockh
-                0x0000000008004840       0x30 Src/si5351/si5351.o
-                0x0000000008004840                Si5351::output_enable(si5351_clock, unsigned char)
+                0x0000000008004888       0x30 Src/si5351/si5351.o
+                0x0000000008004888                Si5351::output_enable(si5351_clock, unsigned char)
  .text._ZN6Si535113set_ms_sourceE12si5351_clock10si5351_pll
-                0x0000000008004870       0x36 Src/si5351/si5351.o
-                0x0000000008004870                Si5351::set_ms_source(si5351_clock, si5351_pll)
+                0x00000000080048b8       0x36 Src/si5351/si5351.o
+                0x00000000080048b8                Si5351::set_ms_source(si5351_clock, si5351_pll)
  .text._ZN6Si53517set_intE12si5351_clockh
-                0x00000000080048a6       0x2a Src/si5351/si5351.o
-                0x00000000080048a6                Si5351::set_int(si5351_clock, unsigned char)
+                0x00000000080048ee       0x2a Src/si5351/si5351.o
+                0x00000000080048ee                Si5351::set_int(si5351_clock, unsigned char)
  .text._ZN6Si53518pll_calcE10si5351_pllyP12Si5351RegSetlh
-                0x00000000080048d0      0x270 Src/si5351/si5351.o
-                0x00000000080048d0                Si5351::pll_calc(si5351_pll, unsigned long long, Si5351RegSet*, long, unsigned char)
+                0x0000000008004918      0x270 Src/si5351/si5351.o
+                0x0000000008004918                Si5351::pll_calc(si5351_pll, unsigned long long, Si5351RegSet*, long, unsigned char)
  .text._ZN6Si53517set_pllEy10si5351_pll
-                0x0000000008004b40       0xce Src/si5351/si5351.o
-                0x0000000008004b40                Si5351::set_pll(unsigned long long, si5351_pll)
- *fill*         0x0000000008004c0e        0x2 
+                0x0000000008004b88       0xce Src/si5351/si5351.o
+                0x0000000008004b88                Si5351::set_pll(unsigned long long, si5351_pll)
+ *fill*         0x0000000008004c56        0x2 
  .text._ZN6Si53515resetEv
-                0x0000000008004c10      0x190 Src/si5351/si5351.o
-                0x0000000008004c10                Si5351::reset()
+                0x0000000008004c58      0x190 Src/si5351/si5351.o
+                0x0000000008004c58                Si5351::reset()
  .text._ZN6Si535114set_correctionEl16si5351_pll_input
-                0x0000000008004da0       0x2c Src/si5351/si5351.o
-                0x0000000008004da0                Si5351::set_correction(long, si5351_pll_input)
+                0x0000000008004de8       0x2c Src/si5351/si5351.o
+                0x0000000008004de8                Si5351::set_correction(long, si5351_pll_input)
  .text._ZN6Si53514initEhml
-                0x0000000008004dcc       0x74 Src/si5351/si5351.o
-                0x0000000008004dcc                Si5351::init(unsigned char, unsigned long, long)
+                0x0000000008004e14       0x74 Src/si5351/si5351.o
+                0x0000000008004e14                Si5351::init(unsigned char, unsigned long, long)
  .text._ZN6Si535115multisynth_calcEyyP12Si5351RegSet
-                0x0000000008004e40      0x1a4 Src/si5351/si5351.o
-                0x0000000008004e40                Si5351::multisynth_calc(unsigned long long, unsigned long long, Si5351RegSet*)
- *fill*         0x0000000008004fe4        0x4 
+                0x0000000008004e88      0x1a4 Src/si5351/si5351.o
+                0x0000000008004e88                Si5351::multisynth_calc(unsigned long long, unsigned long long, Si5351RegSet*)
+ *fill*         0x000000000800502c        0x4 
  .text._ZN6Si535117multisynth67_calcEyyP12Si5351RegSet
-                0x0000000008004fe8      0x11c Src/si5351/si5351.o
-                0x0000000008004fe8                Si5351::multisynth67_calc(unsigned long long, unsigned long long, Si5351RegSet*)
+                0x0000000008005030      0x11c Src/si5351/si5351.o
+                0x0000000008005030                Si5351::multisynth67_calc(unsigned long long, unsigned long long, Si5351RegSet*)
  .text._ZN6Si53516ms_divE12si5351_clockhh
-                0x0000000008005104       0x88 Src/si5351/si5351.o
-                0x0000000008005104                Si5351::ms_div(si5351_clock, unsigned char, unsigned char)
+                0x000000000800514c       0x88 Src/si5351/si5351.o
+                0x000000000800514c                Si5351::ms_div(si5351_clock, unsigned char, unsigned char)
  .text._ZN6Si53516set_msE12si5351_clock12Si5351RegSethhh
-                0x000000000800518c      0x198 Src/si5351/si5351.o
-                0x000000000800518c                Si5351::set_ms(si5351_clock, Si5351RegSet, unsigned char, unsigned char, unsigned char)
- *fill*         0x0000000008005324        0x4 
+                0x00000000080051d4      0x198 Src/si5351/si5351.o
+                0x00000000080051d4                Si5351::set_ms(si5351_clock, Si5351RegSet, unsigned char, unsigned char, unsigned char)
+ *fill*         0x000000000800536c        0x4 
  .text._ZN6Si535112select_r_divEPy
-                0x0000000008005328      0x178 Src/si5351/si5351.o
-                0x0000000008005328                Si5351::select_r_div(unsigned long long*)
+                0x0000000008005370      0x178 Src/si5351/si5351.o
+                0x0000000008005370                Si5351::select_r_div(unsigned long long*)
  .text._ZN6Si535117select_r_div_ms67EPy
-                0x00000000080054a0      0x188 Src/si5351/si5351.o
-                0x00000000080054a0                Si5351::select_r_div_ms67(unsigned long long*)
+                0x00000000080054e8      0x188 Src/si5351/si5351.o
+                0x00000000080054e8                Si5351::select_r_div_ms67(unsigned long long*)
  .text._ZN6Si53518set_freqEy12si5351_clock
-                0x0000000008005628      0x3d4 Src/si5351/si5351.o
-                0x0000000008005628                Si5351::set_freq(unsigned long long, si5351_clock)
+                0x0000000008005670      0x3d4 Src/si5351/si5351.o
+                0x0000000008005670                Si5351::set_freq(unsigned long long, si5351_clock)
  .text.DWT_Delay_Init
-                0x00000000080059fc       0x44 Src/st7735/dwt_stm32_delay.o
-                0x00000000080059fc                DWT_Delay_Init
+                0x0000000008005a44       0x44 Src/st7735/dwt_stm32_delay.o
+                0x0000000008005a44                DWT_Delay_Init
  .text.ST7735_write
-                0x0000000008005a40       0x30 Src/st7735/st7735.o
-                0x0000000008005a40                ST7735_write
+                0x0000000008005a88       0x30 Src/st7735/st7735.o
+                0x0000000008005a88                ST7735_write
  .text.ST7735_cmd
-                0x0000000008005a70       0x1c Src/st7735/st7735.o
-                0x0000000008005a70                ST7735_cmd
+                0x0000000008005ab8       0x1c Src/st7735/st7735.o
+                0x0000000008005ab8                ST7735_cmd
  .text.ST7735_data
-                0x0000000008005a8c       0x1c Src/st7735/st7735.o
-                0x0000000008005a8c                ST7735_data
+                0x0000000008005ad4       0x1c Src/st7735/st7735.o
+                0x0000000008005ad4                ST7735_data
  .text.ST7735_Orientation
-                0x0000000008005aa8       0x88 Src/st7735/st7735.o
-                0x0000000008005aa8                ST7735_Orientation
+                0x0000000008005af0       0x88 Src/st7735/st7735.o
+                0x0000000008005af0                ST7735_Orientation
  .text.ST7735_Init
-                0x0000000008005b30      0x1e0 Src/st7735/st7735.o
-                0x0000000008005b30                ST7735_Init
+                0x0000000008005b78      0x1e0 Src/st7735/st7735.o
+                0x0000000008005b78                ST7735_Init
  .text.ST7735_AddrSet
-                0x0000000008005d10       0x74 Src/st7735/st7735.o
-                0x0000000008005d10                ST7735_AddrSet
+                0x0000000008005d58       0x74 Src/st7735/st7735.o
+                0x0000000008005d58                ST7735_AddrSet
  .text.ST7735_HLine
-                0x0000000008005d84       0x64 Src/st7735/st7735.o
-                0x0000000008005d84                ST7735_HLine
+                0x0000000008005dcc       0x64 Src/st7735/st7735.o
+                0x0000000008005dcc                ST7735_HLine
  .text.ST7735_VLine
-                0x0000000008005de8       0x64 Src/st7735/st7735.o
-                0x0000000008005de8                ST7735_VLine
+                0x0000000008005e30       0x64 Src/st7735/st7735.o
+                0x0000000008005e30                ST7735_VLine
  .text.ST7735_Rect
-                0x0000000008005e4c       0x42 Src/st7735/st7735.o
-                0x0000000008005e4c                ST7735_Rect
- *fill*         0x0000000008005e8e        0x2 
+                0x0000000008005e94       0x42 Src/st7735/st7735.o
+                0x0000000008005e94                ST7735_Rect
+ *fill*         0x0000000008005ed6        0x2 
  .text.ST7735_FillRect
-                0x0000000008005e90       0x78 Src/st7735/st7735.o
-                0x0000000008005e90                ST7735_FillRect
+                0x0000000008005ed8       0x78 Src/st7735/st7735.o
+                0x0000000008005ed8                ST7735_FillRect
  .text.ST7735_FillRectEx
-                0x0000000008005f08       0x7c Src/st7735/st7735.o
-                0x0000000008005f08                ST7735_FillRectEx
+                0x0000000008005f50       0x7c Src/st7735/st7735.o
+                0x0000000008005f50                ST7735_FillRectEx
  .text.ST7735_PutChar7x11Ex
-                0x0000000008005f84      0x15c Src/st7735/st7735.o
-                0x0000000008005f84                ST7735_PutChar7x11Ex
+                0x0000000008005fcc      0x15c Src/st7735/st7735.o
+                0x0000000008005fcc                ST7735_PutChar7x11Ex
  .text.ST7735_PutStr7x11Ex
-                0x00000000080060e0       0x60 Src/st7735/st7735.o
-                0x00000000080060e0                ST7735_PutStr7x11Ex
+                0x0000000008006128       0x60 Src/st7735/st7735.o
+                0x0000000008006128                ST7735_PutStr7x11Ex
  .text.ST7735_PutChar5x7Ex
-                0x0000000008006140      0x254 Src/st7735/st7735.o
-                0x0000000008006140                ST7735_PutChar5x7Ex
+                0x0000000008006188      0x254 Src/st7735/st7735.o
+                0x0000000008006188                ST7735_PutChar5x7Ex
  .text.ST7735_PutStr5x7Ex
-                0x0000000008006394       0xd0 Src/st7735/st7735.o
-                0x0000000008006394                ST7735_PutStr5x7Ex
+                0x00000000080063dc       0xd0 Src/st7735/st7735.o
+                0x00000000080063dc                ST7735_PutStr5x7Ex
  .text.Reset_Handler
-                0x0000000008006464       0x48 startup/startup_stm32f103xb.o
-                0x0000000008006464                Reset_Handler
+                0x00000000080064ac       0x48 startup/startup_stm32f103xb.o
+                0x00000000080064ac                Reset_Handler
  .text.Default_Handler
-                0x00000000080064ac        0x2 startup/startup_stm32f103xb.o
-                0x00000000080064ac                USBWakeUp_IRQHandler
-                0x00000000080064ac                EXTI2_IRQHandler
-                0x00000000080064ac                TIM1_CC_IRQHandler
-                0x00000000080064ac                PVD_IRQHandler
-                0x00000000080064ac                EXTI3_IRQHandler
-                0x00000000080064ac                EXTI0_IRQHandler
-                0x00000000080064ac                I2C2_EV_IRQHandler
-                0x00000000080064ac                ADC1_2_IRQHandler
-                0x00000000080064ac                SPI1_IRQHandler
-                0x00000000080064ac                TAMPER_IRQHandler
-                0x00000000080064ac                DMA1_Channel4_IRQHandler
-                0x00000000080064ac                USART3_IRQHandler
-                0x00000000080064ac                RTC_IRQHandler
-                0x00000000080064ac                DMA1_Channel7_IRQHandler
-                0x00000000080064ac                CAN1_RX1_IRQHandler
-                0x00000000080064ac                TIM4_IRQHandler
-                0x00000000080064ac                I2C1_EV_IRQHandler
-                0x00000000080064ac                DMA1_Channel6_IRQHandler
-                0x00000000080064ac                TIM3_IRQHandler
-                0x00000000080064ac                RCC_IRQHandler
-                0x00000000080064ac                TIM1_TRG_COM_IRQHandler
-                0x00000000080064ac                DMA1_Channel1_IRQHandler
-                0x00000000080064ac                Default_Handler
-                0x00000000080064ac                EXTI15_10_IRQHandler
-                0x00000000080064ac                EXTI9_5_IRQHandler
-                0x00000000080064ac                SPI2_IRQHandler
-                0x00000000080064ac                DMA1_Channel5_IRQHandler
-                0x00000000080064ac                EXTI4_IRQHandler
-                0x00000000080064ac                USB_LP_CAN1_RX0_IRQHandler
-                0x00000000080064ac                USB_HP_CAN1_TX_IRQHandler
-                0x00000000080064ac                DMA1_Channel3_IRQHandler
-                0x00000000080064ac                TIM1_UP_IRQHandler
-                0x00000000080064ac                WWDG_IRQHandler
-                0x00000000080064ac                TIM2_IRQHandler
-                0x00000000080064ac                TIM1_BRK_IRQHandler
-                0x00000000080064ac                EXTI1_IRQHandler
-                0x00000000080064ac                USART2_IRQHandler
-                0x00000000080064ac                I2C2_ER_IRQHandler
-                0x00000000080064ac                DMA1_Channel2_IRQHandler
-                0x00000000080064ac                CAN1_SCE_IRQHandler
-                0x00000000080064ac                FLASH_IRQHandler
-                0x00000000080064ac                USART1_IRQHandler
-                0x00000000080064ac                I2C1_ER_IRQHandler
-                0x00000000080064ac                RTC_Alarm_IRQHandler
- .text._ZdlPvj  0x00000000080064ae        0x4 /Applications/Ac6/SystemWorkbench.app/Contents/Eclipse/plugins/fr.ac6.mcu.externaltools.arm-none.macos64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libstdc++_nano.a(del_ops.o)
-                0x00000000080064ae                operator delete(void*, unsigned int)
- .text._Znwj    0x00000000080064b2       0x22 /Applications/Ac6/SystemWorkbench.app/Contents/Eclipse/plugins/fr.ac6.mcu.externaltools.arm-none.macos64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libstdc++_nano.a(new_op.o)
-                0x00000000080064b2                operator new(unsigned int)
- .text._Znaj    0x00000000080064d4        0x4 /Applications/Ac6/SystemWorkbench.app/Contents/Eclipse/plugins/fr.ac6.mcu.externaltools.arm-none.macos64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libstdc++_nano.a(new_opv.o)
-                0x00000000080064d4                operator new[](unsigned int)
+                0x00000000080064f4        0x2 startup/startup_stm32f103xb.o
+                0x00000000080064f4                USBWakeUp_IRQHandler
+                0x00000000080064f4                EXTI2_IRQHandler
+                0x00000000080064f4                TIM1_CC_IRQHandler
+                0x00000000080064f4                PVD_IRQHandler
+                0x00000000080064f4                EXTI3_IRQHandler
+                0x00000000080064f4                EXTI0_IRQHandler
+                0x00000000080064f4                I2C2_EV_IRQHandler
+                0x00000000080064f4                ADC1_2_IRQHandler
+                0x00000000080064f4                SPI1_IRQHandler
+                0x00000000080064f4                TAMPER_IRQHandler
+                0x00000000080064f4                DMA1_Channel4_IRQHandler
+                0x00000000080064f4                USART3_IRQHandler
+                0x00000000080064f4                RTC_IRQHandler
+                0x00000000080064f4                DMA1_Channel7_IRQHandler
+                0x00000000080064f4                CAN1_RX1_IRQHandler
+                0x00000000080064f4                TIM4_IRQHandler
+                0x00000000080064f4                I2C1_EV_IRQHandler
+                0x00000000080064f4                DMA1_Channel6_IRQHandler
+                0x00000000080064f4                TIM3_IRQHandler
+                0x00000000080064f4                RCC_IRQHandler
+                0x00000000080064f4                TIM1_TRG_COM_IRQHandler
+                0x00000000080064f4                DMA1_Channel1_IRQHandler
+                0x00000000080064f4                Default_Handler
+                0x00000000080064f4                EXTI15_10_IRQHandler
+                0x00000000080064f4                EXTI9_5_IRQHandler
+                0x00000000080064f4                SPI2_IRQHandler
+                0x00000000080064f4                DMA1_Channel5_IRQHandler
+                0x00000000080064f4                EXTI4_IRQHandler
+                0x00000000080064f4                USB_LP_CAN1_RX0_IRQHandler
+                0x00000000080064f4                USB_HP_CAN1_TX_IRQHandler
+                0x00000000080064f4                DMA1_Channel3_IRQHandler
+                0x00000000080064f4                TIM1_UP_IRQHandler
+                0x00000000080064f4                WWDG_IRQHandler
+                0x00000000080064f4                TIM2_IRQHandler
+                0x00000000080064f4                TIM1_BRK_IRQHandler
+                0x00000000080064f4                EXTI1_IRQHandler
+                0x00000000080064f4                USART2_IRQHandler
+                0x00000000080064f4                I2C2_ER_IRQHandler
+                0x00000000080064f4                DMA1_Channel2_IRQHandler
+                0x00000000080064f4                CAN1_SCE_IRQHandler
+                0x00000000080064f4                FLASH_IRQHandler
+                0x00000000080064f4                USART1_IRQHandler
+                0x00000000080064f4                I2C1_ER_IRQHandler
+                0x00000000080064f4                RTC_Alarm_IRQHandler
+ .text._ZdlPvj  0x00000000080064f6        0x4 /Applications/Ac6/SystemWorkbench.app/Contents/Eclipse/plugins/fr.ac6.mcu.externaltools.arm-none.macos64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libstdc++_nano.a(del_ops.o)
+                0x00000000080064f6                operator delete(void*, unsigned int)
+ .text._Znwj    0x00000000080064fa       0x22 /Applications/Ac6/SystemWorkbench.app/Contents/Eclipse/plugins/fr.ac6.mcu.externaltools.arm-none.macos64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libstdc++_nano.a(new_op.o)
+                0x00000000080064fa                operator new(unsigned int)
+ .text._Znaj    0x000000000800651c        0x4 /Applications/Ac6/SystemWorkbench.app/Contents/Eclipse/plugins/fr.ac6.mcu.externaltools.arm-none.macos64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libstdc++_nano.a(new_opv.o)
+                0x000000000800651c                operator new[](unsigned int)
  .text.__cxa_pure_virtual
-                0x00000000080064d8        0x6 /Applications/Ac6/SystemWorkbench.app/Contents/Eclipse/plugins/fr.ac6.mcu.externaltools.arm-none.macos64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libstdc++_nano.a(pure.o)
-                0x00000000080064d8                __cxa_pure_virtual
- .text._ZdlPv   0x00000000080064de        0x4 /Applications/Ac6/SystemWorkbench.app/Contents/Eclipse/plugins/fr.ac6.mcu.externaltools.arm-none.macos64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libstdc++_nano.a(del_op.o)
-                0x00000000080064de                operator delete(void*)
+                0x0000000008006520        0x6 /Applications/Ac6/SystemWorkbench.app/Contents/Eclipse/plugins/fr.ac6.mcu.externaltools.arm-none.macos64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libstdc++_nano.a(pure.o)
+                0x0000000008006520                __cxa_pure_virtual
+ .text._ZdlPv   0x0000000008006526        0x4 /Applications/Ac6/SystemWorkbench.app/Contents/Eclipse/plugins/fr.ac6.mcu.externaltools.arm-none.macos64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libstdc++_nano.a(del_op.o)
+                0x0000000008006526                operator delete(void*)
  .text._ZN10__cxxabiv111__terminateEPFvvE
-                0x00000000080064e2        0x8 /Applications/Ac6/SystemWorkbench.app/Contents/Eclipse/plugins/fr.ac6.mcu.externaltools.arm-none.macos64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libstdc++_nano.a(eh_terminate.o)
-                0x00000000080064e2                __cxxabiv1::__terminate(void (*)())
- *fill*         0x00000000080064ea        0x2 
+                0x000000000800652a        0x8 /Applications/Ac6/SystemWorkbench.app/Contents/Eclipse/plugins/fr.ac6.mcu.externaltools.arm-none.macos64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libstdc++_nano.a(eh_terminate.o)
+                0x000000000800652a                __cxxabiv1::__terminate(void (*)())
+ *fill*         0x0000000008006532        0x2 
  .text._ZSt13get_terminatev
-                0x00000000080064ec       0x10 /Applications/Ac6/SystemWorkbench.app/Contents/Eclipse/plugins/fr.ac6.mcu.externaltools.arm-none.macos64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libstdc++_nano.a(eh_terminate.o)
-                0x00000000080064ec                std::get_terminate()
+                0x0000000008006534       0x10 /Applications/Ac6/SystemWorkbench.app/Contents/Eclipse/plugins/fr.ac6.mcu.externaltools.arm-none.macos64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libstdc++_nano.a(eh_terminate.o)
+                0x0000000008006534                std::get_terminate()
  .text._ZSt9terminatev
-                0x00000000080064fc        0xa /Applications/Ac6/SystemWorkbench.app/Contents/Eclipse/plugins/fr.ac6.mcu.externaltools.arm-none.macos64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libstdc++_nano.a(eh_terminate.o)
-                0x00000000080064fc                std::terminate()
- *fill*         0x0000000008006506        0x2 
+                0x0000000008006544        0xa /Applications/Ac6/SystemWorkbench.app/Contents/Eclipse/plugins/fr.ac6.mcu.externaltools.arm-none.macos64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libstdc++_nano.a(eh_terminate.o)
+                0x0000000008006544                std::terminate()
+ *fill*         0x000000000800654e        0x2 
  .text._ZSt15get_new_handlerv
-                0x0000000008006508       0x10 /Applications/Ac6/SystemWorkbench.app/Contents/Eclipse/plugins/fr.ac6.mcu.externaltools.arm-none.macos64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libstdc++_nano.a(new_handler.o)
-                0x0000000008006508                std::get_new_handler()
- .text.abort    0x0000000008006518        0xe /Applications/Ac6/SystemWorkbench.app/Contents/Eclipse/plugins/fr.ac6.mcu.externaltools.arm-none.macos64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-abort.o)
-                0x0000000008006518                abort
- *fill*         0x0000000008006526        0x2 
+                0x0000000008006550       0x10 /Applications/Ac6/SystemWorkbench.app/Contents/Eclipse/plugins/fr.ac6.mcu.externaltools.arm-none.macos64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libstdc++_nano.a(new_handler.o)
+                0x0000000008006550                std::get_new_handler()
+ .text.abort    0x0000000008006560        0xe /Applications/Ac6/SystemWorkbench.app/Contents/Eclipse/plugins/fr.ac6.mcu.externaltools.arm-none.macos64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-abort.o)
+                0x0000000008006560                abort
+ *fill*         0x000000000800656e        0x2 
  .text.__libc_init_array
-                0x0000000008006528       0x48 /Applications/Ac6/SystemWorkbench.app/Contents/Eclipse/plugins/fr.ac6.mcu.externaltools.arm-none.macos64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-init.o)
-                0x0000000008006528                __libc_init_array
- .text.malloc   0x0000000008006570       0x10 /Applications/Ac6/SystemWorkbench.app/Contents/Eclipse/plugins/fr.ac6.mcu.externaltools.arm-none.macos64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-malloc.o)
-                0x0000000008006570                malloc
- .text.free     0x0000000008006580       0x10 /Applications/Ac6/SystemWorkbench.app/Contents/Eclipse/plugins/fr.ac6.mcu.externaltools.arm-none.macos64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-malloc.o)
-                0x0000000008006580                free
- .text.memcpy   0x0000000008006590       0x16 /Applications/Ac6/SystemWorkbench.app/Contents/Eclipse/plugins/fr.ac6.mcu.externaltools.arm-none.macos64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-memcpy-stub.o)
-                0x0000000008006590                memcpy
- *fill*         0x00000000080065a6        0x2 
- .text._free_r  0x00000000080065a8       0x98 /Applications/Ac6/SystemWorkbench.app/Contents/Eclipse/plugins/fr.ac6.mcu.externaltools.arm-none.macos64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-nano-freer.o)
-                0x00000000080065a8                _free_r
+                0x0000000008006570       0x48 /Applications/Ac6/SystemWorkbench.app/Contents/Eclipse/plugins/fr.ac6.mcu.externaltools.arm-none.macos64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-init.o)
+                0x0000000008006570                __libc_init_array
+ .text.malloc   0x00000000080065b8       0x10 /Applications/Ac6/SystemWorkbench.app/Contents/Eclipse/plugins/fr.ac6.mcu.externaltools.arm-none.macos64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-malloc.o)
+                0x00000000080065b8                malloc
+ .text.free     0x00000000080065c8       0x10 /Applications/Ac6/SystemWorkbench.app/Contents/Eclipse/plugins/fr.ac6.mcu.externaltools.arm-none.macos64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-malloc.o)
+                0x00000000080065c8                free
+ .text.memcpy   0x00000000080065d8       0x16 /Applications/Ac6/SystemWorkbench.app/Contents/Eclipse/plugins/fr.ac6.mcu.externaltools.arm-none.macos64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-memcpy-stub.o)
+                0x00000000080065d8                memcpy
+ *fill*         0x00000000080065ee        0x2 
+ .text._free_r  0x00000000080065f0       0x98 /Applications/Ac6/SystemWorkbench.app/Contents/Eclipse/plugins/fr.ac6.mcu.externaltools.arm-none.macos64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-nano-freer.o)
+                0x00000000080065f0                _free_r
  .text._malloc_r
-                0x0000000008006640       0xbc /Applications/Ac6/SystemWorkbench.app/Contents/Eclipse/plugins/fr.ac6.mcu.externaltools.arm-none.macos64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-nano-mallocr.o)
-                0x0000000008006640                _malloc_r
- .text._sbrk_r  0x00000000080066fc       0x20 /Applications/Ac6/SystemWorkbench.app/Contents/Eclipse/plugins/fr.ac6.mcu.externaltools.arm-none.macos64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-sbrkr.o)
-                0x00000000080066fc                _sbrk_r
+                0x0000000008006688       0xbc /Applications/Ac6/SystemWorkbench.app/Contents/Eclipse/plugins/fr.ac6.mcu.externaltools.arm-none.macos64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-nano-mallocr.o)
+                0x0000000008006688                _malloc_r
+ .text._sbrk_r  0x0000000008006744       0x20 /Applications/Ac6/SystemWorkbench.app/Contents/Eclipse/plugins/fr.ac6.mcu.externaltools.arm-none.macos64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-sbrkr.o)
+                0x0000000008006744                _sbrk_r
  .text._raise_r
-                0x000000000800671c       0x50 /Applications/Ac6/SystemWorkbench.app/Contents/Eclipse/plugins/fr.ac6.mcu.externaltools.arm-none.macos64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-signal.o)
-                0x000000000800671c                _raise_r
- .text.raise    0x000000000800676c       0x10 /Applications/Ac6/SystemWorkbench.app/Contents/Eclipse/plugins/fr.ac6.mcu.externaltools.arm-none.macos64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-signal.o)
-                0x000000000800676c                raise
- .text._kill_r  0x000000000800677c       0x24 /Applications/Ac6/SystemWorkbench.app/Contents/Eclipse/plugins/fr.ac6.mcu.externaltools.arm-none.macos64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-signalr.o)
-                0x000000000800677c                _kill_r
+                0x0000000008006764       0x50 /Applications/Ac6/SystemWorkbench.app/Contents/Eclipse/plugins/fr.ac6.mcu.externaltools.arm-none.macos64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-signal.o)
+                0x0000000008006764                _raise_r
+ .text.raise    0x00000000080067b4       0x10 /Applications/Ac6/SystemWorkbench.app/Contents/Eclipse/plugins/fr.ac6.mcu.externaltools.arm-none.macos64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-signal.o)
+                0x00000000080067b4                raise
+ .text._kill_r  0x00000000080067c4       0x24 /Applications/Ac6/SystemWorkbench.app/Contents/Eclipse/plugins/fr.ac6.mcu.externaltools.arm-none.macos64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-signalr.o)
+                0x00000000080067c4                _kill_r
  .text._getpid_r
-                0x00000000080067a0        0x4 /Applications/Ac6/SystemWorkbench.app/Contents/Eclipse/plugins/fr.ac6.mcu.externaltools.arm-none.macos64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-signalr.o)
-                0x00000000080067a0                _getpid_r
+                0x00000000080067e8        0x4 /Applications/Ac6/SystemWorkbench.app/Contents/Eclipse/plugins/fr.ac6.mcu.externaltools.arm-none.macos64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-signalr.o)
+                0x00000000080067e8                _getpid_r
  .text.__malloc_lock
-                0x00000000080067a4        0x2 /Applications/Ac6/SystemWorkbench.app/Contents/Eclipse/plugins/fr.ac6.mcu.externaltools.arm-none.macos64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-mlock.o)
-                0x00000000080067a4                __malloc_lock
+                0x00000000080067ec        0x2 /Applications/Ac6/SystemWorkbench.app/Contents/Eclipse/plugins/fr.ac6.mcu.externaltools.arm-none.macos64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-mlock.o)
+                0x00000000080067ec                __malloc_lock
  .text.__malloc_unlock
-                0x00000000080067a6        0x2 /Applications/Ac6/SystemWorkbench.app/Contents/Eclipse/plugins/fr.ac6.mcu.externaltools.arm-none.macos64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-mlock.o)
-                0x00000000080067a6                __malloc_unlock
- .text._getpid  0x00000000080067a8       0x10 /Applications/Ac6/SystemWorkbench.app/Contents/Eclipse/plugins/fr.ac6.mcu.externaltools.arm-none.macos64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libnosys.a(getpid.o)
-                0x00000000080067a8                _getpid
- .text._kill    0x00000000080067b8       0x10 /Applications/Ac6/SystemWorkbench.app/Contents/Eclipse/plugins/fr.ac6.mcu.externaltools.arm-none.macos64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libnosys.a(kill.o)
-                0x00000000080067b8                _kill
- .text._sbrk    0x00000000080067c8       0x1c /Applications/Ac6/SystemWorkbench.app/Contents/Eclipse/plugins/fr.ac6.mcu.externaltools.arm-none.macos64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libnosys.a(sbrk.o)
-                0x00000000080067c8                _sbrk
- .text._exit    0x00000000080067e4        0x4 /Applications/Ac6/SystemWorkbench.app/Contents/Eclipse/plugins/fr.ac6.mcu.externaltools.arm-none.macos64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libnosys.a(_exit.o)
-                0x00000000080067e4                _exit
+                0x00000000080067ee        0x2 /Applications/Ac6/SystemWorkbench.app/Contents/Eclipse/plugins/fr.ac6.mcu.externaltools.arm-none.macos64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-mlock.o)
+                0x00000000080067ee                __malloc_unlock
+ .text._getpid  0x00000000080067f0       0x10 /Applications/Ac6/SystemWorkbench.app/Contents/Eclipse/plugins/fr.ac6.mcu.externaltools.arm-none.macos64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libnosys.a(getpid.o)
+                0x00000000080067f0                _getpid
+ .text._kill    0x0000000008006800       0x10 /Applications/Ac6/SystemWorkbench.app/Contents/Eclipse/plugins/fr.ac6.mcu.externaltools.arm-none.macos64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libnosys.a(kill.o)
+                0x0000000008006800                _kill
+ .text._sbrk    0x0000000008006810       0x1c /Applications/Ac6/SystemWorkbench.app/Contents/Eclipse/plugins/fr.ac6.mcu.externaltools.arm-none.macos64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libnosys.a(sbrk.o)
+                0x0000000008006810                _sbrk
+ .text._exit    0x000000000800682c        0x4 /Applications/Ac6/SystemWorkbench.app/Contents/Eclipse/plugins/fr.ac6.mcu.externaltools.arm-none.macos64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libnosys.a(_exit.o)
+                0x000000000800682c                _exit
  *(.glue_7)
- .glue_7        0x00000000080067e8        0x0 linker stubs
+ .glue_7        0x0000000008006830        0x0 linker stubs
  *(.glue_7t)
- .glue_7t       0x00000000080067e8        0x0 linker stubs
+ .glue_7t       0x0000000008006830        0x0 linker stubs
  *(.eh_frame)
- .eh_frame      0x00000000080067e8        0x0 /Applications/Ac6/SystemWorkbench.app/Contents/Eclipse/plugins/fr.ac6.mcu.externaltools.arm-none.macos64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7-m/crtbegin.o
+ .eh_frame      0x0000000008006830        0x0 /Applications/Ac6/SystemWorkbench.app/Contents/Eclipse/plugins/fr.ac6.mcu.externaltools.arm-none.macos64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7-m/crtbegin.o
  *(.init)
- .init          0x00000000080067e8        0x4 /Applications/Ac6/SystemWorkbench.app/Contents/Eclipse/plugins/fr.ac6.mcu.externaltools.arm-none.macos64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7-m/crti.o
-                0x00000000080067e8                _init
- .init          0x00000000080067ec        0x8 /Applications/Ac6/SystemWorkbench.app/Contents/Eclipse/plugins/fr.ac6.mcu.externaltools.arm-none.macos64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7-m/crtn.o
+ .init          0x0000000008006830        0x4 /Applications/Ac6/SystemWorkbench.app/Contents/Eclipse/plugins/fr.ac6.mcu.externaltools.arm-none.macos64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7-m/crti.o
+                0x0000000008006830                _init
+ .init          0x0000000008006834        0x8 /Applications/Ac6/SystemWorkbench.app/Contents/Eclipse/plugins/fr.ac6.mcu.externaltools.arm-none.macos64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7-m/crtn.o
  *(.fini)
- .fini          0x00000000080067f4        0x4 /Applications/Ac6/SystemWorkbench.app/Contents/Eclipse/plugins/fr.ac6.mcu.externaltools.arm-none.macos64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7-m/crti.o
-                0x00000000080067f4                _fini
- .fini          0x00000000080067f8        0x8 /Applications/Ac6/SystemWorkbench.app/Contents/Eclipse/plugins/fr.ac6.mcu.externaltools.arm-none.macos64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7-m/crtn.o
-                0x0000000008006800                . = ALIGN (0x4)
-                0x0000000008006800                _etext = .
+ .fini          0x000000000800683c        0x4 /Applications/Ac6/SystemWorkbench.app/Contents/Eclipse/plugins/fr.ac6.mcu.externaltools.arm-none.macos64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7-m/crti.o
+                0x000000000800683c                _fini
+ .fini          0x0000000008006840        0x8 /Applications/Ac6/SystemWorkbench.app/Contents/Eclipse/plugins/fr.ac6.mcu.externaltools.arm-none.macos64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7-m/crtn.o
+                0x0000000008006848                . = ALIGN (0x4)
+                0x0000000008006848                _etext = .
 
-.vfp11_veneer   0x0000000008006800        0x0
- .vfp11_veneer  0x0000000008006800        0x0 linker stubs
+.vfp11_veneer   0x0000000008006848        0x0
+ .vfp11_veneer  0x0000000008006848        0x0 linker stubs
 
-.v4_bx          0x0000000008006800        0x0
- .v4_bx         0x0000000008006800        0x0 linker stubs
+.v4_bx          0x0000000008006848        0x0
+ .v4_bx         0x0000000008006848        0x0 linker stubs
 
-.iplt           0x0000000008006800        0x0
- .iplt          0x0000000008006800        0x0 /Applications/Ac6/SystemWorkbench.app/Contents/Eclipse/plugins/fr.ac6.mcu.externaltools.arm-none.macos64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7-m/crtbegin.o
+.iplt           0x0000000008006848        0x0
+ .iplt          0x0000000008006848        0x0 /Applications/Ac6/SystemWorkbench.app/Contents/Eclipse/plugins/fr.ac6.mcu.externaltools.arm-none.macos64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7-m/crtbegin.o
 
-.rodata         0x0000000008006800      0xe30
-                0x0000000008006800                . = ALIGN (0x4)
+.rodata         0x0000000008006848      0xe30
+                0x0000000008006848                . = ALIGN (0x4)
  *(.rodata)
- .rodata        0x0000000008006800       0x12 Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc.o
- *fill*         0x0000000008006812        0x2 
- .rodata        0x0000000008006814       0x10 Src/VFO/Configuration.o
-                0x0000000008006814                vtable for VFO::Configuration
- .rodata        0x0000000008006824       0x10 Src/VFO/GUIController.o
-                0x0000000008006824                vtable for VFO::GUIController
- .rodata        0x0000000008006834       0x23 Src/VFO/GUIMainView.o
-                0x0000000008006834                vtable for VFO::GUIMainView
- *fill*         0x0000000008006857        0x1 
- .rodata        0x0000000008006858       0x54 Src/VFO/GUISetupView.o
-                0x0000000008006858                vtable for VFO::GUISetupView
- .rodata        0x00000000080068ac       0x1c Src/VFO/GUIView.o
-                0x00000000080068ac                vtable for VFO::GUIView
- .rodata        0x00000000080068c8       0x10 Src/VFO/VFOController.o
-                0x00000000080068c8                vtable for VFO::VFOController
- .rodata        0x00000000080068d8       0x37 Src/VFO/GUI/Background.o
-                0x00000000080068d8                vtable for VFO::BitmapBox
-                0x00000000080068ec                vtable for VFO::GradientBox
- *fill*         0x000000000800690f        0x1 
- .rodata        0x0000000008006910       0x18 Src/system_stm32f1xx.o
-                0x0000000008006910                AHBPrescTable
-                0x0000000008006920                APBPrescTable
- .rodata        0x0000000008006928      0xc00 Src/st7735/st7735.o
+ .rodata        0x0000000008006848       0x12 Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc.o
+ *fill*         0x000000000800685a        0x2 
+ .rodata        0x000000000800685c       0x10 Src/VFO/Configuration.o
+                0x000000000800685c                vtable for VFO::Configuration
+ .rodata        0x000000000800686c       0x10 Src/VFO/GUIController.o
+                0x000000000800686c                vtable for VFO::GUIController
+ .rodata        0x000000000800687c       0x23 Src/VFO/GUIMainView.o
+                0x000000000800687c                vtable for VFO::GUIMainView
+ *fill*         0x000000000800689f        0x1 
+ .rodata        0x00000000080068a0       0x54 Src/VFO/GUISetupView.o
+                0x00000000080068a0                vtable for VFO::GUISetupView
+ .rodata        0x00000000080068f4       0x1c Src/VFO/GUIView.o
+                0x00000000080068f4                vtable for VFO::GUIView
+ .rodata        0x0000000008006910       0x10 Src/VFO/VFOController.o
+                0x0000000008006910                vtable for VFO::VFOController
+ .rodata        0x0000000008006920       0x37 Src/VFO/GUI/Background.o
+                0x0000000008006920                vtable for VFO::BitmapBox
+                0x0000000008006934                vtable for VFO::GradientBox
+ *fill*         0x0000000008006957        0x1 
+ .rodata        0x0000000008006958       0x18 Src/system_stm32f1xx.o
+                0x0000000008006958                AHBPrescTable
+                0x0000000008006968                APBPrescTable
+ .rodata        0x0000000008006970      0xc00 Src/st7735/st7735.o
  *(.rodata*)
  .rodata.str1.4
-                0x0000000008007528       0x18 Src/VFO/GUIMainView.o
+                0x0000000008007570       0x18 Src/VFO/GUIMainView.o
  .rodata.str1.4
-                0x0000000008007540       0xc3 Src/VFO/GUISetupView.o
- *fill*         0x0000000008007603        0x1 
+                0x0000000008007588       0xc3 Src/VFO/GUISetupView.o
+ *fill*         0x000000000800764b        0x1 
  .rodata.str1.4
-                0x0000000008007604        0xe Src/main.o
- *fill*         0x0000000008007612        0x2 
+                0x000000000800764c        0xe Src/main.o
+ *fill*         0x000000000800765a        0x2 
  .rodata.str1.4
-                0x0000000008007614       0x1c Src/si5351/si5351.o
+                0x000000000800765c       0x1c Src/si5351/si5351.o
                                          0x19 (size before relaxing)
-                0x0000000008007630                . = ALIGN (0x4)
+                0x0000000008007678                . = ALIGN (0x4)
 
 .ARM.extab
  *(.ARM.extab* .gnu.linkonce.armextab.*)
 
-.ARM            0x0000000008007630        0x8
-                0x0000000008007630                __exidx_start = .
+.ARM            0x0000000008007678        0x8
+                0x0000000008007678                __exidx_start = .
  *(.ARM.exidx*)
- .ARM.exidx     0x0000000008007630        0x8 /Applications/Ac6/SystemWorkbench.app/Contents/Eclipse/plugins/fr.ac6.mcu.externaltools.arm-none.macos64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7-m/libgcc.a(_udivmoddi4.o)
-                0x0000000008007638                __exidx_end = .
+ .ARM.exidx     0x0000000008007678        0x8 /Applications/Ac6/SystemWorkbench.app/Contents/Eclipse/plugins/fr.ac6.mcu.externaltools.arm-none.macos64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7-m/libgcc.a(_udivmoddi4.o)
+                0x0000000008007680                __exidx_end = .
 
-.rel.dyn        0x0000000008007638        0x0
- .rel.iplt      0x0000000008007638        0x0 /Applications/Ac6/SystemWorkbench.app/Contents/Eclipse/plugins/fr.ac6.mcu.externaltools.arm-none.macos64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7-m/crtbegin.o
+.rel.dyn        0x0000000008007680        0x0
+ .rel.iplt      0x0000000008007680        0x0 /Applications/Ac6/SystemWorkbench.app/Contents/Eclipse/plugins/fr.ac6.mcu.externaltools.arm-none.macos64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7-m/crtbegin.o
 
-.preinit_array  0x0000000008007638        0x0
-                0x0000000008007638                PROVIDE (__preinit_array_start, .)
+.preinit_array  0x0000000008007680        0x0
+                0x0000000008007680                PROVIDE (__preinit_array_start, .)
  *(.preinit_array*)
-                0x0000000008007638                PROVIDE (__preinit_array_end, .)
+                0x0000000008007680                PROVIDE (__preinit_array_end, .)
 
-.init_array     0x0000000008007638        0x8
-                0x0000000008007638                PROVIDE (__init_array_start, .)
+.init_array     0x0000000008007680        0x8
+                0x0000000008007680                PROVIDE (__init_array_start, .)
  *(SORT(.init_array.*))
  *(.init_array*)
- .init_array    0x0000000008007638        0x4 /Applications/Ac6/SystemWorkbench.app/Contents/Eclipse/plugins/fr.ac6.mcu.externaltools.arm-none.macos64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7-m/crtbegin.o
- .init_array    0x000000000800763c        0x4 Src/VFO/VFOController.o
-                0x0000000008007640                PROVIDE (__init_array_end, .)
+ .init_array    0x0000000008007680        0x4 /Applications/Ac6/SystemWorkbench.app/Contents/Eclipse/plugins/fr.ac6.mcu.externaltools.arm-none.macos64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7-m/crtbegin.o
+ .init_array    0x0000000008007684        0x4 Src/VFO/VFOController.o
+                0x0000000008007688                PROVIDE (__init_array_end, .)
 
-.fini_array     0x0000000008007640        0x4
+.fini_array     0x0000000008007688        0x4
                 [!provide]                        PROVIDE (__fini_array_start, .)
  *(SORT(.fini_array.*))
  *(.fini_array*)
- .fini_array    0x0000000008007640        0x4 /Applications/Ac6/SystemWorkbench.app/Contents/Eclipse/plugins/fr.ac6.mcu.externaltools.arm-none.macos64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7-m/crtbegin.o
+ .fini_array    0x0000000008007688        0x4 /Applications/Ac6/SystemWorkbench.app/Contents/Eclipse/plugins/fr.ac6.mcu.externaltools.arm-none.macos64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7-m/crtbegin.o
                 [!provide]                        PROVIDE (__fini_array_end, .)
-                0x0000000008007644                _sidata = LOADADDR (.data)
+                0x000000000800768c                _sidata = LOADADDR (.data)
 
-.data           0x0000000020000000      0x138 load address 0x0000000008007644
+.data           0x0000000020000000      0x138 load address 0x000000000800768c
                 0x0000000020000000                . = ALIGN (0x4)
                 0x0000000020000000                _sdata = .
  *(.data)
@@ -7995,14 +8006,14 @@ LOAD /Applications/Ac6/SystemWorkbench.app/Contents/Eclipse/plugins/fr.ac6.mcu.e
                 0x0000000020000138                . = ALIGN (0x4)
                 0x0000000020000138                _edata = .
 
-.jcr            0x0000000020000138        0x0 load address 0x000000000800777c
+.jcr            0x0000000020000138        0x0 load address 0x00000000080077c4
  .jcr           0x0000000020000138        0x0 /Applications/Ac6/SystemWorkbench.app/Contents/Eclipse/plugins/fr.ac6.mcu.externaltools.arm-none.macos64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7-m/crtbegin.o
 
-.igot.plt       0x0000000020000138        0x0 load address 0x000000000800777c
+.igot.plt       0x0000000020000138        0x0 load address 0x00000000080077c4
  .igot.plt      0x0000000020000138        0x0 /Applications/Ac6/SystemWorkbench.app/Contents/Eclipse/plugins/fr.ac6.mcu.externaltools.arm-none.macos64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7-m/crtbegin.o
                 0x0000000020000138                . = ALIGN (0x4)
 
-.bss            0x0000000020000138      0x1cc load address 0x000000000800777c
+.bss            0x0000000020000138      0x1cc load address 0x00000000080077c4
                 0x0000000020000138                _sbss = .
                 0x0000000020000138                __bss_start__ = _sbss
  *(.bss)
@@ -8045,7 +8056,7 @@ LOAD /Applications/Ac6/SystemWorkbench.app/Contents/Eclipse/plugins/fr.ac6.mcu.e
                 0x0000000020000304                __bss_end__ = _ebss
 
 ._user_heap_stack
-                0x0000000020000304      0x604 load address 0x000000000800777c
+                0x0000000020000304      0x604 load address 0x00000000080077c4
                 0x0000000020000308                . = ALIGN (0x8)
  *fill*         0x0000000020000304        0x4 
                 0x0000000020000308                PROVIDE (end, .)
@@ -8198,7 +8209,7 @@ LOAD /Applications/Ac6/SystemWorkbench.app/Contents/Eclipse/plugins/fr.ac6.mcu.e
                 0x0000000000000bd1       0x1d /Applications/Ac6/SystemWorkbench.app/Contents/Eclipse/plugins/fr.ac6.mcu.externaltools.arm-none.macos64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7-m/crtn.o
 OUTPUT(STM32VFO.elf elf32-littlearm)
 
-.debug_info     0x0000000000000000    0x3688e
+.debug_info     0x0000000000000000    0x36a35
  .debug_info    0x0000000000000000      0xfd2 Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.o
  .debug_info    0x0000000000000fd2     0x1643 Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.o
  .debug_info    0x0000000000002615     0x14a3 Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.o
@@ -8216,25 +8227,25 @@ OUTPUT(STM32VFO.elf elf32-littlearm)
  .debug_info    0x00000000000152c0      0xfc8 Src/VFO/Configuration.o
  .debug_info    0x0000000000016288     0x2041 Src/VFO/GUIController.o
  .debug_info    0x00000000000182c9     0x2697 Src/VFO/GUIMainView.o
- .debug_info    0x000000000001a960     0x281d Src/VFO/GUISetupView.o
- .debug_info    0x000000000001d17d     0x17ff Src/VFO/GUIView.o
- .debug_info    0x000000000001e97c     0x2e50 Src/VFO/VFOController.o
- .debug_info    0x00000000000217cc     0x289d Src/VFO/GUI/Background.o
- .debug_info    0x0000000000024069     0x1ec9 Src/VFO/GUI/FrequencyString.o
- .debug_info    0x0000000000025f32      0x2ec Src/VFO/GUI/Utils.o
- .debug_info    0x000000000002621e     0x237b Src/VFO.o
- .debug_info    0x0000000000028599     0x1ead Src/main.o
- .debug_info    0x000000000002a446     0x18aa Src/stm32f1xx_hal_msp.o
- .debug_info    0x000000000002bcf0      0xa47 Src/stm32f1xx_it.o
- .debug_info    0x000000000002c737      0xc43 Src/system_stm32f1xx.o
- .debug_info    0x000000000002d37a     0x1170 Src/eeprom/eeprom.o
- .debug_info    0x000000000002e4ea      0xe64 Src/kbd/kbd.o
- .debug_info    0x000000000002f34e     0x38e7 Src/si5351/si5351.o
- .debug_info    0x0000000000032c35      0xb25 Src/st7735/dwt_stm32_delay.o
- .debug_info    0x000000000003375a     0x30bd Src/st7735/st7735.o
- .debug_info    0x0000000000036817       0x77 startup/startup_stm32f103xb.o
+ .debug_info    0x000000000001a960     0x29c4 Src/VFO/GUISetupView.o
+ .debug_info    0x000000000001d324     0x17ff Src/VFO/GUIView.o
+ .debug_info    0x000000000001eb23     0x2e50 Src/VFO/VFOController.o
+ .debug_info    0x0000000000021973     0x289d Src/VFO/GUI/Background.o
+ .debug_info    0x0000000000024210     0x1ec9 Src/VFO/GUI/FrequencyString.o
+ .debug_info    0x00000000000260d9      0x2ec Src/VFO/GUI/Utils.o
+ .debug_info    0x00000000000263c5     0x237b Src/VFO.o
+ .debug_info    0x0000000000028740     0x1ead Src/main.o
+ .debug_info    0x000000000002a5ed     0x18aa Src/stm32f1xx_hal_msp.o
+ .debug_info    0x000000000002be97      0xa47 Src/stm32f1xx_it.o
+ .debug_info    0x000000000002c8de      0xc43 Src/system_stm32f1xx.o
+ .debug_info    0x000000000002d521     0x1170 Src/eeprom/eeprom.o
+ .debug_info    0x000000000002e691      0xe64 Src/kbd/kbd.o
+ .debug_info    0x000000000002f4f5     0x38e7 Src/si5351/si5351.o
+ .debug_info    0x0000000000032ddc      0xb25 Src/st7735/dwt_stm32_delay.o
+ .debug_info    0x0000000000033901     0x30bd Src/st7735/st7735.o
+ .debug_info    0x00000000000369be       0x77 startup/startup_stm32f103xb.o
 
-.debug_abbrev   0x0000000000000000     0x6f2a
+.debug_abbrev   0x0000000000000000     0x6f38
  .debug_abbrev  0x0000000000000000      0x301 Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.o
  .debug_abbrev  0x0000000000000301      0x2a4 Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.o
  .debug_abbrev  0x00000000000005a5      0x3da Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.o
@@ -8252,25 +8263,25 @@ OUTPUT(STM32VFO.elf elf32-littlearm)
  .debug_abbrev  0x0000000000002aa6      0x3b9 Src/VFO/Configuration.o
  .debug_abbrev  0x0000000000002e5f      0x482 Src/VFO/GUIController.o
  .debug_abbrev  0x00000000000032e1      0x51c Src/VFO/GUIMainView.o
- .debug_abbrev  0x00000000000037fd      0x545 Src/VFO/GUISetupView.o
- .debug_abbrev  0x0000000000003d42      0x2ff Src/VFO/GUIView.o
- .debug_abbrev  0x0000000000004041      0x54e Src/VFO/VFOController.o
- .debug_abbrev  0x000000000000458f      0x57c Src/VFO/GUI/Background.o
- .debug_abbrev  0x0000000000004b0b      0x45b Src/VFO/GUI/FrequencyString.o
- .debug_abbrev  0x0000000000004f66      0x100 Src/VFO/GUI/Utils.o
- .debug_abbrev  0x0000000000005066      0x3e2 Src/VFO.o
- .debug_abbrev  0x0000000000005448      0x358 Src/main.o
- .debug_abbrev  0x00000000000057a0      0x270 Src/stm32f1xx_hal_msp.o
- .debug_abbrev  0x0000000000005a10      0x207 Src/stm32f1xx_it.o
- .debug_abbrev  0x0000000000005c17      0x235 Src/system_stm32f1xx.o
- .debug_abbrev  0x0000000000005e4c      0x2bd Src/eeprom/eeprom.o
- .debug_abbrev  0x0000000000006109      0x377 Src/kbd/kbd.o
- .debug_abbrev  0x0000000000006480      0x49a Src/si5351/si5351.o
- .debug_abbrev  0x000000000000691a      0x1c2 Src/st7735/dwt_stm32_delay.o
- .debug_abbrev  0x0000000000006adc      0x43c Src/st7735/st7735.o
- .debug_abbrev  0x0000000000006f18       0x12 startup/startup_stm32f103xb.o
+ .debug_abbrev  0x00000000000037fd      0x553 Src/VFO/GUISetupView.o
+ .debug_abbrev  0x0000000000003d50      0x2ff Src/VFO/GUIView.o
+ .debug_abbrev  0x000000000000404f      0x54e Src/VFO/VFOController.o
+ .debug_abbrev  0x000000000000459d      0x57c Src/VFO/GUI/Background.o
+ .debug_abbrev  0x0000000000004b19      0x45b Src/VFO/GUI/FrequencyString.o
+ .debug_abbrev  0x0000000000004f74      0x100 Src/VFO/GUI/Utils.o
+ .debug_abbrev  0x0000000000005074      0x3e2 Src/VFO.o
+ .debug_abbrev  0x0000000000005456      0x358 Src/main.o
+ .debug_abbrev  0x00000000000057ae      0x270 Src/stm32f1xx_hal_msp.o
+ .debug_abbrev  0x0000000000005a1e      0x207 Src/stm32f1xx_it.o
+ .debug_abbrev  0x0000000000005c25      0x235 Src/system_stm32f1xx.o
+ .debug_abbrev  0x0000000000005e5a      0x2bd Src/eeprom/eeprom.o
+ .debug_abbrev  0x0000000000006117      0x377 Src/kbd/kbd.o
+ .debug_abbrev  0x000000000000648e      0x49a Src/si5351/si5351.o
+ .debug_abbrev  0x0000000000006928      0x1c2 Src/st7735/dwt_stm32_delay.o
+ .debug_abbrev  0x0000000000006aea      0x43c Src/st7735/st7735.o
+ .debug_abbrev  0x0000000000006f26       0x12 startup/startup_stm32f103xb.o
 
-.debug_loc      0x0000000000000000    0x10994
+.debug_loc      0x0000000000000000    0x10b77
  .debug_loc     0x0000000000000000      0x108 Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.o
  .debug_loc     0x0000000000000108      0x952 Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.o
  .debug_loc     0x0000000000000a5a      0x5ad Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.o
@@ -8288,22 +8299,22 @@ OUTPUT(STM32VFO.elf elf32-littlearm)
  .debug_loc     0x000000000000a41d       0xb9 Src/VFO/Configuration.o
  .debug_loc     0x000000000000a4d6      0x136 Src/VFO/GUIController.o
  .debug_loc     0x000000000000a60c      0x16f Src/VFO/GUIMainView.o
- .debug_loc     0x000000000000a77b      0x56e Src/VFO/GUISetupView.o
- .debug_loc     0x000000000000ace9       0x1e Src/VFO/GUIView.o
- .debug_loc     0x000000000000ad07      0x3dd Src/VFO/VFOController.o
- .debug_loc     0x000000000000b0e4      0x4b6 Src/VFO/GUI/Background.o
- .debug_loc     0x000000000000b59a       0xb4 Src/VFO/GUI/FrequencyString.o
- .debug_loc     0x000000000000b64e      0x7b0 Src/VFO/GUI/Utils.o
- .debug_loc     0x000000000000bdfe       0x63 Src/VFO.o
- .debug_loc     0x000000000000be61       0x16 Src/main.o
- .debug_loc     0x000000000000be77      0x111 Src/stm32f1xx_hal_msp.o
- .debug_loc     0x000000000000bf88       0xdf Src/system_stm32f1xx.o
- .debug_loc     0x000000000000c067      0x984 Src/eeprom/eeprom.o
- .debug_loc     0x000000000000c9eb      0x2cd Src/kbd/kbd.o
- .debug_loc     0x000000000000ccb8     0x2150 Src/si5351/si5351.o
- .debug_loc     0x000000000000ee08     0x1b8c Src/st7735/st7735.o
+ .debug_loc     0x000000000000a77b      0x751 Src/VFO/GUISetupView.o
+ .debug_loc     0x000000000000aecc       0x1e Src/VFO/GUIView.o
+ .debug_loc     0x000000000000aeea      0x3dd Src/VFO/VFOController.o
+ .debug_loc     0x000000000000b2c7      0x4b6 Src/VFO/GUI/Background.o
+ .debug_loc     0x000000000000b77d       0xb4 Src/VFO/GUI/FrequencyString.o
+ .debug_loc     0x000000000000b831      0x7b0 Src/VFO/GUI/Utils.o
+ .debug_loc     0x000000000000bfe1       0x63 Src/VFO.o
+ .debug_loc     0x000000000000c044       0x16 Src/main.o
+ .debug_loc     0x000000000000c05a      0x111 Src/stm32f1xx_hal_msp.o
+ .debug_loc     0x000000000000c16b       0xdf Src/system_stm32f1xx.o
+ .debug_loc     0x000000000000c24a      0x984 Src/eeprom/eeprom.o
+ .debug_loc     0x000000000000cbce      0x2cd Src/kbd/kbd.o
+ .debug_loc     0x000000000000ce9b     0x2150 Src/si5351/si5351.o
+ .debug_loc     0x000000000000efeb     0x1b8c Src/st7735/st7735.o
 
-.debug_aranges  0x0000000000000000     0x13d0
+.debug_aranges  0x0000000000000000     0x13e8
  .debug_aranges
                 0x0000000000000000       0xd0 Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.o
  .debug_aranges
@@ -8339,41 +8350,41 @@ OUTPUT(STM32VFO.elf elf32-littlearm)
  .debug_aranges
                 0x0000000000000cf8       0x50 Src/VFO/GUIMainView.o
  .debug_aranges
-                0x0000000000000d48       0x80 Src/VFO/GUISetupView.o
+                0x0000000000000d48       0x98 Src/VFO/GUISetupView.o
  .debug_aranges
-                0x0000000000000dc8       0x30 Src/VFO/GUIView.o
+                0x0000000000000de0       0x30 Src/VFO/GUIView.o
  .debug_aranges
-                0x0000000000000df8       0x90 Src/VFO/VFOController.o
+                0x0000000000000e10       0x90 Src/VFO/VFOController.o
  .debug_aranges
-                0x0000000000000e88       0x80 Src/VFO/GUI/Background.o
+                0x0000000000000ea0       0x80 Src/VFO/GUI/Background.o
  .debug_aranges
-                0x0000000000000f08       0x30 Src/VFO/GUI/FrequencyString.o
+                0x0000000000000f20       0x30 Src/VFO/GUI/FrequencyString.o
  .debug_aranges
-                0x0000000000000f38       0x30 Src/VFO/GUI/Utils.o
+                0x0000000000000f50       0x30 Src/VFO/GUI/Utils.o
  .debug_aranges
-                0x0000000000000f68       0x58 Src/VFO.o
+                0x0000000000000f80       0x58 Src/VFO.o
  .debug_aranges
-                0x0000000000000fc0       0x58 Src/main.o
+                0x0000000000000fd8       0x58 Src/main.o
  .debug_aranges
-                0x0000000000001018       0x50 Src/stm32f1xx_hal_msp.o
+                0x0000000000001030       0x50 Src/stm32f1xx_hal_msp.o
  .debug_aranges
-                0x0000000000001068       0x60 Src/stm32f1xx_it.o
+                0x0000000000001080       0x60 Src/stm32f1xx_it.o
  .debug_aranges
-                0x00000000000010c8       0x28 Src/system_stm32f1xx.o
+                0x00000000000010e0       0x28 Src/system_stm32f1xx.o
  .debug_aranges
-                0x00000000000010f0       0x58 Src/eeprom/eeprom.o
+                0x0000000000001108       0x58 Src/eeprom/eeprom.o
  .debug_aranges
-                0x0000000000001148       0x38 Src/kbd/kbd.o
+                0x0000000000001160       0x38 Src/kbd/kbd.o
  .debug_aranges
-                0x0000000000001180      0x130 Src/si5351/si5351.o
+                0x0000000000001198      0x130 Src/si5351/si5351.o
  .debug_aranges
-                0x00000000000012b0       0x20 Src/st7735/dwt_stm32_delay.o
+                0x00000000000012c8       0x20 Src/st7735/dwt_stm32_delay.o
  .debug_aranges
-                0x00000000000012d0       0xd8 Src/st7735/st7735.o
+                0x00000000000012e8       0xd8 Src/st7735/st7735.o
  .debug_aranges
-                0x00000000000013a8       0x28 startup/startup_stm32f103xb.o
+                0x00000000000013c0       0x28 startup/startup_stm32f103xb.o
 
-.debug_ranges   0x0000000000000000     0x1378
+.debug_ranges   0x0000000000000000     0x1360
  .debug_ranges  0x0000000000000000       0xc0 Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.o
  .debug_ranges  0x00000000000000c0       0xe0 Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.o
  .debug_ranges  0x00000000000001a0       0xe0 Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.o
@@ -8391,23 +8402,23 @@ OUTPUT(STM32VFO.elf elf32-littlearm)
  .debug_ranges  0x0000000000000c18       0x30 Src/VFO/Configuration.o
  .debug_ranges  0x0000000000000c48       0x48 Src/VFO/GUIController.o
  .debug_ranges  0x0000000000000c90       0x40 Src/VFO/GUIMainView.o
- .debug_ranges  0x0000000000000cd0       0xd0 Src/VFO/GUISetupView.o
- .debug_ranges  0x0000000000000da0       0x20 Src/VFO/GUIView.o
- .debug_ranges  0x0000000000000dc0       0x80 Src/VFO/VFOController.o
- .debug_ranges  0x0000000000000e40       0x88 Src/VFO/GUI/Background.o
- .debug_ranges  0x0000000000000ec8       0x20 Src/VFO/GUI/FrequencyString.o
- .debug_ranges  0x0000000000000ee8       0xa0 Src/VFO/GUI/Utils.o
- .debug_ranges  0x0000000000000f88       0x48 Src/VFO.o
- .debug_ranges  0x0000000000000fd0       0x48 Src/main.o
- .debug_ranges  0x0000000000001018       0x40 Src/stm32f1xx_hal_msp.o
- .debug_ranges  0x0000000000001058       0x50 Src/stm32f1xx_it.o
- .debug_ranges  0x00000000000010a8       0x18 Src/system_stm32f1xx.o
- .debug_ranges  0x00000000000010c0       0x48 Src/eeprom/eeprom.o
- .debug_ranges  0x0000000000001108       0x40 Src/kbd/kbd.o
- .debug_ranges  0x0000000000001148      0x138 Src/si5351/si5351.o
- .debug_ranges  0x0000000000001280       0x10 Src/st7735/dwt_stm32_delay.o
- .debug_ranges  0x0000000000001290       0xc8 Src/st7735/st7735.o
- .debug_ranges  0x0000000000001358       0x20 startup/startup_stm32f103xb.o
+ .debug_ranges  0x0000000000000cd0       0xb8 Src/VFO/GUISetupView.o
+ .debug_ranges  0x0000000000000d88       0x20 Src/VFO/GUIView.o
+ .debug_ranges  0x0000000000000da8       0x80 Src/VFO/VFOController.o
+ .debug_ranges  0x0000000000000e28       0x88 Src/VFO/GUI/Background.o
+ .debug_ranges  0x0000000000000eb0       0x20 Src/VFO/GUI/FrequencyString.o
+ .debug_ranges  0x0000000000000ed0       0xa0 Src/VFO/GUI/Utils.o
+ .debug_ranges  0x0000000000000f70       0x48 Src/VFO.o
+ .debug_ranges  0x0000000000000fb8       0x48 Src/main.o
+ .debug_ranges  0x0000000000001000       0x40 Src/stm32f1xx_hal_msp.o
+ .debug_ranges  0x0000000000001040       0x50 Src/stm32f1xx_it.o
+ .debug_ranges  0x0000000000001090       0x18 Src/system_stm32f1xx.o
+ .debug_ranges  0x00000000000010a8       0x48 Src/eeprom/eeprom.o
+ .debug_ranges  0x00000000000010f0       0x40 Src/kbd/kbd.o
+ .debug_ranges  0x0000000000001130      0x138 Src/si5351/si5351.o
+ .debug_ranges  0x0000000000001268       0x10 Src/st7735/dwt_stm32_delay.o
+ .debug_ranges  0x0000000000001278       0xc8 Src/st7735/st7735.o
+ .debug_ranges  0x0000000000001340       0x20 startup/startup_stm32f103xb.o
 
 .debug_macro    0x0000000000000000    0x1fb13
  .debug_macro   0x0000000000000000      0x384 Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.o
@@ -8546,7 +8557,7 @@ OUTPUT(STM32VFO.elf elf32-littlearm)
  .debug_macro   0x000000000001f72d      0x3b1 Src/st7735/st7735.o
  .debug_macro   0x000000000001fade       0x35 Src/st7735/st7735.o
 
-.debug_line     0x0000000000000000    0x18bc6
+.debug_line     0x0000000000000000    0x18c0d
  .debug_line    0x0000000000000000      0xa5c Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.o
  .debug_line    0x0000000000000a5c      0xdd8 Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.o
  .debug_line    0x0000000000001834      0xa5b Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.o
@@ -8564,25 +8575,25 @@ OUTPUT(STM32VFO.elf elf32-littlearm)
  .debug_line    0x000000000000b9a7      0x95c Src/VFO/Configuration.o
  .debug_line    0x000000000000c303      0xde1 Src/VFO/GUIController.o
  .debug_line    0x000000000000d0e4      0xcf0 Src/VFO/GUIMainView.o
- .debug_line    0x000000000000ddd4      0xe06 Src/VFO/GUISetupView.o
- .debug_line    0x000000000000ebda      0x95d Src/VFO/GUIView.o
- .debug_line    0x000000000000f537      0xd8c Src/VFO/VFOController.o
- .debug_line    0x00000000000102c3      0xcf7 Src/VFO/GUI/Background.o
- .debug_line    0x0000000000010fba      0xb9e Src/VFO/GUI/FrequencyString.o
- .debug_line    0x0000000000011b58      0x424 Src/VFO/GUI/Utils.o
- .debug_line    0x0000000000011f7c      0xcb4 Src/VFO.o
- .debug_line    0x0000000000012c30      0x99a Src/main.o
- .debug_line    0x00000000000135ca      0x935 Src/stm32f1xx_hal_msp.o
- .debug_line    0x0000000000013eff      0x932 Src/stm32f1xx_it.o
- .debug_line    0x0000000000014831      0x8e0 Src/system_stm32f1xx.o
- .debug_line    0x0000000000015111      0xa8f Src/eeprom/eeprom.o
- .debug_line    0x0000000000015ba0      0x962 Src/kbd/kbd.o
- .debug_line    0x0000000000016502      0xe52 Src/si5351/si5351.o
- .debug_line    0x0000000000017354      0x900 Src/st7735/dwt_stm32_delay.o
- .debug_line    0x0000000000017c54      0xef5 Src/st7735/st7735.o
- .debug_line    0x0000000000018b49       0x7d startup/startup_stm32f103xb.o
+ .debug_line    0x000000000000ddd4      0xe4d Src/VFO/GUISetupView.o
+ .debug_line    0x000000000000ec21      0x95d Src/VFO/GUIView.o
+ .debug_line    0x000000000000f57e      0xd8c Src/VFO/VFOController.o
+ .debug_line    0x000000000001030a      0xcf7 Src/VFO/GUI/Background.o
+ .debug_line    0x0000000000011001      0xb9e Src/VFO/GUI/FrequencyString.o
+ .debug_line    0x0000000000011b9f      0x424 Src/VFO/GUI/Utils.o
+ .debug_line    0x0000000000011fc3      0xcb4 Src/VFO.o
+ .debug_line    0x0000000000012c77      0x99a Src/main.o
+ .debug_line    0x0000000000013611      0x935 Src/stm32f1xx_hal_msp.o
+ .debug_line    0x0000000000013f46      0x932 Src/stm32f1xx_it.o
+ .debug_line    0x0000000000014878      0x8e0 Src/system_stm32f1xx.o
+ .debug_line    0x0000000000015158      0xa8f Src/eeprom/eeprom.o
+ .debug_line    0x0000000000015be7      0x962 Src/kbd/kbd.o
+ .debug_line    0x0000000000016549      0xe52 Src/si5351/si5351.o
+ .debug_line    0x000000000001739b      0x900 Src/st7735/dwt_stm32_delay.o
+ .debug_line    0x0000000000017c9b      0xef5 Src/st7735/st7735.o
+ .debug_line    0x0000000000018b90       0x7d startup/startup_stm32f103xb.o
 
-.debug_str      0x0000000000000000    0x84ed6
+.debug_str      0x0000000000000000    0x84f84
  .debug_str     0x0000000000000000    0x7771a Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.o
                                       0x77c1c (size before relaxing)
  .debug_str     0x000000000007771a      0x642 Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.o
@@ -8617,37 +8628,37 @@ OUTPUT(STM32VFO.elf elf32-littlearm)
                                       0x7b36d (size before relaxing)
  .debug_str     0x00000000000828f1      0x43d Src/VFO/GUIMainView.o
                                       0x7b939 (size before relaxing)
- .debug_str     0x0000000000082d2e      0x4bd Src/VFO/GUISetupView.o
-                                      0x7b9e6 (size before relaxing)
- .debug_str     0x00000000000831eb      0x10b Src/VFO/GUIView.o
+ .debug_str     0x0000000000082d2e      0x56b Src/VFO/GUISetupView.o
+                                      0x7ba94 (size before relaxing)
+ .debug_str     0x0000000000083299      0x10b Src/VFO/GUIView.o
                                       0x78bff (size before relaxing)
- .debug_str     0x00000000000832f6      0xc6d Src/VFO/VFOController.o
+ .debug_str     0x00000000000833a4      0xc6d Src/VFO/VFOController.o
                                       0x7c522 (size before relaxing)
- .debug_str     0x0000000000083f63      0x2c6 Src/VFO/GUI/Background.o
+ .debug_str     0x0000000000084011      0x2c6 Src/VFO/GUI/Background.o
                                       0x7a729 (size before relaxing)
- .debug_str     0x0000000000084229       0x72 Src/VFO/GUI/FrequencyString.o
+ .debug_str     0x00000000000842d7       0x72 Src/VFO/GUI/FrequencyString.o
                                       0x7a4ac (size before relaxing)
- .debug_str     0x000000000008429b       0x70 Src/VFO/GUI/Utils.o
+ .debug_str     0x0000000000084349       0x70 Src/VFO/GUI/Utils.o
                                        0x3cd3 (size before relaxing)
- .debug_str     0x000000000008430b      0x2c2 Src/VFO.o
+ .debug_str     0x00000000000843b9      0x2c2 Src/VFO.o
                                       0x7bbc0 (size before relaxing)
- .debug_str     0x00000000000845cd      0x104 Src/main.o
+ .debug_str     0x000000000008467b      0x104 Src/main.o
                                       0x784c0 (size before relaxing)
- .debug_str     0x00000000000846d1       0x28 Src/stm32f1xx_hal_msp.o
+ .debug_str     0x000000000008477f       0x28 Src/stm32f1xx_hal_msp.o
                                       0x78026 (size before relaxing)
- .debug_str     0x00000000000846f9       0xb8 Src/stm32f1xx_it.o
+ .debug_str     0x00000000000847a7       0xb8 Src/stm32f1xx_it.o
                                       0x7753d (size before relaxing)
- .debug_str     0x00000000000847b1       0x69 Src/system_stm32f1xx.o
+ .debug_str     0x000000000008485f       0x69 Src/system_stm32f1xx.o
                                       0x77563 (size before relaxing)
- .debug_str     0x000000000008481a      0x12d Src/eeprom/eeprom.o
+ .debug_str     0x00000000000848c8      0x12d Src/eeprom/eeprom.o
                                       0x78e94 (size before relaxing)
- .debug_str     0x0000000000084947      0x110 Src/kbd/kbd.o
+ .debug_str     0x00000000000849f5      0x110 Src/kbd/kbd.o
                                       0x77c53 (size before relaxing)
- .debug_str     0x0000000000084a57      0x19a Src/si5351/si5351.o
+ .debug_str     0x0000000000084b05      0x19a Src/si5351/si5351.o
                                       0x79c89 (size before relaxing)
- .debug_str     0x0000000000084bf1      0x106 Src/st7735/dwt_stm32_delay.o
+ .debug_str     0x0000000000084c9f      0x106 Src/st7735/dwt_stm32_delay.o
                                       0x77576 (size before relaxing)
- .debug_str     0x0000000000084cf7      0x1df Src/st7735/st7735.o
+ .debug_str     0x0000000000084da5      0x1df Src/st7735/st7735.o
                                       0x789f6 (size before relaxing)
 
 .comment        0x0000000000000000       0x7f
@@ -8686,7 +8697,7 @@ OUTPUT(STM32VFO.elf elf32-littlearm)
  .comment       0x000000000000007f       0x80 Src/st7735/dwt_stm32_delay.o
  .comment       0x000000000000007f       0x80 Src/st7735/st7735.o
 
-.debug_frame    0x0000000000000000     0x3c90
+.debug_frame    0x0000000000000000     0x3ce4
  .debug_frame   0x0000000000000000      0x1ac Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.o
  .debug_frame   0x00000000000001ac      0x2a8 Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.o
  .debug_frame   0x0000000000000454      0x12c Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.o
@@ -8704,47 +8715,47 @@ OUTPUT(STM32VFO.elf elf32-littlearm)
  .debug_frame   0x0000000000002218       0x8c Src/VFO/Configuration.o
  .debug_frame   0x00000000000022a4       0xd4 Src/VFO/GUIController.o
  .debug_frame   0x0000000000002378       0xdc Src/VFO/GUIMainView.o
- .debug_frame   0x0000000000002454      0x19c Src/VFO/GUISetupView.o
- .debug_frame   0x00000000000025f0       0x48 Src/VFO/GUIView.o
- .debug_frame   0x0000000000002638      0x194 Src/VFO/VFOController.o
- .debug_frame   0x00000000000027cc      0x174 Src/VFO/GUI/Background.o
- .debug_frame   0x0000000000002940       0x60 Src/VFO/GUI/FrequencyString.o
- .debug_frame   0x00000000000029a0       0x84 Src/VFO/GUI/Utils.o
- .debug_frame   0x0000000000002a24       0xc0 Src/VFO.o
- .debug_frame   0x0000000000002ae4       0xf0 Src/main.o
- .debug_frame   0x0000000000002bd4       0xc8 Src/stm32f1xx_hal_msp.o
- .debug_frame   0x0000000000002c9c       0xa8 Src/stm32f1xx_it.o
- .debug_frame   0x0000000000002d44       0x30 Src/system_stm32f1xx.o
- .debug_frame   0x0000000000002d74       0xf4 Src/eeprom/eeprom.o
- .debug_frame   0x0000000000002e68       0x6c Src/kbd/kbd.o
- .debug_frame   0x0000000000002ed4      0x498 Src/si5351/si5351.o
- .debug_frame   0x000000000000336c       0x20 Src/st7735/dwt_stm32_delay.o
- .debug_frame   0x000000000000338c      0x368 Src/st7735/st7735.o
- .debug_frame   0x00000000000036f4       0x20 /Applications/Ac6/SystemWorkbench.app/Contents/Eclipse/plugins/fr.ac6.mcu.externaltools.arm-none.macos64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libstdc++_nano.a(del_ops.o)
- .debug_frame   0x0000000000003714       0x28 /Applications/Ac6/SystemWorkbench.app/Contents/Eclipse/plugins/fr.ac6.mcu.externaltools.arm-none.macos64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libstdc++_nano.a(new_op.o)
- .debug_frame   0x000000000000373c       0x20 /Applications/Ac6/SystemWorkbench.app/Contents/Eclipse/plugins/fr.ac6.mcu.externaltools.arm-none.macos64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libstdc++_nano.a(new_opv.o)
- .debug_frame   0x000000000000375c       0x40 /Applications/Ac6/SystemWorkbench.app/Contents/Eclipse/plugins/fr.ac6.mcu.externaltools.arm-none.macos64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libstdc++_nano.a(pure.o)
- .debug_frame   0x000000000000379c       0x20 /Applications/Ac6/SystemWorkbench.app/Contents/Eclipse/plugins/fr.ac6.mcu.externaltools.arm-none.macos64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libstdc++_nano.a(del_op.o)
- .debug_frame   0x00000000000037bc       0xb0 /Applications/Ac6/SystemWorkbench.app/Contents/Eclipse/plugins/fr.ac6.mcu.externaltools.arm-none.macos64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libstdc++_nano.a(eh_terminate.o)
- .debug_frame   0x000000000000386c       0x30 /Applications/Ac6/SystemWorkbench.app/Contents/Eclipse/plugins/fr.ac6.mcu.externaltools.arm-none.macos64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libstdc++_nano.a(new_handler.o)
- .debug_frame   0x000000000000389c       0x44 /Applications/Ac6/SystemWorkbench.app/Contents/Eclipse/plugins/fr.ac6.mcu.externaltools.arm-none.macos64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7-m/libgcc.a(_aeabi_ldivmod.o)
- .debug_frame   0x00000000000038e0       0x2c /Applications/Ac6/SystemWorkbench.app/Contents/Eclipse/plugins/fr.ac6.mcu.externaltools.arm-none.macos64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7-m/libgcc.a(_aeabi_uldivmod.o)
- .debug_frame   0x000000000000390c       0x34 /Applications/Ac6/SystemWorkbench.app/Contents/Eclipse/plugins/fr.ac6.mcu.externaltools.arm-none.macos64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7-m/libgcc.a(_udivmoddi4.o)
- .debug_frame   0x0000000000003940       0x28 /Applications/Ac6/SystemWorkbench.app/Contents/Eclipse/plugins/fr.ac6.mcu.externaltools.arm-none.macos64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-abort.o)
- .debug_frame   0x0000000000003968       0x2c /Applications/Ac6/SystemWorkbench.app/Contents/Eclipse/plugins/fr.ac6.mcu.externaltools.arm-none.macos64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-init.o)
- .debug_frame   0x0000000000003994       0x30 /Applications/Ac6/SystemWorkbench.app/Contents/Eclipse/plugins/fr.ac6.mcu.externaltools.arm-none.macos64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-malloc.o)
- .debug_frame   0x00000000000039c4       0x28 /Applications/Ac6/SystemWorkbench.app/Contents/Eclipse/plugins/fr.ac6.mcu.externaltools.arm-none.macos64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-memcpy-stub.o)
- .debug_frame   0x00000000000039ec       0x38 /Applications/Ac6/SystemWorkbench.app/Contents/Eclipse/plugins/fr.ac6.mcu.externaltools.arm-none.macos64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-nano-freer.o)
- .debug_frame   0x0000000000003a24       0x2c /Applications/Ac6/SystemWorkbench.app/Contents/Eclipse/plugins/fr.ac6.mcu.externaltools.arm-none.macos64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-nano-mallocr.o)
- .debug_frame   0x0000000000003a50       0x2c /Applications/Ac6/SystemWorkbench.app/Contents/Eclipse/plugins/fr.ac6.mcu.externaltools.arm-none.macos64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-sbrkr.o)
- .debug_frame   0x0000000000003a7c       0xcc /Applications/Ac6/SystemWorkbench.app/Contents/Eclipse/plugins/fr.ac6.mcu.externaltools.arm-none.macos64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-signal.o)
- .debug_frame   0x0000000000003b48       0x3c /Applications/Ac6/SystemWorkbench.app/Contents/Eclipse/plugins/fr.ac6.mcu.externaltools.arm-none.macos64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-signalr.o)
- .debug_frame   0x0000000000003b84       0x30 /Applications/Ac6/SystemWorkbench.app/Contents/Eclipse/plugins/fr.ac6.mcu.externaltools.arm-none.macos64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-mlock.o)
- .debug_frame   0x0000000000003bb4       0x5c /Applications/Ac6/SystemWorkbench.app/Contents/Eclipse/plugins/fr.ac6.mcu.externaltools.arm-none.macos64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-reent.o)
- .debug_frame   0x0000000000003c10       0x20 /Applications/Ac6/SystemWorkbench.app/Contents/Eclipse/plugins/fr.ac6.mcu.externaltools.arm-none.macos64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libnosys.a(getpid.o)
- .debug_frame   0x0000000000003c30       0x20 /Applications/Ac6/SystemWorkbench.app/Contents/Eclipse/plugins/fr.ac6.mcu.externaltools.arm-none.macos64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libnosys.a(kill.o)
- .debug_frame   0x0000000000003c50       0x20 /Applications/Ac6/SystemWorkbench.app/Contents/Eclipse/plugins/fr.ac6.mcu.externaltools.arm-none.macos64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libnosys.a(sbrk.o)
- .debug_frame   0x0000000000003c70       0x20 /Applications/Ac6/SystemWorkbench.app/Contents/Eclipse/plugins/fr.ac6.mcu.externaltools.arm-none.macos64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libnosys.a(_exit.o)
+ .debug_frame   0x0000000000002454      0x1f0 Src/VFO/GUISetupView.o
+ .debug_frame   0x0000000000002644       0x48 Src/VFO/GUIView.o
+ .debug_frame   0x000000000000268c      0x194 Src/VFO/VFOController.o
+ .debug_frame   0x0000000000002820      0x174 Src/VFO/GUI/Background.o
+ .debug_frame   0x0000000000002994       0x60 Src/VFO/GUI/FrequencyString.o
+ .debug_frame   0x00000000000029f4       0x84 Src/VFO/GUI/Utils.o
+ .debug_frame   0x0000000000002a78       0xc0 Src/VFO.o
+ .debug_frame   0x0000000000002b38       0xf0 Src/main.o
+ .debug_frame   0x0000000000002c28       0xc8 Src/stm32f1xx_hal_msp.o
+ .debug_frame   0x0000000000002cf0       0xa8 Src/stm32f1xx_it.o
+ .debug_frame   0x0000000000002d98       0x30 Src/system_stm32f1xx.o
+ .debug_frame   0x0000000000002dc8       0xf4 Src/eeprom/eeprom.o
+ .debug_frame   0x0000000000002ebc       0x6c Src/kbd/kbd.o
+ .debug_frame   0x0000000000002f28      0x498 Src/si5351/si5351.o
+ .debug_frame   0x00000000000033c0       0x20 Src/st7735/dwt_stm32_delay.o
+ .debug_frame   0x00000000000033e0      0x368 Src/st7735/st7735.o
+ .debug_frame   0x0000000000003748       0x20 /Applications/Ac6/SystemWorkbench.app/Contents/Eclipse/plugins/fr.ac6.mcu.externaltools.arm-none.macos64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libstdc++_nano.a(del_ops.o)
+ .debug_frame   0x0000000000003768       0x28 /Applications/Ac6/SystemWorkbench.app/Contents/Eclipse/plugins/fr.ac6.mcu.externaltools.arm-none.macos64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libstdc++_nano.a(new_op.o)
+ .debug_frame   0x0000000000003790       0x20 /Applications/Ac6/SystemWorkbench.app/Contents/Eclipse/plugins/fr.ac6.mcu.externaltools.arm-none.macos64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libstdc++_nano.a(new_opv.o)
+ .debug_frame   0x00000000000037b0       0x40 /Applications/Ac6/SystemWorkbench.app/Contents/Eclipse/plugins/fr.ac6.mcu.externaltools.arm-none.macos64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libstdc++_nano.a(pure.o)
+ .debug_frame   0x00000000000037f0       0x20 /Applications/Ac6/SystemWorkbench.app/Contents/Eclipse/plugins/fr.ac6.mcu.externaltools.arm-none.macos64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libstdc++_nano.a(del_op.o)
+ .debug_frame   0x0000000000003810       0xb0 /Applications/Ac6/SystemWorkbench.app/Contents/Eclipse/plugins/fr.ac6.mcu.externaltools.arm-none.macos64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libstdc++_nano.a(eh_terminate.o)
+ .debug_frame   0x00000000000038c0       0x30 /Applications/Ac6/SystemWorkbench.app/Contents/Eclipse/plugins/fr.ac6.mcu.externaltools.arm-none.macos64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libstdc++_nano.a(new_handler.o)
+ .debug_frame   0x00000000000038f0       0x44 /Applications/Ac6/SystemWorkbench.app/Contents/Eclipse/plugins/fr.ac6.mcu.externaltools.arm-none.macos64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7-m/libgcc.a(_aeabi_ldivmod.o)
+ .debug_frame   0x0000000000003934       0x2c /Applications/Ac6/SystemWorkbench.app/Contents/Eclipse/plugins/fr.ac6.mcu.externaltools.arm-none.macos64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7-m/libgcc.a(_aeabi_uldivmod.o)
+ .debug_frame   0x0000000000003960       0x34 /Applications/Ac6/SystemWorkbench.app/Contents/Eclipse/plugins/fr.ac6.mcu.externaltools.arm-none.macos64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7-m/libgcc.a(_udivmoddi4.o)
+ .debug_frame   0x0000000000003994       0x28 /Applications/Ac6/SystemWorkbench.app/Contents/Eclipse/plugins/fr.ac6.mcu.externaltools.arm-none.macos64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-abort.o)
+ .debug_frame   0x00000000000039bc       0x2c /Applications/Ac6/SystemWorkbench.app/Contents/Eclipse/plugins/fr.ac6.mcu.externaltools.arm-none.macos64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-init.o)
+ .debug_frame   0x00000000000039e8       0x30 /Applications/Ac6/SystemWorkbench.app/Contents/Eclipse/plugins/fr.ac6.mcu.externaltools.arm-none.macos64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-malloc.o)
+ .debug_frame   0x0000000000003a18       0x28 /Applications/Ac6/SystemWorkbench.app/Contents/Eclipse/plugins/fr.ac6.mcu.externaltools.arm-none.macos64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-memcpy-stub.o)
+ .debug_frame   0x0000000000003a40       0x38 /Applications/Ac6/SystemWorkbench.app/Contents/Eclipse/plugins/fr.ac6.mcu.externaltools.arm-none.macos64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-nano-freer.o)
+ .debug_frame   0x0000000000003a78       0x2c /Applications/Ac6/SystemWorkbench.app/Contents/Eclipse/plugins/fr.ac6.mcu.externaltools.arm-none.macos64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-nano-mallocr.o)
+ .debug_frame   0x0000000000003aa4       0x2c /Applications/Ac6/SystemWorkbench.app/Contents/Eclipse/plugins/fr.ac6.mcu.externaltools.arm-none.macos64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-sbrkr.o)
+ .debug_frame   0x0000000000003ad0       0xcc /Applications/Ac6/SystemWorkbench.app/Contents/Eclipse/plugins/fr.ac6.mcu.externaltools.arm-none.macos64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-signal.o)
+ .debug_frame   0x0000000000003b9c       0x3c /Applications/Ac6/SystemWorkbench.app/Contents/Eclipse/plugins/fr.ac6.mcu.externaltools.arm-none.macos64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-signalr.o)
+ .debug_frame   0x0000000000003bd8       0x30 /Applications/Ac6/SystemWorkbench.app/Contents/Eclipse/plugins/fr.ac6.mcu.externaltools.arm-none.macos64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-mlock.o)
+ .debug_frame   0x0000000000003c08       0x5c /Applications/Ac6/SystemWorkbench.app/Contents/Eclipse/plugins/fr.ac6.mcu.externaltools.arm-none.macos64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-reent.o)
+ .debug_frame   0x0000000000003c64       0x20 /Applications/Ac6/SystemWorkbench.app/Contents/Eclipse/plugins/fr.ac6.mcu.externaltools.arm-none.macos64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libnosys.a(getpid.o)
+ .debug_frame   0x0000000000003c84       0x20 /Applications/Ac6/SystemWorkbench.app/Contents/Eclipse/plugins/fr.ac6.mcu.externaltools.arm-none.macos64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libnosys.a(kill.o)
+ .debug_frame   0x0000000000003ca4       0x20 /Applications/Ac6/SystemWorkbench.app/Contents/Eclipse/plugins/fr.ac6.mcu.externaltools.arm-none.macos64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libnosys.a(sbrk.o)
+ .debug_frame   0x0000000000003cc4       0x20 /Applications/Ac6/SystemWorkbench.app/Contents/Eclipse/plugins/fr.ac6.mcu.externaltools.arm-none.macos64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libnosys.a(_exit.o)
 
 .stab           0x0000000000000000       0x3c
  .stab          0x0000000000000000       0x24 /Applications/Ac6/SystemWorkbench.app/Contents/Eclipse/plugins/fr.ac6.mcu.externaltools.arm-none.macos64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libnosys.a(getpid.o)

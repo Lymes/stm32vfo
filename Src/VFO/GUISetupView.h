@@ -48,13 +48,12 @@ public:
 	GUISetupView();
 	GUISetupView(SetupItem *item, GUISetupView *parent);
 	virtual ~GUISetupView();
-
 	void init();
+
 	virtual void draw();
 	virtual void pushEncoderIncrement(int16_t increment);
 	virtual void menuKeyPressed();
 
-	void drawBackButton(bool selected);
 	void setParent( GUISetupView *p ) { _parent = p; }
 	void setSelectedChild( GUISetupView *child );
 	void setSelected( uint8_t selected );
@@ -62,6 +61,10 @@ public:
 
 private:
 	void drawBackground();
+	void drawWindowTitle(void);
+	void drawItemTitle(uint8_t itemIndex, bool selected);
+	void drawValue(uint8_t itemIndex, bool selected, bool edited);
+	void drawBackButton(bool selected);
 };
 
 } /* namespace VFO */
