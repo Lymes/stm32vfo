@@ -39,6 +39,7 @@ GUIMainView::GUIMainView()
 	_btn3->upRight = {100, 100, 100};
 
 	_freqString = new FrequencyString(0, 10, _window);
+	_sMeter = new SMeter(10, 90, _window);
 }
 
 GUIMainView::~GUIMainView()
@@ -79,20 +80,7 @@ void GUIMainView::drawBackground()
 	ST7735_PutStr7x11Ex(18, 57, VFO::utf8to1251(tt), COLOR565_YELLOW, _btn1,
 			VFO::backgroundColor);
 
-	ST7735_HLine(10,  140, 105, COLOR565_WHITE);
-	ST7735_HLine(10,  140, 115, COLOR565_WHITE);
-	ST7735_VLine(10,  100, 105, COLOR565_WHITE);
-	ST7735_VLine(29,  100, 105, COLOR565_WHITE);
-	ST7735_VLine(48,  100, 105, COLOR565_WHITE);
-	ST7735_VLine(67,  100, 105, COLOR565_WHITE);
-	ST7735_VLine(86,  100, 105, COLOR565_WHITE);
-	ST7735_VLine(107, 100, 105, COLOR565_WHITE);
-	ST7735_VLine(130, 100, 105, COLOR565_WHITE);
-
-	ST7735_PutStr5x7Ex(1, 10, 90, "1  3  5  7  9", COLOR565_WHITE, _window,
-			VFO::backgroundColor);
-	ST7735_PutStr5x7Ex(1, 96, 90, "+20 +60", COLOR565_RED, _window,
-			VFO::backgroundColor);
+	_sMeter->draw(255);
 
 }
 
@@ -101,7 +89,7 @@ void GUIMainView::pushEncoderIncrement(int16_t increment, uint16_t period)
 {
 	uint32_t freq = _mainController->getConfig()->getFrequency();
 
-	uint16_t factor = abs(increment / period) > 10 ? 10000 : 10;
+	uint16_t factor = abs(increment / period) > 10 ? 1000 : 10;
 	freq += increment * factor / period;
 	_mainController->setFrequency(freq);
 	_freqString->draw(freq);

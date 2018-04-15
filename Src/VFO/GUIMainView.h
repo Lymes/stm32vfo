@@ -11,6 +11,8 @@
 #include "GUIView.h"
 #include "GUI/Background.h"
 #include "GUI/FrequencyString.h"
+#include "GUI/SMeter.h"
+
 
 namespace VFO
 {
@@ -22,6 +24,7 @@ class GUIMainView : public GUIView
 	GradientBox *_btn2;
 	GradientBox *_btn3;
 	FrequencyString *_freqString;
+	SMeter *_sMeter;
 
 public:
 	GUIMainView();
