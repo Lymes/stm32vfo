@@ -22,7 +22,7 @@ public:
 	virtual ~GUIView();
 
 	virtual void draw() = 0;
-	virtual void pushEncoderIncrement(int16_t increment) = 0;
+	virtual void pushEncoderIncrement(int16_t increment, uint16_t period) = 0;
 	virtual void menuKeyPressed() = 0;
 
 };

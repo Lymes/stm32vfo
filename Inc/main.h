@@ -72,6 +72,8 @@
 #define TFT_RESET_GPIO_Port GPIOA
 #define TFT_CS_Pin GPIO_PIN_12
 #define TFT_CS_GPIO_Port GPIOA
+#define TFT_LED_Pin GPIO_PIN_4
+#define TFT_LED_GPIO_Port GPIOB
 #define ENC1_Pin GPIO_PIN_6
 #define ENC1_GPIO_Port GPIOB
 #define ENC2_Pin GPIO_PIN_7

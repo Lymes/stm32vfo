@@ -51,7 +51,7 @@ public:
 	void init();
 
 	virtual void draw();
-	virtual void pushEncoderIncrement(int16_t increment);
+	virtual void pushEncoderIncrement(int16_t increment, uint16_t period);
 	virtual void menuKeyPressed();
 
 	void setParent( GUISetupView *p ) { _parent = p; }

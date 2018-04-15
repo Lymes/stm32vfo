@@ -28,7 +28,7 @@ public:
 	virtual ~GUIMainView();
 
 	virtual void draw();
-	virtual void pushEncoderIncrement(int16_t increment);
+	virtual void pushEncoderIncrement(int16_t increment, uint16_t period);
 	virtual void menuKeyPressed();
 
 private:

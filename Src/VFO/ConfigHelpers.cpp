@@ -43,9 +43,15 @@ int32_t _getBrightness()
 {
 	return _mainController->getConfig()->getBrightness();
 }
+
 void _setBrightness(int32_t value)
 {
+	if ( value > 255 || value < 0 )
+	{
+		return;
+	}
 	_mainController->getConfig()->setBrightness(value);
+	_mainController->setBrightness(value);
 }
 
 int32_t _getEncoder()

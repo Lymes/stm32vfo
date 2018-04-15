@@ -32,13 +32,14 @@ public:
 	Configuration *getConfig() { return _conf; }
 
 	void menuKeyPressed();
-	void pushEncoderIncrement(int16_t increment);
+	void pushEncoderIncrement(int16_t increment, uint16_t period);
 
 	void showSetup();
 	void showMain();
 
 	void reset();
 	void setFrequency(uint32_t frequency);
+	void setBrightness(uint8_t value);
 
 	void checkMemoryState();
 	void triggerMemoryWrite();

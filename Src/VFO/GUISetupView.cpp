@@ -138,11 +138,11 @@ GUISetupView::~GUISetupView()
 
 // Callbacks
 
-void GUISetupView::pushEncoderIncrement(int16_t increment)
+void GUISetupView::pushEncoderIncrement(int16_t increment, uint16_t period)
 {
 	if ( _selectedChild )
 	{
-		_selectedChild->pushEncoderIncrement(increment);
+		_selectedChild->pushEncoderIncrement(increment, period);
 		return;
 	}
 
@@ -272,8 +272,8 @@ void GUISetupView::setSelectedChild( GUISetupView *child )
 void GUISetupView::draw()
 {
 	this->drawBackground();
-	this->setSelected(0);
-	drawBackButton(false);
+	this->setSelected(_currentItem->numChildren);
+	drawBackButton(true);
 }
 
 void GUISetupView::drawBackground()

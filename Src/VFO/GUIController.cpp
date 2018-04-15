@@ -22,7 +22,7 @@ GUIController::GUIController()
 	_setupView = new GUISetupView();
 	_mainView = new GUIMainView();
 
-	_currentView = _setupView;
+	_currentView = _mainView;
 }
 
 GUIController::~GUIController()
@@ -36,9 +36,9 @@ void GUIController::draw()
 	_currentView->draw();
 }
 
-void GUIController::pushEncoderIncrement(int16_t increment)
+void GUIController::pushEncoderIncrement(int16_t increment, uint16_t period)
 {
-	_currentView->pushEncoderIncrement(increment);
+	_currentView->pushEncoderIncrement(increment, period);
 }
 
 void GUIController::menuKeyPressed()

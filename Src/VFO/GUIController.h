@@ -31,7 +31,7 @@ public:
 	void showMain();
 
 	void draw();
-	void pushEncoderIncrement(int16_t increment);
+	void pushEncoderIncrement(int16_t increment, uint16_t period);
 
 	void menuKeyPressed();
 };

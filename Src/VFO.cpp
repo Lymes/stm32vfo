@@ -7,7 +7,7 @@
 #define ENC_VALUE 500
 
 VFO::VFOController *_mainController;
-
+volatile uint32_t _ticks = 0;
 
 void _vfoSetup(void);
 void _vfoLoopIteration(void);
@@ -16,6 +16,7 @@ void _vfoSystick(void);
 
 extern "C"
 {
+extern TIM_HandleTypeDef htim3;
 extern TIM_HandleTypeDef htim4;
 
 
@@ -68,6 +69,9 @@ void _vfoSetup(void)
 	HAL_TIM_Encoder_Start_IT(&htim4, TIM_CHANNEL_1);
 	__HAL_TIM_SET_COUNTER(&htim4, ENC_VALUE);
 
+	HAL_TIM_Base_Start_IT(&htim3);
+	HAL_TIM_PWM_Start(&htim3,TIM_CHANNEL_1);
+
 	KBD_addKey(GPIOA, 7, LO, KBDCallBack_Setup);
 
 	_mainController = new VFO::VFOController;
@@ -82,8 +86,9 @@ void _vfoLoopIteration(void)
 	if (encCounter != ENC_VALUE)
 	{
 		__HAL_TIM_SET_COUNTER(&htim4, ENC_VALUE);
-		_mainController->pushEncoderIncrement(encCounter - ENC_VALUE);
+		_mainController->pushEncoderIncrement(encCounter - ENC_VALUE, _ticks);
 	}
+	_ticks = 0;
 
 	_mainController->checkMemoryState();
 	HAL_Delay(10);
@@ -93,6 +98,6 @@ void _vfoLoopIteration(void)
 // Tick from sys timer
 void _vfoSystick(void)
 {
-
+	_ticks++;
 }
 

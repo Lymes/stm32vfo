@@ -97,11 +97,12 @@ void GUIMainView::drawBackground()
 }
 
 
-void GUIMainView::pushEncoderIncrement(int16_t increment)
+void GUIMainView::pushEncoderIncrement(int16_t increment, uint16_t period)
 {
 	uint32_t freq = _mainController->getConfig()->getFrequency();
 
-	freq += increment * 10;
+	uint16_t factor = abs(increment / period) > 10 ? 10000 : 10;
+	freq += increment * factor / period;
 	_mainController->setFrequency(freq);
 	_freqString->draw(freq);
 }
