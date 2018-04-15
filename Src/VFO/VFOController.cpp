@@ -25,7 +25,9 @@ VFOController::VFOController()
 
 	if (_si5351->init(SI5351_CRYSTAL_LOAD_8PF, 0, 0))
 	{
+		_si5351->set_correction(_conf->getCalibration(), SI5351_PLL_INPUT_XO);
 		_si5351->set_freq(_conf->getFrequency() * 100, SI5351_CLK0);
+		_si5351->set_freq(_conf->getBFrequency() * 100, SI5351_CLK1);
 	}
 	else
 	{
@@ -81,6 +83,11 @@ void VFOController::setBrightness(uint8_t value)
 	TIM3->CCR1 = value;
 }
 
+void VFOController::setCalibration(int32_t value)
+{
+	_si5351->set_correction(value, SI5351_PLL_INPUT_XO);
+}
+
 void VFOController::storeConfiguration()
 {
 	_conf->save();
@@ -89,7 +96,7 @@ void VFOController::storeConfiguration()
 void VFOController::reset()
 {
 	_conf->setFrequency(7125000);
-	_conf->setCalibration(0);
+	_conf->setCalibration(28457);
 	_conf->setIFrequency(11500000);
 	_conf->setBFrequency(4000000);
 	_conf->setBrightness(255);

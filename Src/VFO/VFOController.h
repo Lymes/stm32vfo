@@ -40,6 +40,7 @@ public:
 	void reset();
 	void setFrequency(uint32_t frequency);
 	void setBrightness(uint8_t value);
+	void setCalibration(int32_t value);
 
 	void checkMemoryState();
 	void triggerMemoryWrite();

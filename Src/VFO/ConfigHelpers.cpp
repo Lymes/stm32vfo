@@ -18,12 +18,14 @@ int32_t _getCalibration()
 void _setCalibration(int32_t value)
 {
 	_mainController->getConfig()->setCalibration(value);
+	_mainController->setCalibration(value);
 }
 
 int32_t _getIFrequency()
 {
 	return _mainController->getConfig()->getIFrequency();
 }
+
 void _setIFrequency(int32_t value)
 {
 	_mainController->getConfig()->setIFrequency(value);
