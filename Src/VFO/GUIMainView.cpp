@@ -89,7 +89,7 @@ void GUIMainView::pushEncoderIncrement(int16_t increment, uint16_t period)
 {
 	uint32_t freq = _mainController->getConfig()->getFrequency();
 
-	uint16_t factor = abs(increment / period) > 10 ? 1000 : 10;
+	uint16_t factor = abs(increment / period) > 10 ? 10000 : 10;
 	freq += increment * factor / period;
 	_mainController->setFrequency(freq);
 	_freqString->draw(freq);

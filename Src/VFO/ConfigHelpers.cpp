@@ -39,6 +39,7 @@ int32_t _getBFrequency()
 void _setBFrequency(int32_t value)
 {
 	_mainController->getConfig()->setBFrequency(value);
+	_mainController->setBFrequency(value);
 }
 
 int32_t _getBrightness()
