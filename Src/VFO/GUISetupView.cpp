@@ -31,7 +31,7 @@ const struct SetupItem menu =
 			NULL
 		},
 		{
-			"Установка ПЧ",
+			"Промежуточная",
 			_getIFrequency,
 			_setIFrequency,
 			NULL,
@@ -39,7 +39,7 @@ const struct SetupItem menu =
 			NULL
 		},
 		{
-			"Установка OпЧ",
+			"Опорная",
 			_getBFrequency,
 			_setBFrequency,
 			NULL,
@@ -55,7 +55,7 @@ const struct SetupItem menu =
 			(struct SetupItem[])
 			{
 				{
-					"Яркость экр",
+					"Яркость экрана",
 					_getBrightness,
 					_setBrightness,
 					NULL,
