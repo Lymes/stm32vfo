@@ -56,9 +56,6 @@ void VFOController::begin()
 void VFOController::menuKeyPressed()
 {
 	_gui->menuKeyPressed();
-
-//	reset();
-//	_gui->showMain();
 }
 
 void VFOController::showSetup()
@@ -143,10 +140,10 @@ void VFOController::triggerMemoryWrite()
 
 void VFOController::checkMemoryState()
 {
-	// Write the frequency to memory if not stored and 2 seconds have passed since the last frequency change.
+	// Write the frequency to memory if not stored and 3 seconds have passed since the last frequency change.
 	if (_memStatus == 0)
 	{
-		if (_timepassed + 2000 < HAL_GetTick())
+		if (_timepassed + 3000 < HAL_GetTick())
 		{
 			storeConfiguration();
 			_memStatus = 1;
