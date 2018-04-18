@@ -47,6 +47,7 @@ public:
 	void triggerMemoryWrite();
 
 	void storeConfiguration();
+	void loadConfiguration();
 };
 
 

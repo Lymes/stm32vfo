@@ -88,10 +88,24 @@ void GUIMainView::drawBackground()
 void GUIMainView::pushEncoderIncrement(int16_t increment, uint16_t period)
 {
 	uint32_t freq = _mainController->getConfig()->getFrequency();
+	uint16_t encoder = _mainController->getConfig()->getEncoder();
+	float velocity = (float)increment / (float)period;
+	velocity = velocity < 0 ? -velocity : velocity;
+	float oneRotation = (float)encoder / (float)period;
 
-	uint16_t factor = abs(increment / period) > 10 ? 10000 : 10;
-	freq += increment * factor / period;
+	uint16_t factor = 1;
+	if ( velocity > oneRotation / 2. )
+	{
+		factor = 100;
+	}
+	else if ( velocity > oneRotation / 4. )
+	{
+		factor = 10;
+	}
+	freq += increment * 10 / period;
 	_mainController->setFrequency(freq);
+	_mainController->triggerMemoryWrite();
+
 	_freqString->draw(freq);
 }
 

@@ -9,7 +9,12 @@
 #define VFO_CONFIGURATION_H_
 
 #include "stm32f1xx_hal.h"
-//#include <eeprom/eeprom24xx.h>
+
+//#define EXT_EEPROM
+
+#ifdef EXT_EEPROM
+#include <eeprom/eeprom24xx.h>
+#endif
 
 namespace VFO
 {
@@ -25,7 +30,9 @@ struct ConfigData {
 
 class Configuration
 {
-	//Eeprom24 _mem;
+#ifdef EXT_EEPROM
+	Eeprom24 _mem;
+#endif
 	ConfigData _data;
 
 public:

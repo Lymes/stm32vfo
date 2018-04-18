@@ -66,6 +66,10 @@
 #define S_MTR_GPIO_Port GPIOA
 #define BTN_STP_Pin GPIO_PIN_7
 #define BTN_STP_GPIO_Port GPIOA
+#define I2C_SCL_Pin GPIO_PIN_10
+#define I2C_SCL_GPIO_Port GPIOB
+#define I2C_SDA_Pin GPIO_PIN_11
+#define I2C_SDA_GPIO_Port GPIOB
 #define TFT_A0_Pin GPIO_PIN_9
 #define TFT_A0_GPIO_Port GPIOA
 #define TFT_RESET_Pin GPIO_PIN_10

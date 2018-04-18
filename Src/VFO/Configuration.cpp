@@ -6,11 +6,15 @@
  */
 
 #include "Configuration.h"
-#include "eeprom/eeprom.h"
 
+
+#ifndef EXT_EEPROM
+#include "eeprom/eeprom.h"
 
 uint16_t VirtAddVarTab[NB_OF_VAR] = { 0x5000, 0x5001, 0x5002,
 0x5003, 0x5004, 0x5005, 0x5006, 0x5007, 0x5008, 0x5009, 0x500a };
+#endif
+
 
 
 namespace VFO
@@ -21,23 +25,25 @@ Configuration::Configuration()
 	// TODO Auto-generated constructor stub
 	_data.frequency = 28500000;
 
+#ifndef EXT_EEPROM
 	HAL_FLASH_Unlock();
-
 	uint16_t res = EE_Init();
 	if ( res == ERASED )
 	{
 	}
 	HAL_FLASH_Lock();
+#else
+#endif
 }
 
 Configuration::~Configuration()
 {
-	// TODO Auto-generated destructor stub
 }
 
 
 void Configuration::save()
 {
+#ifndef EXT_EEPROM
 	HAL_FLASH_Unlock();
 	EE_WriteVariable(VirtAddVarTab[0], _data.frequency >> 16 );
 	EE_WriteVariable(VirtAddVarTab[1], _data.frequency & 0xffff );
@@ -52,10 +58,17 @@ void Configuration::save()
 	EE_WriteVariable(VirtAddVarTab[9], _data.encoder >> 16 );
 	EE_WriteVariable(VirtAddVarTab[10], _data.encoder & 0xffff );
 	HAL_FLASH_Lock();
+#else
+	if ( _mem.isConnected() )
+	{
+		_mem.save(&_data, sizeof(_data));
+	}
+#endif
 }
 
 void Configuration::load()
 {
+#ifndef EXT_EEPROM
 	uint16_t f1, f2;
 	EE_ReadVariable(VirtAddVarTab[0], &f1);
 	EE_ReadVariable(VirtAddVarTab[1], &f2);
@@ -75,6 +88,12 @@ void Configuration::load()
 	EE_ReadVariable(VirtAddVarTab[9], &f1);
 	EE_ReadVariable(VirtAddVarTab[10], &f2);
 	_data.encoder = f1 << 16 | f2;
+#else
+	if ( _mem.isConnected() )
+	{
+		_mem.load(&_data, sizeof(_data));
+	}
+#endif
 }
 
 } /* namespace VFO */

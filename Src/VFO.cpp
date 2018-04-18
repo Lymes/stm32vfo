@@ -75,6 +75,11 @@ void _vfoSetup(void)
 	KBD_addKey(GPIOA, 7, LO, KBDCallBack_Setup);
 
 	_mainController = new VFO::VFOController;
+
+	if ( HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_7) == 0 )
+	{
+		_mainController->reset();
+	}
 	_mainController->begin();
 }
 

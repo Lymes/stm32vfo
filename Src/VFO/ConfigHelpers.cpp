@@ -61,8 +61,13 @@ int32_t _getEncoder()
 {
 	return _mainController->getConfig()->getEncoder();
 }
+
 void _setEncoder(int32_t value)
 {
+	if ( value < 0 )
+	{
+		return;
+	}
 	_mainController->getConfig()->setEncoder(value);
 }
 

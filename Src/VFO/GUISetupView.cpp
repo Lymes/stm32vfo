@@ -149,7 +149,7 @@ void GUISetupView::pushEncoderIncrement(int16_t increment, uint16_t period)
 	if (!_editing)
 	{
 		_encCounter += increment;
-		if (abs(_encCounter) < _getEncoder()) /*  */
+		if (abs(_encCounter) < _getEncoder() / 2) /* half rotation step */
 		{
 			return;
 		}

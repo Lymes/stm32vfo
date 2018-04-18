@@ -20,7 +20,6 @@ VFOController::VFOController()
 	_gui = new GUIController;
 	_si5351 = new Si5351;
 	_conf->load();
-
 	setBrightness(0);
 
 	if (_si5351->init(SI5351_CRYSTAL_LOAD_8PF, 0, 0))
@@ -57,6 +56,9 @@ void VFOController::begin()
 void VFOController::menuKeyPressed()
 {
 	_gui->menuKeyPressed();
+
+//	reset();
+//	_gui->showMain();
 }
 
 void VFOController::showSetup()
@@ -81,7 +83,6 @@ void VFOController::setFrequency(uint32_t frequency)
 		_si5351->set_freq(frequency * 100, SI5351_CLK0);
 	}
 	_conf->setFrequency(frequency);
-	triggerMemoryWrite();
 }
 
 void VFOController::setBFrequency(uint32_t frequency)
@@ -99,7 +100,10 @@ void VFOController::setBrightness(uint8_t value)
 
 void VFOController::setCalibration(int32_t value)
 {
-	_si5351->set_correction(value, SI5351_PLL_INPUT_XO);
+	if ( _si5351_enabled )
+	{
+		_si5351->set_correction(value, SI5351_PLL_INPUT_XO);
+	}
 }
 
 void VFOController::storeConfiguration()
@@ -107,16 +111,28 @@ void VFOController::storeConfiguration()
 	_conf->save();
 }
 
+
+void VFOController::loadConfiguration()
+{
+	_conf->load();
+	setFrequency(_conf->getFrequency());
+	setCalibration(_conf->getCalibration());
+	setBFrequency(_conf->getBFrequency());
+	setFrequency(_conf->getFrequency());
+	setBrightness(_conf->getBrightness());
+}
+
+
 void VFOController::reset()
 {
 	_conf->setFrequency(7125000);
-	_conf->setCalibration(28457);
+	_conf->setCalibration(27000);
 	_conf->setIFrequency(11500000);
 	_conf->setBFrequency(4000000);
 	_conf->setBrightness(255);
-	_conf->setEncoder(150);
-	_conf->save();
-	_conf->load();
+	_conf->setEncoder(128);
+	storeConfiguration();
+	loadConfiguration();
 }
 
 void VFOController::triggerMemoryWrite()
