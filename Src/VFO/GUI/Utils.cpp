@@ -82,6 +82,79 @@ char *valToStr(int32_t val, char *buf, size_t bufSize, char sepChar)
 }
 
 
+char *voltageToStr(int32_t val, char *buf, size_t bufSize)
+{
+	// validate the parameters, return null on error
+	if ((bufSize < 2) || (buf == 0))
+	{
+		return 0;
+	}
+
+	// put a null at the end of the buffer, adjust the size
+	buf += bufSize--;
+	*(--buf) = '\0';
+
+	// special case: value equal zero
+	if (val == 0)
+	{
+		*(--buf) = '0';
+		bufSize--;
+	}
+
+	// special case: value is negative
+	bool negative = false;
+	if (val < 0)
+	{
+		val = -val;
+		negative = true;
+	}
+
+	uint8_t digCnt = 0;
+
+	// general case: possibly multiple digits with thousands separators
+	while (bufSize)
+	{
+		// add a thousands separator every three digits
+		if ((digCnt >= 2) && (bufSize > 1))
+		{
+			*(--buf) = '.';
+			bufSize--;
+			digCnt = 0;
+		}
+		if (val == 0)
+		{
+			if (*buf == '.') // first symbol cannot be separator
+			{
+				buf++;
+				bufSize++;
+			}
+			if (negative) // put minus symbol
+			{
+				*(--buf) = '-';
+				negative = false;
+			}
+			else
+			{
+				*(--buf) = '0'; // nothing to do, put space
+			}
+		}
+		else
+		{
+			// add another digit to the buffer
+			*(--buf) = (char) (val % 10) | '0';
+			digCnt++;
+			// prepare for producing the next digit
+			val /= 10;
+		}
+		bufSize--;
+	}
+
+	// return a pointer to the completed string
+	return (buf);
+}
+
+
+
 char* utf8to1251Dest(const char *utf8, char *dest, size_t len)
 {
 	int i = 0;

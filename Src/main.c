@@ -45,7 +45,6 @@
 /* USER CODE END Includes */
 
 /* Private variables ---------------------------------------------------------*/
-ADC_HandleTypeDef hadc1;
 
 I2C_HandleTypeDef hi2c2;
 
@@ -61,10 +60,10 @@ TIM_HandleTypeDef htim4;
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 static void MX_SPI2_Init(void);
-static void MX_ADC1_Init(void);
 static void MX_TIM4_Init(void);
 static void MX_I2C2_Init(void);
 static void MX_TIM3_Init(void);
+static void MX_ADC1_Init(void);
 
 void HAL_TIM_MspPostInit(TIM_HandleTypeDef *htim);
                                 
@@ -75,129 +74,6 @@ void HAL_TIM_MspPostInit(TIM_HandleTypeDef *htim);
 /* USER CODE END PFP */
 
 /* USER CODE BEGIN 0 */
-/**
-1. Disable the I2C peripheral by clearing the PE bit in I2Cx_CR1 register.
-2. Configure the SCL and SDA I/Os as General Purpose Output Open-Drain, High level
-(Write 1 to GPIOx_ODR).
-3. Check SCL and SDA High level in GPIOx_IDR.
-4. Configure the SDA I/O as General Purpose Output Open-Drain, Low level (Write 0 to
-GPIOx_ODR).
-5. Check SDA Low level in GPIOx_IDR.
-6. Configure the SCL I/O as General Purpose Output Open-Drain, Low level (Write 0 to
-GPIOx_ODR).
-7. Check SCL Low level in GPIOx_IDR.
-8. Configure the SCL I/O as General Purpose Output Open-Drain, High level (Write 1 to
-GPIOx_ODR).
-9. Check SCL High level in GPIOx_IDR.
-10. Configure the SDA I/O as General Purpose Output Open-Drain , High level (Write 1 to
-GPIOx_ODR).
-11. Check SDA High level in GPIOx_IDR.
-12. Configure the SCL and SDA I/Os as Alternate function Open-Drain.
-13. Set SWRST bit in I2Cx_CR1 register.
-14. Clear SWRST bit in I2Cx_CR1 register.
-15. Enable the I2C peripheral by setting the PE bit in I2Cx_CR1 register.
-**/
-void HAL_I2C_ClearBusyFlagErrata_2_14_7(I2C_HandleTypeDef *hi2c) {
-
-    static uint8_t resetTried = 0;
-    if (resetTried == 1) {
-        return ;
-    }
-    uint32_t SDA_PIN = I2C_SDA_Pin;
-    uint32_t SCL_PIN = I2C_SCL_Pin;
-    GPIO_InitTypeDef GPIO_InitStruct;
-
-    // 1
-    __HAL_I2C_DISABLE(hi2c);
-
-    // 2
-    GPIO_InitStruct.Pin = SDA_PIN|SCL_PIN;
-    GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_OD;
-    GPIO_InitStruct.Pull = GPIO_NOPULL;
-    GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
-    HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
-
-    HAL_GPIO_WRITE_ODR(GPIOB, SDA_PIN);
-    HAL_GPIO_WRITE_ODR(GPIOB, SCL_PIN);
-
-    // 3
-    GPIO_PinState pinState;
-    if (HAL_GPIO_ReadPin(GPIOB, SDA_PIN) == GPIO_PIN_RESET) {
-        for(;;){}
-    }
-    if (HAL_GPIO_ReadPin(GPIOB, SCL_PIN) == GPIO_PIN_RESET) {
-        for(;;){}
-    }
-
-    // 4
-    GPIO_InitStruct.Pin = SDA_PIN;
-    HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
-
-    HAL_GPIO_TogglePin(GPIOB, SDA_PIN);
-
-    // 5
-    if (HAL_GPIO_ReadPin(GPIOB, SDA_PIN) == GPIO_PIN_SET) {
-        for(;;){}
-    }
-
-    // 6
-    GPIO_InitStruct.Pin = SCL_PIN;
-    HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
-
-    HAL_GPIO_TogglePin(GPIOB, SCL_PIN);
-
-    // 7
-    if (HAL_GPIO_ReadPin(GPIOB, SCL_PIN) == GPIO_PIN_SET) {
-        for(;;){}
-    }
-
-    // 8
-    GPIO_InitStruct.Pin = SDA_PIN;
-    HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
-
-    HAL_GPIO_WRITE_ODR(GPIOB, SDA_PIN);
-
-    // 9
-    if (HAL_GPIO_ReadPin(GPIOB, SDA_PIN) == GPIO_PIN_RESET) {
-        for(;;){}
-    }
-
-    // 10
-    GPIO_InitStruct.Pin = SCL_PIN;
-    HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
-
-    HAL_GPIO_WRITE_ODR(GPIOB, SCL_PIN);
-
-    // 11
-    if (HAL_GPIO_ReadPin(GPIOB, SCL_PIN) == GPIO_PIN_RESET) {
-        for(;;){}
-    }
-
-    // 12
-    GPIO_InitStruct.Pin = SDA_PIN|SCL_PIN;
-    GPIO_InitStruct.Mode = GPIO_MODE_AF_OD;
-   // GPIO_InitStruct.Alternate = NUCLEO_I2C_EXPBD_SCL_SDA_AF;
-    HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
-
-   // 13
-   hi2c->Instance->CR1 |= I2C_CR1_SWRST;
-
-   // 14
-   hi2c->Instance->CR1 ^= I2C_CR1_SWRST;
-
-   // 15
-   __HAL_I2C_ENABLE(hi2c);
-
-   resetTried = 1;
-}
-
-void HAL_GPIO_WRITE_ODR(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin)
-{
-  /* Check the parameters */
-  assert_param(IS_GPIO_PIN(GPIO_Pin));
-
-  GPIOx->ODR |= GPIO_Pin;
-}
 
 /* USER CODE END 0 */
 
@@ -226,35 +102,35 @@ int main(void)
 
   /* USER CODE BEGIN SysInit */
 
-  /* BugFix: see https://electronics.stackexchange.com/questions/272427/stm32-busy-flag-is-set-after-i2c-initialization */
-  __HAL_RCC_I2C2_CLK_ENABLE();
+	/* BugFix: see https://electronics.stackexchange.com/questions/272427/stm32-busy-flag-is-set-after-i2c-initialization */
+	__HAL_RCC_I2C2_CLK_ENABLE()
+	;
 
   /* USER CODE END SysInit */
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   MX_SPI2_Init();
-  MX_ADC1_Init();
   MX_TIM4_Init();
   MX_I2C2_Init();
   MX_TIM3_Init();
+  MX_ADC1_Init();
   /* USER CODE BEGIN 2 */
 
-  //HAL_I2C_ClearBusyFlagErrata_2_14_7(&hi2c2);
-
-  vfoSetup();
+	//HAL_I2C_ClearBusyFlagErrata_2_14_7(&hi2c2);
+	vfoSetup();
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  while (1)
-  {
-	  vfoLoopIteration();
+	while (1)
+	{
+		vfoLoopIteration();
   /* USER CODE END WHILE */
 
   /* USER CODE BEGIN 3 */
 
-  }
+	}
   /* USER CODE END 3 */
 
 }
@@ -299,7 +175,7 @@ void SystemClock_Config(void)
   }
 
   PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_ADC;
-  PeriphClkInit.AdcClockSelection = RCC_ADCPCLK2_DIV6;
+  PeriphClkInit.AdcClockSelection = RCC_ADCPCLK2_DIV8;
   if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInit) != HAL_OK)
   {
     _Error_Handler(__FILE__, __LINE__);
@@ -321,31 +197,38 @@ void SystemClock_Config(void)
 static void MX_ADC1_Init(void)
 {
 
-  ADC_ChannelConfTypeDef sConfig;
+  LL_ADC_InitTypeDef ADC_InitStruct;
+  LL_ADC_CommonInitTypeDef ADC_CommonInitStruct;
+  LL_ADC_REG_InitTypeDef ADC_REG_InitStruct;
+
+  LL_GPIO_InitTypeDef GPIO_InitStruct;
+
+  /* Peripheral clock enable */
+  LL_APB2_GRP1_EnableClock(LL_APB2_GRP1_PERIPH_ADC1);
+  
+  /**ADC1 GPIO Configuration  
+  PA3   ------> ADC1_IN3
+  PA4   ------> ADC1_IN4 
+  */
+  GPIO_InitStruct.Pin = LL_GPIO_PIN_3|LL_GPIO_PIN_4;
+  GPIO_InitStruct.Mode = LL_GPIO_MODE_ANALOG;
+  LL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
     /**Common config 
     */
-  hadc1.Instance = ADC1;
-  hadc1.Init.ScanConvMode = ADC_SCAN_DISABLE;
-  hadc1.Init.ContinuousConvMode = DISABLE;
-  hadc1.Init.DiscontinuousConvMode = DISABLE;
-  hadc1.Init.ExternalTrigConv = ADC_SOFTWARE_START;
-  hadc1.Init.DataAlign = ADC_DATAALIGN_RIGHT;
-  hadc1.Init.NbrOfConversion = 1;
-  if (HAL_ADC_Init(&hadc1) != HAL_OK)
-  {
-    _Error_Handler(__FILE__, __LINE__);
-  }
+  ADC_InitStruct.DataAlignment = LL_ADC_DATA_ALIGN_RIGHT;
+  ADC_InitStruct.SequencersScanMode = LL_ADC_SEQ_SCAN_DISABLE;
+  LL_ADC_Init(ADC1, &ADC_InitStruct);
 
-    /**Configure Regular Channel 
-    */
-  sConfig.Channel = ADC_CHANNEL_4;
-  sConfig.Rank = ADC_REGULAR_RANK_1;
-  sConfig.SamplingTime = ADC_SAMPLETIME_1CYCLE_5;
-  if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK)
-  {
-    _Error_Handler(__FILE__, __LINE__);
-  }
+  ADC_CommonInitStruct.Multimode = LL_ADC_MULTI_INDEPENDENT;
+  LL_ADC_CommonInit(__LL_ADC_COMMON_INSTANCE(ADC1), &ADC_CommonInitStruct);
+
+  ADC_REG_InitStruct.TriggerSource = LL_ADC_REG_TRIG_SOFTWARE;
+  ADC_REG_InitStruct.SequencerLength = 1;
+  ADC_REG_InitStruct.SequencerDiscont = LL_ADC_REG_SEQ_DISCONT_DISABLE;
+  ADC_REG_InitStruct.ContinuousMode = LL_ADC_REG_CONV_SINGLE;
+  ADC_REG_InitStruct.DMATransfer = LL_ADC_REG_DMA_TRANSFER_NONE;
+  LL_ADC_REG_Init(ADC1, &ADC_REG_InitStruct);
 
 }
 
@@ -499,17 +382,17 @@ static void MX_GPIO_Init(void)
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOA, TFT_A0_Pin|TFT_RESET_Pin|TFT_CS_Pin, GPIO_PIN_RESET);
 
-  /*Configure GPIO pin : BTN_STP_Pin */
-  GPIO_InitStruct.Pin = BTN_STP_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
-  GPIO_InitStruct.Pull = GPIO_PULLUP;
-  HAL_GPIO_Init(BTN_STP_GPIO_Port, &GPIO_InitStruct);
-
   /*Configure GPIO pins : TFT_A0_Pin TFT_RESET_Pin TFT_CS_Pin */
   GPIO_InitStruct.Pin = TFT_A0_Pin|TFT_RESET_Pin|TFT_CS_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+
+  /*Configure GPIO pin : BTN_STP_Pin */
+  GPIO_InitStruct.Pin = BTN_STP_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_PULLUP;
+  HAL_GPIO_Init(BTN_STP_GPIO_Port, &GPIO_InitStruct);
 
 }
 
@@ -527,10 +410,10 @@ void _Error_Handler(char *file, int line)
 {
   /* USER CODE BEGIN Error_Handler_Debug */
 	//printf("ERROR in file %s, line %d\n", file, line);
-  /* User can add his own implementation to report the HAL error return state */
-  while(1)
-  {
-  }
+	/* User can add his own implementation to report the HAL error return state */
+	while (1)
+	{
+	}
   /* USER CODE END Error_Handler_Debug */
 }
 
@@ -545,8 +428,8 @@ void _Error_Handler(char *file, int line)
 void assert_failed(uint8_t* file, uint32_t line)
 { 
   /* USER CODE BEGIN 6 */
-  /* User can add his own implementation to report the file name and line number,
-     tex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
+	/* User can add his own implementation to report the file name and line number,
+	 tex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
   /* USER CODE END 6 */
 }
 #endif /* USE_FULL_ASSERT */

@@ -42,6 +42,7 @@
 #define __MAIN_H__
 
 /* Includes ------------------------------------------------------------------*/
+#include "stm32f1xx_ll_adc.h"
 #include "stm32f1xx_ll_spi.h"
 #include "stm32f1xx_ll_bus.h"
 #include "stm32f1xx_ll_cortex.h"
@@ -60,12 +61,6 @@
 
 /* Private define ------------------------------------------------------------*/
 
-#define V_MTR_Pin GPIO_PIN_4
-#define V_MTR_GPIO_Port GPIOA
-#define S_MTR_Pin GPIO_PIN_5
-#define S_MTR_GPIO_Port GPIOA
-#define BTN_STP_Pin GPIO_PIN_7
-#define BTN_STP_GPIO_Port GPIOA
 #define I2C_SCL_Pin GPIO_PIN_10
 #define I2C_SCL_GPIO_Port GPIOB
 #define I2C_SDA_Pin GPIO_PIN_11
@@ -78,6 +73,8 @@
 #define TFT_CS_GPIO_Port GPIOA
 #define TFT_LED_Pin GPIO_PIN_4
 #define TFT_LED_GPIO_Port GPIOB
+#define BTN_STP_Pin GPIO_PIN_5
+#define BTN_STP_GPIO_Port GPIOB
 #define ENC1_Pin GPIO_PIN_6
 #define ENC1_GPIO_Port GPIOB
 #define ENC2_Pin GPIO_PIN_7

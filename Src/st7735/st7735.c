@@ -878,3 +878,26 @@ void ST7735_PutStr5x7Ex(uint8_t scale, uint8_t X, uint8_t Y, char *str,
 	}
 }
 
+
+void ST7735_defineScrollArea(int16_t tfa, int16_t bfa)
+{
+	CS_L();
+	ST7735_cmd(0x33); // SCRLAR
+	A0_H();
+	ST7735_write(tfa >> 8);
+	ST7735_write((uint8_t)tfa);
+	ST7735_write(bfa >> 8);
+	ST7735_write((uint8_t)bfa);
+	CS_H();
+}
+
+
+void ST7735_scroll(int16_t addr)
+{
+	CS_L();
+	ST7735_cmd(0x37); // SCRL
+	A0_H();
+	ST7735_write(addr >> 8);
+	ST7735_write((uint8_t)addr);
+	CS_H();
+}

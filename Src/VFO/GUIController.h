@@ -29,6 +29,7 @@ public:
 
 	void showSetup();
 	void showMain();
+	void showVoltage(uint32_t value);
 
 	void draw();
 	void pushEncoderIncrement(int16_t increment, uint16_t period);

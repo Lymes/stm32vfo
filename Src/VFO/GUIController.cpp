@@ -58,4 +58,13 @@ void GUIController::showMain()
 	_currentView->draw();
 }
 
+void GUIController::showVoltage(uint32_t value)
+{
+	if ( _currentView == _mainView )
+	{
+		_mainView->showVoltage(value);
+	}
+}
+
+
 } /* namespace VFO */

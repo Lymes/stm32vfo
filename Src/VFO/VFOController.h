@@ -34,6 +34,8 @@ public:
 	void menuKeyPressed();
 	void pushEncoderIncrement(int16_t increment, uint16_t period);
 
+	void showVoltage(uint32_t value);
+
 	void showSetup();
 	void showMain();
 

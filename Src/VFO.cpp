@@ -19,6 +19,8 @@ extern "C"
 extern TIM_HandleTypeDef htim3;
 extern TIM_HandleTypeDef htim4;
 
+extern uint16_t readVoltage(ADC_TypeDef *ADCx, uint8_t channel);
+
 
 void HAL_SYSTICK_Callback(void)
 {
@@ -62,7 +64,6 @@ void KBDCallBack_Setup(int key, int action)
 }
 
 
-
 // Initial Setup
 void _vfoSetup(void)
 {
@@ -72,11 +73,11 @@ void _vfoSetup(void)
 	HAL_TIM_Base_Start_IT(&htim3);
 	HAL_TIM_PWM_Start(&htim3,TIM_CHANNEL_1);
 
-	KBD_addKey(GPIOA, 7, LO, KBDCallBack_Setup);
+	KBD_addKey(GPIOB, 5, LO, KBDCallBack_Setup);
 
 	_mainController = new VFO::VFOController;
 
-	if ( HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_7) == 0 )
+	if ( HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_5) == 0 )
 	{
 		_mainController->reset();
 	}
@@ -94,6 +95,9 @@ void _vfoLoopIteration(void)
 		_mainController->pushEncoderIncrement(encCounter - ENC_VALUE, _ticks);
 	}
 	_ticks = 0;
+
+	uint32_t voltage = readVoltage(ADC1, 3);
+	_mainController->showVoltage(voltage);
 
 	_mainController->checkMemoryState();
 	HAL_Delay(10);

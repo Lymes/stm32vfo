@@ -86,6 +86,9 @@ void ST7735_PutChar7x11Ex(uint16_t X, uint16_t Y, uint8_t chr, uint16_t color, v
 void ST7735_PutChar5x7Ex(uint8_t scale, uint16_t X, uint16_t Y, uint8_t chr, uint16_t color, void *ptr, uint16_t (*bgcolor)(void *, uint8_t, uint8_t));
 void ST7735_PutStr5x7Ex(uint8_t scale, uint8_t X, uint8_t Y, char *str, uint16_t color, void *ptr, uint16_t (*bgcolor)(void *, uint8_t, uint8_t));
 
+void ST7735_defineScrollArea(int16_t tfa, int16_t bfa);
+void ST7735_scroll(int16_t addr);
+
 #ifdef __cplusplus
  }
 #endif
