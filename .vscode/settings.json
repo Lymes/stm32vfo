@@ -1,0 +1,11 @@
+{
+    "stm32-for-vscode.armToolchainPath": "/usr/local/gcc-arm-none-eabi-8-2019-q3-update/bin",
+    "files.associations": {
+        "stm32f1xx_hal.h": "c"
+    },
+    "C_Cpp.autocomplete": "Default",
+    "C_Cpp.default.intelliSenseMode": "gcc-x64",
+    "C_Cpp.errorSquiggles": "Enabled",
+    "C_Cpp.intelliSenseEngine": "Default",
+    "C_Cpp.intelliSenseEngineFallback": "Enabled"
+}

@@ -1,0 +1,34 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Load STM Firmware",
+      "type": "shell",
+      "command": "st-flash write ./build/STM32VFO.bin 0x08000000",
+      "options": {
+        "cwd": "${workspaceRoot}"
+      },
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "problemMatcher": [],
+      "dependsOn": [
+        "Build STM"
+      ]
+    },
+    {
+      "label": "Build STM",
+      "type": "shell",
+      "command": "node /Users/lymes/.vscode/extensions/bmd.stm32-for-vscode-1.8.6/STM32Cli build /Users/lymes/Development/Electronics/STM32VFO",
+      "options": {
+        "cwd": "${workspaceRoot}"
+      },
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "problemMatcher": []
+    }
+  ]
+}
