@@ -31,7 +31,9 @@ static I2C_HandleTypeDef hi2c;
 extern void _Error_Handler(char *, int);
 }
 
-#define I2CTIMEOUT 10
+
+#define I2CTIMEOUT 100
+
 
 /********************/
 /* Public functions */
@@ -70,8 +72,9 @@ Si5351::Si5351(uint8_t i2c_addr) :
  */
 bool Si5351::init(uint8_t xtal_load_c, uint32_t xo_freq, int32_t corr) {
 
-	if (HAL_I2C_IsDeviceReady(&hi2c, (uint16_t) SI5351_BUS_BASE_ADDR << 1, 200,
-	I2CTIMEOUT) != HAL_OK) {
+	int ret = HAL_I2C_IsDeviceReady(&hi2c, (uint16_t) SI5351_BUS_BASE_ADDR << 1, 3,
+			100);
+	if ( ret != HAL_OK) {
 		return false;
 		//_Error_Handler((char *) __FILE__, __LINE__);
 	}
@@ -1177,90 +1180,7 @@ void Si5351::set_ref_freq(uint32_t ref_freq, enum si5351_pll_input ref_osc) {
 	//si5351_write(SI5351_PLL_INPUT_SOURCE, reg_val);
 }
 
-uint8_t Si5351::si5351_write_bulk(uint8_t addr, uint8_t bytes, uint8_t *data) {
-	if (HAL_I2C_IsDeviceReady(&hi2c, (uint16_t) SI5351_BUS_BASE_ADDR << 1, 2,
-	I2CTIMEOUT) != HAL_OK) {
-		_Error_Handler((char *) __FILE__, __LINE__);
-	}
 
-	/* Try to transmit via I2C */
-	if (HAL_I2C_Mem_Write(&hi2c, (uint16_t) SI5351_BUS_BASE_ADDR << 1, addr,
-			addr > 0xFF ? I2C_MEMADD_SIZE_16BIT : I2C_MEMADD_SIZE_8BIT, data,
-			bytes, I2CTIMEOUT) != HAL_OK) {
-		/* Check error */
-		if (HAL_I2C_GetError(&hi2c) != HAL_I2C_ERROR_AF) {
-
-		}
-
-		/* Return error */
-		return 1;
-	}
-	return 0;
-}
-
-uint8_t Si5351::si5351_write(uint8_t addr, uint8_t data) {
-	uint8_t d[2];
-
-	if (HAL_I2C_IsDeviceReady(&hi2c, (uint16_t) SI5351_BUS_BASE_ADDR << 1, 2,
-	I2CTIMEOUT) != HAL_OK) {
-		_Error_Handler((char *) __FILE__, __LINE__);
-	}
-
-	/* Format array to send */
-	d[0] = addr;
-	d[1] = data;
-
-	/* Try to transmit via I2C */
-	if (HAL_I2C_Master_Transmit(&hi2c, (uint16_t) SI5351_BUS_BASE_ADDR << 1,
-			(uint8_t *) d, 2, I2CTIMEOUT) != HAL_OK) {
-		/* Check error */
-		if (HAL_I2C_GetError(&hi2c) != HAL_I2C_ERROR_AF) {
-			_Error_Handler((char *) __FILE__, __LINE__);
-			/* Return error */
-			return 1;
-		}
-	}
-	return 0;
-}
-
-uint8_t Si5351::si5351_read(uint8_t addr) {
-	uint8_t buffer[] = { addr };
-	uint8_t value;
-
-	if (HAL_I2C_IsDeviceReady(&hi2c, (uint16_t) SI5351_BUS_BASE_ADDR << 1, 2,
-	I2CTIMEOUT) != HAL_OK) {
-		_Error_Handler((char *) __FILE__, __LINE__);
-	}
-
-	while (HAL_I2C_Master_Transmit(&hi2c, (uint16_t) SI5351_BUS_BASE_ADDR << 1,
-			(uint8_t*) &buffer, sizeof(buffer), I2CTIMEOUT) != HAL_OK) {
-		/* Error_Handler() function is called when Timeout error occurs.
-		 When Acknowledge failure occurs (Slave don't acknowledge it's address)
-		 Master restarts communication */
-		if (HAL_I2C_GetError(&hi2c) != HAL_I2C_ERROR_AF) {
-			_Error_Handler((char *) __FILE__, __LINE__);
-			break;
-		}
-	}
-
-	if (HAL_I2C_IsDeviceReady(&hi2c, (uint16_t) SI5351_BUS_BASE_ADDR << 1, 2,
-	I2CTIMEOUT) != HAL_OK) {
-		_Error_Handler((char *) __FILE__, __LINE__);
-	}
-
-	while (HAL_I2C_Master_Receive(&hi2c, (uint16_t) SI5351_BUS_BASE_ADDR << 1,
-			(uint8_t *) &value, 1, I2CTIMEOUT) != HAL_OK) {
-		/* Error_Handler() function is called when Timeout error occurs.
-		 When Acknowledge failure occurs (Slave don't acknowledge it's address)
-		 Master restarts communication */
-		if (HAL_I2C_GetError(&hi2c) != HAL_I2C_ERROR_AF) {
-			_Error_Handler((char *) __FILE__, __LINE__);
-			break;
-		}
-	}
-
-	return value;
-}
 
 /*********************/
 /* Private functions */
@@ -1647,4 +1567,87 @@ uint8_t Si5351::select_r_div_ms67(uint64_t *freq) {
 	}
 
 	return r_div;
+}
+
+
+
+uint8_t Si5351::si5351_write_bulk(uint8_t addr, uint8_t bytes, uint8_t *data) {
+	if (HAL_I2C_IsDeviceReady(&hi2c, (uint16_t) SI5351_BUS_BASE_ADDR << 1, 20,
+	I2CTIMEOUT) != HAL_OK) {
+		_Error_Handler((char *) __FILE__, __LINE__);
+	}
+
+	/* Try to transmit via I2C */
+	if (HAL_I2C_Mem_Write(&hi2c, (uint16_t) SI5351_BUS_BASE_ADDR << 1, addr,
+			addr > 0xFF ? I2C_MEMADD_SIZE_16BIT : I2C_MEMADD_SIZE_8BIT, data,
+			bytes, I2CTIMEOUT) != HAL_OK) {
+		/* Check error */
+		if (HAL_I2C_GetError(&hi2c) != HAL_I2C_ERROR_AF) {
+
+		}
+
+		/* Return error */
+		return 1;
+	}
+	return 0;
+}
+
+uint8_t Si5351::si5351_write(uint8_t addr, uint8_t data)
+{
+	uint8_t d[2];
+
+	if (HAL_I2C_IsDeviceReady(&hi2c, (uint16_t) SI5351_BUS_BASE_ADDR << 1, 20,
+	I2CTIMEOUT) != HAL_OK) {
+		_Error_Handler((char *) __FILE__, __LINE__);
+	}
+
+
+	d[0] = addr;
+	d[1] = data;
+
+
+	if (HAL_I2C_Master_Transmit(&hi2c, (uint16_t) SI5351_BUS_BASE_ADDR << 1,
+			(uint8_t *) d, 2, I2CTIMEOUT) != HAL_OK) {
+
+		if (HAL_I2C_GetError(&hi2c) != HAL_I2C_ERROR_AF) {
+			_Error_Handler((char *) __FILE__, __LINE__);
+
+			return 1;
+		}
+	}
+	return 0;
+}
+
+uint8_t Si5351::si5351_read(uint8_t addr)
+{
+	uint8_t buffer[] = { addr };
+	uint8_t value;
+
+	if (HAL_I2C_IsDeviceReady(&hi2c, (uint16_t) SI5351_BUS_BASE_ADDR << 1, 20,
+	I2CTIMEOUT) != HAL_OK) {
+		_Error_Handler((char *) __FILE__, __LINE__);
+	}
+
+	while (HAL_I2C_Master_Transmit(&hi2c, (uint16_t) SI5351_BUS_BASE_ADDR << 1,
+			(uint8_t*) &buffer, sizeof(buffer), I2CTIMEOUT) != HAL_OK) {
+		if (HAL_I2C_GetError(&hi2c) != HAL_I2C_ERROR_AF) {
+			_Error_Handler((char *) __FILE__, __LINE__);
+			break;
+		}
+	}
+
+	if (HAL_I2C_IsDeviceReady(&hi2c, (uint16_t) SI5351_BUS_BASE_ADDR << 1, 20,
+	I2CTIMEOUT) != HAL_OK) {
+		_Error_Handler((char *) __FILE__, __LINE__);
+	}
+
+	while (HAL_I2C_Master_Receive(&hi2c, (uint16_t) SI5351_BUS_BASE_ADDR << 1,
+			(uint8_t *) &value, 1, I2CTIMEOUT) != HAL_OK) {
+		if (HAL_I2C_GetError(&hi2c) != HAL_I2C_ERROR_AF) {
+			_Error_Handler((char *) __FILE__, __LINE__);
+			break;
+		}
+	}
+
+	return value;
 }

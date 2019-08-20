@@ -47,7 +47,6 @@ uint16_t RGB565(uint8_t R, uint8_t G, uint8_t B)
 
 void ST7735_Init(void)
 {
-
 	DWT_Delay_Init();
 	LL_SPI_Enable(SPI_PORT);
 //	LL_SPI_EnableDMAReq_TX(SPI_PORT);
@@ -400,7 +399,7 @@ void ST7735_FillRect(uint16_t X1, uint16_t Y1, uint16_t X2, uint16_t Y2,
 
 
 void ST7735_FillRectEx(uint16_t X1, uint16_t Y1, uint16_t X2, uint16_t Y2,
-		void *ptr, uint16_t (*bgcolor)(void *, uint16_t, uint16_t))
+		void *ptr, uint16_t (*bgcolor)(void *, uint8_t, uint8_t))
 {
 	uint16_t row, col;
 	//uint16_t FS = (X2 - X1 + 1) * (Y2 - Y1 + 1);

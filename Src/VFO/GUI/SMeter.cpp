@@ -31,9 +31,9 @@ void SMeter::draw(uint8_t value)
 
 void SMeter::drawBackground()
 {
-	ST7735_PutStr5x7Ex(1, _x, _y, "1  3  5  7  9", COLOR565_WHITE, _back,
+	ST7735_PutStr5x7Ex(1, _x, _y, (char *)"1  3  5  7  9", COLOR565_WHITE, _back,
 			VFO::backgroundColor);
-	ST7735_PutStr5x7Ex(1, _x + 86, _y, "+20 +60", COLOR565_RED, _back,
+	ST7735_PutStr5x7Ex(1, _x + 86, _y, (char *)"+20 +60", COLOR565_RED, _back,
 			VFO::backgroundColor);
 
 	ST7735_HLine(_x,  140, _y + 15, COLOR565_WHITE);

@@ -8,31 +8,25 @@
 #ifndef VFO_CONFIGURATION_H_
 #define VFO_CONFIGURATION_H_
 
+#include <stdint.h>
 #include "stm32f1xx_hal.h"
-
-//#define EXT_EEPROM
-
-#ifdef EXT_EEPROM
 #include <eeprom/eeprom24xx.h>
-#endif
 
 namespace VFO
 {
 
 struct ConfigData {
 	uint32_t frequency;
-	int32_t calibration;
 	uint32_t iFrequency;
 	uint32_t bFrequency;
-	uint8_t brightness;
 	uint32_t encoder;
+	int32_t calibration;
+	uint8_t brightness;
 };
 
 class Configuration
 {
-#ifdef EXT_EEPROM
 	Eeprom24 _mem;
-#endif
 	ConfigData _data;
 
 public:
@@ -44,7 +38,7 @@ public:
 	void load();
 
 	uint32_t getFrequency(void) { return _data.frequency; }
-	uint32_t getCalibration(void) { return _data.calibration; }
+	int32_t getCalibration(void) { return _data.calibration; }
 	uint32_t getIFrequency(void) { return _data.iFrequency; }
 	uint32_t getBFrequency(void) { return _data.bFrequency; }
 	uint8_t getBrightness(void) { return _data.brightness; }

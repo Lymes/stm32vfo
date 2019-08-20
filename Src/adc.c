@@ -1,4 +1,5 @@
 #include "stm32f1xx_hal.h"
+#include "stm32f1xx_ll_adc.h"
 
 uint16_t readVoltage(ADC_TypeDef *ADCx, uint8_t channel)
 {

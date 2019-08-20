@@ -31,6 +31,8 @@ public:
 
 	Configuration *getConfig() { return _conf; }
 
+	void initSI();
+
 	void menuKeyPressed();
 	void pushEncoderIncrement(int16_t increment, uint16_t period);
 

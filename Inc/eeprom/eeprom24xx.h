@@ -13,8 +13,8 @@
 #endif
 
 bool EEPROM24XX_IsConnected(void);
-bool EEPROM24XX_Save(uint16_t Address, void *data, size_t size_of_data);
-bool EEPROM24XX_Load(uint16_t Address, void *data, size_t size_of_data);
+bool EEPROM24XX_Save(uint16_t Address, uint8_t *data, size_t size_of_data);
+bool EEPROM24XX_Load(uint16_t Address, uint8_t *data, size_t size_of_data);
 
 #ifdef __cplusplus
  }
@@ -24,7 +24,7 @@ bool EEPROM24XX_Load(uint16_t Address, void *data, size_t size_of_data);
 
  class Eeprom24
  {
- 	uint16_t _addr;
+ 	uint8_t _addr;
 
  public:
  	Eeprom24() : Eeprom24( 0 ) {}
@@ -32,8 +32,8 @@ bool EEPROM24XX_Load(uint16_t Address, void *data, size_t size_of_data);
  	virtual ~Eeprom24() {}
 
  	bool isConnected(void) { return ::EEPROM24XX_IsConnected(); }
- 	bool save(void *data, size_t size_of_data) { return ::EEPROM24XX_Save(_addr, data, size_of_data); }
- 	bool load(void *data, size_t size_of_data) { return ::EEPROM24XX_Load(_addr, data, size_of_data); }
+ 	bool save(uint8_t *data, size_t size_of_data) { return ::EEPROM24XX_Save(_addr, data, size_of_data); }
+ 	bool load(uint8_t *data, size_t size_of_data) { return ::EEPROM24XX_Load(_addr, data, size_of_data); }
 
  };
 

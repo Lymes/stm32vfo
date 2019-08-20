@@ -192,7 +192,7 @@ void GUISetupView::menuKeyPressed()
 		}
 		else
 		{
-			_mainController->storeConfiguration();
+			_mainController->triggerMemoryWrite();
 			_mainController->showMain();
 			return;
 		}

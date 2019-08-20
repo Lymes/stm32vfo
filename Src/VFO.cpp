@@ -47,15 +47,16 @@ void vfoSystick(void)
 }
 
 
-void KBDCallBack_Setup(int key, int action)
+void KBDCallBack(int key, int action)
 {
 	switch (action)
 	{
 	case KEY:
 		_mainController->menuKeyPressed();
+		//_mainController->initSI();
 		break;
 	case LONGKEY:
-		//_mainController->menuKeyPressed();
+		_mainController->menuKeyPressed();
 		break;
 	case DOUBLECLICK:
 		break;
@@ -73,7 +74,7 @@ void _vfoSetup(void)
 	HAL_TIM_Base_Start_IT(&htim3);
 	HAL_TIM_PWM_Start(&htim3,TIM_CHANNEL_1);
 
-	KBD_addKey(GPIOB, 5, LO, KBDCallBack_Setup);
+	KBD_addKey(GPIOB, 5, LO, KBDCallBack);
 
 	_mainController = new VFO::VFOController;
 
