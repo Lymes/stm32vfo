@@ -1,0 +1,746 @@
+ARM GAS  /var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccwEtaAX.s 			page 1
+
+
+   1              		.cpu cortex-m3
+   2              		.eabi_attribute 20, 1
+   3              		.eabi_attribute 21, 1
+   4              		.eabi_attribute 23, 3
+   5              		.eabi_attribute 24, 1
+   6              		.eabi_attribute 25, 1
+   7              		.eabi_attribute 26, 1
+   8              		.eabi_attribute 30, 2
+   9              		.eabi_attribute 34, 1
+  10              		.eabi_attribute 18, 4
+  11              		.file	"GUIController.cpp"
+  12              		.text
+  13              	.Ltext0:
+  14              		.cfi_sections	.debug_frame
+  15              		.section	.text._ZN3VFO13GUIControllerD2Ev,"ax",%progbits
+  16              		.align	1
+  17              		.p2align 2,,3
+  18              		.global	_ZN3VFO13GUIControllerD2Ev
+  19              		.arch armv7-m
+  20              		.syntax unified
+  21              		.thumb
+  22              		.thumb_func
+  23              		.fpu softvfp
+  25              	_ZN3VFO13GUIControllerD2Ev:
+  26              		.fnstart
+  27              	.LVL0:
+  28              	.LFB316:
+  29              		.file 1 "Src/VFO/GUIController.cpp"
+   1:Src/VFO/GUIController.cpp **** /*
+   2:Src/VFO/GUIController.cpp ****  * GUIController.cpp
+   3:Src/VFO/GUIController.cpp ****  *
+   4:Src/VFO/GUIController.cpp ****  *  Created on: Apr 1, 2018
+   5:Src/VFO/GUIController.cpp ****  *      Author: lymes
+   6:Src/VFO/GUIController.cpp ****  */
+   7:Src/VFO/GUIController.cpp **** 
+   8:Src/VFO/GUIController.cpp **** #include "GUIController.h"
+   9:Src/VFO/GUIController.cpp **** 
+  10:Src/VFO/GUIController.cpp **** #include <stdio.h>
+  11:Src/VFO/GUIController.cpp **** #include <stdlib.h>
+  12:Src/VFO/GUIController.cpp **** #include <math.h>
+  13:Src/VFO/GUIController.cpp **** 
+  14:Src/VFO/GUIController.cpp **** namespace VFO
+  15:Src/VFO/GUIController.cpp **** {
+  16:Src/VFO/GUIController.cpp **** 
+  17:Src/VFO/GUIController.cpp **** GUIController::GUIController()
+  18:Src/VFO/GUIController.cpp **** {
+  19:Src/VFO/GUIController.cpp **** 	ST7735_Init();
+  20:Src/VFO/GUIController.cpp **** 	ST7735_Orientation(scr_CCW);
+  21:Src/VFO/GUIController.cpp **** 
+  22:Src/VFO/GUIController.cpp **** 	_setupView = new GUISetupView();
+  23:Src/VFO/GUIController.cpp **** 	_mainView = new GUIMainView();
+  24:Src/VFO/GUIController.cpp **** 
+  25:Src/VFO/GUIController.cpp **** 	_currentView = _mainView;
+  26:Src/VFO/GUIController.cpp **** }
+  27:Src/VFO/GUIController.cpp **** 
+  28:Src/VFO/GUIController.cpp **** GUIController::~GUIController()
+  30              		.loc 1 28 1 view -0
+ARM GAS  /var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccwEtaAX.s 			page 2
+
+
+  31              		.cfi_startproc
+  32              		@ args = 0, pretend = 0, frame = 0
+  33              		@ frame_needed = 0, uses_anonymous_args = 0
+  34              		.loc 1 28 1 is_stmt 0 view .LVU1
+  35 0000 10B5     		push	{r4, lr}
+  36              	.LCFI0:
+  37              		.cfi_def_cfa_offset 8
+  38              		.cfi_offset 4, -8
+  39              		.cfi_offset 14, -4
+  40              		.loc 1 28 1 view .LVU2
+  41 0002 0446     		mov	r4, r0
+  42              	.LBB3:
+  43              		.loc 1 28 31 view .LVU3
+  44 0004 064B     		ldr	r3, .L12
+  29:Src/VFO/GUIController.cpp **** {
+  30:Src/VFO/GUIController.cpp **** 	delete _setupView;
+  45              		.loc 1 30 9 view .LVU4
+  46 0006 C068     		ldr	r0, [r0, #12]
+  47              	.LVL1:
+  28:Src/VFO/GUIController.cpp **** {
+  48              		.loc 1 28 31 view .LVU5
+  49 0008 2360     		str	r3, [r4]
+  50              		.loc 1 30 2 is_stmt 1 view .LVU6
+  51              		.loc 1 30 19 is_stmt 0 view .LVU7
+  52 000a 10B1     		cbz	r0, .L2
+  53              		.loc 1 30 9 discriminator 1 view .LVU8
+  54 000c 0368     		ldr	r3, [r0]
+  55 000e 5B68     		ldr	r3, [r3, #4]
+  56 0010 9847     		blx	r3
+  57              	.LVL2:
+  58              	.L2:
+  31:Src/VFO/GUIController.cpp **** 	delete _mainView;
+  59              		.loc 1 31 2 is_stmt 1 view .LVU9
+  60              		.loc 1 31 9 is_stmt 0 view .LVU10
+  61 0012 A068     		ldr	r0, [r4, #8]
+  62              		.loc 1 31 18 view .LVU11
+  63 0014 10B1     		cbz	r0, .L3
+  64              		.loc 1 31 9 discriminator 1 view .LVU12
+  65 0016 0368     		ldr	r3, [r0]
+  66 0018 5B68     		ldr	r3, [r3, #4]
+  67 001a 9847     		blx	r3
+  68              	.LVL3:
+  69              	.L3:
+  70              	.LBE3:
+  32:Src/VFO/GUIController.cpp **** }
+  71              		.loc 1 32 1 view .LVU13
+  72 001c 2046     		mov	r0, r4
+  73 001e 10BD     		pop	{r4, pc}
+  74              	.LVL4:
+  75              	.L13:
+  76              		.loc 1 32 1 view .LVU14
+  77              		.align	2
+  78              	.L12:
+  79 0020 08000000 		.word	.LANCHOR0+8
+  80              		.cfi_endproc
+  81              	.LFE316:
+  82              		.cantunwind
+ARM GAS  /var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccwEtaAX.s 			page 3
+
+
+  83              		.fnend
+  85              		.global	_ZN3VFO13GUIControllerD1Ev
+  86              		.thumb_set _ZN3VFO13GUIControllerD1Ev,_ZN3VFO13GUIControllerD2Ev
+  87              		.section	.text._ZN3VFO13GUIControllerD0Ev,"ax",%progbits
+  88              		.align	1
+  89              		.p2align 2,,3
+  90              		.global	_ZN3VFO13GUIControllerD0Ev
+  91              		.syntax unified
+  92              		.thumb
+  93              		.thumb_func
+  94              		.fpu softvfp
+  96              	_ZN3VFO13GUIControllerD0Ev:
+  97              		.fnstart
+  98              	.LVL5:
+  99              	.LFB318:
+  28:Src/VFO/GUIController.cpp **** {
+ 100              		.loc 1 28 1 is_stmt 1 view -0
+ 101              		.cfi_startproc
+ 102              		@ args = 0, pretend = 0, frame = 0
+ 103              		@ frame_needed = 0, uses_anonymous_args = 0
+  28:Src/VFO/GUIController.cpp **** {
+ 104              		.loc 1 28 1 is_stmt 0 view .LVU16
+ 105 0000 10B5     		push	{r4, lr}
+ 106              	.LCFI1:
+ 107              		.cfi_def_cfa_offset 8
+ 108              		.cfi_offset 4, -8
+ 109              		.cfi_offset 14, -4
+  28:Src/VFO/GUIController.cpp **** {
+ 110              		.loc 1 28 1 view .LVU17
+ 111 0002 0446     		mov	r4, r0
+ 112              	.LVL6:
+ 113              	.LBB7:
+ 114              	.LBI7:
+  28:Src/VFO/GUIController.cpp **** {
+ 115              		.loc 1 28 1 is_stmt 1 view .LVU18
+ 116              	.LBB8:
+  28:Src/VFO/GUIController.cpp **** {
+ 117              		.loc 1 28 31 is_stmt 0 view .LVU19
+ 118 0004 084B     		ldr	r3, .L24
+  30:Src/VFO/GUIController.cpp **** 	delete _mainView;
+ 119              		.loc 1 30 9 view .LVU20
+ 120 0006 C068     		ldr	r0, [r0, #12]
+ 121              	.LVL7:
+  28:Src/VFO/GUIController.cpp **** {
+ 122              		.loc 1 28 31 view .LVU21
+ 123 0008 2360     		str	r3, [r4]
+  30:Src/VFO/GUIController.cpp **** 	delete _mainView;
+ 124              		.loc 1 30 2 is_stmt 1 view .LVU22
+  30:Src/VFO/GUIController.cpp **** 	delete _mainView;
+ 125              		.loc 1 30 19 is_stmt 0 view .LVU23
+ 126 000a 10B1     		cbz	r0, .L15
+  30:Src/VFO/GUIController.cpp **** 	delete _mainView;
+ 127              		.loc 1 30 9 view .LVU24
+ 128 000c 0368     		ldr	r3, [r0]
+ 129 000e 5B68     		ldr	r3, [r3, #4]
+ 130 0010 9847     		blx	r3
+ 131              	.LVL8:
+ARM GAS  /var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccwEtaAX.s 			page 4
+
+
+ 132              	.L15:
+  31:Src/VFO/GUIController.cpp **** }
+ 133              		.loc 1 31 2 is_stmt 1 view .LVU25
+  31:Src/VFO/GUIController.cpp **** }
+ 134              		.loc 1 31 9 is_stmt 0 view .LVU26
+ 135 0012 A068     		ldr	r0, [r4, #8]
+  31:Src/VFO/GUIController.cpp **** }
+ 136              		.loc 1 31 18 view .LVU27
+ 137 0014 10B1     		cbz	r0, .L16
+  31:Src/VFO/GUIController.cpp **** }
+ 138              		.loc 1 31 9 view .LVU28
+ 139 0016 0368     		ldr	r3, [r0]
+ 140 0018 5B68     		ldr	r3, [r3, #4]
+ 141 001a 9847     		blx	r3
+ 142              	.LVL9:
+ 143              	.L16:
+  31:Src/VFO/GUIController.cpp **** }
+ 144              		.loc 1 31 9 view .LVU29
+ 145              	.LBE8:
+ 146              	.LBE7:
+ 147              		.loc 1 32 1 view .LVU30
+ 148 001c 2046     		mov	r0, r4
+ 149 001e 1021     		movs	r1, #16
+ 150 0020 FFF7FEFF 		bl	_ZdlPvj
+ 151              	.LVL10:
+ 152 0024 2046     		mov	r0, r4
+ 153 0026 10BD     		pop	{r4, pc}
+ 154              	.LVL11:
+ 155              	.L25:
+ 156              		.loc 1 32 1 view .LVU31
+ 157              		.align	2
+ 158              	.L24:
+ 159 0028 08000000 		.word	.LANCHOR0+8
+ 160              		.cfi_endproc
+ 161              	.LFE318:
+ 162              		.cantunwind
+ 163              		.fnend
+ 165              		.section	.text._ZN3VFO13GUIControllerC2Ev,"ax",%progbits
+ 166              		.align	1
+ 167              		.p2align 2,,3
+ 168              		.global	_ZN3VFO13GUIControllerC2Ev
+ 169              		.syntax unified
+ 170              		.thumb
+ 171              		.thumb_func
+ 172              		.fpu softvfp
+ 174              	_ZN3VFO13GUIControllerC2Ev:
+ 175              		.fnstart
+ 176              	.LVL12:
+ 177              	.LFB313:
+  17:Src/VFO/GUIController.cpp **** {
+ 178              		.loc 1 17 1 is_stmt 1 view -0
+ 179              		.cfi_startproc
+ 180              		@ args = 0, pretend = 0, frame = 0
+ 181              		@ frame_needed = 0, uses_anonymous_args = 0
+  17:Src/VFO/GUIController.cpp **** {
+ 182              		.loc 1 17 1 is_stmt 0 view .LVU33
+ 183 0000 38B5     		push	{r3, r4, r5, lr}
+ARM GAS  /var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccwEtaAX.s 			page 5
+
+
+ 184              		.save {r3, r4, r5, lr}
+ 185              	.LCFI2:
+ 186              		.cfi_def_cfa_offset 16
+ 187              		.cfi_offset 3, -16
+ 188              		.cfi_offset 4, -12
+ 189              		.cfi_offset 5, -8
+ 190              		.cfi_offset 14, -4
+ 191              	.LBB9:
+  17:Src/VFO/GUIController.cpp **** {
+ 192              		.loc 1 17 30 view .LVU34
+ 193 0002 124B     		ldr	r3, .L34
+ 194              	.LBE9:
+  17:Src/VFO/GUIController.cpp **** {
+ 195              		.loc 1 17 1 view .LVU35
+ 196 0004 0446     		mov	r4, r0
+ 197              	.LBB10:
+  17:Src/VFO/GUIController.cpp **** {
+ 198              		.loc 1 17 30 view .LVU36
+ 199 0006 0360     		str	r3, [r0]
+  19:Src/VFO/GUIController.cpp **** 	ST7735_Orientation(scr_CCW);
+ 200              		.loc 1 19 2 is_stmt 1 view .LVU37
+ 201              	.LEHB0:
+  19:Src/VFO/GUIController.cpp **** 	ST7735_Orientation(scr_CCW);
+ 202              		.loc 1 19 13 is_stmt 0 view .LVU38
+ 203 0008 FFF7FEFF 		bl	ST7735_Init
+ 204              	.LVL13:
+  20:Src/VFO/GUIController.cpp **** 
+ 205              		.loc 1 20 2 is_stmt 1 view .LVU39
+  20:Src/VFO/GUIController.cpp **** 
+ 206              		.loc 1 20 20 is_stmt 0 view .LVU40
+ 207 000c 0220     		movs	r0, #2
+ 208 000e FFF7FEFF 		bl	ST7735_Orientation
+ 209              	.LVL14:
+  22:Src/VFO/GUIController.cpp **** 	_mainView = new GUIMainView();
+ 210              		.loc 1 22 2 is_stmt 1 view .LVU41
+  22:Src/VFO/GUIController.cpp **** 	_mainView = new GUIMainView();
+ 211              		.loc 1 22 32 is_stmt 0 view .LVU42
+ 212 0012 2820     		movs	r0, #40
+ 213 0014 FFF7FEFF 		bl	_Znwj
+ 214              	.LVL15:
+ 215              	.LEHE0:
+ 216 0018 0546     		mov	r5, r0
+ 217              	.LEHB1:
+ 218 001a FFF7FEFF 		bl	_ZN3VFO12GUISetupViewC1Ev
+ 219              	.LVL16:
+ 220              	.LEHE1:
+  22:Src/VFO/GUIController.cpp **** 	_mainView = new GUIMainView();
+ 221              		.loc 1 22 13 discriminator 2 view .LVU43
+ 222 001e E560     		str	r5, [r4, #12]
+  23:Src/VFO/GUIController.cpp **** 
+ 223              		.loc 1 23 2 is_stmt 1 discriminator 2 view .LVU44
+  23:Src/VFO/GUIController.cpp **** 
+ 224              		.loc 1 23 30 is_stmt 0 discriminator 2 view .LVU45
+ 225 0020 1C20     		movs	r0, #28
+ 226              	.LEHB2:
+ 227 0022 FFF7FEFF 		bl	_Znwj
+ 228              	.LVL17:
+ARM GAS  /var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccwEtaAX.s 			page 6
+
+
+ 229              	.LEHE2:
+ 230 0026 0546     		mov	r5, r0
+ 231              	.LEHB3:
+ 232 0028 FFF7FEFF 		bl	_ZN3VFO11GUIMainViewC1Ev
+ 233              	.LVL18:
+ 234              	.LEHE3:
+  25:Src/VFO/GUIController.cpp **** }
+ 235              		.loc 1 25 15 view .LVU46
+ 236 002c C4E90155 		strd	r5, r5, [r4, #4]
+ 237              	.LBE10:
+  26:Src/VFO/GUIController.cpp **** 
+ 238              		.loc 1 26 1 view .LVU47
+ 239 0030 2046     		mov	r0, r4
+ 240 0032 38BD     		pop	{r3, r4, r5, pc}
+ 241              	.LVL19:
+ 242              	.L29:
+ 243              	.LBB11:
+  22:Src/VFO/GUIController.cpp **** 	_mainView = new GUIMainView();
+ 244              		.loc 1 22 32 view .LVU48
+ 245 0034 2846     		mov	r0, r5
+ 246 0036 2821     		movs	r1, #40
+ 247 0038 FFF7FEFF 		bl	_ZdlPvj
+ 248              	.LVL20:
+ 249              	.LEHB4:
+ 250 003c FFF7FEFF 		bl	__cxa_end_cleanup
+ 251              	.LVL21:
+ 252              	.L30:
+  23:Src/VFO/GUIController.cpp **** 
+ 253              		.loc 1 23 30 view .LVU49
+ 254 0040 2846     		mov	r0, r5
+ 255 0042 1C21     		movs	r1, #28
+ 256 0044 FFF7FEFF 		bl	_ZdlPvj
+ 257              	.LVL22:
+ 258 0048 FFF7FEFF 		bl	__cxa_end_cleanup
+ 259              	.LVL23:
+ 260              	.LEHE4:
+ 261              	.L35:
+ 262              		.align	2
+ 263              	.L34:
+ 264 004c 08000000 		.word	.LANCHOR0+8
+ 265              	.LBE11:
+ 266              		.cfi_endproc
+ 267              	.LFE313:
+ 268              		.global	__gxx_personality_v0
+ 269              		.personality	__gxx_personality_v0
+ 270              		.handlerdata
+ 271              	.LLSDA313:
+ 272 0008 FF       		.byte	0xff
+ 273 0009 FF       		.byte	0xff
+ 274 000a 01       		.byte	0x1
+ 275 000b 14       		.uleb128 .LLSDACSE313-.LLSDACSB313
+ 276              	.LLSDACSB313:
+ 277 000c 08       		.uleb128 .LEHB0-.LFB313
+ 278 000d 10       		.uleb128 .LEHE0-.LEHB0
+ 279 000e 00       		.uleb128 0
+ 280 000f 00       		.uleb128 0
+ 281 0010 1A       		.uleb128 .LEHB1-.LFB313
+ARM GAS  /var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccwEtaAX.s 			page 7
+
+
+ 282 0011 04       		.uleb128 .LEHE1-.LEHB1
+ 283 0012 34       		.uleb128 .L29-.LFB313
+ 284 0013 00       		.uleb128 0
+ 285 0014 22       		.uleb128 .LEHB2-.LFB313
+ 286 0015 04       		.uleb128 .LEHE2-.LEHB2
+ 287 0016 00       		.uleb128 0
+ 288 0017 00       		.uleb128 0
+ 289 0018 28       		.uleb128 .LEHB3-.LFB313
+ 290 0019 04       		.uleb128 .LEHE3-.LEHB3
+ 291 001a 40       		.uleb128 .L30-.LFB313
+ 292 001b 00       		.uleb128 0
+ 293 001c 3C       		.uleb128 .LEHB4-.LFB313
+ 294 001d 10       		.uleb128 .LEHE4-.LEHB4
+ 295 001e 00       		.uleb128 0
+ 296 001f 00       		.uleb128 0
+ 297              	.LLSDACSE313:
+ 298              		.section	.text._ZN3VFO13GUIControllerC2Ev
+ 299              		.fnend
+ 301              		.global	_ZN3VFO13GUIControllerC1Ev
+ 302              		.thumb_set _ZN3VFO13GUIControllerC1Ev,_ZN3VFO13GUIControllerC2Ev
+ 303              		.section	.text._ZN3VFO13GUIController4drawEv,"ax",%progbits
+ 304              		.align	1
+ 305              		.p2align 2,,3
+ 306              		.global	_ZN3VFO13GUIController4drawEv
+ 307              		.syntax unified
+ 308              		.thumb
+ 309              		.thumb_func
+ 310              		.fpu softvfp
+ 312              	_ZN3VFO13GUIController4drawEv:
+ 313              		.fnstart
+ 314              	.LVL24:
+ 315              	.LFB319:
+  33:Src/VFO/GUIController.cpp **** 
+  34:Src/VFO/GUIController.cpp **** void GUIController::draw()
+  35:Src/VFO/GUIController.cpp **** {
+ 316              		.loc 1 35 1 is_stmt 1 view -0
+ 317              		.cfi_startproc
+ 318              		@ args = 0, pretend = 0, frame = 0
+ 319              		@ frame_needed = 0, uses_anonymous_args = 0
+ 320              		@ link register save eliminated.
+  36:Src/VFO/GUIController.cpp **** 	_currentView->draw();
+ 321              		.loc 1 36 2 view .LVU51
+ 322 0000 4068     		ldr	r0, [r0, #4]
+ 323              	.LVL25:
+ 324              		.loc 1 36 21 is_stmt 0 view .LVU52
+ 325 0002 0368     		ldr	r3, [r0]
+ 326              		.loc 1 36 20 view .LVU53
+ 327 0004 9B68     		ldr	r3, [r3, #8]
+ 328 0006 1847     		bx	r3	@ indirect register sibling call
+ 329              	.LVL26:
+ 330              		.cfi_endproc
+ 331              	.LFE319:
+ 332              		.cantunwind
+ 333              		.fnend
+ 335              		.section	.text._ZN3VFO13GUIController20pushEncoderIncrementEst,"ax",%progbits
+ 336              		.align	1
+ 337              		.p2align 2,,3
+ARM GAS  /var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccwEtaAX.s 			page 8
+
+
+ 338              		.global	_ZN3VFO13GUIController20pushEncoderIncrementEst
+ 339              		.syntax unified
+ 340              		.thumb
+ 341              		.thumb_func
+ 342              		.fpu softvfp
+ 344              	_ZN3VFO13GUIController20pushEncoderIncrementEst:
+ 345              		.fnstart
+ 346              	.LVL27:
+ 347              	.LFB320:
+  37:Src/VFO/GUIController.cpp **** }
+  38:Src/VFO/GUIController.cpp **** 
+  39:Src/VFO/GUIController.cpp **** void GUIController::pushEncoderIncrement(int16_t increment, uint16_t period)
+  40:Src/VFO/GUIController.cpp **** {
+ 348              		.loc 1 40 1 is_stmt 1 view -0
+ 349              		.cfi_startproc
+ 350              		@ args = 0, pretend = 0, frame = 0
+ 351              		@ frame_needed = 0, uses_anonymous_args = 0
+ 352              		@ link register save eliminated.
+  41:Src/VFO/GUIController.cpp **** 	_currentView->pushEncoderIncrement(increment, period);
+ 353              		.loc 1 41 2 view .LVU55
+ 354 0000 4068     		ldr	r0, [r0, #4]
+ 355              	.LVL28:
+ 356              		.loc 1 41 54 is_stmt 0 view .LVU56
+ 357 0002 0368     		ldr	r3, [r0]
+ 358              		.loc 1 41 36 view .LVU57
+ 359 0004 DB68     		ldr	r3, [r3, #12]
+ 360 0006 1847     		bx	r3	@ indirect register sibling call
+ 361              	.LVL29:
+ 362              		.loc 1 41 36 view .LVU58
+ 363              		.cfi_endproc
+ 364              	.LFE320:
+ 365              		.cantunwind
+ 366              		.fnend
+ 368              		.section	.text._ZN3VFO13GUIController14menuKeyPressedEv,"ax",%progbits
+ 369              		.align	1
+ 370              		.p2align 2,,3
+ 371              		.global	_ZN3VFO13GUIController14menuKeyPressedEv
+ 372              		.syntax unified
+ 373              		.thumb
+ 374              		.thumb_func
+ 375              		.fpu softvfp
+ 377              	_ZN3VFO13GUIController14menuKeyPressedEv:
+ 378              		.fnstart
+ 379              	.LVL30:
+ 380              	.LFB321:
+  42:Src/VFO/GUIController.cpp **** }
+  43:Src/VFO/GUIController.cpp **** 
+  44:Src/VFO/GUIController.cpp **** void GUIController::menuKeyPressed()
+  45:Src/VFO/GUIController.cpp **** {
+ 381              		.loc 1 45 1 is_stmt 1 view -0
+ 382              		.cfi_startproc
+ 383              		@ args = 0, pretend = 0, frame = 0
+ 384              		@ frame_needed = 0, uses_anonymous_args = 0
+ 385              		@ link register save eliminated.
+  46:Src/VFO/GUIController.cpp **** 	_currentView->menuKeyPressed();
+ 386              		.loc 1 46 2 view .LVU60
+ 387 0000 4068     		ldr	r0, [r0, #4]
+ARM GAS  /var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccwEtaAX.s 			page 9
+
+
+ 388              	.LVL31:
+ 389              		.loc 1 46 31 is_stmt 0 view .LVU61
+ 390 0002 0368     		ldr	r3, [r0]
+ 391              		.loc 1 46 30 view .LVU62
+ 392 0004 1B69     		ldr	r3, [r3, #16]
+ 393 0006 1847     		bx	r3	@ indirect register sibling call
+ 394              	.LVL32:
+ 395              		.cfi_endproc
+ 396              	.LFE321:
+ 397              		.cantunwind
+ 398              		.fnend
+ 400              		.section	.text._ZN3VFO13GUIController9showSetupEv,"ax",%progbits
+ 401              		.align	1
+ 402              		.p2align 2,,3
+ 403              		.global	_ZN3VFO13GUIController9showSetupEv
+ 404              		.syntax unified
+ 405              		.thumb
+ 406              		.thumb_func
+ 407              		.fpu softvfp
+ 409              	_ZN3VFO13GUIController9showSetupEv:
+ 410              		.fnstart
+ 411              	.LVL33:
+ 412              	.LFB322:
+  47:Src/VFO/GUIController.cpp **** }
+  48:Src/VFO/GUIController.cpp **** 
+  49:Src/VFO/GUIController.cpp **** void GUIController::showSetup()
+  50:Src/VFO/GUIController.cpp **** {
+ 413              		.loc 1 50 1 is_stmt 1 view -0
+ 414              		.cfi_startproc
+ 415              		@ args = 0, pretend = 0, frame = 0
+ 416              		@ frame_needed = 0, uses_anonymous_args = 0
+ 417              		@ link register save eliminated.
+  51:Src/VFO/GUIController.cpp **** 	_currentView = _setupView;
+ 418              		.loc 1 51 2 view .LVU64
+ 419              		.loc 1 51 17 is_stmt 0 view .LVU65
+ 420 0000 C368     		ldr	r3, [r0, #12]
+  52:Src/VFO/GUIController.cpp **** 	_currentView->draw();
+ 421              		.loc 1 52 21 view .LVU66
+ 422 0002 1A68     		ldr	r2, [r3]
+  51:Src/VFO/GUIController.cpp **** 	_currentView = _setupView;
+ 423              		.loc 1 51 15 view .LVU67
+ 424 0004 4360     		str	r3, [r0, #4]
+ 425              		.loc 1 52 2 is_stmt 1 view .LVU68
+ 426              		.loc 1 52 20 is_stmt 0 view .LVU69
+ 427 0006 9268     		ldr	r2, [r2, #8]
+ 428 0008 1846     		mov	r0, r3
+ 429              	.LVL34:
+ 430              		.loc 1 52 20 view .LVU70
+ 431 000a 1047     		bx	r2	@ indirect register sibling call
+ 432              	.LVL35:
+ 433              		.cfi_endproc
+ 434              	.LFE322:
+ 435              		.cantunwind
+ 436              		.fnend
+ 438              		.section	.text._ZN3VFO13GUIController8showMainEv,"ax",%progbits
+ 439              		.align	1
+ 440              		.p2align 2,,3
+ARM GAS  /var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccwEtaAX.s 			page 10
+
+
+ 441              		.global	_ZN3VFO13GUIController8showMainEv
+ 442              		.syntax unified
+ 443              		.thumb
+ 444              		.thumb_func
+ 445              		.fpu softvfp
+ 447              	_ZN3VFO13GUIController8showMainEv:
+ 448              		.fnstart
+ 449              	.LVL36:
+ 450              	.LFB323:
+  53:Src/VFO/GUIController.cpp **** }
+  54:Src/VFO/GUIController.cpp **** 
+  55:Src/VFO/GUIController.cpp **** void GUIController::showMain()
+  56:Src/VFO/GUIController.cpp **** {
+ 451              		.loc 1 56 1 is_stmt 1 view -0
+ 452              		.cfi_startproc
+ 453              		@ args = 0, pretend = 0, frame = 0
+ 454              		@ frame_needed = 0, uses_anonymous_args = 0
+ 455              		@ link register save eliminated.
+  57:Src/VFO/GUIController.cpp **** 	_currentView = _mainView;
+ 456              		.loc 1 57 2 view .LVU72
+ 457              		.loc 1 57 17 is_stmt 0 view .LVU73
+ 458 0000 8368     		ldr	r3, [r0, #8]
+  58:Src/VFO/GUIController.cpp **** 	_currentView->draw();
+ 459              		.loc 1 58 21 view .LVU74
+ 460 0002 1A68     		ldr	r2, [r3]
+  57:Src/VFO/GUIController.cpp **** 	_currentView = _mainView;
+ 461              		.loc 1 57 15 view .LVU75
+ 462 0004 4360     		str	r3, [r0, #4]
+ 463              		.loc 1 58 2 is_stmt 1 view .LVU76
+ 464              		.loc 1 58 20 is_stmt 0 view .LVU77
+ 465 0006 9268     		ldr	r2, [r2, #8]
+ 466 0008 1846     		mov	r0, r3
+ 467              	.LVL37:
+ 468              		.loc 1 58 20 view .LVU78
+ 469 000a 1047     		bx	r2	@ indirect register sibling call
+ 470              	.LVL38:
+ 471              		.cfi_endproc
+ 472              	.LFE323:
+ 473              		.cantunwind
+ 474              		.fnend
+ 476              		.section	.text._ZN3VFO13GUIController11showVoltageEm,"ax",%progbits
+ 477              		.align	1
+ 478              		.p2align 2,,3
+ 479              		.global	_ZN3VFO13GUIController11showVoltageEm
+ 480              		.syntax unified
+ 481              		.thumb
+ 482              		.thumb_func
+ 483              		.fpu softvfp
+ 485              	_ZN3VFO13GUIController11showVoltageEm:
+ 486              		.fnstart
+ 487              	.LVL39:
+ 488              	.LFB324:
+  59:Src/VFO/GUIController.cpp **** }
+  60:Src/VFO/GUIController.cpp **** 
+  61:Src/VFO/GUIController.cpp **** void GUIController::showVoltage(uint32_t value)
+  62:Src/VFO/GUIController.cpp **** {
+ 489              		.loc 1 62 1 is_stmt 1 view -0
+ARM GAS  /var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccwEtaAX.s 			page 11
+
+
+ 490              		.cfi_startproc
+ 491              		@ args = 0, pretend = 0, frame = 0
+ 492              		@ frame_needed = 0, uses_anonymous_args = 0
+ 493              		@ link register save eliminated.
+  63:Src/VFO/GUIController.cpp **** 	if ( _currentView == _mainView )
+ 494              		.loc 1 63 2 view .LVU80
+ 495              		.loc 1 63 23 is_stmt 0 view .LVU81
+ 496 0000 8368     		ldr	r3, [r0, #8]
+ 497              		.loc 1 63 2 view .LVU82
+ 498 0002 4068     		ldr	r0, [r0, #4]
+ 499              	.LVL40:
+ 500              		.loc 1 63 2 view .LVU83
+ 501 0004 9842     		cmp	r0, r3
+ 502 0006 00D0     		beq	.L43
+  64:Src/VFO/GUIController.cpp **** 	{
+  65:Src/VFO/GUIController.cpp **** 		_mainView->showVoltage(value);
+  66:Src/VFO/GUIController.cpp **** 	}
+  67:Src/VFO/GUIController.cpp **** }
+ 503              		.loc 1 67 1 view .LVU84
+ 504 0008 7047     		bx	lr
+ 505              	.L43:
+  65:Src/VFO/GUIController.cpp **** 	}
+ 506              		.loc 1 65 3 is_stmt 1 view .LVU85
+  65:Src/VFO/GUIController.cpp **** 	}
+ 507              		.loc 1 65 25 is_stmt 0 view .LVU86
+ 508 000a FFF7FEBF 		b	_ZN3VFO11GUIMainView11showVoltageEm
+ 509              	.LVL41:
+  65:Src/VFO/GUIController.cpp **** 	}
+ 510              		.loc 1 65 25 view .LVU87
+ 511              		.cfi_endproc
+ 512              	.LFE324:
+ 513              		.cantunwind
+ 514              		.fnend
+ 516              		.global	_ZTSN3VFO13GUIControllerE
+ 517              		.global	_ZTIN3VFO13GUIControllerE
+ 518              		.global	_ZTVN3VFO13GUIControllerE
+ 519 000e 00BF     		.section	.rodata._ZTIN3VFO13GUIControllerE,"a"
+ 520              		.align	2
+ 523              	_ZTIN3VFO13GUIControllerE:
+ 524 0000 08000000 		.word	_ZTVN10__cxxabiv117__class_type_infoE+8
+ 525 0004 00000000 		.word	_ZTSN3VFO13GUIControllerE
+ 526              		.section	.rodata._ZTSN3VFO13GUIControllerE,"a"
+ 527              		.align	2
+ 530              	_ZTSN3VFO13GUIControllerE:
+ 531 0000 4E335646 		.ascii	"N3VFO13GUIControllerE\000"
+ 531      4F313347 
+ 531      5549436F 
+ 531      6E74726F 
+ 531      6C6C6572 
+ 532              		.section	.rodata._ZTVN3VFO13GUIControllerE,"a"
+ 533              		.align	2
+ 534              		.set	.LANCHOR0,. + 0
+ 537              	_ZTVN3VFO13GUIControllerE:
+ 538 0000 00000000 		.word	0
+ 539 0004 00000000 		.word	_ZTIN3VFO13GUIControllerE
+ 540 0008 00000000 		.word	_ZN3VFO13GUIControllerD1Ev
+ 541 000c 00000000 		.word	_ZN3VFO13GUIControllerD0Ev
+ARM GAS  /var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccwEtaAX.s 			page 12
+
+
+ 542              		.text
+ 543              	.Letext0:
+ 544              		.file 2 "/usr/local/gcc-arm-none-eabi-8-2019-q3-update/arm-none-eabi/include/machine/_default_type
+ 545              		.file 3 "/usr/local/gcc-arm-none-eabi-8-2019-q3-update/arm-none-eabi/include/sys/_stdint.h"
+ 546              		.file 4 "Drivers/CMSIS/Include/core_cm3.h"
+ 547              		.file 5 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h"
+ 548              		.file 6 "/usr/local/gcc-arm-none-eabi-8-2019-q3-update/lib/gcc/arm-none-eabi/8.3.1/include/stddef.
+ 549              		.file 7 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h"
+ 550              		.file 8 "/usr/local/gcc-arm-none-eabi-8-2019-q3-update/arm-none-eabi/include/sys/_types.h"
+ 551              		.file 9 "/usr/local/gcc-arm-none-eabi-8-2019-q3-update/arm-none-eabi/include/sys/reent.h"
+ 552              		.file 10 "/usr/local/gcc-arm-none-eabi-8-2019-q3-update/arm-none-eabi/include/sys/lock.h"
+ 553              		.file 11 "Inc/st7735/font5x7.h"
+ 554              		.file 12 "Inc/st7735/font7x11.h"
+ 555              		.file 13 "Inc/st7735/st7735.h"
+ 556              		.file 14 "/usr/local/gcc-arm-none-eabi-8-2019-q3-update/arm-none-eabi/include/c++/8.3.1/cstdlib"
+ 557              		.file 15 "/usr/local/gcc-arm-none-eabi-8-2019-q3-update/arm-none-eabi/include/c++/8.3.1/bits/std_a
+ 558              		.file 16 "/usr/local/gcc-arm-none-eabi-8-2019-q3-update/arm-none-eabi/include/c++/8.3.1/bits/cpp_t
+ 559              		.file 17 "/usr/local/gcc-arm-none-eabi-8-2019-q3-update/arm-none-eabi/include/c++/8.3.1/cmath"
+ 560              		.file 18 "/usr/local/gcc-arm-none-eabi-8-2019-q3-update/arm-none-eabi/include/c++/8.3.1/arm-none-e
+ 561              		.file 19 "/usr/local/gcc-arm-none-eabi-8-2019-q3-update/arm-none-eabi/include/stdlib.h"
+ 562              		.file 20 "/usr/local/gcc-arm-none-eabi-8-2019-q3-update/arm-none-eabi/include/c++/8.3.1/stdlib.h"
+ 563              		.file 21 "Src/VFO/GUIController.h"
+ 564              		.file 22 "/usr/local/gcc-arm-none-eabi-8-2019-q3-update/arm-none-eabi/include/math.h"
+ 565              		.file 23 "/usr/local/gcc-arm-none-eabi-8-2019-q3-update/arm-none-eabi/include/c++/8.3.1/math.h"
+ 566              		.file 24 "Src/VFO/GUIMainView.h"
+ 567              		.file 25 "<built-in>"
+ 568              		.file 26 "Src/VFO/GUIView.h"
+ARM GAS  /var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccwEtaAX.s 			page 13
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 GUIController.cpp
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccwEtaAX.s:16     .text._ZN3VFO13GUIControllerD2Ev:0000000000000000 $t
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccwEtaAX.s:25     .text._ZN3VFO13GUIControllerD2Ev:0000000000000000 _ZN3VFO13GUIControllerD2Ev
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccwEtaAX.s:79     .text._ZN3VFO13GUIControllerD2Ev:0000000000000020 $d
+.ARM.exidx.text._ZN3VFO13GUIControllerD2Ev:0000000000000000 $d
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccwEtaAX.s:25     .text._ZN3VFO13GUIControllerD2Ev:0000000000000000 _ZN3VFO13GUIControllerD1Ev
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccwEtaAX.s:88     .text._ZN3VFO13GUIControllerD0Ev:0000000000000000 $t
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccwEtaAX.s:96     .text._ZN3VFO13GUIControllerD0Ev:0000000000000000 _ZN3VFO13GUIControllerD0Ev
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccwEtaAX.s:159    .text._ZN3VFO13GUIControllerD0Ev:0000000000000028 $d
+.ARM.exidx.text._ZN3VFO13GUIControllerD0Ev:0000000000000000 $d
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccwEtaAX.s:166    .text._ZN3VFO13GUIControllerC2Ev:0000000000000000 $t
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccwEtaAX.s:174    .text._ZN3VFO13GUIControllerC2Ev:0000000000000000 _ZN3VFO13GUIControllerC2Ev
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccwEtaAX.s:264    .text._ZN3VFO13GUIControllerC2Ev:000000000000004c $d
+.ARM.extab.text._ZN3VFO13GUIControllerC2Ev:0000000000000000 $d
+.ARM.exidx.text._ZN3VFO13GUIControllerC2Ev:0000000000000000 $d
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccwEtaAX.s:174    .text._ZN3VFO13GUIControllerC2Ev:0000000000000000 _ZN3VFO13GUIControllerC1Ev
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccwEtaAX.s:304    .text._ZN3VFO13GUIController4drawEv:0000000000000000 $t
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccwEtaAX.s:312    .text._ZN3VFO13GUIController4drawEv:0000000000000000 _ZN3VFO13GUIController4drawEv
+.ARM.exidx.text._ZN3VFO13GUIController4drawEv:0000000000000000 $d
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccwEtaAX.s:336    .text._ZN3VFO13GUIController20pushEncoderIncrementEst:0000000000000000 $t
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccwEtaAX.s:344    .text._ZN3VFO13GUIController20pushEncoderIncrementEst:0000000000000000 _ZN3VFO13GUIController20pushEncoderIncrementEst
+.ARM.exidx.text._ZN3VFO13GUIController20pushEncoderIncrementEst:0000000000000000 $d
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccwEtaAX.s:369    .text._ZN3VFO13GUIController14menuKeyPressedEv:0000000000000000 $t
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccwEtaAX.s:377    .text._ZN3VFO13GUIController14menuKeyPressedEv:0000000000000000 _ZN3VFO13GUIController14menuKeyPressedEv
+.ARM.exidx.text._ZN3VFO13GUIController14menuKeyPressedEv:0000000000000000 $d
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccwEtaAX.s:401    .text._ZN3VFO13GUIController9showSetupEv:0000000000000000 $t
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccwEtaAX.s:409    .text._ZN3VFO13GUIController9showSetupEv:0000000000000000 _ZN3VFO13GUIController9showSetupEv
+.ARM.exidx.text._ZN3VFO13GUIController9showSetupEv:0000000000000000 $d
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccwEtaAX.s:439    .text._ZN3VFO13GUIController8showMainEv:0000000000000000 $t
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccwEtaAX.s:447    .text._ZN3VFO13GUIController8showMainEv:0000000000000000 _ZN3VFO13GUIController8showMainEv
+.ARM.exidx.text._ZN3VFO13GUIController8showMainEv:0000000000000000 $d
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccwEtaAX.s:477    .text._ZN3VFO13GUIController11showVoltageEm:0000000000000000 $t
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccwEtaAX.s:485    .text._ZN3VFO13GUIController11showVoltageEm:0000000000000000 _ZN3VFO13GUIController11showVoltageEm
+.ARM.exidx.text._ZN3VFO13GUIController11showVoltageEm:0000000000000000 $d
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccwEtaAX.s:530    .rodata._ZTSN3VFO13GUIControllerE:0000000000000000 _ZTSN3VFO13GUIControllerE
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccwEtaAX.s:523    .rodata._ZTIN3VFO13GUIControllerE:0000000000000000 _ZTIN3VFO13GUIControllerE
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccwEtaAX.s:537    .rodata._ZTVN3VFO13GUIControllerE:0000000000000000 _ZTVN3VFO13GUIControllerE
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccwEtaAX.s:520    .rodata._ZTIN3VFO13GUIControllerE:0000000000000000 $d
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccwEtaAX.s:527    .rodata._ZTSN3VFO13GUIControllerE:0000000000000000 $d
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccwEtaAX.s:533    .rodata._ZTVN3VFO13GUIControllerE:0000000000000000 $d
+
+UNDEFINED SYMBOLS
+_ZdlPvj
+ST7735_Init
+ST7735_Orientation
+_Znwj
+_ZN3VFO12GUISetupViewC1Ev
+_ZN3VFO11GUIMainViewC1Ev
+__cxa_end_cleanup
+__gxx_personality_v0
+_ZN3VFO11GUIMainView11showVoltageEm
+_ZTVN10__cxxabiv117__class_type_infoE

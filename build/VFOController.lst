@@ -1,0 +1,3035 @@
+ARM GAS  /var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccDl9rV2.s 			page 1
+
+
+   1              		.cpu cortex-m3
+   2              		.eabi_attribute 20, 1
+   3              		.eabi_attribute 21, 1
+   4              		.eabi_attribute 23, 3
+   5              		.eabi_attribute 24, 1
+   6              		.eabi_attribute 25, 1
+   7              		.eabi_attribute 26, 1
+   8              		.eabi_attribute 30, 2
+   9              		.eabi_attribute 34, 1
+  10              		.eabi_attribute 18, 4
+  11              		.file	"VFOController.cpp"
+  12              		.text
+  13              	.Ltext0:
+  14              		.cfi_sections	.debug_frame
+  15              		.section	.text._ZN3VFO13VFOControllerD2Ev,"ax",%progbits
+  16              		.align	1
+  17              		.p2align 2,,3
+  18              		.global	_ZN3VFO13VFOControllerD2Ev
+  19              		.arch armv7-m
+  20              		.syntax unified
+  21              		.thumb
+  22              		.thumb_func
+  23              		.fpu softvfp
+  25              	_ZN3VFO13VFOControllerD2Ev:
+  26              		.fnstart
+  27              	.LVL0:
+  28              	.LFB124:
+  29              		.file 1 "Src/VFO/VFOController.cpp"
+   1:Src/VFO/VFOController.cpp **** /*
+   2:Src/VFO/VFOController.cpp ****  * VFOController.cpp
+   3:Src/VFO/VFOController.cpp ****  *
+   4:Src/VFO/VFOController.cpp ****  *  Created on: Apr 1, 2018
+   5:Src/VFO/VFOController.cpp ****  *      Author: lymes
+   6:Src/VFO/VFOController.cpp ****  */
+   7:Src/VFO/VFOController.cpp **** 
+   8:Src/VFO/VFOController.cpp **** #include "VFOController.h"
+   9:Src/VFO/VFOController.cpp **** #include <stdio.h>
+  10:Src/VFO/VFOController.cpp **** #include "stm32f103xb.h"
+  11:Src/VFO/VFOController.cpp **** 
+  12:Src/VFO/VFOController.cpp **** namespace VFO
+  13:Src/VFO/VFOController.cpp **** {
+  14:Src/VFO/VFOController.cpp **** 
+  15:Src/VFO/VFOController.cpp **** static uint32_t _timepassed = HAL_GetTick(); // int to hold the STM32 miilis since startup
+  16:Src/VFO/VFOController.cpp **** static int _memStatus = 1;					 // value to notify if memory is current or old. 0=old,
+  17:Src/VFO/VFOController.cpp **** 
+  18:Src/VFO/VFOController.cpp **** VFOController::VFOController()
+  19:Src/VFO/VFOController.cpp **** {
+  20:Src/VFO/VFOController.cpp **** 	_conf = new Configuration;
+  21:Src/VFO/VFOController.cpp **** 	_gui = new GUIController;
+  22:Src/VFO/VFOController.cpp **** 	_si5351 = new Si5351;
+  23:Src/VFO/VFOController.cpp **** 
+  24:Src/VFO/VFOController.cpp **** 	_conf->load();
+  25:Src/VFO/VFOController.cpp **** 	if (_conf->getBrightness() == 0)
+  26:Src/VFO/VFOController.cpp **** 	{
+  27:Src/VFO/VFOController.cpp **** 		reset();
+  28:Src/VFO/VFOController.cpp **** 	}
+  29:Src/VFO/VFOController.cpp **** 
+ARM GAS  /var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccDl9rV2.s 			page 2
+
+
+  30:Src/VFO/VFOController.cpp **** 	this->initSI();
+  31:Src/VFO/VFOController.cpp **** }
+  32:Src/VFO/VFOController.cpp **** 
+  33:Src/VFO/VFOController.cpp **** void VFOController::initSI()
+  34:Src/VFO/VFOController.cpp **** {
+  35:Src/VFO/VFOController.cpp **** 	if (_si5351->init(SI5351_CRYSTAL_LOAD_8PF, 0, 0))
+  36:Src/VFO/VFOController.cpp **** 	{
+  37:Src/VFO/VFOController.cpp **** 		_si5351->set_correction(_conf->getCalibration(), SI5351_PLL_INPUT_XO);
+  38:Src/VFO/VFOController.cpp **** 		_si5351->set_freq((_conf->getFrequency() + _conf->getIFrequency()) * 100, SI5351_CLK0);
+  39:Src/VFO/VFOController.cpp **** 		_si5351->set_freq(_conf->getBFrequency() * 100, SI5351_CLK1);
+  40:Src/VFO/VFOController.cpp **** 		_si5351->output_enable(SI5351_CLK2, 0);
+  41:Src/VFO/VFOController.cpp **** 	}
+  42:Src/VFO/VFOController.cpp **** 	else
+  43:Src/VFO/VFOController.cpp **** 	{
+  44:Src/VFO/VFOController.cpp **** 		_si5351_enabled = false;
+  45:Src/VFO/VFOController.cpp **** 	}
+  46:Src/VFO/VFOController.cpp **** }
+  47:Src/VFO/VFOController.cpp **** 
+  48:Src/VFO/VFOController.cpp **** VFOController::~VFOController()
+  30              		.loc 1 48 1 view -0
+  31              		.cfi_startproc
+  32              		@ args = 0, pretend = 0, frame = 0
+  33              		@ frame_needed = 0, uses_anonymous_args = 0
+  34              		.loc 1 48 1 is_stmt 0 view .LVU1
+  35 0000 10B5     		push	{r4, lr}
+  36              	.LCFI0:
+  37              		.cfi_def_cfa_offset 8
+  38              		.cfi_offset 4, -8
+  39              		.cfi_offset 14, -4
+  40              		.loc 1 48 1 view .LVU2
+  41 0002 0446     		mov	r4, r0
+  42              	.LBB65:
+  43              		.loc 1 48 31 view .LVU3
+  44 0004 084B     		ldr	r3, .L12
+  49:Src/VFO/VFOController.cpp **** {
+  50:Src/VFO/VFOController.cpp **** 	delete _conf;
+  45              		.loc 1 50 9 view .LVU4
+  46 0006 4068     		ldr	r0, [r0, #4]
+  47              	.LVL1:
+  48:Src/VFO/VFOController.cpp **** {
+  48              		.loc 1 48 31 view .LVU5
+  49 0008 2360     		str	r3, [r4]
+  50              		.loc 1 50 2 is_stmt 1 view .LVU6
+  51              		.loc 1 50 14 is_stmt 0 view .LVU7
+  52 000a 10B1     		cbz	r0, .L2
+  53              		.loc 1 50 9 discriminator 1 view .LVU8
+  54 000c 0368     		ldr	r3, [r0]
+  55 000e 5B68     		ldr	r3, [r3, #4]
+  56 0010 9847     		blx	r3
+  57              	.LVL2:
+  58              	.L2:
+  51:Src/VFO/VFOController.cpp **** 	delete _gui;
+  59              		.loc 1 51 2 is_stmt 1 view .LVU9
+  60              		.loc 1 51 9 is_stmt 0 view .LVU10
+  61 0012 A068     		ldr	r0, [r4, #8]
+  62              		.loc 1 51 13 view .LVU11
+  63 0014 10B1     		cbz	r0, .L3
+ARM GAS  /var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccDl9rV2.s 			page 3
+
+
+  64              		.loc 1 51 9 discriminator 1 view .LVU12
+  65 0016 0368     		ldr	r3, [r0]
+  66 0018 5B68     		ldr	r3, [r3, #4]
+  67 001a 9847     		blx	r3
+  68              	.LVL3:
+  69              	.L3:
+  52:Src/VFO/VFOController.cpp **** 	delete _si5351;
+  70              		.loc 1 52 2 is_stmt 1 view .LVU13
+  71              		.loc 1 52 9 is_stmt 0 view .LVU14
+  72 001c E068     		ldr	r0, [r4, #12]
+  73 001e 8821     		movs	r1, #136
+  74 0020 FFF7FEFF 		bl	_ZdlPvj
+  75              	.LVL4:
+  76              	.LBE65:
+  53:Src/VFO/VFOController.cpp **** }
+  77              		.loc 1 53 1 view .LVU15
+  78 0024 2046     		mov	r0, r4
+  79 0026 10BD     		pop	{r4, pc}
+  80              	.LVL5:
+  81              	.L13:
+  82              		.loc 1 53 1 view .LVU16
+  83              		.align	2
+  84              	.L12:
+  85 0028 08000000 		.word	.LANCHOR0+8
+  86              		.cfi_endproc
+  87              	.LFE124:
+  88              		.cantunwind
+  89              		.fnend
+  91              		.global	_ZN3VFO13VFOControllerD1Ev
+  92              		.thumb_set _ZN3VFO13VFOControllerD1Ev,_ZN3VFO13VFOControllerD2Ev
+  93              		.section	.text._ZN3VFO13VFOControllerD0Ev,"ax",%progbits
+  94              		.align	1
+  95              		.p2align 2,,3
+  96              		.global	_ZN3VFO13VFOControllerD0Ev
+  97              		.syntax unified
+  98              		.thumb
+  99              		.thumb_func
+ 100              		.fpu softvfp
+ 102              	_ZN3VFO13VFOControllerD0Ev:
+ 103              		.fnstart
+ 104              	.LVL6:
+ 105              	.LFB126:
+  48:Src/VFO/VFOController.cpp **** {
+ 106              		.loc 1 48 1 is_stmt 1 view -0
+ 107              		.cfi_startproc
+ 108              		@ args = 0, pretend = 0, frame = 0
+ 109              		@ frame_needed = 0, uses_anonymous_args = 0
+  48:Src/VFO/VFOController.cpp **** {
+ 110              		.loc 1 48 1 is_stmt 0 view .LVU18
+ 111 0000 10B5     		push	{r4, lr}
+ 112              	.LCFI1:
+ 113              		.cfi_def_cfa_offset 8
+ 114              		.cfi_offset 4, -8
+ 115              		.cfi_offset 14, -4
+  48:Src/VFO/VFOController.cpp **** {
+ 116              		.loc 1 48 1 view .LVU19
+ 117 0002 0446     		mov	r4, r0
+ARM GAS  /var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccDl9rV2.s 			page 4
+
+
+ 118              	.LVL7:
+ 119              	.LBB69:
+ 120              	.LBI69:
+  48:Src/VFO/VFOController.cpp **** {
+ 121              		.loc 1 48 1 is_stmt 1 view .LVU20
+ 122              	.LBB70:
+  48:Src/VFO/VFOController.cpp **** {
+ 123              		.loc 1 48 31 is_stmt 0 view .LVU21
+ 124 0004 0A4B     		ldr	r3, .L24
+  50:Src/VFO/VFOController.cpp **** 	delete _gui;
+ 125              		.loc 1 50 9 view .LVU22
+ 126 0006 4068     		ldr	r0, [r0, #4]
+ 127              	.LVL8:
+  48:Src/VFO/VFOController.cpp **** {
+ 128              		.loc 1 48 31 view .LVU23
+ 129 0008 2360     		str	r3, [r4]
+  50:Src/VFO/VFOController.cpp **** 	delete _gui;
+ 130              		.loc 1 50 2 is_stmt 1 view .LVU24
+  50:Src/VFO/VFOController.cpp **** 	delete _gui;
+ 131              		.loc 1 50 14 is_stmt 0 view .LVU25
+ 132 000a 10B1     		cbz	r0, .L15
+  50:Src/VFO/VFOController.cpp **** 	delete _gui;
+ 133              		.loc 1 50 9 view .LVU26
+ 134 000c 0368     		ldr	r3, [r0]
+ 135 000e 5B68     		ldr	r3, [r3, #4]
+ 136 0010 9847     		blx	r3
+ 137              	.LVL9:
+ 138              	.L15:
+  51:Src/VFO/VFOController.cpp **** 	delete _si5351;
+ 139              		.loc 1 51 2 is_stmt 1 view .LVU27
+  51:Src/VFO/VFOController.cpp **** 	delete _si5351;
+ 140              		.loc 1 51 9 is_stmt 0 view .LVU28
+ 141 0012 A068     		ldr	r0, [r4, #8]
+  51:Src/VFO/VFOController.cpp **** 	delete _si5351;
+ 142              		.loc 1 51 13 view .LVU29
+ 143 0014 10B1     		cbz	r0, .L16
+  51:Src/VFO/VFOController.cpp **** 	delete _si5351;
+ 144              		.loc 1 51 9 view .LVU30
+ 145 0016 0368     		ldr	r3, [r0]
+ 146 0018 5B68     		ldr	r3, [r3, #4]
+ 147 001a 9847     		blx	r3
+ 148              	.LVL10:
+ 149              	.L16:
+  52:Src/VFO/VFOController.cpp **** }
+ 150              		.loc 1 52 2 is_stmt 1 view .LVU31
+  52:Src/VFO/VFOController.cpp **** }
+ 151              		.loc 1 52 9 is_stmt 0 view .LVU32
+ 152 001c E068     		ldr	r0, [r4, #12]
+ 153 001e 8821     		movs	r1, #136
+ 154 0020 FFF7FEFF 		bl	_ZdlPvj
+ 155              	.LVL11:
+  52:Src/VFO/VFOController.cpp **** }
+ 156              		.loc 1 52 9 view .LVU33
+ 157              	.LBE70:
+ 158              	.LBE69:
+ 159              		.loc 1 53 1 view .LVU34
+ 160 0024 2046     		mov	r0, r4
+ARM GAS  /var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccDl9rV2.s 			page 5
+
+
+ 161 0026 1421     		movs	r1, #20
+ 162 0028 FFF7FEFF 		bl	_ZdlPvj
+ 163              	.LVL12:
+ 164 002c 2046     		mov	r0, r4
+ 165 002e 10BD     		pop	{r4, pc}
+ 166              	.LVL13:
+ 167              	.L25:
+ 168              		.loc 1 53 1 view .LVU35
+ 169              		.align	2
+ 170              	.L24:
+ 171 0030 08000000 		.word	.LANCHOR0+8
+ 172              		.cfi_endproc
+ 173              	.LFE126:
+ 174              		.cantunwind
+ 175              		.fnend
+ 177              		.section	.text._ZN3VFO13VFOController6initSIEv,"ax",%progbits
+ 178              		.align	1
+ 179              		.p2align 2,,3
+ 180              		.global	_ZN3VFO13VFOController6initSIEv
+ 181              		.syntax unified
+ 182              		.thumb
+ 183              		.thumb_func
+ 184              		.fpu softvfp
+ 186              	_ZN3VFO13VFOController6initSIEv:
+ 187              		.fnstart
+ 188              	.LVL14:
+ 189              	.LFB122:
+  34:Src/VFO/VFOController.cpp **** 	if (_si5351->init(SI5351_CRYSTAL_LOAD_8PF, 0, 0))
+ 190              		.loc 1 34 1 is_stmt 1 view -0
+ 191              		.cfi_startproc
+ 192              		@ args = 0, pretend = 0, frame = 0
+ 193              		@ frame_needed = 0, uses_anonymous_args = 0
+  35:Src/VFO/VFOController.cpp **** 	{
+ 194              		.loc 1 35 2 view .LVU37
+  35:Src/VFO/VFOController.cpp **** 	{
+ 195              		.loc 1 35 19 is_stmt 0 view .LVU38
+ 196 0000 0023     		movs	r3, #0
+  34:Src/VFO/VFOController.cpp **** 	if (_si5351->init(SI5351_CRYSTAL_LOAD_8PF, 0, 0))
+ 197              		.loc 1 34 1 view .LVU39
+ 198 0002 70B5     		push	{r4, r5, r6, lr}
+ 199              		.save {r4, r5, r6, lr}
+ 200              	.LCFI2:
+ 201              		.cfi_def_cfa_offset 16
+ 202              		.cfi_offset 4, -16
+ 203              		.cfi_offset 5, -12
+ 204              		.cfi_offset 6, -8
+ 205              		.cfi_offset 14, -4
+  35:Src/VFO/VFOController.cpp **** 	{
+ 206              		.loc 1 35 19 view .LVU40
+ 207 0004 1A46     		mov	r2, r3
+  34:Src/VFO/VFOController.cpp **** 	if (_si5351->init(SI5351_CRYSTAL_LOAD_8PF, 0, 0))
+ 208              		.loc 1 34 1 view .LVU41
+ 209              		.pad #8
+ 210 0006 82B0     		sub	sp, sp, #8
+ 211              	.LCFI3:
+ 212              		.cfi_def_cfa_offset 24
+  34:Src/VFO/VFOController.cpp **** 	if (_si5351->init(SI5351_CRYSTAL_LOAD_8PF, 0, 0))
+ARM GAS  /var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccDl9rV2.s 			page 6
+
+
+ 213              		.loc 1 34 1 view .LVU42
+ 214 0008 0446     		mov	r4, r0
+  35:Src/VFO/VFOController.cpp **** 	{
+ 215              		.loc 1 35 19 view .LVU43
+ 216 000a 8021     		movs	r1, #128
+ 217 000c C068     		ldr	r0, [r0, #12]
+ 218              	.LVL15:
+  35:Src/VFO/VFOController.cpp **** 	{
+ 219              		.loc 1 35 19 view .LVU44
+ 220 000e FFF7FEFF 		bl	_ZN6Si53514initEhml
+ 221              	.LVL16:
+  35:Src/VFO/VFOController.cpp **** 	{
+ 222              		.loc 1 35 2 view .LVU45
+ 223 0012 10B9     		cbnz	r0, .L29
+  44:Src/VFO/VFOController.cpp **** 	}
+ 224              		.loc 1 44 3 is_stmt 1 view .LVU46
+  44:Src/VFO/VFOController.cpp **** 	}
+ 225              		.loc 1 44 19 is_stmt 0 view .LVU47
+ 226 0014 2074     		strb	r0, [r4, #16]
+  46:Src/VFO/VFOController.cpp **** 
+ 227              		.loc 1 46 1 view .LVU48
+ 228 0016 02B0     		add	sp, sp, #8
+ 229              	.LCFI4:
+ 230              		.cfi_remember_state
+ 231              		.cfi_def_cfa_offset 16
+ 232              		@ sp needed
+ 233 0018 70BD     		pop	{r4, r5, r6, pc}
+ 234              	.LVL17:
+ 235              	.L29:
+ 236              	.LCFI5:
+ 237              		.cfi_restore_state
+ 238              	.LBB81:
+ 239              	.LBI81:
+  33:Src/VFO/VFOController.cpp **** {
+ 240              		.loc 1 33 6 is_stmt 1 view .LVU49
+ 241              	.LBB82:
+  37:Src/VFO/VFOController.cpp **** 		_si5351->set_freq((_conf->getFrequency() + _conf->getIFrequency()) * 100, SI5351_CLK0);
+ 242              		.loc 1 37 3 view .LVU50
+  37:Src/VFO/VFOController.cpp **** 		_si5351->set_freq((_conf->getFrequency() + _conf->getIFrequency()) * 100, SI5351_CLK0);
+ 243              		.loc 1 37 3 is_stmt 0 view .LVU51
+ 244              	.LBE82:
+ 245              	.LBE81:
+ 246              		.file 2 "Src/VFO/Configuration.h"
+   1:Src/VFO/Configuration.h **** /*
+   2:Src/VFO/Configuration.h ****  * Configuration.h
+   3:Src/VFO/Configuration.h ****  *
+   4:Src/VFO/Configuration.h ****  *  Created on: Apr 4, 2018
+   5:Src/VFO/Configuration.h ****  *      Author: lymes
+   6:Src/VFO/Configuration.h ****  */
+   7:Src/VFO/Configuration.h **** 
+   8:Src/VFO/Configuration.h **** #ifndef VFO_CONFIGURATION_H_
+   9:Src/VFO/Configuration.h **** #define VFO_CONFIGURATION_H_
+  10:Src/VFO/Configuration.h **** 
+  11:Src/VFO/Configuration.h **** #include <stdint.h>
+  12:Src/VFO/Configuration.h **** #include "stm32f1xx_hal.h"
+  13:Src/VFO/Configuration.h **** #include <eeprom/eeprom24xx.h>
+  14:Src/VFO/Configuration.h **** 
+ARM GAS  /var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccDl9rV2.s 			page 7
+
+
+  15:Src/VFO/Configuration.h **** namespace VFO
+  16:Src/VFO/Configuration.h **** {
+  17:Src/VFO/Configuration.h **** 
+  18:Src/VFO/Configuration.h **** struct ConfigData {
+  19:Src/VFO/Configuration.h **** 	uint32_t frequency;
+  20:Src/VFO/Configuration.h **** 	uint32_t iFrequency;
+  21:Src/VFO/Configuration.h **** 	uint32_t bFrequency;
+  22:Src/VFO/Configuration.h **** 	uint32_t encoder;
+  23:Src/VFO/Configuration.h **** 	int32_t calibration;
+  24:Src/VFO/Configuration.h **** 	uint8_t brightness;
+  25:Src/VFO/Configuration.h **** };
+  26:Src/VFO/Configuration.h **** 
+  27:Src/VFO/Configuration.h **** class Configuration
+  28:Src/VFO/Configuration.h **** {
+  29:Src/VFO/Configuration.h **** 	Eeprom24 _mem;
+  30:Src/VFO/Configuration.h **** 	ConfigData _data;
+  31:Src/VFO/Configuration.h **** 
+  32:Src/VFO/Configuration.h **** public:
+  33:Src/VFO/Configuration.h **** 
+  34:Src/VFO/Configuration.h **** 	Configuration();
+  35:Src/VFO/Configuration.h **** 	virtual ~Configuration();
+  36:Src/VFO/Configuration.h **** 
+  37:Src/VFO/Configuration.h **** 	void save();
+  38:Src/VFO/Configuration.h **** 	void load();
+  39:Src/VFO/Configuration.h **** 
+  40:Src/VFO/Configuration.h **** 	uint32_t getFrequency(void) { return _data.frequency; }
+  41:Src/VFO/Configuration.h **** 	int32_t getCalibration(void) { return _data.calibration; }
+ 247              		.loc 2 41 33 is_stmt 1 view .LVU52
+ 248              	.LBB87:
+ 249              	.LBB83:
+  38:Src/VFO/VFOController.cpp **** 		_si5351->set_freq(_conf->getBFrequency() * 100, SI5351_CLK1);
+ 250              		.loc 1 38 20 is_stmt 0 view .LVU53
+ 251 001a 0025     		movs	r5, #0
+  38:Src/VFO/VFOController.cpp **** 		_si5351->set_freq(_conf->getBFrequency() * 100, SI5351_CLK1);
+ 252              		.loc 1 38 70 view .LVU54
+ 253 001c 6426     		movs	r6, #100
+  37:Src/VFO/VFOController.cpp **** 		_si5351->set_freq((_conf->getFrequency() + _conf->getIFrequency()) * 100, SI5351_CLK0);
+ 254              		.loc 1 37 26 view .LVU55
+ 255 001e 6368     		ldr	r3, [r4, #4]
+ 256 0020 2A46     		mov	r2, r5
+ 257 0022 D969     		ldr	r1, [r3, #28]
+ 258 0024 E068     		ldr	r0, [r4, #12]
+ 259 0026 FFF7FEFF 		bl	_ZN6Si535114set_correctionEl16si5351_pll_input
+ 260              	.LVL18:
+  38:Src/VFO/VFOController.cpp **** 		_si5351->set_freq(_conf->getBFrequency() * 100, SI5351_CLK1);
+ 261              		.loc 1 38 3 is_stmt 1 view .LVU56
+  38:Src/VFO/VFOController.cpp **** 		_si5351->set_freq(_conf->getBFrequency() * 100, SI5351_CLK1);
+ 262              		.loc 1 38 22 is_stmt 0 view .LVU57
+ 263 002a 6168     		ldr	r1, [r4, #4]
+ 264              	.LVL19:
+  38:Src/VFO/VFOController.cpp **** 		_si5351->set_freq(_conf->getBFrequency() * 100, SI5351_CLK1);
+ 265              		.loc 1 38 22 view .LVU58
+ 266              	.LBE83:
+ 267              	.LBE87:
+  40:Src/VFO/Configuration.h **** 	int32_t getCalibration(void) { return _data.calibration; }
+ 268              		.loc 2 40 32 is_stmt 1 view .LVU59
+  42:Src/VFO/Configuration.h **** 	uint32_t getIFrequency(void) { return _data.iFrequency; }
+ARM GAS  /var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccDl9rV2.s 			page 8
+
+
+ 269              		.loc 2 42 33 view .LVU60
+ 270              	.LBB88:
+ 271              	.LBB84:
+  38:Src/VFO/VFOController.cpp **** 		_si5351->set_freq(_conf->getBFrequency() * 100, SI5351_CLK1);
+ 272              		.loc 1 38 20 is_stmt 0 view .LVU61
+ 273 002c 2B46     		mov	r3, r5
+  38:Src/VFO/VFOController.cpp **** 		_si5351->set_freq(_conf->getBFrequency() * 100, SI5351_CLK1);
+ 274              		.loc 1 38 44 view .LVU62
+ 275 002e D1E90321 		ldrd	r2, r1, [r1, #12]
+ 276              	.LVL20:
+  38:Src/VFO/VFOController.cpp **** 		_si5351->set_freq(_conf->getBFrequency() * 100, SI5351_CLK1);
+ 277              		.loc 1 38 20 view .LVU63
+ 278 0032 0095     		str	r5, [sp]
+ 279              	.LVL21:
+  38:Src/VFO/VFOController.cpp **** 		_si5351->set_freq(_conf->getBFrequency() * 100, SI5351_CLK1);
+ 280              		.loc 1 38 44 view .LVU64
+ 281 0034 0A44     		add	r2, r2, r1
+  38:Src/VFO/VFOController.cpp **** 		_si5351->set_freq(_conf->getBFrequency() * 100, SI5351_CLK1);
+ 282              		.loc 1 38 20 view .LVU65
+ 283 0036 06FB02F2 		mul	r2, r6, r2
+ 284 003a E068     		ldr	r0, [r4, #12]
+ 285 003c FFF7FEFF 		bl	_ZN6Si53518set_freqEy12si5351_clock
+ 286              	.LVL22:
+  39:Src/VFO/VFOController.cpp **** 		_si5351->output_enable(SI5351_CLK2, 0);
+ 287              		.loc 1 39 3 is_stmt 1 view .LVU66
+  39:Src/VFO/VFOController.cpp **** 		_si5351->output_enable(SI5351_CLK2, 0);
+ 288              		.loc 1 39 3 is_stmt 0 view .LVU67
+ 289              	.LBE84:
+ 290              	.LBE88:
+  43:Src/VFO/Configuration.h **** 	uint32_t getBFrequency(void) { return _data.bFrequency; }
+ 291              		.loc 2 43 33 is_stmt 1 view .LVU68
+ 292              	.LBB89:
+ 293              	.LBB85:
+  39:Src/VFO/VFOController.cpp **** 		_si5351->output_enable(SI5351_CLK2, 0);
+ 294              		.loc 1 39 20 is_stmt 0 view .LVU69
+ 295 0040 0121     		movs	r1, #1
+  39:Src/VFO/VFOController.cpp **** 		_si5351->output_enable(SI5351_CLK2, 0);
+ 296              		.loc 1 39 41 view .LVU70
+ 297 0042 6268     		ldr	r2, [r4, #4]
+  39:Src/VFO/VFOController.cpp **** 		_si5351->output_enable(SI5351_CLK2, 0);
+ 298              		.loc 1 39 20 view .LVU71
+ 299 0044 2B46     		mov	r3, r5
+  39:Src/VFO/VFOController.cpp **** 		_si5351->output_enable(SI5351_CLK2, 0);
+ 300              		.loc 1 39 44 view .LVU72
+ 301 0046 5269     		ldr	r2, [r2, #20]
+  39:Src/VFO/VFOController.cpp **** 		_si5351->output_enable(SI5351_CLK2, 0);
+ 302              		.loc 1 39 20 view .LVU73
+ 303 0048 0091     		str	r1, [sp]
+ 304              	.LVL23:
+  39:Src/VFO/VFOController.cpp **** 		_si5351->output_enable(SI5351_CLK2, 0);
+ 305              		.loc 1 39 20 view .LVU74
+ 306 004a 06FB02F2 		mul	r2, r6, r2
+ 307 004e E068     		ldr	r0, [r4, #12]
+ 308 0050 FFF7FEFF 		bl	_ZN6Si53518set_freqEy12si5351_clock
+ 309              	.LVL24:
+  40:Src/VFO/VFOController.cpp **** 	}
+ 310              		.loc 1 40 3 is_stmt 1 view .LVU75
+ARM GAS  /var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccDl9rV2.s 			page 9
+
+
+  40:Src/VFO/VFOController.cpp **** 	}
+ 311              		.loc 1 40 25 is_stmt 0 view .LVU76
+ 312 0054 2A46     		mov	r2, r5
+ 313 0056 0221     		movs	r1, #2
+ 314 0058 E068     		ldr	r0, [r4, #12]
+ 315              	.LBE85:
+ 316              	.LBE89:
+  46:Src/VFO/VFOController.cpp **** 
+ 317              		.loc 1 46 1 view .LVU77
+ 318 005a 02B0     		add	sp, sp, #8
+ 319              	.LCFI6:
+ 320              		.cfi_def_cfa_offset 16
+ 321              		@ sp needed
+ 322 005c BDE87040 		pop	{r4, r5, r6, lr}
+ 323              	.LCFI7:
+ 324              		.cfi_restore 14
+ 325              		.cfi_restore 6
+ 326              		.cfi_restore 5
+ 327              		.cfi_restore 4
+ 328              		.cfi_def_cfa_offset 0
+ 329              	.LVL25:
+ 330              	.LBB90:
+ 331              	.LBB86:
+  40:Src/VFO/VFOController.cpp **** 	}
+ 332              		.loc 1 40 25 view .LVU78
+ 333 0060 FFF7FEBF 		b	_ZN6Si535113output_enableE12si5351_clockh
+ 334              	.LVL26:
+ 335              	.LBE86:
+ 336              	.LBE90:
+ 337              		.cfi_endproc
+ 338              	.LFE122:
+ 339              		.fnend
+ 341              		.section	.text._ZN3VFO13VFOController5beginEv,"ax",%progbits
+ 342              		.align	1
+ 343              		.p2align 2,,3
+ 344              		.global	_ZN3VFO13VFOController5beginEv
+ 345              		.syntax unified
+ 346              		.thumb
+ 347              		.thumb_func
+ 348              		.fpu softvfp
+ 350              	_ZN3VFO13VFOController5beginEv:
+ 351              		.fnstart
+ 352              	.LVL27:
+ 353              	.LFB127:
+  54:Src/VFO/VFOController.cpp **** 
+  55:Src/VFO/VFOController.cpp **** void VFOController::begin()
+  56:Src/VFO/VFOController.cpp **** {
+ 354              		.loc 1 56 1 is_stmt 1 view -0
+ 355              		.cfi_startproc
+ 356              		@ args = 0, pretend = 0, frame = 0
+ 357              		@ frame_needed = 0, uses_anonymous_args = 0
+  57:Src/VFO/VFOController.cpp **** 	_gui->draw();
+ 358              		.loc 1 57 2 view .LVU80
+  56:Src/VFO/VFOController.cpp **** 	_gui->draw();
+ 359              		.loc 1 56 1 is_stmt 0 view .LVU81
+ 360 0000 70B5     		push	{r4, r5, r6, lr}
+ 361              		.save {r4, r5, r6, lr}
+ARM GAS  /var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccDl9rV2.s 			page 10
+
+
+ 362              	.LCFI8:
+ 363              		.cfi_def_cfa_offset 16
+ 364              		.cfi_offset 4, -16
+ 365              		.cfi_offset 5, -12
+ 366              		.cfi_offset 6, -8
+ 367              		.cfi_offset 14, -4
+  56:Src/VFO/VFOController.cpp **** 	_gui->draw();
+ 368              		.loc 1 56 1 view .LVU82
+ 369 0002 0546     		mov	r5, r0
+ 370              		.loc 1 57 12 view .LVU83
+ 371 0004 8068     		ldr	r0, [r0, #8]
+ 372              	.LVL28:
+ 373              		.loc 1 57 12 view .LVU84
+ 374 0006 FFF7FEFF 		bl	_ZN3VFO13GUIController4drawEv
+ 375              	.LVL29:
+  58:Src/VFO/VFOController.cpp **** 	for (int i = 0; i < _conf->getBrightness(); i++)
+ 376              		.loc 1 58 2 is_stmt 1 view .LVU85
+  44:Src/VFO/Configuration.h **** 	uint8_t getBrightness(void) { return _data.brightness; }
+ 377              		.loc 2 44 32 view .LVU86
+ 378              	.LBB91:
+ 379              		.loc 1 58 42 is_stmt 0 view .LVU87
+ 380 000a 6B68     		ldr	r3, [r5, #4]
+ 381              		.loc 1 58 20 view .LVU88
+ 382 000c 93F82030 		ldrb	r3, [r3, #32]	@ zero_extendqisi2
+ 383 0010 5BB1     		cbz	r3, .L30
+ 384              		.loc 1 58 11 view .LVU89
+ 385 0012 0024     		movs	r4, #0
+ 386              	.LBB92:
+ 387              	.LBB93:
+  59:Src/VFO/VFOController.cpp **** 	{
+  60:Src/VFO/VFOController.cpp **** 		setBrightness(i);
+  61:Src/VFO/VFOController.cpp **** 		HAL_Delay(1);
+  62:Src/VFO/VFOController.cpp **** 	}
+  63:Src/VFO/VFOController.cpp **** }
+  64:Src/VFO/VFOController.cpp **** 
+  65:Src/VFO/VFOController.cpp **** void VFOController::menuKeyPressed()
+  66:Src/VFO/VFOController.cpp **** {
+  67:Src/VFO/VFOController.cpp **** 	_gui->menuKeyPressed();
+  68:Src/VFO/VFOController.cpp **** }
+  69:Src/VFO/VFOController.cpp **** 
+  70:Src/VFO/VFOController.cpp **** void VFOController::showVoltage(uint32_t value)
+  71:Src/VFO/VFOController.cpp **** {
+  72:Src/VFO/VFOController.cpp **** 	_gui->showVoltage(value);
+  73:Src/VFO/VFOController.cpp **** }
+  74:Src/VFO/VFOController.cpp **** 
+  75:Src/VFO/VFOController.cpp **** void VFOController::showSetup()
+  76:Src/VFO/VFOController.cpp **** {
+  77:Src/VFO/VFOController.cpp **** 	_gui->showSetup();
+  78:Src/VFO/VFOController.cpp **** }
+  79:Src/VFO/VFOController.cpp **** 
+  80:Src/VFO/VFOController.cpp **** void VFOController::showMain()
+  81:Src/VFO/VFOController.cpp **** {
+  82:Src/VFO/VFOController.cpp **** 	_gui->showMain();
+  83:Src/VFO/VFOController.cpp **** }
+  84:Src/VFO/VFOController.cpp **** 
+  85:Src/VFO/VFOController.cpp **** void VFOController::pushEncoderIncrement(int16_t increment, uint16_t period)
+  86:Src/VFO/VFOController.cpp **** {
+ARM GAS  /var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccDl9rV2.s 			page 11
+
+
+  87:Src/VFO/VFOController.cpp **** 	_gui->pushEncoderIncrement(increment, period);
+  88:Src/VFO/VFOController.cpp **** }
+  89:Src/VFO/VFOController.cpp **** 
+  90:Src/VFO/VFOController.cpp **** void VFOController::setFrequency(uint32_t frequency)
+  91:Src/VFO/VFOController.cpp **** {
+  92:Src/VFO/VFOController.cpp **** 	if (_si5351_enabled)
+  93:Src/VFO/VFOController.cpp **** 	{
+  94:Src/VFO/VFOController.cpp **** 		_si5351->set_freq((frequency + _conf->getIFrequency()) * 100, SI5351_CLK0);
+  95:Src/VFO/VFOController.cpp **** 	}
+  96:Src/VFO/VFOController.cpp **** 	_conf->setFrequency(frequency);
+  97:Src/VFO/VFOController.cpp **** }
+  98:Src/VFO/VFOController.cpp **** 
+  99:Src/VFO/VFOController.cpp **** void VFOController::setBFrequency(uint32_t frequency)
+ 100:Src/VFO/VFOController.cpp **** {
+ 101:Src/VFO/VFOController.cpp **** 	if (_si5351_enabled)
+ 102:Src/VFO/VFOController.cpp **** 	{
+ 103:Src/VFO/VFOController.cpp **** 		_si5351->set_freq(frequency * 100, SI5351_CLK1);
+ 104:Src/VFO/VFOController.cpp **** 	}
+ 105:Src/VFO/VFOController.cpp **** }
+ 106:Src/VFO/VFOController.cpp **** 
+ 107:Src/VFO/VFOController.cpp **** void VFOController::setBrightness(uint8_t value)
+ 108:Src/VFO/VFOController.cpp **** {
+ 109:Src/VFO/VFOController.cpp **** 	TIM3->CCR1 = value;
+ 388              		.loc 1 109 13 view .LVU90
+ 389 0014 054E     		ldr	r6, .L38
+ 390              	.LVL30:
+ 391              	.L32:
+ 392              		.loc 1 109 13 view .LVU91
+ 393              	.LBE93:
+ 394              	.LBE92:
+  60:Src/VFO/VFOController.cpp **** 		HAL_Delay(1);
+ 395              		.loc 1 60 3 is_stmt 1 discriminator 2 view .LVU92
+ 396              	.LBB95:
+ 397              	.LBI92:
+ 107:Src/VFO/VFOController.cpp **** {
+ 398              		.loc 1 107 6 discriminator 2 view .LVU93
+ 399              	.LBB94:
+ 400              		.loc 1 109 2 discriminator 2 view .LVU94
+ 401              		.loc 1 109 13 is_stmt 0 discriminator 2 view .LVU95
+ 402 0016 7463     		str	r4, [r6, #52]
+ 403              	.LVL31:
+ 404              		.loc 1 109 13 discriminator 2 view .LVU96
+ 405              	.LBE94:
+ 406              	.LBE95:
+  61:Src/VFO/VFOController.cpp **** 	}
+ 407              		.loc 1 61 3 is_stmt 1 discriminator 2 view .LVU97
+  61:Src/VFO/VFOController.cpp **** 	}
+ 408              		.loc 1 61 12 is_stmt 0 discriminator 2 view .LVU98
+ 409 0018 0120     		movs	r0, #1
+ 410 001a FFF7FEFF 		bl	HAL_Delay
+ 411              	.LVL32:
+  58:Src/VFO/VFOController.cpp **** 	{
+ 412              		.loc 1 58 42 discriminator 2 view .LVU99
+ 413 001e 6B68     		ldr	r3, [r5, #4]
+  58:Src/VFO/VFOController.cpp **** 	{
+ 414              		.loc 1 58 2 discriminator 2 view .LVU100
+ 415 0020 0134     		adds	r4, r4, #1
+ARM GAS  /var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccDl9rV2.s 			page 12
+
+
+ 416              	.LVL33:
+  58:Src/VFO/VFOController.cpp **** 	{
+ 417              		.loc 1 58 2 discriminator 2 view .LVU101
+ 418              	.LBE91:
+ 419              		.loc 2 44 32 is_stmt 1 discriminator 2 view .LVU102
+ 420              	.LBB96:
+  58:Src/VFO/VFOController.cpp **** 	{
+ 421              		.loc 1 58 42 is_stmt 0 discriminator 2 view .LVU103
+ 422 0022 93F82030 		ldrb	r3, [r3, #32]	@ zero_extendqisi2
+ 423              	.LVL34:
+  58:Src/VFO/VFOController.cpp **** 	{
+ 424              		.loc 1 58 20 discriminator 2 view .LVU104
+ 425 0026 A342     		cmp	r3, r4
+ 426 0028 F5DC     		bgt	.L32
+ 427              	.LVL35:
+ 428              	.L30:
+  58:Src/VFO/VFOController.cpp **** 	{
+ 429              		.loc 1 58 20 discriminator 2 view .LVU105
+ 430              	.LBE96:
+  63:Src/VFO/VFOController.cpp **** 
+ 431              		.loc 1 63 1 view .LVU106
+ 432 002a 70BD     		pop	{r4, r5, r6, pc}
+ 433              	.LVL36:
+ 434              	.L39:
+  63:Src/VFO/VFOController.cpp **** 
+ 435              		.loc 1 63 1 view .LVU107
+ 436              		.align	2
+ 437              	.L38:
+ 438 002c 00040040 		.word	1073742848
+ 439              		.cfi_endproc
+ 440              	.LFE127:
+ 441              		.fnend
+ 443              		.section	.text._ZN3VFO13VFOController14menuKeyPressedEv,"ax",%progbits
+ 444              		.align	1
+ 445              		.p2align 2,,3
+ 446              		.global	_ZN3VFO13VFOController14menuKeyPressedEv
+ 447              		.syntax unified
+ 448              		.thumb
+ 449              		.thumb_func
+ 450              		.fpu softvfp
+ 452              	_ZN3VFO13VFOController14menuKeyPressedEv:
+ 453              		.fnstart
+ 454              	.LVL37:
+ 455              	.LFB128:
+  66:Src/VFO/VFOController.cpp **** 	_gui->menuKeyPressed();
+ 456              		.loc 1 66 1 is_stmt 1 view -0
+ 457              		.cfi_startproc
+ 458              		@ args = 0, pretend = 0, frame = 0
+ 459              		@ frame_needed = 0, uses_anonymous_args = 0
+ 460              		@ link register save eliminated.
+  67:Src/VFO/VFOController.cpp **** }
+ 461              		.loc 1 67 2 view .LVU109
+  67:Src/VFO/VFOController.cpp **** }
+ 462              		.loc 1 67 22 is_stmt 0 view .LVU110
+ 463 0000 8068     		ldr	r0, [r0, #8]
+ 464              	.LVL38:
+  67:Src/VFO/VFOController.cpp **** }
+ARM GAS  /var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccDl9rV2.s 			page 13
+
+
+ 465              		.loc 1 67 22 view .LVU111
+ 466 0002 FFF7FEBF 		b	_ZN3VFO13GUIController14menuKeyPressedEv
+ 467              	.LVL39:
+ 468              		.cfi_endproc
+ 469              	.LFE128:
+ 470              		.cantunwind
+ 471              		.fnend
+ 473 0006 00BF     		.section	.text._ZN3VFO13VFOController11showVoltageEm,"ax",%progbits
+ 474              		.align	1
+ 475              		.p2align 2,,3
+ 476              		.global	_ZN3VFO13VFOController11showVoltageEm
+ 477              		.syntax unified
+ 478              		.thumb
+ 479              		.thumb_func
+ 480              		.fpu softvfp
+ 482              	_ZN3VFO13VFOController11showVoltageEm:
+ 483              		.fnstart
+ 484              	.LVL40:
+ 485              	.LFB129:
+  71:Src/VFO/VFOController.cpp **** 	_gui->showVoltage(value);
+ 486              		.loc 1 71 1 is_stmt 1 view -0
+ 487              		.cfi_startproc
+ 488              		@ args = 0, pretend = 0, frame = 0
+ 489              		@ frame_needed = 0, uses_anonymous_args = 0
+ 490              		@ link register save eliminated.
+  72:Src/VFO/VFOController.cpp **** }
+ 491              		.loc 1 72 2 view .LVU113
+  72:Src/VFO/VFOController.cpp **** }
+ 492              		.loc 1 72 19 is_stmt 0 view .LVU114
+ 493 0000 8068     		ldr	r0, [r0, #8]
+ 494              	.LVL41:
+  72:Src/VFO/VFOController.cpp **** }
+ 495              		.loc 1 72 19 view .LVU115
+ 496 0002 FFF7FEBF 		b	_ZN3VFO13GUIController11showVoltageEm
+ 497              	.LVL42:
+  72:Src/VFO/VFOController.cpp **** }
+ 498              		.loc 1 72 19 view .LVU116
+ 499              		.cfi_endproc
+ 500              	.LFE129:
+ 501              		.cantunwind
+ 502              		.fnend
+ 504 0006 00BF     		.section	.text._ZN3VFO13VFOController9showSetupEv,"ax",%progbits
+ 505              		.align	1
+ 506              		.p2align 2,,3
+ 507              		.global	_ZN3VFO13VFOController9showSetupEv
+ 508              		.syntax unified
+ 509              		.thumb
+ 510              		.thumb_func
+ 511              		.fpu softvfp
+ 513              	_ZN3VFO13VFOController9showSetupEv:
+ 514              		.fnstart
+ 515              	.LVL43:
+ 516              	.LFB130:
+  76:Src/VFO/VFOController.cpp **** 	_gui->showSetup();
+ 517              		.loc 1 76 1 is_stmt 1 view -0
+ 518              		.cfi_startproc
+ 519              		@ args = 0, pretend = 0, frame = 0
+ARM GAS  /var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccDl9rV2.s 			page 14
+
+
+ 520              		@ frame_needed = 0, uses_anonymous_args = 0
+ 521              		@ link register save eliminated.
+  77:Src/VFO/VFOController.cpp **** }
+ 522              		.loc 1 77 2 view .LVU118
+  77:Src/VFO/VFOController.cpp **** }
+ 523              		.loc 1 77 17 is_stmt 0 view .LVU119
+ 524 0000 8068     		ldr	r0, [r0, #8]
+ 525              	.LVL44:
+  77:Src/VFO/VFOController.cpp **** }
+ 526              		.loc 1 77 17 view .LVU120
+ 527 0002 FFF7FEBF 		b	_ZN3VFO13GUIController9showSetupEv
+ 528              	.LVL45:
+ 529              		.cfi_endproc
+ 530              	.LFE130:
+ 531              		.cantunwind
+ 532              		.fnend
+ 534 0006 00BF     		.section	.text._ZN3VFO13VFOController8showMainEv,"ax",%progbits
+ 535              		.align	1
+ 536              		.p2align 2,,3
+ 537              		.global	_ZN3VFO13VFOController8showMainEv
+ 538              		.syntax unified
+ 539              		.thumb
+ 540              		.thumb_func
+ 541              		.fpu softvfp
+ 543              	_ZN3VFO13VFOController8showMainEv:
+ 544              		.fnstart
+ 545              	.LVL46:
+ 546              	.LFB131:
+  81:Src/VFO/VFOController.cpp **** 	_gui->showMain();
+ 547              		.loc 1 81 1 is_stmt 1 view -0
+ 548              		.cfi_startproc
+ 549              		@ args = 0, pretend = 0, frame = 0
+ 550              		@ frame_needed = 0, uses_anonymous_args = 0
+ 551              		@ link register save eliminated.
+  82:Src/VFO/VFOController.cpp **** }
+ 552              		.loc 1 82 2 view .LVU122
+  82:Src/VFO/VFOController.cpp **** }
+ 553              		.loc 1 82 16 is_stmt 0 view .LVU123
+ 554 0000 8068     		ldr	r0, [r0, #8]
+ 555              	.LVL47:
+  82:Src/VFO/VFOController.cpp **** }
+ 556              		.loc 1 82 16 view .LVU124
+ 557 0002 FFF7FEBF 		b	_ZN3VFO13GUIController8showMainEv
+ 558              	.LVL48:
+ 559              		.cfi_endproc
+ 560              	.LFE131:
+ 561              		.cantunwind
+ 562              		.fnend
+ 564 0006 00BF     		.section	.text._ZN3VFO13VFOController20pushEncoderIncrementEst,"ax",%progbits
+ 565              		.align	1
+ 566              		.p2align 2,,3
+ 567              		.global	_ZN3VFO13VFOController20pushEncoderIncrementEst
+ 568              		.syntax unified
+ 569              		.thumb
+ 570              		.thumb_func
+ 571              		.fpu softvfp
+ 573              	_ZN3VFO13VFOController20pushEncoderIncrementEst:
+ARM GAS  /var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccDl9rV2.s 			page 15
+
+
+ 574              		.fnstart
+ 575              	.LVL49:
+ 576              	.LFB132:
+  86:Src/VFO/VFOController.cpp **** 	_gui->pushEncoderIncrement(increment, period);
+ 577              		.loc 1 86 1 is_stmt 1 view -0
+ 578              		.cfi_startproc
+ 579              		@ args = 0, pretend = 0, frame = 0
+ 580              		@ frame_needed = 0, uses_anonymous_args = 0
+ 581              		@ link register save eliminated.
+  87:Src/VFO/VFOController.cpp **** }
+ 582              		.loc 1 87 2 view .LVU126
+  87:Src/VFO/VFOController.cpp **** }
+ 583              		.loc 1 87 28 is_stmt 0 view .LVU127
+ 584 0000 8068     		ldr	r0, [r0, #8]
+ 585              	.LVL50:
+  87:Src/VFO/VFOController.cpp **** }
+ 586              		.loc 1 87 28 view .LVU128
+ 587 0002 FFF7FEBF 		b	_ZN3VFO13GUIController20pushEncoderIncrementEst
+ 588              	.LVL51:
+  87:Src/VFO/VFOController.cpp **** }
+ 589              		.loc 1 87 28 view .LVU129
+ 590              		.cfi_endproc
+ 591              	.LFE132:
+ 592              		.cantunwind
+ 593              		.fnend
+ 595 0006 00BF     		.section	.text._ZN3VFO13VFOController12setFrequencyEm,"ax",%progbits
+ 596              		.align	1
+ 597              		.p2align 2,,3
+ 598              		.global	_ZN3VFO13VFOController12setFrequencyEm
+ 599              		.syntax unified
+ 600              		.thumb
+ 601              		.thumb_func
+ 602              		.fpu softvfp
+ 604              	_ZN3VFO13VFOController12setFrequencyEm:
+ 605              		.fnstart
+ 606              	.LVL52:
+ 607              	.LFB133:
+  91:Src/VFO/VFOController.cpp **** 	if (_si5351_enabled)
+ 608              		.loc 1 91 1 is_stmt 1 view -0
+ 609              		.cfi_startproc
+ 610              		@ args = 0, pretend = 0, frame = 0
+ 611              		@ frame_needed = 0, uses_anonymous_args = 0
+  92:Src/VFO/VFOController.cpp **** 	{
+ 612              		.loc 1 92 2 view .LVU131
+  91:Src/VFO/VFOController.cpp **** 	if (_si5351_enabled)
+ 613              		.loc 1 91 1 is_stmt 0 view .LVU132
+ 614 0000 30B5     		push	{r4, r5, lr}
+ 615              		.save {r4, r5, lr}
+ 616              	.LCFI9:
+ 617              		.cfi_def_cfa_offset 12
+ 618              		.cfi_offset 4, -12
+ 619              		.cfi_offset 5, -8
+ 620              		.cfi_offset 14, -4
+  92:Src/VFO/VFOController.cpp **** 	{
+ 621              		.loc 1 92 2 view .LVU133
+ 622 0002 037C     		ldrb	r3, [r0, #16]	@ zero_extendqisi2
+  91:Src/VFO/VFOController.cpp **** 	if (_si5351_enabled)
+ARM GAS  /var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccDl9rV2.s 			page 16
+
+
+ 623              		.loc 1 91 1 view .LVU134
+ 624 0004 0446     		mov	r4, r0
+ 625              		.pad #12
+ 626 0006 83B0     		sub	sp, sp, #12
+ 627              	.LCFI10:
+ 628              		.cfi_def_cfa_offset 24
+  91:Src/VFO/VFOController.cpp **** 	if (_si5351_enabled)
+ 629              		.loc 1 91 1 view .LVU135
+ 630 0008 0D46     		mov	r5, r1
+ 631 000a 4068     		ldr	r0, [r0, #4]
+ 632              	.LVL53:
+  92:Src/VFO/VFOController.cpp **** 	{
+ 633              		.loc 1 92 2 view .LVU136
+ 634 000c 13B9     		cbnz	r3, .L51
+  96:Src/VFO/VFOController.cpp **** }
+ 635              		.loc 1 96 2 is_stmt 1 view .LVU137
+ 636              	.LVL54:
+ 637              	.LBB99:
+ 638              	.LBI99:
+  45:Src/VFO/Configuration.h **** 	uint32_t getEncoder(void) { return _data.encoder; }
+  46:Src/VFO/Configuration.h **** 
+  47:Src/VFO/Configuration.h **** 	void setFrequency(uint32_t frequency) { _data.frequency = frequency; }
+ 639              		.loc 2 47 7 view .LVU138
+ 640              	.LBB100:
+ 641              		.loc 2 47 42 view .LVU139
+ 642              		.loc 2 47 58 is_stmt 0 view .LVU140
+ 643 000e C560     		str	r5, [r0, #12]
+ 644              	.LVL55:
+ 645              		.loc 2 47 58 view .LVU141
+ 646              	.LBE100:
+ 647              	.LBE99:
+  97:Src/VFO/VFOController.cpp **** 
+ 648              		.loc 1 97 1 view .LVU142
+ 649 0010 03B0     		add	sp, sp, #12
+ 650              	.LCFI11:
+ 651              		.cfi_remember_state
+ 652              		.cfi_def_cfa_offset 12
+ 653              		@ sp needed
+ 654 0012 30BD     		pop	{r4, r5, pc}
+ 655              	.LVL56:
+ 656              	.L51:
+ 657              	.LCFI12:
+ 658              		.cfi_restore_state
+  94:Src/VFO/VFOController.cpp **** 	}
+ 659              		.loc 1 94 3 is_stmt 1 view .LVU143
+  42:Src/VFO/Configuration.h **** 	uint32_t getBFrequency(void) { return _data.bFrequency; }
+ 660              		.loc 2 42 33 view .LVU144
+  94:Src/VFO/VFOController.cpp **** 	}
+ 661              		.loc 1 94 20 is_stmt 0 view .LVU145
+ 662 0014 0023     		movs	r3, #0
+  94:Src/VFO/VFOController.cpp **** 	}
+ 663              		.loc 1 94 58 view .LVU146
+ 664 0016 6421     		movs	r1, #100
+ 665              	.LVL57:
+  94:Src/VFO/VFOController.cpp **** 	}
+ 666              		.loc 1 94 32 view .LVU147
+ 667 0018 0269     		ldr	r2, [r0, #16]
+ARM GAS  /var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccDl9rV2.s 			page 17
+
+
+  94:Src/VFO/VFOController.cpp **** 	}
+ 668              		.loc 1 94 20 view .LVU148
+ 669 001a 0093     		str	r3, [sp]
+ 670              	.LVL58:
+  94:Src/VFO/VFOController.cpp **** 	}
+ 671              		.loc 1 94 32 view .LVU149
+ 672 001c 2A44     		add	r2, r2, r5
+  94:Src/VFO/VFOController.cpp **** 	}
+ 673              		.loc 1 94 20 view .LVU150
+ 674 001e 01FB02F2 		mul	r2, r1, r2
+ 675 0022 E068     		ldr	r0, [r4, #12]
+ 676 0024 FFF7FEFF 		bl	_ZN6Si53518set_freqEy12si5351_clock
+ 677              	.LVL59:
+ 678 0028 6068     		ldr	r0, [r4, #4]
+  96:Src/VFO/VFOController.cpp **** }
+ 679              		.loc 1 96 2 is_stmt 1 view .LVU151
+ 680              	.LVL60:
+ 681              	.LBB102:
+ 682              		.loc 2 47 7 view .LVU152
+ 683              	.LBB101:
+ 684              		.loc 2 47 42 view .LVU153
+ 685              		.loc 2 47 58 is_stmt 0 view .LVU154
+ 686 002a C560     		str	r5, [r0, #12]
+ 687              	.LVL61:
+ 688              		.loc 2 47 58 view .LVU155
+ 689              	.LBE101:
+ 690              	.LBE102:
+  97:Src/VFO/VFOController.cpp **** 
+ 691              		.loc 1 97 1 view .LVU156
+ 692 002c 03B0     		add	sp, sp, #12
+ 693              	.LCFI13:
+ 694              		.cfi_def_cfa_offset 12
+ 695              		@ sp needed
+ 696 002e 30BD     		pop	{r4, r5, pc}
+  97:Src/VFO/VFOController.cpp **** 
+ 697              		.loc 1 97 1 view .LVU157
+ 698              		.cfi_endproc
+ 699              	.LFE133:
+ 700              		.fnend
+ 702              		.section	.text._ZN3VFO13VFOController13setBFrequencyEm,"ax",%progbits
+ 703              		.align	1
+ 704              		.p2align 2,,3
+ 705              		.global	_ZN3VFO13VFOController13setBFrequencyEm
+ 706              		.syntax unified
+ 707              		.thumb
+ 708              		.thumb_func
+ 709              		.fpu softvfp
+ 711              	_ZN3VFO13VFOController13setBFrequencyEm:
+ 712              		.fnstart
+ 713              	.LVL62:
+ 714              	.LFB134:
+ 100:Src/VFO/VFOController.cpp **** 	if (_si5351_enabled)
+ 715              		.loc 1 100 1 is_stmt 1 view -0
+ 716              		.cfi_startproc
+ 717              		@ args = 0, pretend = 0, frame = 0
+ 718              		@ frame_needed = 0, uses_anonymous_args = 0
+ 101:Src/VFO/VFOController.cpp **** 	{
+ARM GAS  /var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccDl9rV2.s 			page 18
+
+
+ 719              		.loc 1 101 2 view .LVU159
+ 720 0000 037C     		ldrb	r3, [r0, #16]	@ zero_extendqisi2
+ 721 0002 03B9     		cbnz	r3, .L61
+ 722 0004 7047     		bx	lr
+ 723              	.L61:
+ 724              	.LVL63:
+ 725              	.LBB105:
+ 726              	.LBI105:
+  99:Src/VFO/VFOController.cpp **** {
+ 727              		.loc 1 99 6 view .LVU160
+ 728              	.LBB106:
+ 103:Src/VFO/VFOController.cpp **** 	}
+ 729              		.loc 1 103 3 view .LVU161
+ 103:Src/VFO/VFOController.cpp **** 	}
+ 730              		.loc 1 103 20 is_stmt 0 view .LVU162
+ 731 0006 0123     		movs	r3, #1
+ 103:Src/VFO/VFOController.cpp **** 	}
+ 732              		.loc 1 103 31 view .LVU163
+ 733 0008 6422     		movs	r2, #100
+ 734              	.LBE106:
+ 735              	.LBE105:
+ 100:Src/VFO/VFOController.cpp **** 	if (_si5351_enabled)
+ 736              		.loc 1 100 1 view .LVU164
+ 737 000a 00B5     		push	{lr}
+ 738              		.save {lr}
+ 739              	.LCFI14:
+ 740              		.cfi_def_cfa_offset 4
+ 741              		.cfi_offset 14, -4
+ 742              		.pad #12
+ 743 000c 83B0     		sub	sp, sp, #12
+ 744              	.LCFI15:
+ 745              		.cfi_def_cfa_offset 16
+ 746              	.LBB108:
+ 747              	.LBB107:
+ 103:Src/VFO/VFOController.cpp **** 	}
+ 748              		.loc 1 103 20 view .LVU165
+ 749 000e C068     		ldr	r0, [r0, #12]
+ 750              	.LVL64:
+ 103:Src/VFO/VFOController.cpp **** 	}
+ 751              		.loc 1 103 20 view .LVU166
+ 752 0010 02FB01F2 		mul	r2, r2, r1
+ 753 0014 0093     		str	r3, [sp]
+ 754 0016 0023     		movs	r3, #0
+ 755 0018 FFF7FEFF 		bl	_ZN6Si53518set_freqEy12si5351_clock
+ 756              	.LVL65:
+ 103:Src/VFO/VFOController.cpp **** 	}
+ 757              		.loc 1 103 20 view .LVU167
+ 758              	.LBE107:
+ 759              	.LBE108:
+ 105:Src/VFO/VFOController.cpp **** 
+ 760              		.loc 1 105 1 view .LVU168
+ 761 001c 03B0     		add	sp, sp, #12
+ 762              	.LCFI16:
+ 763              		.cfi_def_cfa_offset 4
+ 764              		@ sp needed
+ 765 001e 5DF804FB 		ldr	pc, [sp], #4
+ 766              		.cfi_endproc
+ARM GAS  /var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccDl9rV2.s 			page 19
+
+
+ 767              	.LFE134:
+ 768              		.fnend
+ 770 0022 00BF     		.section	.text._ZN3VFO13VFOController13setBrightnessEh,"ax",%progbits
+ 771              		.align	1
+ 772              		.p2align 2,,3
+ 773              		.global	_ZN3VFO13VFOController13setBrightnessEh
+ 774              		.syntax unified
+ 775              		.thumb
+ 776              		.thumb_func
+ 777              		.fpu softvfp
+ 779              	_ZN3VFO13VFOController13setBrightnessEh:
+ 780              		.fnstart
+ 781              	.LVL66:
+ 782              	.LFB135:
+ 108:Src/VFO/VFOController.cpp **** 	TIM3->CCR1 = value;
+ 783              		.loc 1 108 1 is_stmt 1 view -0
+ 784              		.cfi_startproc
+ 785              		@ args = 0, pretend = 0, frame = 0
+ 786              		@ frame_needed = 0, uses_anonymous_args = 0
+ 787              		@ link register save eliminated.
+ 788              		.loc 1 109 2 view .LVU170
+ 789              		.loc 1 109 13 is_stmt 0 view .LVU171
+ 790 0000 014B     		ldr	r3, .L63
+ 791 0002 5963     		str	r1, [r3, #52]
+ 110:Src/VFO/VFOController.cpp **** }
+ 792              		.loc 1 110 1 view .LVU172
+ 793 0004 7047     		bx	lr
+ 794              	.L64:
+ 795 0006 00BF     		.align	2
+ 796              	.L63:
+ 797 0008 00040040 		.word	1073742848
+ 798              		.cfi_endproc
+ 799              	.LFE135:
+ 800              		.cantunwind
+ 801              		.fnend
+ 803              		.section	.text._ZN3VFO13VFOController14setCalibrationEl,"ax",%progbits
+ 804              		.align	1
+ 805              		.p2align 2,,3
+ 806              		.global	_ZN3VFO13VFOController14setCalibrationEl
+ 807              		.syntax unified
+ 808              		.thumb
+ 809              		.thumb_func
+ 810              		.fpu softvfp
+ 812              	_ZN3VFO13VFOController14setCalibrationEl:
+ 813              		.fnstart
+ 814              	.LVL67:
+ 815              	.LFB136:
+ 111:Src/VFO/VFOController.cpp **** 
+ 112:Src/VFO/VFOController.cpp **** void VFOController::setCalibration(int32_t value)
+ 113:Src/VFO/VFOController.cpp **** {
+ 816              		.loc 1 113 1 is_stmt 1 view -0
+ 817              		.cfi_startproc
+ 818              		@ args = 0, pretend = 0, frame = 0
+ 819              		@ frame_needed = 0, uses_anonymous_args = 0
+ 820              		@ link register save eliminated.
+ 114:Src/VFO/VFOController.cpp **** 	if (_si5351_enabled)
+ 821              		.loc 1 114 2 view .LVU174
+ARM GAS  /var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccDl9rV2.s 			page 20
+
+
+ 822 0000 037C     		ldrb	r3, [r0, #16]	@ zero_extendqisi2
+ 823 0002 03B9     		cbnz	r3, .L67
+ 115:Src/VFO/VFOController.cpp **** 	{
+ 116:Src/VFO/VFOController.cpp **** 		_si5351->set_correction(value, SI5351_PLL_INPUT_XO);
+ 117:Src/VFO/VFOController.cpp **** 	}
+ 118:Src/VFO/VFOController.cpp **** }
+ 824              		.loc 1 118 1 is_stmt 0 view .LVU175
+ 825 0004 7047     		bx	lr
+ 826              	.L67:
+ 827              	.LVL68:
+ 828              	.LBB111:
+ 829              	.LBI111:
+ 112:Src/VFO/VFOController.cpp **** {
+ 830              		.loc 1 112 6 is_stmt 1 view .LVU176
+ 831              	.LBB112:
+ 116:Src/VFO/VFOController.cpp **** 	}
+ 832              		.loc 1 116 3 view .LVU177
+ 116:Src/VFO/VFOController.cpp **** 	}
+ 833              		.loc 1 116 26 is_stmt 0 view .LVU178
+ 834 0006 C068     		ldr	r0, [r0, #12]
+ 835              	.LVL69:
+ 116:Src/VFO/VFOController.cpp **** 	}
+ 836              		.loc 1 116 26 view .LVU179
+ 837 0008 0022     		movs	r2, #0
+ 838 000a FFF7FEBF 		b	_ZN6Si535114set_correctionEl16si5351_pll_input
+ 839              	.LVL70:
+ 116:Src/VFO/VFOController.cpp **** 	}
+ 840              		.loc 1 116 26 view .LVU180
+ 841              	.LBE112:
+ 842              	.LBE111:
+ 843              		.cfi_endproc
+ 844              	.LFE136:
+ 845              		.cantunwind
+ 846              		.fnend
+ 848 000e 00BF     		.section	.text._ZN3VFO13VFOController18storeConfigurationEv,"ax",%progbits
+ 849              		.align	1
+ 850              		.p2align 2,,3
+ 851              		.global	_ZN3VFO13VFOController18storeConfigurationEv
+ 852              		.syntax unified
+ 853              		.thumb
+ 854              		.thumb_func
+ 855              		.fpu softvfp
+ 857              	_ZN3VFO13VFOController18storeConfigurationEv:
+ 858              		.fnstart
+ 859              	.LVL71:
+ 860              	.LFB137:
+ 119:Src/VFO/VFOController.cpp **** 
+ 120:Src/VFO/VFOController.cpp **** void VFOController::storeConfiguration()
+ 121:Src/VFO/VFOController.cpp **** {
+ 861              		.loc 1 121 1 is_stmt 1 view -0
+ 862              		.cfi_startproc
+ 863              		@ args = 0, pretend = 0, frame = 0
+ 864              		@ frame_needed = 0, uses_anonymous_args = 0
+ 865              		@ link register save eliminated.
+ 122:Src/VFO/VFOController.cpp **** 	_conf->save();
+ 866              		.loc 1 122 2 view .LVU182
+ 867              		.loc 1 122 13 is_stmt 0 view .LVU183
+ARM GAS  /var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccDl9rV2.s 			page 21
+
+
+ 868 0000 4068     		ldr	r0, [r0, #4]
+ 869              	.LVL72:
+ 870              		.loc 1 122 13 view .LVU184
+ 871 0002 FFF7FEBF 		b	_ZN3VFO13Configuration4saveEv
+ 872              	.LVL73:
+ 873              		.cfi_endproc
+ 874              	.LFE137:
+ 875              		.cantunwind
+ 876              		.fnend
+ 878 0006 00BF     		.section	.text._ZN3VFO13VFOController17loadConfigurationEv,"ax",%progbits
+ 879              		.align	1
+ 880              		.p2align 2,,3
+ 881              		.global	_ZN3VFO13VFOController17loadConfigurationEv
+ 882              		.syntax unified
+ 883              		.thumb
+ 884              		.thumb_func
+ 885              		.fpu softvfp
+ 887              	_ZN3VFO13VFOController17loadConfigurationEv:
+ 888              		.fnstart
+ 889              	.LVL74:
+ 890              	.LFB138:
+ 123:Src/VFO/VFOController.cpp **** }
+ 124:Src/VFO/VFOController.cpp **** 
+ 125:Src/VFO/VFOController.cpp **** void VFOController::loadConfiguration()
+ 126:Src/VFO/VFOController.cpp **** {
+ 891              		.loc 1 126 1 is_stmt 1 view -0
+ 892              		.cfi_startproc
+ 893              		@ args = 0, pretend = 0, frame = 0
+ 894              		@ frame_needed = 0, uses_anonymous_args = 0
+ 127:Src/VFO/VFOController.cpp **** 	_conf->load();
+ 895              		.loc 1 127 2 view .LVU186
+ 126:Src/VFO/VFOController.cpp **** 	_conf->load();
+ 896              		.loc 1 126 1 is_stmt 0 view .LVU187
+ 897 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 898              		.save {r4, r5, r6, r7, lr}
+ 899              	.LCFI17:
+ 900              		.cfi_def_cfa_offset 20
+ 901              		.cfi_offset 4, -20
+ 902              		.cfi_offset 5, -16
+ 903              		.cfi_offset 6, -12
+ 904              		.cfi_offset 7, -8
+ 905              		.cfi_offset 14, -4
+ 906 0002 0446     		mov	r4, r0
+ 907              		.pad #12
+ 908 0004 83B0     		sub	sp, sp, #12
+ 909              	.LCFI18:
+ 910              		.cfi_def_cfa_offset 32
+ 911              		.loc 1 127 13 view .LVU188
+ 912 0006 4068     		ldr	r0, [r0, #4]
+ 913              	.LVL75:
+ 914              		.loc 1 127 13 view .LVU189
+ 915 0008 FFF7FEFF 		bl	_ZN3VFO13Configuration4loadEv
+ 916              	.LVL76:
+ 128:Src/VFO/VFOController.cpp **** 	setFrequency(_conf->getFrequency());
+ 917              		.loc 1 128 2 is_stmt 1 view .LVU190
+ 918              		.loc 1 128 15 is_stmt 0 view .LVU191
+ 919 000c 6368     		ldr	r3, [r4, #4]
+ARM GAS  /var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccDl9rV2.s 			page 22
+
+
+ 920              	.LBB137:
+ 921              	.LBB138:
+  92:Src/VFO/VFOController.cpp **** 	{
+ 922              		.loc 1 92 2 view .LVU192
+ 923 000e 227C     		ldrb	r2, [r4, #16]	@ zero_extendqisi2
+ 924              	.LBE138:
+ 925              	.LBE137:
+ 926              		.loc 1 128 14 view .LVU193
+ 927 0010 DD68     		ldr	r5, [r3, #12]
+ 928              	.LVL77:
+  40:Src/VFO/Configuration.h **** 	int32_t getCalibration(void) { return _data.calibration; }
+ 929              		.loc 2 40 32 is_stmt 1 view .LVU194
+ 930              	.LBB144:
+ 931              	.LBI137:
+  90:Src/VFO/VFOController.cpp **** {
+ 932              		.loc 1 90 6 view .LVU195
+ 933              	.LBB141:
+  92:Src/VFO/VFOController.cpp **** 	{
+ 934              		.loc 1 92 2 view .LVU196
+ 935 0012 32B9     		cbnz	r2, .L84
+ 936              	.LVL78:
+ 937              	.L73:
+  92:Src/VFO/VFOController.cpp **** 	{
+ 938              		.loc 1 92 2 is_stmt 0 view .LVU197
+ 939              	.LBE141:
+ 940              	.LBE144:
+ 941              	.LBB145:
+ 942              	.LBB146:
+  96:Src/VFO/VFOController.cpp **** }
+ 943              		.loc 1 96 2 is_stmt 1 view .LVU198
+ 944              	.LBB147:
+ 945              	.LBI147:
+ 946              		.loc 2 47 7 view .LVU199
+ 947              	.LBB148:
+ 948              		.loc 2 47 42 view .LVU200
+ 949              	.LBE148:
+ 950              	.LBE147:
+ 951              	.LBE146:
+ 952              	.LBE145:
+ 953              	.LBB155:
+ 954              	.LBB156:
+ 109:Src/VFO/VFOController.cpp **** }
+ 955              		.loc 1 109 13 is_stmt 0 view .LVU201
+ 956 0014 93F82010 		ldrb	r1, [r3, #32]	@ zero_extendqisi2
+ 957 0018 1B4A     		ldr	r2, .L86
+ 958              	.LBE156:
+ 959              	.LBE155:
+ 960              	.LBB158:
+ 961              	.LBB151:
+ 962              	.LBB150:
+ 963              	.LBB149:
+ 964              		.loc 2 47 58 view .LVU202
+ 965 001a DD60     		str	r5, [r3, #12]
+ 966              	.LVL79:
+ 967              		.loc 2 47 58 view .LVU203
+ 968              	.LBE149:
+ 969              	.LBE150:
+ARM GAS  /var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccDl9rV2.s 			page 23
+
+
+ 970              	.LBE151:
+ 971              	.LBE158:
+ 129:Src/VFO/VFOController.cpp **** 	setCalibration(_conf->getCalibration());
+ 130:Src/VFO/VFOController.cpp **** 	setBFrequency(_conf->getBFrequency());
+ 131:Src/VFO/VFOController.cpp **** 	setFrequency(_conf->getFrequency());
+ 132:Src/VFO/VFOController.cpp **** 	setBrightness(_conf->getBrightness());
+ 972              		.loc 1 132 2 is_stmt 1 view .LVU204
+  44:Src/VFO/Configuration.h **** 	uint32_t getEncoder(void) { return _data.encoder; }
+ 973              		.loc 2 44 32 view .LVU205
+ 974              	.LBB159:
+ 975              	.LBI155:
+ 107:Src/VFO/VFOController.cpp **** {
+ 976              		.loc 1 107 6 view .LVU206
+ 977              	.LBB157:
+ 109:Src/VFO/VFOController.cpp **** }
+ 978              		.loc 1 109 2 view .LVU207
+ 109:Src/VFO/VFOController.cpp **** }
+ 979              		.loc 1 109 13 is_stmt 0 view .LVU208
+ 980 001c 5163     		str	r1, [r2, #52]
+ 981              	.LVL80:
+ 109:Src/VFO/VFOController.cpp **** }
+ 982              		.loc 1 109 13 view .LVU209
+ 983              	.LBE157:
+ 984              	.LBE159:
+ 133:Src/VFO/VFOController.cpp **** }
+ 985              		.loc 1 133 1 view .LVU210
+ 986 001e 03B0     		add	sp, sp, #12
+ 987              	.LCFI19:
+ 988              		.cfi_remember_state
+ 989              		.cfi_def_cfa_offset 20
+ 990              		@ sp needed
+ 991 0020 F0BD     		pop	{r4, r5, r6, r7, pc}
+ 992              	.LVL81:
+ 993              	.L84:
+ 994              	.LCFI20:
+ 995              		.cfi_restore_state
+ 996              	.LBB160:
+ 997              	.LBB142:
+  94:Src/VFO/VFOController.cpp **** 	}
+ 998              		.loc 1 94 3 is_stmt 1 view .LVU211
+  94:Src/VFO/VFOController.cpp **** 	}
+ 999              		.loc 1 94 3 is_stmt 0 view .LVU212
+ 1000              	.LBE142:
+ 1001              	.LBE160:
+  42:Src/VFO/Configuration.h **** 	uint32_t getBFrequency(void) { return _data.bFrequency; }
+ 1002              		.loc 2 42 33 is_stmt 1 view .LVU213
+ 1003              	.LBB161:
+ 1004              	.LBB143:
+  94:Src/VFO/VFOController.cpp **** 	}
+ 1005              		.loc 1 94 20 is_stmt 0 view .LVU214
+ 1006 0022 0026     		movs	r6, #0
+  94:Src/VFO/VFOController.cpp **** 	}
+ 1007              		.loc 1 94 58 view .LVU215
+ 1008 0024 6427     		movs	r7, #100
+  94:Src/VFO/VFOController.cpp **** 	}
+ 1009              		.loc 1 94 32 view .LVU216
+ 1010 0026 1A69     		ldr	r2, [r3, #16]
+ARM GAS  /var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccDl9rV2.s 			page 24
+
+
+  94:Src/VFO/VFOController.cpp **** 	}
+ 1011              		.loc 1 94 20 view .LVU217
+ 1012 0028 0096     		str	r6, [sp]
+  94:Src/VFO/VFOController.cpp **** 	}
+ 1013              		.loc 1 94 32 view .LVU218
+ 1014 002a 2A44     		add	r2, r2, r5
+  94:Src/VFO/VFOController.cpp **** 	}
+ 1015              		.loc 1 94 20 view .LVU219
+ 1016 002c 3346     		mov	r3, r6
+ 1017              	.LVL82:
+  94:Src/VFO/VFOController.cpp **** 	}
+ 1018              		.loc 1 94 20 view .LVU220
+ 1019 002e 07FB02F2 		mul	r2, r7, r2
+ 1020 0032 E068     		ldr	r0, [r4, #12]
+ 1021 0034 FFF7FEFF 		bl	_ZN6Si53518set_freqEy12si5351_clock
+ 1022              	.LVL83:
+ 1023 0038 227C     		ldrb	r2, [r4, #16]	@ zero_extendqisi2
+ 1024 003a 6368     		ldr	r3, [r4, #4]
+  96:Src/VFO/VFOController.cpp **** }
+ 1025              		.loc 1 96 2 is_stmt 1 view .LVU221
+ 1026              	.LVL84:
+ 1027              	.LBB139:
+ 1028              	.LBI139:
+ 1029              		.loc 2 47 7 view .LVU222
+ 1030              	.LBB140:
+ 1031              		.loc 2 47 42 view .LVU223
+ 1032              		.loc 2 47 58 is_stmt 0 view .LVU224
+ 1033 003c DD60     		str	r5, [r3, #12]
+ 1034              	.LVL85:
+ 1035              		.loc 2 47 58 view .LVU225
+ 1036              	.LBE140:
+ 1037              	.LBE139:
+ 1038              	.LBE143:
+ 1039              	.LBE161:
+ 129:Src/VFO/VFOController.cpp **** 	setBFrequency(_conf->getBFrequency());
+ 1040              		.loc 1 129 2 is_stmt 1 view .LVU226
+  41:Src/VFO/Configuration.h **** 	uint32_t getIFrequency(void) { return _data.iFrequency; }
+ 1041              		.loc 2 41 33 view .LVU227
+ 1042              	.LBB162:
+ 1043              	.LBI162:
+ 112:Src/VFO/VFOController.cpp **** {
+ 1044              		.loc 1 112 6 view .LVU228
+ 1045              	.LBB163:
+ 114:Src/VFO/VFOController.cpp **** 	{
+ 1046              		.loc 1 114 2 view .LVU229
+ 1047 003e 002A     		cmp	r2, #0
+ 1048 0040 E8D0     		beq	.L73
+ 1049              	.LVL86:
+ 1050              	.LBB164:
+ 1051              	.LBI164:
+ 112:Src/VFO/VFOController.cpp **** {
+ 1052              		.loc 1 112 6 view .LVU230
+ 1053              	.LBB165:
+ 116:Src/VFO/VFOController.cpp **** 	}
+ 1054              		.loc 1 116 3 view .LVU231
+ 116:Src/VFO/VFOController.cpp **** 	}
+ 1055              		.loc 1 116 26 is_stmt 0 view .LVU232
+ARM GAS  /var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccDl9rV2.s 			page 25
+
+
+ 1056 0042 D969     		ldr	r1, [r3, #28]
+ 1057 0044 3246     		mov	r2, r6
+ 1058 0046 E068     		ldr	r0, [r4, #12]
+ 1059 0048 FFF7FEFF 		bl	_ZN6Si535114set_correctionEl16si5351_pll_input
+ 1060              	.LVL87:
+ 116:Src/VFO/VFOController.cpp **** 	}
+ 1061              		.loc 1 116 26 view .LVU233
+ 1062              	.LBE165:
+ 1063              	.LBE164:
+ 1064              	.LBE163:
+ 1065              	.LBE162:
+ 130:Src/VFO/VFOController.cpp **** 	setFrequency(_conf->getFrequency());
+ 1066              		.loc 1 130 2 is_stmt 1 view .LVU234
+ 130:Src/VFO/VFOController.cpp **** 	setFrequency(_conf->getFrequency());
+ 1067              		.loc 1 130 16 is_stmt 0 view .LVU235
+ 1068 004c 6368     		ldr	r3, [r4, #4]
+ 1069              	.LBB166:
+ 1070              	.LBB167:
+ 101:Src/VFO/VFOController.cpp **** 	{
+ 1071              		.loc 1 101 2 view .LVU236
+ 1072 004e 217C     		ldrb	r1, [r4, #16]	@ zero_extendqisi2
+ 1073              	.LBE167:
+ 1074              	.LBE166:
+ 130:Src/VFO/VFOController.cpp **** 	setFrequency(_conf->getFrequency());
+ 1075              		.loc 1 130 15 view .LVU237
+ 1076 0050 5A69     		ldr	r2, [r3, #20]
+ 1077              	.LVL88:
+  43:Src/VFO/Configuration.h **** 	uint8_t getBrightness(void) { return _data.brightness; }
+ 1078              		.loc 2 43 33 is_stmt 1 view .LVU238
+ 1079              	.LBB171:
+ 1080              	.LBI166:
+  99:Src/VFO/VFOController.cpp **** {
+ 1081              		.loc 1 99 6 view .LVU239
+ 1082              	.LBB170:
+ 101:Src/VFO/VFOController.cpp **** 	{
+ 1083              		.loc 1 101 2 view .LVU240
+ 1084 0052 B9B1     		cbz	r1, .L85
+ 1085              	.LVL89:
+ 1086              	.LBB168:
+ 1087              	.LBI168:
+  99:Src/VFO/VFOController.cpp **** {
+ 1088              		.loc 1 99 6 view .LVU241
+ 1089              	.LBB169:
+ 103:Src/VFO/VFOController.cpp **** 	}
+ 1090              		.loc 1 103 3 view .LVU242
+ 103:Src/VFO/VFOController.cpp **** 	}
+ 1091              		.loc 1 103 20 is_stmt 0 view .LVU243
+ 1092 0054 0123     		movs	r3, #1
+ 1093              	.LVL90:
+ 103:Src/VFO/VFOController.cpp **** 	}
+ 1094              		.loc 1 103 20 view .LVU244
+ 1095 0056 0093     		str	r3, [sp]
+ 1096              	.LVL91:
+ 103:Src/VFO/VFOController.cpp **** 	}
+ 1097              		.loc 1 103 20 view .LVU245
+ 1098 0058 07FB02F2 		mul	r2, r7, r2
+ 1099              	.LVL92:
+ARM GAS  /var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccDl9rV2.s 			page 26
+
+
+ 103:Src/VFO/VFOController.cpp **** 	}
+ 1100              		.loc 1 103 20 view .LVU246
+ 1101 005c 3346     		mov	r3, r6
+ 1102 005e E068     		ldr	r0, [r4, #12]
+ 1103 0060 FFF7FEFF 		bl	_ZN6Si53518set_freqEy12si5351_clock
+ 1104              	.LVL93:
+ 103:Src/VFO/VFOController.cpp **** 	}
+ 1105              		.loc 1 103 20 view .LVU247
+ 1106              	.LBE169:
+ 1107              	.LBE168:
+ 1108              	.LBE170:
+ 1109              	.LBE171:
+ 131:Src/VFO/VFOController.cpp **** 	setBrightness(_conf->getBrightness());
+ 1110              		.loc 1 131 2 is_stmt 1 view .LVU248
+ 131:Src/VFO/VFOController.cpp **** 	setBrightness(_conf->getBrightness());
+ 1111              		.loc 1 131 15 is_stmt 0 view .LVU249
+ 1112 0064 6368     		ldr	r3, [r4, #4]
+ 1113              	.LBB172:
+ 1114              	.LBB152:
+  92:Src/VFO/VFOController.cpp **** 	{
+ 1115              		.loc 1 92 2 view .LVU250
+ 1116 0066 227C     		ldrb	r2, [r4, #16]	@ zero_extendqisi2
+ 1117              	.LBE152:
+ 1118              	.LBE172:
+ 131:Src/VFO/VFOController.cpp **** 	setBrightness(_conf->getBrightness());
+ 1119              		.loc 1 131 14 view .LVU251
+ 1120 0068 DD68     		ldr	r5, [r3, #12]
+ 1121              	.LVL94:
+  40:Src/VFO/Configuration.h **** 	int32_t getCalibration(void) { return _data.calibration; }
+ 1122              		.loc 2 40 32 is_stmt 1 view .LVU252
+ 1123              	.LBB173:
+ 1124              	.LBI145:
+  90:Src/VFO/VFOController.cpp **** {
+ 1125              		.loc 1 90 6 view .LVU253
+ 1126              	.LBB153:
+  92:Src/VFO/VFOController.cpp **** 	{
+ 1127              		.loc 1 92 2 view .LVU254
+ 1128 006a 002A     		cmp	r2, #0
+ 1129 006c D2D0     		beq	.L73
+  94:Src/VFO/VFOController.cpp **** 	}
+ 1130              		.loc 1 94 3 view .LVU255
+ 1131              	.LVL95:
+  94:Src/VFO/VFOController.cpp **** 	}
+ 1132              		.loc 1 94 3 is_stmt 0 view .LVU256
+ 1133              	.LBE153:
+ 1134              	.LBE173:
+  42:Src/VFO/Configuration.h **** 	uint32_t getBFrequency(void) { return _data.bFrequency; }
+ 1135              		.loc 2 42 33 is_stmt 1 view .LVU257
+ 1136              	.LBB174:
+ 1137              	.LBB154:
+  94:Src/VFO/VFOController.cpp **** 	}
+ 1138              		.loc 1 94 32 is_stmt 0 view .LVU258
+ 1139 006e 1A69     		ldr	r2, [r3, #16]
+  94:Src/VFO/VFOController.cpp **** 	}
+ 1140              		.loc 1 94 20 view .LVU259
+ 1141 0070 0096     		str	r6, [sp]
+  94:Src/VFO/VFOController.cpp **** 	}
+ARM GAS  /var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccDl9rV2.s 			page 27
+
+
+ 1142              		.loc 1 94 32 view .LVU260
+ 1143 0072 2A44     		add	r2, r2, r5
+  94:Src/VFO/VFOController.cpp **** 	}
+ 1144              		.loc 1 94 20 view .LVU261
+ 1145 0074 3346     		mov	r3, r6
+ 1146              	.LVL96:
+  94:Src/VFO/VFOController.cpp **** 	}
+ 1147              		.loc 1 94 20 view .LVU262
+ 1148 0076 07FB02F2 		mul	r2, r7, r2
+ 1149 007a E068     		ldr	r0, [r4, #12]
+ 1150 007c FFF7FEFF 		bl	_ZN6Si53518set_freqEy12si5351_clock
+ 1151              	.LVL97:
+ 1152 0080 6368     		ldr	r3, [r4, #4]
+ 1153 0082 C7E7     		b	.L73
+ 1154              	.LVL98:
+ 1155              	.L85:
+  94:Src/VFO/VFOController.cpp **** 	}
+ 1156              		.loc 1 94 20 view .LVU263
+ 1157 0084 DD68     		ldr	r5, [r3, #12]
+ 1158 0086 C5E7     		b	.L73
+ 1159              	.L87:
+ 1160              		.align	2
+ 1161              	.L86:
+ 1162 0088 00040040 		.word	1073742848
+ 1163              	.LBE154:
+ 1164              	.LBE174:
+ 1165              		.cfi_endproc
+ 1166              	.LFE138:
+ 1167              		.fnend
+ 1169              		.section	.text._ZN3VFO13VFOControllerC2Ev,"ax",%progbits
+ 1170              		.align	1
+ 1171              		.p2align 2,,3
+ 1172              		.global	_ZN3VFO13VFOControllerC2Ev
+ 1173              		.syntax unified
+ 1174              		.thumb
+ 1175              		.thumb_func
+ 1176              		.fpu softvfp
+ 1178              	_ZN3VFO13VFOControllerC2Ev:
+ 1179              		.fnstart
+ 1180              	.LVL99:
+ 1181              	.LFB120:
+  18:Src/VFO/VFOController.cpp **** {
+ 1182              		.loc 1 18 1 is_stmt 1 view -0
+ 1183              		.cfi_startproc
+ 1184              		@ args = 0, pretend = 0, frame = 0
+ 1185              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1186              	.LBB193:
+  18:Src/VFO/VFOController.cpp **** {
+ 1187              		.loc 1 18 30 is_stmt 0 view .LVU265
+ 1188 0000 0122     		movs	r2, #1
+ 1189              	.LBE193:
+  18:Src/VFO/VFOController.cpp **** {
+ 1190              		.loc 1 18 1 view .LVU266
+ 1191 0002 38B5     		push	{r3, r4, r5, lr}
+ 1192              		.save {r3, r4, r5, lr}
+ 1193              	.LCFI21:
+ 1194              		.cfi_def_cfa_offset 16
+ARM GAS  /var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccDl9rV2.s 			page 28
+
+
+ 1195              		.cfi_offset 3, -16
+ 1196              		.cfi_offset 4, -12
+ 1197              		.cfi_offset 5, -8
+ 1198              		.cfi_offset 14, -4
+ 1199              	.LBB225:
+  18:Src/VFO/VFOController.cpp **** {
+ 1200              		.loc 1 18 30 view .LVU267
+ 1201 0004 284B     		ldr	r3, .L99
+ 1202 0006 0274     		strb	r2, [r0, #16]
+  20:Src/VFO/VFOController.cpp **** 	_gui = new GUIController;
+ 1203              		.loc 1 20 2 is_stmt 1 view .LVU268
+  18:Src/VFO/VFOController.cpp **** {
+ 1204              		.loc 1 18 30 is_stmt 0 view .LVU269
+ 1205 0008 0360     		str	r3, [r0]
+ 1206              	.LBE225:
+  18:Src/VFO/VFOController.cpp **** {
+ 1207              		.loc 1 18 1 view .LVU270
+ 1208 000a 0446     		mov	r4, r0
+ 1209              	.LBB226:
+  20:Src/VFO/VFOController.cpp **** 	_gui = new GUIController;
+ 1210              		.loc 1 20 14 view .LVU271
+ 1211 000c 2420     		movs	r0, #36
+ 1212              	.LVL100:
+ 1213              	.LEHB0:
+  20:Src/VFO/VFOController.cpp **** 	_gui = new GUIController;
+ 1214              		.loc 1 20 14 view .LVU272
+ 1215 000e FFF7FEFF 		bl	_Znwj
+ 1216              	.LVL101:
+ 1217              	.LEHE0:
+ 1218 0012 0546     		mov	r5, r0
+ 1219              	.LEHB1:
+ 1220 0014 FFF7FEFF 		bl	_ZN3VFO13ConfigurationC1Ev
+ 1221              	.LVL102:
+ 1222              	.LEHE1:
+  20:Src/VFO/VFOController.cpp **** 	_gui = new GUIController;
+ 1223              		.loc 1 20 8 discriminator 2 view .LVU273
+ 1224 0018 6560     		str	r5, [r4, #4]
+  21:Src/VFO/VFOController.cpp **** 	_si5351 = new Si5351;
+ 1225              		.loc 1 21 2 is_stmt 1 discriminator 2 view .LVU274
+  21:Src/VFO/VFOController.cpp **** 	_si5351 = new Si5351;
+ 1226              		.loc 1 21 13 is_stmt 0 discriminator 2 view .LVU275
+ 1227 001a 1020     		movs	r0, #16
+ 1228              	.LEHB2:
+ 1229 001c FFF7FEFF 		bl	_Znwj
+ 1230              	.LVL103:
+ 1231              	.LEHE2:
+ 1232 0020 0546     		mov	r5, r0
+ 1233              	.LEHB3:
+ 1234 0022 FFF7FEFF 		bl	_ZN3VFO13GUIControllerC1Ev
+ 1235              	.LVL104:
+ 1236              	.LEHE3:
+  21:Src/VFO/VFOController.cpp **** 	_si5351 = new Si5351;
+ 1237              		.loc 1 21 7 discriminator 2 view .LVU276
+ 1238 0026 A560     		str	r5, [r4, #8]
+  22:Src/VFO/VFOController.cpp **** 
+ 1239              		.loc 1 22 2 is_stmt 1 discriminator 2 view .LVU277
+  22:Src/VFO/VFOController.cpp **** 
+ARM GAS  /var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccDl9rV2.s 			page 29
+
+
+ 1240              		.loc 1 22 16 is_stmt 0 discriminator 2 view .LVU278
+ 1241 0028 8820     		movs	r0, #136
+ 1242              	.LEHB4:
+ 1243 002a FFF7FEFF 		bl	_Znwj
+ 1244              	.LVL105:
+ 1245              	.LEHE4:
+ 1246 002e 6021     		movs	r1, #96
+ 1247 0030 0546     		mov	r5, r0
+ 1248              	.LEHB5:
+ 1249 0032 FFF7FEFF 		bl	_ZN6Si5351C1Eh
+ 1250              	.LVL106:
+ 1251              	.LEHE5:
+  22:Src/VFO/VFOController.cpp **** 
+ 1252              		.loc 1 22 10 discriminator 2 view .LVU279
+ 1253 0036 E560     		str	r5, [r4, #12]
+  24:Src/VFO/VFOController.cpp **** 	if (_conf->getBrightness() == 0)
+ 1254              		.loc 1 24 2 is_stmt 1 discriminator 2 view .LVU280
+  24:Src/VFO/VFOController.cpp **** 	if (_conf->getBrightness() == 0)
+ 1255              		.loc 1 24 13 is_stmt 0 discriminator 2 view .LVU281
+ 1256 0038 6068     		ldr	r0, [r4, #4]
+ 1257              	.LEHB6:
+ 1258 003a FFF7FEFF 		bl	_ZN3VFO13Configuration4loadEv
+ 1259              	.LVL107:
+  25:Src/VFO/VFOController.cpp **** 	{
+ 1260              		.loc 1 25 2 is_stmt 1 discriminator 2 view .LVU282
+  25:Src/VFO/VFOController.cpp **** 	{
+ 1261              		.loc 1 25 6 is_stmt 0 discriminator 2 view .LVU283
+ 1262 003e 6368     		ldr	r3, [r4, #4]
+ 1263              	.LBB194:
+ 1264              	.LBI194:
+  44:Src/VFO/Configuration.h **** 	uint32_t getEncoder(void) { return _data.encoder; }
+ 1265              		.loc 2 44 10 is_stmt 1 discriminator 2 view .LVU284
+ 1266              	.LVL108:
+  44:Src/VFO/Configuration.h **** 	uint32_t getEncoder(void) { return _data.encoder; }
+ 1267              		.loc 2 44 10 is_stmt 0 discriminator 2 view .LVU285
+ 1268              	.LBE194:
+ 1269              	.LBE226:
+  44:Src/VFO/Configuration.h **** 	uint32_t getEncoder(void) { return _data.encoder; }
+ 1270              		.loc 2 44 32 is_stmt 1 discriminator 2 view .LVU286
+ 1271              	.LBB227:
+  25:Src/VFO/VFOController.cpp **** 	{
+ 1272              		.loc 1 25 2 is_stmt 0 discriminator 2 view .LVU287
+ 1273 0040 93F82020 		ldrb	r2, [r3, #32]	@ zero_extendqisi2
+ 1274 0044 22B1     		cbz	r2, .L98
+  30:Src/VFO/VFOController.cpp **** }
+ 1275              		.loc 1 30 2 is_stmt 1 view .LVU288
+  30:Src/VFO/VFOController.cpp **** }
+ 1276              		.loc 1 30 14 is_stmt 0 view .LVU289
+ 1277 0046 2046     		mov	r0, r4
+ 1278 0048 FFF7FEFF 		bl	_ZN3VFO13VFOController6initSIEv
+ 1279              	.LVL109:
+  30:Src/VFO/VFOController.cpp **** }
+ 1280              		.loc 1 30 14 view .LVU290
+ 1281              	.LBE227:
+  31:Src/VFO/VFOController.cpp **** 
+ 1282              		.loc 1 31 1 view .LVU291
+ 1283 004c 2046     		mov	r0, r4
+ARM GAS  /var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccDl9rV2.s 			page 30
+
+
+ 1284 004e 38BD     		pop	{r3, r4, r5, pc}
+ 1285              	.LVL110:
+ 1286              	.L98:
+ 1287              	.LBB228:
+  27:Src/VFO/VFOController.cpp **** 	}
+ 1288              		.loc 1 27 3 is_stmt 1 view .LVU292
+ 1289              	.LBB195:
+ 1290              	.LBI195:
+ 134:Src/VFO/VFOController.cpp **** 
+ 135:Src/VFO/VFOController.cpp **** void VFOController::reset()
+ 1291              		.loc 1 135 6 view .LVU293
+ 1292              	.LBB196:
+ 136:Src/VFO/VFOController.cpp **** {
+ 137:Src/VFO/VFOController.cpp **** 	_conf->setFrequency(7125000);
+ 1293              		.loc 1 137 2 view .LVU294
+ 1294              	.LBB197:
+ 1295              	.LBI197:
+ 1296              		.loc 2 47 7 view .LVU295
+ 1297              	.LBB198:
+ 1298              		.loc 2 47 42 view .LVU296
+ 1299              	.LBE198:
+ 1300              	.LBE197:
+ 1301              	.LBB200:
+ 1302              	.LBB201:
+  48:Src/VFO/Configuration.h **** 	void setCalibration(uint32_t value) { _data.calibration = value; }
+  49:Src/VFO/Configuration.h **** 	void setIFrequency(uint32_t frequency) { _data.iFrequency = frequency; }
+  50:Src/VFO/Configuration.h **** 	void setBFrequency(uint32_t frequency) { _data.bFrequency = frequency; }
+  51:Src/VFO/Configuration.h **** 	void setBrightness(uint8_t value) { _data.brightness = value; }
+ 1303              		.loc 2 51 55 is_stmt 0 view .LVU297
+ 1304 0050 FF22     		movs	r2, #255
+ 1305              	.LBE201:
+ 1306              	.LBE200:
+ 1307              	.LBB204:
+ 1308              	.LBB205:
+  48:Src/VFO/Configuration.h **** 	void setCalibration(uint32_t value) { _data.calibration = value; }
+ 1309              		.loc 2 48 58 view .LVU298
+ 1310 0052 45F23E71 		movw	r1, #22334
+ 1311              	.LBE205:
+ 1312              	.LBE204:
+ 1313              	.LBB207:
+ 1314              	.LBB208:
+  52:Src/VFO/Configuration.h **** 	void setEncoder(uint32_t value) { _data.encoder = value; }
+ 1315              		.loc 2 52 50 view .LVU299
+ 1316 0056 8025     		movs	r5, #128
+ 1317              	.LBE208:
+ 1318              	.LBE207:
+ 1319              	.LBB211:
+ 1320              	.LBB202:
+  51:Src/VFO/Configuration.h **** 	void setEncoder(uint32_t value) { _data.encoder = value; }
+ 1321              		.loc 2 51 55 view .LVU300
+ 1322 0058 83F82020 		strb	r2, [r3, #32]
+ 1323              	.LBE202:
+ 1324              	.LBE211:
+ 138:Src/VFO/VFOController.cpp **** 	_conf->setCalibration(22334);
+ 139:Src/VFO/VFOController.cpp **** 	//_conf->setCalibration(406000);
+ 140:Src/VFO/VFOController.cpp **** 	_conf->setIFrequency(5000000);
+ 141:Src/VFO/VFOController.cpp **** 	_conf->setBFrequency(5000000);
+ARM GAS  /var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccDl9rV2.s 			page 31
+
+
+ 142:Src/VFO/VFOController.cpp **** 	_conf->setBrightness(255);
+ 143:Src/VFO/VFOController.cpp **** 	_conf->setEncoder(128);
+ 1325              		.loc 1 143 2 view .LVU301
+ 1326 005c 6268     		ldr	r2, [r4, #4]
+ 1327              	.LBB212:
+ 1328              	.LBB199:
+  47:Src/VFO/Configuration.h **** 	void setCalibration(uint32_t value) { _data.calibration = value; }
+ 1329              		.loc 2 47 58 view .LVU302
+ 1330 005e 1348     		ldr	r0, .L99+4
+ 1331              	.LBE199:
+ 1332              	.LBE212:
+ 1333              	.LBB213:
+ 1334              	.LBB206:
+  48:Src/VFO/Configuration.h **** 	void setIFrequency(uint32_t frequency) { _data.iFrequency = frequency; }
+ 1335              		.loc 2 48 58 view .LVU303
+ 1336 0060 D961     		str	r1, [r3, #28]
+ 1337              	.LBE206:
+ 1338              	.LBE213:
+ 1339              	.LBB214:
+ 1340              	.LBB215:
+  49:Src/VFO/Configuration.h **** 	void setBFrequency(uint32_t frequency) { _data.bFrequency = frequency; }
+ 1341              		.loc 2 49 60 view .LVU304
+ 1342 0062 1349     		ldr	r1, .L99+8
+ 1343 0064 C3E90301 		strd	r0, r1, [r3, #12]
+ 1344              	.LBE215:
+ 1345              	.LBE214:
+ 141:Src/VFO/VFOController.cpp **** 	_conf->setBrightness(255);
+ 1346              		.loc 1 141 2 is_stmt 1 view .LVU305
+ 1347              	.LVL111:
+ 1348              	.LBB216:
+ 1349              	.LBI216:
+  50:Src/VFO/Configuration.h **** 	void setBrightness(uint8_t value) { _data.brightness = value; }
+ 1350              		.loc 2 50 7 view .LVU306
+ 1351              	.LBB217:
+  50:Src/VFO/Configuration.h **** 	void setBrightness(uint8_t value) { _data.brightness = value; }
+ 1352              		.loc 2 50 43 view .LVU307
+  50:Src/VFO/Configuration.h **** 	void setBrightness(uint8_t value) { _data.brightness = value; }
+ 1353              		.loc 2 50 60 is_stmt 0 view .LVU308
+ 1354 0068 5961     		str	r1, [r3, #20]
+ 1355              	.LVL112:
+  50:Src/VFO/Configuration.h **** 	void setBrightness(uint8_t value) { _data.brightness = value; }
+ 1356              		.loc 2 50 60 view .LVU309
+ 1357              	.LBE217:
+ 1358              	.LBE216:
+ 142:Src/VFO/VFOController.cpp **** 	_conf->setEncoder(128);
+ 1359              		.loc 1 142 2 is_stmt 1 view .LVU310
+ 1360              	.LBB218:
+ 1361              	.LBI200:
+  51:Src/VFO/Configuration.h **** 	void setEncoder(uint32_t value) { _data.encoder = value; }
+ 1362              		.loc 2 51 7 view .LVU311
+ 1363              	.LBB203:
+  51:Src/VFO/Configuration.h **** 	void setEncoder(uint32_t value) { _data.encoder = value; }
+ 1364              		.loc 2 51 38 view .LVU312
+  51:Src/VFO/Configuration.h **** 	void setEncoder(uint32_t value) { _data.encoder = value; }
+ 1365              		.loc 2 51 38 is_stmt 0 view .LVU313
+ 1366              	.LBE203:
+ 1367              	.LBE218:
+ARM GAS  /var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccDl9rV2.s 			page 32
+
+
+ 1368              		.loc 1 143 2 is_stmt 1 view .LVU314
+ 1369              	.LBB219:
+ 1370              	.LBI207:
+ 1371              		.loc 2 52 7 view .LVU315
+ 1372              	.LBB209:
+ 1373              		.loc 2 52 36 view .LVU316
+ 1374              	.LBE209:
+ 1375              	.LBE219:
+ 1376              	.LBB220:
+ 1377              	.LBB221:
+ 122:Src/VFO/VFOController.cpp **** }
+ 1378              		.loc 1 122 13 is_stmt 0 view .LVU317
+ 1379 006a 1046     		mov	r0, r2
+ 1380              	.LBE221:
+ 1381              	.LBE220:
+ 1382              	.LBB223:
+ 1383              	.LBB210:
+ 1384              		.loc 2 52 50 view .LVU318
+ 1385 006c 9561     		str	r5, [r2, #24]
+ 1386              	.LVL113:
+ 1387              		.loc 2 52 50 view .LVU319
+ 1388              	.LBE210:
+ 1389              	.LBE223:
+ 144:Src/VFO/VFOController.cpp **** 	storeConfiguration();
+ 1390              		.loc 1 144 2 is_stmt 1 view .LVU320
+ 1391              	.LBB224:
+ 1392              	.LBI220:
+ 120:Src/VFO/VFOController.cpp **** {
+ 1393              		.loc 1 120 6 view .LVU321
+ 1394              	.LBB222:
+ 122:Src/VFO/VFOController.cpp **** }
+ 1395              		.loc 1 122 2 view .LVU322
+ 122:Src/VFO/VFOController.cpp **** }
+ 1396              		.loc 1 122 13 is_stmt 0 view .LVU323
+ 1397 006e FFF7FEFF 		bl	_ZN3VFO13Configuration4saveEv
+ 1398              	.LVL114:
+ 122:Src/VFO/VFOController.cpp **** }
+ 1399              		.loc 1 122 13 view .LVU324
+ 1400              	.LBE222:
+ 1401              	.LBE224:
+ 145:Src/VFO/VFOController.cpp **** 	loadConfiguration();
+ 1402              		.loc 1 145 2 is_stmt 1 view .LVU325
+ 1403              		.loc 1 145 19 is_stmt 0 view .LVU326
+ 1404 0072 2046     		mov	r0, r4
+ 1405 0074 FFF7FEFF 		bl	_ZN3VFO13VFOController17loadConfigurationEv
+ 1406              	.LVL115:
+ 1407              	.LBE196:
+ 1408              	.LBE195:
+  30:Src/VFO/VFOController.cpp **** }
+ 1409              		.loc 1 30 2 is_stmt 1 view .LVU327
+  30:Src/VFO/VFOController.cpp **** }
+ 1410              		.loc 1 30 14 is_stmt 0 view .LVU328
+ 1411 0078 2046     		mov	r0, r4
+ 1412 007a FFF7FEFF 		bl	_ZN3VFO13VFOController6initSIEv
+ 1413              	.LVL116:
+ 1414              	.LBE228:
+  31:Src/VFO/VFOController.cpp **** 
+ARM GAS  /var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccDl9rV2.s 			page 33
+
+
+ 1415              		.loc 1 31 1 view .LVU329
+ 1416 007e 2046     		mov	r0, r4
+ 1417 0080 38BD     		pop	{r3, r4, r5, pc}
+ 1418              	.LVL117:
+ 1419              	.L95:
+ 1420              	.LBB229:
+  22:Src/VFO/VFOController.cpp **** 
+ 1421              		.loc 1 22 16 view .LVU330
+ 1422 0082 2846     		mov	r0, r5
+ 1423 0084 8821     		movs	r1, #136
+ 1424 0086 FFF7FEFF 		bl	_ZdlPvj
+ 1425              	.LVL118:
+ 1426 008a FFF7FEFF 		bl	__cxa_end_cleanup
+ 1427              	.LVL119:
+ 1428              	.L94:
+  21:Src/VFO/VFOController.cpp **** 	_si5351 = new Si5351;
+ 1429              		.loc 1 21 13 view .LVU331
+ 1430 008e 2846     		mov	r0, r5
+ 1431 0090 1021     		movs	r1, #16
+ 1432 0092 FFF7FEFF 		bl	_ZdlPvj
+ 1433              	.LVL120:
+ 1434 0096 FFF7FEFF 		bl	__cxa_end_cleanup
+ 1435              	.LVL121:
+ 1436              	.L93:
+  20:Src/VFO/VFOController.cpp **** 	_gui = new GUIController;
+ 1437              		.loc 1 20 14 view .LVU332
+ 1438 009a 2846     		mov	r0, r5
+ 1439 009c 2421     		movs	r1, #36
+ 1440 009e FFF7FEFF 		bl	_ZdlPvj
+ 1441              	.LVL122:
+ 1442 00a2 FFF7FEFF 		bl	__cxa_end_cleanup
+ 1443              	.LVL123:
+ 1444              	.LEHE6:
+ 1445              	.L100:
+ 1446 00a6 00BF     		.align	2
+ 1447              	.L99:
+ 1448 00a8 08000000 		.word	.LANCHOR0+8
+ 1449 00ac 08B86C00 		.word	7125000
+ 1450 00b0 404B4C00 		.word	5000000
+ 1451              	.LBE229:
+ 1452              		.cfi_endproc
+ 1453              	.LFE120:
+ 1454              		.global	__gxx_personality_v0
+ 1455              		.personality	__gxx_personality_v0
+ 1456              		.handlerdata
+ 1457              	.LLSDA120:
+ 1458 0008 FF       		.byte	0xff
+ 1459 0009 FF       		.byte	0xff
+ 1460 000a 01       		.byte	0x1
+ 1461 000b 1F       		.uleb128 .LLSDACSE120-.LLSDACSB120
+ 1462              	.LLSDACSB120:
+ 1463 000c 0E       		.uleb128 .LEHB0-.LFB120
+ 1464 000d 04       		.uleb128 .LEHE0-.LEHB0
+ 1465 000e 00       		.uleb128 0
+ 1466 000f 00       		.uleb128 0
+ 1467 0010 14       		.uleb128 .LEHB1-.LFB120
+ 1468 0011 04       		.uleb128 .LEHE1-.LEHB1
+ARM GAS  /var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccDl9rV2.s 			page 34
+
+
+ 1469 0012 9A01     		.uleb128 .L93-.LFB120
+ 1470 0014 00       		.uleb128 0
+ 1471 0015 1C       		.uleb128 .LEHB2-.LFB120
+ 1472 0016 04       		.uleb128 .LEHE2-.LEHB2
+ 1473 0017 00       		.uleb128 0
+ 1474 0018 00       		.uleb128 0
+ 1475 0019 22       		.uleb128 .LEHB3-.LFB120
+ 1476 001a 04       		.uleb128 .LEHE3-.LEHB3
+ 1477 001b 8E01     		.uleb128 .L94-.LFB120
+ 1478 001d 00       		.uleb128 0
+ 1479 001e 2A       		.uleb128 .LEHB4-.LFB120
+ 1480 001f 04       		.uleb128 .LEHE4-.LEHB4
+ 1481 0020 00       		.uleb128 0
+ 1482 0021 00       		.uleb128 0
+ 1483 0022 32       		.uleb128 .LEHB5-.LFB120
+ 1484 0023 04       		.uleb128 .LEHE5-.LEHB5
+ 1485 0024 8201     		.uleb128 .L95-.LFB120
+ 1486 0026 00       		.uleb128 0
+ 1487 0027 3A       		.uleb128 .LEHB6-.LFB120
+ 1488 0028 6C       		.uleb128 .LEHE6-.LEHB6
+ 1489 0029 00       		.uleb128 0
+ 1490 002a 00       		.uleb128 0
+ 1491              	.LLSDACSE120:
+ 1492              		.section	.text._ZN3VFO13VFOControllerC2Ev
+ 1493              		.fnend
+ 1495              		.global	_ZN3VFO13VFOControllerC1Ev
+ 1496              		.thumb_set _ZN3VFO13VFOControllerC1Ev,_ZN3VFO13VFOControllerC2Ev
+ 1497              		.section	.text._ZN3VFO13VFOController5resetEv,"ax",%progbits
+ 1498              		.align	1
+ 1499              		.p2align 2,,3
+ 1500              		.global	_ZN3VFO13VFOController5resetEv
+ 1501              		.syntax unified
+ 1502              		.thumb
+ 1503              		.thumb_func
+ 1504              		.fpu softvfp
+ 1506              	_ZN3VFO13VFOController5resetEv:
+ 1507              		.fnstart
+ 1508              	.LVL124:
+ 1509              	.LFB139:
+ 136:Src/VFO/VFOController.cpp **** 	_conf->setFrequency(7125000);
+ 1510              		.loc 1 136 1 is_stmt 1 view -0
+ 1511              		.cfi_startproc
+ 1512              		@ args = 0, pretend = 0, frame = 0
+ 1513              		@ frame_needed = 0, uses_anonymous_args = 0
+ 137:Src/VFO/VFOController.cpp **** 	_conf->setCalibration(22334);
+ 1514              		.loc 1 137 2 view .LVU334
+ 136:Src/VFO/VFOController.cpp **** 	_conf->setFrequency(7125000);
+ 1515              		.loc 1 136 1 is_stmt 0 view .LVU335
+ 1516 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 1517              		.save {r4, r5, r6, r7, lr}
+ 1518              	.LCFI22:
+ 1519              		.cfi_def_cfa_offset 20
+ 1520              		.cfi_offset 4, -20
+ 1521              		.cfi_offset 5, -16
+ 1522              		.cfi_offset 6, -12
+ 1523              		.cfi_offset 7, -8
+ 1524              		.cfi_offset 14, -4
+ARM GAS  /var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccDl9rV2.s 			page 35
+
+
+ 1525 0002 0446     		mov	r4, r0
+ 1526              	.LBB264:
+ 1527              	.LBB265:
+  51:Src/VFO/Configuration.h **** 	void setEncoder(uint32_t value) { _data.encoder = value; }
+ 1528              		.loc 2 51 55 view .LVU336
+ 1529 0004 FF22     		movs	r2, #255
+ 1530              	.LBE265:
+ 1531              	.LBE264:
+ 1532              	.LBB268:
+ 1533              	.LBB269:
+  48:Src/VFO/Configuration.h **** 	void setIFrequency(uint32_t frequency) { _data.iFrequency = frequency; }
+ 1534              		.loc 2 48 58 view .LVU337
+ 1535 0006 45F23E70 		movw	r0, #22334
+ 1536              	.LVL125:
+  48:Src/VFO/Configuration.h **** 	void setIFrequency(uint32_t frequency) { _data.iFrequency = frequency; }
+ 1537              		.loc 2 48 58 view .LVU338
+ 1538              	.LBE269:
+ 1539              	.LBE268:
+ 1540              	.LBB272:
+ 1541              	.LBB273:
+ 1542              		.loc 2 52 50 view .LVU339
+ 1543 000a 8025     		movs	r5, #128
+ 1544              	.LBE273:
+ 1545              	.LBE272:
+ 137:Src/VFO/VFOController.cpp **** 	_conf->setCalibration(22334);
+ 1546              		.loc 1 137 2 view .LVU340
+ 1547 000c 6368     		ldr	r3, [r4, #4]
+ 1548              	.LVL126:
+ 1549              	.LBB276:
+ 1550              	.LBI276:
+  47:Src/VFO/Configuration.h **** 	void setCalibration(uint32_t value) { _data.calibration = value; }
+ 1551              		.loc 2 47 7 is_stmt 1 view .LVU341
+ 1552              	.LBB277:
+  47:Src/VFO/Configuration.h **** 	void setCalibration(uint32_t value) { _data.calibration = value; }
+ 1553              		.loc 2 47 42 view .LVU342
+  47:Src/VFO/Configuration.h **** 	void setCalibration(uint32_t value) { _data.calibration = value; }
+ 1554              		.loc 2 47 58 is_stmt 0 view .LVU343
+ 1555 000e 2749     		ldr	r1, .L118
+ 1556              	.LBE277:
+ 1557              	.LBE276:
+ 1558              	.LBB279:
+ 1559              	.LBB266:
+  51:Src/VFO/Configuration.h **** 	void setEncoder(uint32_t value) { _data.encoder = value; }
+ 1560              		.loc 2 51 55 view .LVU344
+ 1561 0010 83F82020 		strb	r2, [r3, #32]
+ 1562              	.LBE266:
+ 1563              	.LBE279:
+ 143:Src/VFO/VFOController.cpp **** 	storeConfiguration();
+ 1564              		.loc 1 143 2 view .LVU345
+ 1565 0014 6268     		ldr	r2, [r4, #4]
+ 1566              	.LBB280:
+ 1567              	.LBB278:
+  47:Src/VFO/Configuration.h **** 	void setCalibration(uint32_t value) { _data.calibration = value; }
+ 1568              		.loc 2 47 58 view .LVU346
+ 1569 0016 D960     		str	r1, [r3, #12]
+ 1570              	.LVL127:
+  47:Src/VFO/Configuration.h **** 	void setCalibration(uint32_t value) { _data.calibration = value; }
+ARM GAS  /var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccDl9rV2.s 			page 36
+
+
+ 1571              		.loc 2 47 58 view .LVU347
+ 1572              	.LBE278:
+ 1573              	.LBE280:
+ 138:Src/VFO/VFOController.cpp **** 	//_conf->setCalibration(406000);
+ 1574              		.loc 1 138 2 is_stmt 1 view .LVU348
+ 1575              	.LBB281:
+ 1576              	.LBI268:
+  48:Src/VFO/Configuration.h **** 	void setIFrequency(uint32_t frequency) { _data.iFrequency = frequency; }
+ 1577              		.loc 2 48 7 view .LVU349
+ 1578              	.LBB270:
+  48:Src/VFO/Configuration.h **** 	void setIFrequency(uint32_t frequency) { _data.iFrequency = frequency; }
+ 1579              		.loc 2 48 40 view .LVU350
+ 1580              	.LBE270:
+ 1581              	.LBE281:
+ 1582              	.LBB282:
+ 1583              	.LBB283:
+  49:Src/VFO/Configuration.h **** 	void setBFrequency(uint32_t frequency) { _data.bFrequency = frequency; }
+ 1584              		.loc 2 49 60 is_stmt 0 view .LVU351
+ 1585 0018 2549     		ldr	r1, .L118+4
+ 1586              	.LBE283:
+ 1587              	.LBE282:
+ 1588              	.LBB285:
+ 1589              	.LBB271:
+  48:Src/VFO/Configuration.h **** 	void setIFrequency(uint32_t frequency) { _data.iFrequency = frequency; }
+ 1590              		.loc 2 48 58 view .LVU352
+ 1591 001a D861     		str	r0, [r3, #28]
+ 1592              	.LVL128:
+  48:Src/VFO/Configuration.h **** 	void setIFrequency(uint32_t frequency) { _data.iFrequency = frequency; }
+ 1593              		.loc 2 48 58 view .LVU353
+ 1594              	.LBE271:
+ 1595              	.LBE285:
+ 140:Src/VFO/VFOController.cpp **** 	_conf->setBFrequency(5000000);
+ 1596              		.loc 1 140 2 is_stmt 1 view .LVU354
+ 1597              	.LBB286:
+ 1598              	.LBI282:
+  49:Src/VFO/Configuration.h **** 	void setBFrequency(uint32_t frequency) { _data.bFrequency = frequency; }
+ 1599              		.loc 2 49 7 view .LVU355
+ 1600              	.LBB284:
+  49:Src/VFO/Configuration.h **** 	void setBFrequency(uint32_t frequency) { _data.bFrequency = frequency; }
+ 1601              		.loc 2 49 43 view .LVU356
+ 1602              	.LBE284:
+ 1603              	.LBE286:
+ 1604              	.LBB287:
+ 1605              	.LBB288:
+  50:Src/VFO/Configuration.h **** 	void setBrightness(uint8_t value) { _data.brightness = value; }
+ 1606              		.loc 2 50 60 is_stmt 0 view .LVU357
+ 1607 001c C3E90411 		strd	r1, r1, [r3, #16]
+ 1608              	.LBE288:
+ 1609              	.LBE287:
+ 142:Src/VFO/VFOController.cpp **** 	_conf->setEncoder(128);
+ 1610              		.loc 1 142 2 is_stmt 1 view .LVU358
+ 1611              	.LVL129:
+ 1612              	.LBB289:
+ 1613              	.LBI264:
+  51:Src/VFO/Configuration.h **** 	void setEncoder(uint32_t value) { _data.encoder = value; }
+ 1614              		.loc 2 51 7 view .LVU359
+ 1615              	.LBB267:
+ARM GAS  /var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccDl9rV2.s 			page 37
+
+
+  51:Src/VFO/Configuration.h **** 	void setEncoder(uint32_t value) { _data.encoder = value; }
+ 1616              		.loc 2 51 38 view .LVU360
+  51:Src/VFO/Configuration.h **** 	void setEncoder(uint32_t value) { _data.encoder = value; }
+ 1617              		.loc 2 51 38 is_stmt 0 view .LVU361
+ 1618              	.LBE267:
+ 1619              	.LBE289:
+ 143:Src/VFO/VFOController.cpp **** 	storeConfiguration();
+ 1620              		.loc 1 143 2 is_stmt 1 view .LVU362
+ 1621              	.LBB290:
+ 1622              	.LBI272:
+ 1623              		.loc 2 52 7 view .LVU363
+ 1624              	.LBB274:
+ 1625              		.loc 2 52 36 view .LVU364
+ 1626              	.LBE274:
+ 1627              	.LBE290:
+ 1628              	.LBB291:
+ 1629              	.LBB292:
+ 122:Src/VFO/VFOController.cpp **** }
+ 1630              		.loc 1 122 13 is_stmt 0 view .LVU365
+ 1631 0020 1046     		mov	r0, r2
+ 1632              	.LBE292:
+ 1633              	.LBE291:
+ 1634              	.LBB295:
+ 1635              	.LBB275:
+ 1636              		.loc 2 52 50 view .LVU366
+ 1637 0022 9561     		str	r5, [r2, #24]
+ 1638              	.LVL130:
+ 1639              		.loc 2 52 50 view .LVU367
+ 1640              	.LBE275:
+ 1641              	.LBE295:
+ 144:Src/VFO/VFOController.cpp **** 	loadConfiguration();
+ 1642              		.loc 1 144 2 is_stmt 1 view .LVU368
+ 1643              	.LBB296:
+ 1644              	.LBI291:
+ 120:Src/VFO/VFOController.cpp **** {
+ 1645              		.loc 1 120 6 view .LVU369
+ 1646              	.LBB293:
+ 122:Src/VFO/VFOController.cpp **** }
+ 1647              		.loc 1 122 2 view .LVU370
+ 1648              	.LBE293:
+ 1649              	.LBE296:
+ 136:Src/VFO/VFOController.cpp **** 	_conf->setFrequency(7125000);
+ 1650              		.loc 1 136 1 is_stmt 0 view .LVU371
+ 1651              		.pad #12
+ 1652 0024 83B0     		sub	sp, sp, #12
+ 1653              	.LCFI23:
+ 1654              		.cfi_def_cfa_offset 32
+ 1655              	.LBB297:
+ 1656              	.LBB294:
+ 122:Src/VFO/VFOController.cpp **** }
+ 1657              		.loc 1 122 13 view .LVU372
+ 1658 0026 FFF7FEFF 		bl	_ZN3VFO13Configuration4saveEv
+ 1659              	.LVL131:
+ 122:Src/VFO/VFOController.cpp **** }
+ 1660              		.loc 1 122 13 view .LVU373
+ 1661              	.LBE294:
+ 1662              	.LBE297:
+ARM GAS  /var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccDl9rV2.s 			page 38
+
+
+ 1663              		.loc 1 145 2 is_stmt 1 view .LVU374
+ 1664              	.LBB298:
+ 1665              	.LBI298:
+ 125:Src/VFO/VFOController.cpp **** {
+ 1666              		.loc 1 125 6 view .LVU375
+ 1667              	.LBB299:
+ 127:Src/VFO/VFOController.cpp **** 	setFrequency(_conf->getFrequency());
+ 1668              		.loc 1 127 2 view .LVU376
+ 127:Src/VFO/VFOController.cpp **** 	setFrequency(_conf->getFrequency());
+ 1669              		.loc 1 127 13 is_stmt 0 view .LVU377
+ 1670 002a 6068     		ldr	r0, [r4, #4]
+ 1671 002c FFF7FEFF 		bl	_ZN3VFO13Configuration4loadEv
+ 1672              	.LVL132:
+ 128:Src/VFO/VFOController.cpp **** 	setCalibration(_conf->getCalibration());
+ 1673              		.loc 1 128 2 is_stmt 1 view .LVU378
+ 128:Src/VFO/VFOController.cpp **** 	setCalibration(_conf->getCalibration());
+ 1674              		.loc 1 128 15 is_stmt 0 view .LVU379
+ 1675 0030 6368     		ldr	r3, [r4, #4]
+ 1676              	.LBB300:
+ 1677              	.LBB301:
+  92:Src/VFO/VFOController.cpp **** 	{
+ 1678              		.loc 1 92 2 view .LVU380
+ 1679 0032 227C     		ldrb	r2, [r4, #16]	@ zero_extendqisi2
+ 1680              	.LBE301:
+ 1681              	.LBE300:
+ 128:Src/VFO/VFOController.cpp **** 	setCalibration(_conf->getCalibration());
+ 1682              		.loc 1 128 14 view .LVU381
+ 1683 0034 DD68     		ldr	r5, [r3, #12]
+ 1684              	.LVL133:
+ 128:Src/VFO/VFOController.cpp **** 	setCalibration(_conf->getCalibration());
+ 1685              		.loc 1 128 14 view .LVU382
+ 1686              	.LBE299:
+ 1687              	.LBE298:
+  40:Src/VFO/Configuration.h **** 	int32_t getCalibration(void) { return _data.calibration; }
+ 1688              		.loc 2 40 32 is_stmt 1 view .LVU383
+ 1689              	.LBB346:
+ 1690              	.LBB338:
+ 1691              	.LBB307:
+ 1692              	.LBI300:
+  90:Src/VFO/VFOController.cpp **** {
+ 1693              		.loc 1 90 6 view .LVU384
+ 1694              	.LBB304:
+  92:Src/VFO/VFOController.cpp **** 	{
+ 1695              		.loc 1 92 2 view .LVU385
+ 1696 0036 32B9     		cbnz	r2, .L116
+ 1697              	.LVL134:
+ 1698              	.L105:
+  92:Src/VFO/VFOController.cpp **** 	{
+ 1699              		.loc 1 92 2 is_stmt 0 view .LVU386
+ 1700              	.LBE304:
+ 1701              	.LBE307:
+ 1702              	.LBB308:
+ 1703              	.LBB309:
+  96:Src/VFO/VFOController.cpp **** }
+ 1704              		.loc 1 96 2 is_stmt 1 view .LVU387
+ 1705              	.LBB310:
+ 1706              	.LBI310:
+ARM GAS  /var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccDl9rV2.s 			page 39
+
+
+  47:Src/VFO/Configuration.h **** 	void setCalibration(uint32_t value) { _data.calibration = value; }
+ 1707              		.loc 2 47 7 view .LVU388
+ 1708              	.LBB311:
+  47:Src/VFO/Configuration.h **** 	void setCalibration(uint32_t value) { _data.calibration = value; }
+ 1709              		.loc 2 47 42 view .LVU389
+ 1710              	.LBE311:
+ 1711              	.LBE310:
+ 1712              	.LBE309:
+ 1713              	.LBE308:
+ 1714              	.LBB318:
+ 1715              	.LBB319:
+ 109:Src/VFO/VFOController.cpp **** }
+ 1716              		.loc 1 109 13 is_stmt 0 view .LVU390
+ 1717 0038 93F82010 		ldrb	r1, [r3, #32]	@ zero_extendqisi2
+ 1718 003c 1D4A     		ldr	r2, .L118+8
+ 1719              	.LBE319:
+ 1720              	.LBE318:
+ 1721              	.LBB321:
+ 1722              	.LBB314:
+ 1723              	.LBB313:
+ 1724              	.LBB312:
+  47:Src/VFO/Configuration.h **** 	void setCalibration(uint32_t value) { _data.calibration = value; }
+ 1725              		.loc 2 47 58 view .LVU391
+ 1726 003e DD60     		str	r5, [r3, #12]
+ 1727              	.LVL135:
+  47:Src/VFO/Configuration.h **** 	void setCalibration(uint32_t value) { _data.calibration = value; }
+ 1728              		.loc 2 47 58 view .LVU392
+ 1729              	.LBE312:
+ 1730              	.LBE313:
+ 1731              	.LBE314:
+ 1732              	.LBE321:
+ 132:Src/VFO/VFOController.cpp **** }
+ 1733              		.loc 1 132 2 is_stmt 1 view .LVU393
+ 132:Src/VFO/VFOController.cpp **** }
+ 1734              		.loc 1 132 2 is_stmt 0 view .LVU394
+ 1735              	.LBE338:
+ 1736              	.LBE346:
+  44:Src/VFO/Configuration.h **** 	uint32_t getEncoder(void) { return _data.encoder; }
+ 1737              		.loc 2 44 32 is_stmt 1 view .LVU395
+ 1738              	.LBB347:
+ 1739              	.LBB339:
+ 1740              	.LBB322:
+ 1741              	.LBI318:
+ 107:Src/VFO/VFOController.cpp **** {
+ 1742              		.loc 1 107 6 view .LVU396
+ 1743              	.LBB320:
+ 109:Src/VFO/VFOController.cpp **** }
+ 1744              		.loc 1 109 2 view .LVU397
+ 109:Src/VFO/VFOController.cpp **** }
+ 1745              		.loc 1 109 13 is_stmt 0 view .LVU398
+ 1746 0040 5163     		str	r1, [r2, #52]
+ 1747              	.LVL136:
+ 109:Src/VFO/VFOController.cpp **** }
+ 1748              		.loc 1 109 13 view .LVU399
+ 1749              	.LBE320:
+ 1750              	.LBE322:
+ 1751              	.LBE339:
+ARM GAS  /var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccDl9rV2.s 			page 40
+
+
+ 1752              	.LBE347:
+ 146:Src/VFO/VFOController.cpp **** }
+ 1753              		.loc 1 146 1 view .LVU400
+ 1754 0042 03B0     		add	sp, sp, #12
+ 1755              	.LCFI24:
+ 1756              		.cfi_remember_state
+ 1757              		.cfi_def_cfa_offset 20
+ 1758              		@ sp needed
+ 1759 0044 F0BD     		pop	{r4, r5, r6, r7, pc}
+ 1760              	.LVL137:
+ 1761              	.L116:
+ 1762              	.LCFI25:
+ 1763              		.cfi_restore_state
+ 1764              	.LBB348:
+ 1765              	.LBB340:
+ 1766              	.LBB323:
+ 1767              	.LBB305:
+  94:Src/VFO/VFOController.cpp **** 	}
+ 1768              		.loc 1 94 3 is_stmt 1 view .LVU401
+  94:Src/VFO/VFOController.cpp **** 	}
+ 1769              		.loc 1 94 3 is_stmt 0 view .LVU402
+ 1770              	.LBE305:
+ 1771              	.LBE323:
+ 1772              	.LBE340:
+ 1773              	.LBE348:
+  42:Src/VFO/Configuration.h **** 	uint32_t getBFrequency(void) { return _data.bFrequency; }
+ 1774              		.loc 2 42 33 is_stmt 1 view .LVU403
+ 1775              	.LBB349:
+ 1776              	.LBB341:
+ 1777              	.LBB324:
+ 1778              	.LBB306:
+  94:Src/VFO/VFOController.cpp **** 	}
+ 1779              		.loc 1 94 20 is_stmt 0 view .LVU404
+ 1780 0046 0026     		movs	r6, #0
+  94:Src/VFO/VFOController.cpp **** 	}
+ 1781              		.loc 1 94 58 view .LVU405
+ 1782 0048 6427     		movs	r7, #100
+  94:Src/VFO/VFOController.cpp **** 	}
+ 1783              		.loc 1 94 32 view .LVU406
+ 1784 004a 1A69     		ldr	r2, [r3, #16]
+  94:Src/VFO/VFOController.cpp **** 	}
+ 1785              		.loc 1 94 20 view .LVU407
+ 1786 004c 0096     		str	r6, [sp]
+  94:Src/VFO/VFOController.cpp **** 	}
+ 1787              		.loc 1 94 32 view .LVU408
+ 1788 004e 2A44     		add	r2, r2, r5
+  94:Src/VFO/VFOController.cpp **** 	}
+ 1789              		.loc 1 94 20 view .LVU409
+ 1790 0050 3346     		mov	r3, r6
+ 1791              	.LVL138:
+  94:Src/VFO/VFOController.cpp **** 	}
+ 1792              		.loc 1 94 20 view .LVU410
+ 1793 0052 07FB02F2 		mul	r2, r7, r2
+ 1794 0056 E068     		ldr	r0, [r4, #12]
+ 1795 0058 FFF7FEFF 		bl	_ZN6Si53518set_freqEy12si5351_clock
+ 1796              	.LVL139:
+ 1797 005c 227C     		ldrb	r2, [r4, #16]	@ zero_extendqisi2
+ARM GAS  /var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccDl9rV2.s 			page 41
+
+
+ 1798 005e 6368     		ldr	r3, [r4, #4]
+  96:Src/VFO/VFOController.cpp **** }
+ 1799              		.loc 1 96 2 is_stmt 1 view .LVU411
+ 1800              	.LVL140:
+ 1801              	.LBB302:
+ 1802              	.LBI302:
+  47:Src/VFO/Configuration.h **** 	void setCalibration(uint32_t value) { _data.calibration = value; }
+ 1803              		.loc 2 47 7 view .LVU412
+ 1804              	.LBB303:
+  47:Src/VFO/Configuration.h **** 	void setCalibration(uint32_t value) { _data.calibration = value; }
+ 1805              		.loc 2 47 42 view .LVU413
+  47:Src/VFO/Configuration.h **** 	void setCalibration(uint32_t value) { _data.calibration = value; }
+ 1806              		.loc 2 47 58 is_stmt 0 view .LVU414
+ 1807 0060 DD60     		str	r5, [r3, #12]
+ 1808              	.LVL141:
+  47:Src/VFO/Configuration.h **** 	void setCalibration(uint32_t value) { _data.calibration = value; }
+ 1809              		.loc 2 47 58 view .LVU415
+ 1810              	.LBE303:
+ 1811              	.LBE302:
+ 1812              	.LBE306:
+ 1813              	.LBE324:
+ 129:Src/VFO/VFOController.cpp **** 	setBFrequency(_conf->getBFrequency());
+ 1814              		.loc 1 129 2 is_stmt 1 view .LVU416
+ 129:Src/VFO/VFOController.cpp **** 	setBFrequency(_conf->getBFrequency());
+ 1815              		.loc 1 129 2 is_stmt 0 view .LVU417
+ 1816              	.LBE341:
+ 1817              	.LBE349:
+  41:Src/VFO/Configuration.h **** 	uint32_t getIFrequency(void) { return _data.iFrequency; }
+ 1818              		.loc 2 41 33 is_stmt 1 view .LVU418
+ 1819              	.LBB350:
+ 1820              	.LBB342:
+ 1821              	.LBB325:
+ 1822              	.LBI325:
+ 112:Src/VFO/VFOController.cpp **** {
+ 1823              		.loc 1 112 6 view .LVU419
+ 1824              	.LBB326:
+ 114:Src/VFO/VFOController.cpp **** 	{
+ 1825              		.loc 1 114 2 view .LVU420
+ 1826 0062 002A     		cmp	r2, #0
+ 1827 0064 E8D0     		beq	.L105
+ 1828              	.LVL142:
+ 1829              	.LBB327:
+ 1830              	.LBI327:
+ 112:Src/VFO/VFOController.cpp **** {
+ 1831              		.loc 1 112 6 view .LVU421
+ 1832              	.LBB328:
+ 116:Src/VFO/VFOController.cpp **** 	}
+ 1833              		.loc 1 116 3 view .LVU422
+ 116:Src/VFO/VFOController.cpp **** 	}
+ 1834              		.loc 1 116 26 is_stmt 0 view .LVU423
+ 1835 0066 D969     		ldr	r1, [r3, #28]
+ 1836 0068 3246     		mov	r2, r6
+ 1837 006a E068     		ldr	r0, [r4, #12]
+ 1838 006c FFF7FEFF 		bl	_ZN6Si535114set_correctionEl16si5351_pll_input
+ 1839              	.LVL143:
+ 116:Src/VFO/VFOController.cpp **** 	}
+ 1840              		.loc 1 116 26 view .LVU424
+ARM GAS  /var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccDl9rV2.s 			page 42
+
+
+ 1841              	.LBE328:
+ 1842              	.LBE327:
+ 1843              	.LBE326:
+ 1844              	.LBE325:
+ 130:Src/VFO/VFOController.cpp **** 	setFrequency(_conf->getFrequency());
+ 1845              		.loc 1 130 2 is_stmt 1 view .LVU425
+ 130:Src/VFO/VFOController.cpp **** 	setFrequency(_conf->getFrequency());
+ 1846              		.loc 1 130 16 is_stmt 0 view .LVU426
+ 1847 0070 6368     		ldr	r3, [r4, #4]
+ 1848              	.LBB329:
+ 1849              	.LBB330:
+ 101:Src/VFO/VFOController.cpp **** 	{
+ 1850              		.loc 1 101 2 view .LVU427
+ 1851 0072 217C     		ldrb	r1, [r4, #16]	@ zero_extendqisi2
+ 1852              	.LBE330:
+ 1853              	.LBE329:
+ 130:Src/VFO/VFOController.cpp **** 	setFrequency(_conf->getFrequency());
+ 1854              		.loc 1 130 15 view .LVU428
+ 1855 0074 5A69     		ldr	r2, [r3, #20]
+ 1856              	.LVL144:
+ 130:Src/VFO/VFOController.cpp **** 	setFrequency(_conf->getFrequency());
+ 1857              		.loc 1 130 15 view .LVU429
+ 1858              	.LBE342:
+ 1859              	.LBE350:
+  43:Src/VFO/Configuration.h **** 	uint8_t getBrightness(void) { return _data.brightness; }
+ 1860              		.loc 2 43 33 is_stmt 1 view .LVU430
+ 1861              	.LBB351:
+ 1862              	.LBB343:
+ 1863              	.LBB334:
+ 1864              	.LBI329:
+  99:Src/VFO/VFOController.cpp **** {
+ 1865              		.loc 1 99 6 view .LVU431
+ 1866              	.LBB333:
+ 101:Src/VFO/VFOController.cpp **** 	{
+ 1867              		.loc 1 101 2 view .LVU432
+ 1868 0076 B9B1     		cbz	r1, .L117
+ 1869              	.LVL145:
+ 1870              	.LBB331:
+ 1871              	.LBI331:
+  99:Src/VFO/VFOController.cpp **** {
+ 1872              		.loc 1 99 6 view .LVU433
+ 1873              	.LBB332:
+ 103:Src/VFO/VFOController.cpp **** 	}
+ 1874              		.loc 1 103 3 view .LVU434
+ 103:Src/VFO/VFOController.cpp **** 	}
+ 1875              		.loc 1 103 20 is_stmt 0 view .LVU435
+ 1876 0078 0123     		movs	r3, #1
+ 1877              	.LVL146:
+ 103:Src/VFO/VFOController.cpp **** 	}
+ 1878              		.loc 1 103 20 view .LVU436
+ 1879 007a 0093     		str	r3, [sp]
+ 1880              	.LVL147:
+ 103:Src/VFO/VFOController.cpp **** 	}
+ 1881              		.loc 1 103 20 view .LVU437
+ 1882 007c 07FB02F2 		mul	r2, r7, r2
+ 1883              	.LVL148:
+ 103:Src/VFO/VFOController.cpp **** 	}
+ARM GAS  /var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccDl9rV2.s 			page 43
+
+
+ 1884              		.loc 1 103 20 view .LVU438
+ 1885 0080 3346     		mov	r3, r6
+ 1886 0082 E068     		ldr	r0, [r4, #12]
+ 1887 0084 FFF7FEFF 		bl	_ZN6Si53518set_freqEy12si5351_clock
+ 1888              	.LVL149:
+ 103:Src/VFO/VFOController.cpp **** 	}
+ 1889              		.loc 1 103 20 view .LVU439
+ 1890              	.LBE332:
+ 1891              	.LBE331:
+ 1892              	.LBE333:
+ 1893              	.LBE334:
+ 131:Src/VFO/VFOController.cpp **** 	setBrightness(_conf->getBrightness());
+ 1894              		.loc 1 131 2 is_stmt 1 view .LVU440
+ 131:Src/VFO/VFOController.cpp **** 	setBrightness(_conf->getBrightness());
+ 1895              		.loc 1 131 15 is_stmt 0 view .LVU441
+ 1896 0088 6368     		ldr	r3, [r4, #4]
+ 1897              	.LBB335:
+ 1898              	.LBB315:
+  92:Src/VFO/VFOController.cpp **** 	{
+ 1899              		.loc 1 92 2 view .LVU442
+ 1900 008a 227C     		ldrb	r2, [r4, #16]	@ zero_extendqisi2
+ 1901              	.LBE315:
+ 1902              	.LBE335:
+ 131:Src/VFO/VFOController.cpp **** 	setBrightness(_conf->getBrightness());
+ 1903              		.loc 1 131 14 view .LVU443
+ 1904 008c DD68     		ldr	r5, [r3, #12]
+ 1905              	.LVL150:
+ 131:Src/VFO/VFOController.cpp **** 	setBrightness(_conf->getBrightness());
+ 1906              		.loc 1 131 14 view .LVU444
+ 1907              	.LBE343:
+ 1908              	.LBE351:
+  40:Src/VFO/Configuration.h **** 	int32_t getCalibration(void) { return _data.calibration; }
+ 1909              		.loc 2 40 32 is_stmt 1 view .LVU445
+ 1910              	.LBB352:
+ 1911              	.LBB344:
+ 1912              	.LBB336:
+ 1913              	.LBI308:
+  90:Src/VFO/VFOController.cpp **** {
+ 1914              		.loc 1 90 6 view .LVU446
+ 1915              	.LBB316:
+  92:Src/VFO/VFOController.cpp **** 	{
+ 1916              		.loc 1 92 2 view .LVU447
+ 1917 008e 002A     		cmp	r2, #0
+ 1918 0090 D2D0     		beq	.L105
+  94:Src/VFO/VFOController.cpp **** 	}
+ 1919              		.loc 1 94 3 view .LVU448
+ 1920              	.LVL151:
+  94:Src/VFO/VFOController.cpp **** 	}
+ 1921              		.loc 1 94 3 is_stmt 0 view .LVU449
+ 1922              	.LBE316:
+ 1923              	.LBE336:
+ 1924              	.LBE344:
+ 1925              	.LBE352:
+  42:Src/VFO/Configuration.h **** 	uint32_t getBFrequency(void) { return _data.bFrequency; }
+ 1926              		.loc 2 42 33 is_stmt 1 view .LVU450
+ 1927              	.LBB353:
+ 1928              	.LBB345:
+ARM GAS  /var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccDl9rV2.s 			page 44
+
+
+ 1929              	.LBB337:
+ 1930              	.LBB317:
+  94:Src/VFO/VFOController.cpp **** 	}
+ 1931              		.loc 1 94 32 is_stmt 0 view .LVU451
+ 1932 0092 1A69     		ldr	r2, [r3, #16]
+  94:Src/VFO/VFOController.cpp **** 	}
+ 1933              		.loc 1 94 20 view .LVU452
+ 1934 0094 0096     		str	r6, [sp]
+  94:Src/VFO/VFOController.cpp **** 	}
+ 1935              		.loc 1 94 32 view .LVU453
+ 1936 0096 2A44     		add	r2, r2, r5
+  94:Src/VFO/VFOController.cpp **** 	}
+ 1937              		.loc 1 94 20 view .LVU454
+ 1938 0098 3346     		mov	r3, r6
+ 1939              	.LVL152:
+  94:Src/VFO/VFOController.cpp **** 	}
+ 1940              		.loc 1 94 20 view .LVU455
+ 1941 009a 07FB02F2 		mul	r2, r7, r2
+ 1942 009e E068     		ldr	r0, [r4, #12]
+ 1943 00a0 FFF7FEFF 		bl	_ZN6Si53518set_freqEy12si5351_clock
+ 1944              	.LVL153:
+ 1945 00a4 6368     		ldr	r3, [r4, #4]
+ 1946 00a6 C7E7     		b	.L105
+ 1947              	.LVL154:
+ 1948              	.L117:
+  94:Src/VFO/VFOController.cpp **** 	}
+ 1949              		.loc 1 94 20 view .LVU456
+ 1950 00a8 DD68     		ldr	r5, [r3, #12]
+ 1951 00aa C5E7     		b	.L105
+ 1952              	.L119:
+ 1953              		.align	2
+ 1954              	.L118:
+ 1955 00ac 08B86C00 		.word	7125000
+ 1956 00b0 404B4C00 		.word	5000000
+ 1957 00b4 00040040 		.word	1073742848
+ 1958              	.LBE317:
+ 1959              	.LBE337:
+ 1960              	.LBE345:
+ 1961              	.LBE353:
+ 1962              		.cfi_endproc
+ 1963              	.LFE139:
+ 1964              		.fnend
+ 1966              		.section	.text._ZN3VFO13VFOController18triggerMemoryWriteEv,"ax",%progbits
+ 1967              		.align	1
+ 1968              		.p2align 2,,3
+ 1969              		.global	_ZN3VFO13VFOController18triggerMemoryWriteEv
+ 1970              		.syntax unified
+ 1971              		.thumb
+ 1972              		.thumb_func
+ 1973              		.fpu softvfp
+ 1975              	_ZN3VFO13VFOController18triggerMemoryWriteEv:
+ 1976              		.fnstart
+ 1977              	.LVL155:
+ 1978              	.LFB140:
+ 147:Src/VFO/VFOController.cpp **** 
+ 148:Src/VFO/VFOController.cpp **** void VFOController::triggerMemoryWrite()
+ 149:Src/VFO/VFOController.cpp **** {
+ARM GAS  /var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccDl9rV2.s 			page 45
+
+
+ 1979              		.loc 1 149 1 is_stmt 1 view -0
+ 1980              		.cfi_startproc
+ 1981              		@ args = 0, pretend = 0, frame = 0
+ 1982              		@ frame_needed = 0, uses_anonymous_args = 0
+ 150:Src/VFO/VFOController.cpp **** 	_timepassed = HAL_GetTick();
+ 1983              		.loc 1 150 2 view .LVU458
+ 149:Src/VFO/VFOController.cpp **** 	_timepassed = HAL_GetTick();
+ 1984              		.loc 1 149 1 is_stmt 0 view .LVU459
+ 1985 0000 08B5     		push	{r3, lr}
+ 1986              		.save {r3, lr}
+ 1987              	.LCFI26:
+ 1988              		.cfi_def_cfa_offset 8
+ 1989              		.cfi_offset 3, -8
+ 1990              		.cfi_offset 14, -4
+ 1991              		.loc 1 150 27 view .LVU460
+ 1992 0002 FFF7FEFF 		bl	HAL_GetTick
+ 1993              	.LVL156:
+ 151:Src/VFO/VFOController.cpp **** 	_memStatus = 0; // Trigger memory write
+ 1994              		.loc 1 151 13 view .LVU461
+ 1995 0006 0022     		movs	r2, #0
+ 150:Src/VFO/VFOController.cpp **** 	_timepassed = HAL_GetTick();
+ 1996              		.loc 1 150 14 view .LVU462
+ 1997 0008 0249     		ldr	r1, .L122
+ 1998              		.loc 1 151 13 view .LVU463
+ 1999 000a 034B     		ldr	r3, .L122+4
+ 150:Src/VFO/VFOController.cpp **** 	_timepassed = HAL_GetTick();
+ 2000              		.loc 1 150 14 view .LVU464
+ 2001 000c 0860     		str	r0, [r1]
+ 2002              		.loc 1 151 2 is_stmt 1 view .LVU465
+ 2003              		.loc 1 151 13 is_stmt 0 view .LVU466
+ 2004 000e 1A60     		str	r2, [r3]
+ 152:Src/VFO/VFOController.cpp **** }
+ 2005              		.loc 1 152 1 view .LVU467
+ 2006 0010 08BD     		pop	{r3, pc}
+ 2007              	.L123:
+ 2008 0012 00BF     		.align	2
+ 2009              	.L122:
+ 2010 0014 00000000 		.word	.LANCHOR1
+ 2011 0018 00000000 		.word	.LANCHOR2
+ 2012              		.cfi_endproc
+ 2013              	.LFE140:
+ 2014              		.fnend
+ 2016              		.section	.text._ZN3VFO13VFOController16checkMemoryStateEv,"ax",%progbits
+ 2017              		.align	1
+ 2018              		.p2align 2,,3
+ 2019              		.global	_ZN3VFO13VFOController16checkMemoryStateEv
+ 2020              		.syntax unified
+ 2021              		.thumb
+ 2022              		.thumb_func
+ 2023              		.fpu softvfp
+ 2025              	_ZN3VFO13VFOController16checkMemoryStateEv:
+ 2026              		.fnstart
+ 2027              	.LVL157:
+ 2028              	.LFB141:
+ 153:Src/VFO/VFOController.cpp **** 
+ 154:Src/VFO/VFOController.cpp **** void VFOController::checkMemoryState()
+ 155:Src/VFO/VFOController.cpp **** {
+ARM GAS  /var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccDl9rV2.s 			page 46
+
+
+ 2029              		.loc 1 155 1 is_stmt 1 view -0
+ 2030              		.cfi_startproc
+ 2031              		@ args = 0, pretend = 0, frame = 0
+ 2032              		@ frame_needed = 0, uses_anonymous_args = 0
+ 156:Src/VFO/VFOController.cpp **** 	// Write the frequency to memory if not stored and 3 seconds have passed since the last frequency 
+ 157:Src/VFO/VFOController.cpp **** 	if (_memStatus == 0)
+ 2033              		.loc 1 157 2 view .LVU469
+ 155:Src/VFO/VFOController.cpp **** 	// Write the frequency to memory if not stored and 3 seconds have passed since the last frequency 
+ 2034              		.loc 1 155 1 is_stmt 0 view .LVU470
+ 2035 0000 70B5     		push	{r4, r5, r6, lr}
+ 2036              		.save {r4, r5, r6, lr}
+ 2037              	.LCFI27:
+ 2038              		.cfi_def_cfa_offset 16
+ 2039              		.cfi_offset 4, -16
+ 2040              		.cfi_offset 5, -12
+ 2041              		.cfi_offset 6, -8
+ 2042              		.cfi_offset 14, -4
+ 2043              		.loc 1 157 17 view .LVU471
+ 2044 0002 094C     		ldr	r4, .L130
+ 2045              		.loc 1 157 2 view .LVU472
+ 2046 0004 2368     		ldr	r3, [r4]
+ 2047 0006 03B1     		cbz	r3, .L129
+ 2048              	.LVL158:
+ 2049              	.L124:
+ 158:Src/VFO/VFOController.cpp **** 	{
+ 159:Src/VFO/VFOController.cpp **** 		if (_timepassed + 2000 < HAL_GetTick())
+ 160:Src/VFO/VFOController.cpp **** 		{
+ 161:Src/VFO/VFOController.cpp **** 			storeConfiguration();
+ 162:Src/VFO/VFOController.cpp **** 			_memStatus = 1;
+ 163:Src/VFO/VFOController.cpp **** 		}
+ 164:Src/VFO/VFOController.cpp **** 	}
+ 165:Src/VFO/VFOController.cpp **** }
+ 2050              		.loc 1 165 1 view .LVU473
+ 2051 0008 70BD     		pop	{r4, r5, r6, pc}
+ 2052              	.LVL159:
+ 2053              	.L129:
+ 159:Src/VFO/VFOController.cpp **** 		{
+ 2054              		.loc 1 159 3 is_stmt 1 view .LVU474
+ 159:Src/VFO/VFOController.cpp **** 		{
+ 2055              		.loc 1 159 19 is_stmt 0 view .LVU475
+ 2056 000a 084B     		ldr	r3, .L130+4
+ 2057 000c 0546     		mov	r5, r0
+ 2058 000e 1E68     		ldr	r6, [r3]
+ 159:Src/VFO/VFOController.cpp **** 		{
+ 2059              		.loc 1 159 39 view .LVU476
+ 2060 0010 FFF7FEFF 		bl	HAL_GetTick
+ 2061              	.LVL160:
+ 159:Src/VFO/VFOController.cpp **** 		{
+ 2062              		.loc 1 159 19 view .LVU477
+ 2063 0014 06F5FA66 		add	r6, r6, #2000
+ 159:Src/VFO/VFOController.cpp **** 		{
+ 2064              		.loc 1 159 3 view .LVU478
+ 2065 0018 8642     		cmp	r6, r0
+ 2066 001a F5D2     		bcs	.L124
+ 161:Src/VFO/VFOController.cpp **** 			_memStatus = 1;
+ 2067              		.loc 1 161 4 is_stmt 1 view .LVU479
+ 2068              	.LVL161:
+ARM GAS  /var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccDl9rV2.s 			page 47
+
+
+ 2069              	.LBB354:
+ 2070              	.LBI354:
+ 120:Src/VFO/VFOController.cpp **** {
+ 2071              		.loc 1 120 6 view .LVU480
+ 2072              	.LBB355:
+ 122:Src/VFO/VFOController.cpp **** }
+ 2073              		.loc 1 122 2 view .LVU481
+ 122:Src/VFO/VFOController.cpp **** }
+ 2074              		.loc 1 122 13 is_stmt 0 view .LVU482
+ 2075 001c 6868     		ldr	r0, [r5, #4]
+ 2076 001e FFF7FEFF 		bl	_ZN3VFO13Configuration4saveEv
+ 2077              	.LVL162:
+ 122:Src/VFO/VFOController.cpp **** }
+ 2078              		.loc 1 122 13 view .LVU483
+ 2079              	.LBE355:
+ 2080              	.LBE354:
+ 162:Src/VFO/VFOController.cpp **** 		}
+ 2081              		.loc 1 162 4 is_stmt 1 view .LVU484
+ 162:Src/VFO/VFOController.cpp **** 		}
+ 2082              		.loc 1 162 15 is_stmt 0 view .LVU485
+ 2083 0022 0123     		movs	r3, #1
+ 2084 0024 2360     		str	r3, [r4]
+ 2085              		.loc 1 165 1 view .LVU486
+ 2086 0026 70BD     		pop	{r4, r5, r6, pc}
+ 2087              	.LVL163:
+ 2088              	.L131:
+ 2089              		.loc 1 165 1 view .LVU487
+ 2090              		.align	2
+ 2091              	.L130:
+ 2092 0028 00000000 		.word	.LANCHOR2
+ 2093 002c 00000000 		.word	.LANCHOR1
+ 2094              		.cfi_endproc
+ 2095              	.LFE141:
+ 2096              		.fnend
+ 2098              		.section	.text.startup._GLOBAL__sub_I__ZN3VFO13VFOControllerC2Ev,"ax",%progbits
+ 2099              		.align	1
+ 2100              		.p2align 2,,3
+ 2101              		.syntax unified
+ 2102              		.thumb
+ 2103              		.thumb_func
+ 2104              		.fpu softvfp
+ 2106              	_GLOBAL__sub_I__ZN3VFO13VFOControllerC2Ev:
+ 2107              		.fnstart
+ 2108              	.LFB143:
+ 166:Src/VFO/VFOController.cpp **** 
+ 167:Src/VFO/VFOController.cpp **** } /* namespace VFO */
+ 2109              		.loc 1 167 1 is_stmt 1 view -0
+ 2110              		.cfi_startproc
+ 2111              		@ args = 0, pretend = 0, frame = 0
+ 2112              		@ frame_needed = 0, uses_anonymous_args = 0
+ 2113              	.LVL164:
+ 2114              	.LBB356:
+ 2115              	.LBI356:
+ 2116              		.loc 1 167 1 view .LVU489
+ 2117              	.LBE356:
+ 2118 0000 08B5     		push	{r3, lr}
+ 2119              	.LCFI28:
+ARM GAS  /var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccDl9rV2.s 			page 48
+
+
+ 2120              		.cfi_def_cfa_offset 8
+ 2121              		.cfi_offset 3, -8
+ 2122              		.cfi_offset 14, -4
+ 2123              	.LBB358:
+ 2124              	.LBB357:
+  15:Src/VFO/VFOController.cpp **** static int _memStatus = 1;					 // value to notify if memory is current or old. 0=old,
+ 2125              		.loc 1 15 42 is_stmt 0 view .LVU490
+ 2126 0002 FFF7FEFF 		bl	HAL_GetTick
+ 2127              	.LVL165:
+  15:Src/VFO/VFOController.cpp **** static int _memStatus = 1;					 // value to notify if memory is current or old. 0=old,
+ 2128              		.loc 1 15 17 view .LVU491
+ 2129 0006 014B     		ldr	r3, .L134
+ 2130 0008 1860     		str	r0, [r3]
+ 2131              	.LVL166:
+  15:Src/VFO/VFOController.cpp **** static int _memStatus = 1;					 // value to notify if memory is current or old. 0=old,
+ 2132              		.loc 1 15 17 view .LVU492
+ 2133              	.LBE357:
+ 2134              	.LBE358:
+ 2135              		.loc 1 167 1 view .LVU493
+ 2136 000a 08BD     		pop	{r3, pc}
+ 2137              	.L135:
+ 2138              		.align	2
+ 2139              	.L134:
+ 2140 000c 00000000 		.word	.LANCHOR1
+ 2141              		.cfi_endproc
+ 2142              	.LFE143:
+ 2143              		.cantunwind
+ 2144              		.fnend
+ 2146              		.section	.init_array,"aw",%init_array
+ 2147              		.align	2
+ 2148 0000 00000000 		.word	_GLOBAL__sub_I__ZN3VFO13VFOControllerC2Ev(target1)
+ 2149              		.global	_ZTSN3VFO13VFOControllerE
+ 2150              		.global	_ZTIN3VFO13VFOControllerE
+ 2151              		.global	_ZTVN3VFO13VFOControllerE
+ 2152              		.section	.bss._ZN3VFOL11_timepassedE,"aw",%nobits
+ 2153              		.align	2
+ 2154              		.set	.LANCHOR1,. + 0
+ 2157              	_ZN3VFOL11_timepassedE:
+ 2158 0000 00000000 		.space	4
+ 2159              		.section	.data._ZN3VFOL10_memStatusE,"aw"
+ 2160              		.align	2
+ 2161              		.set	.LANCHOR2,. + 0
+ 2164              	_ZN3VFOL10_memStatusE:
+ 2165 0000 01000000 		.word	1
+ 2166              		.section	.rodata._ZTIN3VFO13VFOControllerE,"a"
+ 2167              		.align	2
+ 2170              	_ZTIN3VFO13VFOControllerE:
+ 2171 0000 08000000 		.word	_ZTVN10__cxxabiv117__class_type_infoE+8
+ 2172 0004 00000000 		.word	_ZTSN3VFO13VFOControllerE
+ 2173              		.section	.rodata._ZTSN3VFO13VFOControllerE,"a"
+ 2174              		.align	2
+ 2177              	_ZTSN3VFO13VFOControllerE:
+ 2178 0000 4E335646 		.ascii	"N3VFO13VFOControllerE\000"
+ 2178      4F313356 
+ 2178      464F436F 
+ 2178      6E74726F 
+ 2178      6C6C6572 
+ARM GAS  /var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccDl9rV2.s 			page 49
+
+
+ 2179              		.section	.rodata._ZTVN3VFO13VFOControllerE,"a"
+ 2180              		.align	2
+ 2181              		.set	.LANCHOR0,. + 0
+ 2184              	_ZTVN3VFO13VFOControllerE:
+ 2185 0000 00000000 		.word	0
+ 2186 0004 00000000 		.word	_ZTIN3VFO13VFOControllerE
+ 2187 0008 00000000 		.word	_ZN3VFO13VFOControllerD1Ev
+ 2188 000c 00000000 		.word	_ZN3VFO13VFOControllerD0Ev
+ 2189              		.text
+ 2190              	.Letext0:
+ 2191              		.file 3 "/usr/local/gcc-arm-none-eabi-8-2019-q3-update/arm-none-eabi/include/machine/_default_type
+ 2192              		.file 4 "/usr/local/gcc-arm-none-eabi-8-2019-q3-update/arm-none-eabi/include/sys/_stdint.h"
+ 2193              		.file 5 "Drivers/CMSIS/Include/core_cm3.h"
+ 2194              		.file 6 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h"
+ 2195              		.file 7 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xb.h"
+ 2196              		.file 8 "/usr/local/gcc-arm-none-eabi-8-2019-q3-update/lib/gcc/arm-none-eabi/8.3.1/include/stddef.
+ 2197              		.file 9 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h"
+ 2198              		.file 10 "/usr/local/gcc-arm-none-eabi-8-2019-q3-update/arm-none-eabi/include/sys/_types.h"
+ 2199              		.file 11 "/usr/local/gcc-arm-none-eabi-8-2019-q3-update/arm-none-eabi/include/sys/reent.h"
+ 2200              		.file 12 "/usr/local/gcc-arm-none-eabi-8-2019-q3-update/arm-none-eabi/include/sys/lock.h"
+ 2201              		.file 13 "Inc/st7735/font5x7.h"
+ 2202              		.file 14 "Inc/st7735/font7x11.h"
+ 2203              		.file 15 "Inc/st7735/st7735.h"
+ 2204              		.file 16 "/usr/local/gcc-arm-none-eabi-8-2019-q3-update/arm-none-eabi/include/c++/8.3.1/cstdlib"
+ 2205              		.file 17 "/usr/local/gcc-arm-none-eabi-8-2019-q3-update/arm-none-eabi/include/c++/8.3.1/bits/std_a
+ 2206              		.file 18 "/usr/local/gcc-arm-none-eabi-8-2019-q3-update/arm-none-eabi/include/c++/8.3.1/arm-none-e
+ 2207              		.file 19 "/usr/local/gcc-arm-none-eabi-8-2019-q3-update/arm-none-eabi/include/stdlib.h"
+ 2208              		.file 20 "/usr/local/gcc-arm-none-eabi-8-2019-q3-update/arm-none-eabi/include/c++/8.3.1/stdlib.h"
+ 2209              		.file 21 "Src/VFO/VFOController.h"
+ 2210              		.file 22 "Src/VFO/GUIController.h"
+ 2211              		.file 23 "Inc/si5351/si5351.h"
+ 2212              		.file 24 "<built-in>"
+ 2213              		.file 25 "Src/VFO/GUIView.h"
+ARM GAS  /var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccDl9rV2.s 			page 50
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 VFOController.cpp
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccDl9rV2.s:16     .text._ZN3VFO13VFOControllerD2Ev:0000000000000000 $t
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccDl9rV2.s:25     .text._ZN3VFO13VFOControllerD2Ev:0000000000000000 _ZN3VFO13VFOControllerD2Ev
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccDl9rV2.s:85     .text._ZN3VFO13VFOControllerD2Ev:0000000000000028 $d
+.ARM.exidx.text._ZN3VFO13VFOControllerD2Ev:0000000000000000 $d
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccDl9rV2.s:25     .text._ZN3VFO13VFOControllerD2Ev:0000000000000000 _ZN3VFO13VFOControllerD1Ev
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccDl9rV2.s:94     .text._ZN3VFO13VFOControllerD0Ev:0000000000000000 $t
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccDl9rV2.s:102    .text._ZN3VFO13VFOControllerD0Ev:0000000000000000 _ZN3VFO13VFOControllerD0Ev
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccDl9rV2.s:171    .text._ZN3VFO13VFOControllerD0Ev:0000000000000030 $d
+.ARM.exidx.text._ZN3VFO13VFOControllerD0Ev:0000000000000000 $d
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccDl9rV2.s:178    .text._ZN3VFO13VFOController6initSIEv:0000000000000000 $t
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccDl9rV2.s:186    .text._ZN3VFO13VFOController6initSIEv:0000000000000000 _ZN3VFO13VFOController6initSIEv
+.ARM.exidx.text._ZN3VFO13VFOController6initSIEv:0000000000000000 $d
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccDl9rV2.s:342    .text._ZN3VFO13VFOController5beginEv:0000000000000000 $t
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccDl9rV2.s:350    .text._ZN3VFO13VFOController5beginEv:0000000000000000 _ZN3VFO13VFOController5beginEv
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccDl9rV2.s:438    .text._ZN3VFO13VFOController5beginEv:000000000000002c $d
+.ARM.exidx.text._ZN3VFO13VFOController5beginEv:0000000000000000 $d
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccDl9rV2.s:444    .text._ZN3VFO13VFOController14menuKeyPressedEv:0000000000000000 $t
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccDl9rV2.s:452    .text._ZN3VFO13VFOController14menuKeyPressedEv:0000000000000000 _ZN3VFO13VFOController14menuKeyPressedEv
+.ARM.exidx.text._ZN3VFO13VFOController14menuKeyPressedEv:0000000000000000 $d
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccDl9rV2.s:474    .text._ZN3VFO13VFOController11showVoltageEm:0000000000000000 $t
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccDl9rV2.s:482    .text._ZN3VFO13VFOController11showVoltageEm:0000000000000000 _ZN3VFO13VFOController11showVoltageEm
+.ARM.exidx.text._ZN3VFO13VFOController11showVoltageEm:0000000000000000 $d
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccDl9rV2.s:505    .text._ZN3VFO13VFOController9showSetupEv:0000000000000000 $t
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccDl9rV2.s:513    .text._ZN3VFO13VFOController9showSetupEv:0000000000000000 _ZN3VFO13VFOController9showSetupEv
+.ARM.exidx.text._ZN3VFO13VFOController9showSetupEv:0000000000000000 $d
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccDl9rV2.s:535    .text._ZN3VFO13VFOController8showMainEv:0000000000000000 $t
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccDl9rV2.s:543    .text._ZN3VFO13VFOController8showMainEv:0000000000000000 _ZN3VFO13VFOController8showMainEv
+.ARM.exidx.text._ZN3VFO13VFOController8showMainEv:0000000000000000 $d
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccDl9rV2.s:565    .text._ZN3VFO13VFOController20pushEncoderIncrementEst:0000000000000000 $t
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccDl9rV2.s:573    .text._ZN3VFO13VFOController20pushEncoderIncrementEst:0000000000000000 _ZN3VFO13VFOController20pushEncoderIncrementEst
+.ARM.exidx.text._ZN3VFO13VFOController20pushEncoderIncrementEst:0000000000000000 $d
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccDl9rV2.s:596    .text._ZN3VFO13VFOController12setFrequencyEm:0000000000000000 $t
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccDl9rV2.s:604    .text._ZN3VFO13VFOController12setFrequencyEm:0000000000000000 _ZN3VFO13VFOController12setFrequencyEm
+.ARM.exidx.text._ZN3VFO13VFOController12setFrequencyEm:0000000000000000 $d
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccDl9rV2.s:703    .text._ZN3VFO13VFOController13setBFrequencyEm:0000000000000000 $t
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccDl9rV2.s:711    .text._ZN3VFO13VFOController13setBFrequencyEm:0000000000000000 _ZN3VFO13VFOController13setBFrequencyEm
+.ARM.exidx.text._ZN3VFO13VFOController13setBFrequencyEm:0000000000000000 $d
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccDl9rV2.s:771    .text._ZN3VFO13VFOController13setBrightnessEh:0000000000000000 $t
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccDl9rV2.s:779    .text._ZN3VFO13VFOController13setBrightnessEh:0000000000000000 _ZN3VFO13VFOController13setBrightnessEh
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccDl9rV2.s:797    .text._ZN3VFO13VFOController13setBrightnessEh:0000000000000008 $d
+.ARM.exidx.text._ZN3VFO13VFOController13setBrightnessEh:0000000000000000 $d
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccDl9rV2.s:804    .text._ZN3VFO13VFOController14setCalibrationEl:0000000000000000 $t
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccDl9rV2.s:812    .text._ZN3VFO13VFOController14setCalibrationEl:0000000000000000 _ZN3VFO13VFOController14setCalibrationEl
+.ARM.exidx.text._ZN3VFO13VFOController14setCalibrationEl:0000000000000000 $d
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccDl9rV2.s:849    .text._ZN3VFO13VFOController18storeConfigurationEv:0000000000000000 $t
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccDl9rV2.s:857    .text._ZN3VFO13VFOController18storeConfigurationEv:0000000000000000 _ZN3VFO13VFOController18storeConfigurationEv
+.ARM.exidx.text._ZN3VFO13VFOController18storeConfigurationEv:0000000000000000 $d
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccDl9rV2.s:879    .text._ZN3VFO13VFOController17loadConfigurationEv:0000000000000000 $t
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccDl9rV2.s:887    .text._ZN3VFO13VFOController17loadConfigurationEv:0000000000000000 _ZN3VFO13VFOController17loadConfigurationEv
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccDl9rV2.s:1162   .text._ZN3VFO13VFOController17loadConfigurationEv:0000000000000088 $d
+.ARM.exidx.text._ZN3VFO13VFOController17loadConfigurationEv:0000000000000000 $d
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccDl9rV2.s:1170   .text._ZN3VFO13VFOControllerC2Ev:0000000000000000 $t
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccDl9rV2.s:1178   .text._ZN3VFO13VFOControllerC2Ev:0000000000000000 _ZN3VFO13VFOControllerC2Ev
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccDl9rV2.s:1448   .text._ZN3VFO13VFOControllerC2Ev:00000000000000a8 $d
+.ARM.extab.text._ZN3VFO13VFOControllerC2Ev:0000000000000000 $d
+ARM GAS  /var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccDl9rV2.s 			page 51
+
+
+.ARM.exidx.text._ZN3VFO13VFOControllerC2Ev:0000000000000000 $d
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccDl9rV2.s:1178   .text._ZN3VFO13VFOControllerC2Ev:0000000000000000 _ZN3VFO13VFOControllerC1Ev
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccDl9rV2.s:1498   .text._ZN3VFO13VFOController5resetEv:0000000000000000 $t
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccDl9rV2.s:1506   .text._ZN3VFO13VFOController5resetEv:0000000000000000 _ZN3VFO13VFOController5resetEv
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccDl9rV2.s:1955   .text._ZN3VFO13VFOController5resetEv:00000000000000ac $d
+.ARM.exidx.text._ZN3VFO13VFOController5resetEv:0000000000000000 $d
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccDl9rV2.s:1967   .text._ZN3VFO13VFOController18triggerMemoryWriteEv:0000000000000000 $t
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccDl9rV2.s:1975   .text._ZN3VFO13VFOController18triggerMemoryWriteEv:0000000000000000 _ZN3VFO13VFOController18triggerMemoryWriteEv
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccDl9rV2.s:2010   .text._ZN3VFO13VFOController18triggerMemoryWriteEv:0000000000000014 $d
+.ARM.extab.text._ZN3VFO13VFOController18triggerMemoryWriteEv:0000000000000000 $d
+.ARM.exidx.text._ZN3VFO13VFOController18triggerMemoryWriteEv:0000000000000000 $d
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccDl9rV2.s:2017   .text._ZN3VFO13VFOController16checkMemoryStateEv:0000000000000000 $t
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccDl9rV2.s:2025   .text._ZN3VFO13VFOController16checkMemoryStateEv:0000000000000000 _ZN3VFO13VFOController16checkMemoryStateEv
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccDl9rV2.s:2092   .text._ZN3VFO13VFOController16checkMemoryStateEv:0000000000000028 $d
+.ARM.exidx.text._ZN3VFO13VFOController16checkMemoryStateEv:0000000000000000 $d
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccDl9rV2.s:2099   .text.startup._GLOBAL__sub_I__ZN3VFO13VFOControllerC2Ev:0000000000000000 $t
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccDl9rV2.s:2106   .text.startup._GLOBAL__sub_I__ZN3VFO13VFOControllerC2Ev:0000000000000000 _GLOBAL__sub_I__ZN3VFO13VFOControllerC2Ev
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccDl9rV2.s:2140   .text.startup._GLOBAL__sub_I__ZN3VFO13VFOControllerC2Ev:000000000000000c $d
+.ARM.exidx.text.startup._GLOBAL__sub_I__ZN3VFO13VFOControllerC2Ev:0000000000000000 $d
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccDl9rV2.s:2147   .init_array:0000000000000000 $d
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccDl9rV2.s:2177   .rodata._ZTSN3VFO13VFOControllerE:0000000000000000 _ZTSN3VFO13VFOControllerE
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccDl9rV2.s:2170   .rodata._ZTIN3VFO13VFOControllerE:0000000000000000 _ZTIN3VFO13VFOControllerE
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccDl9rV2.s:2184   .rodata._ZTVN3VFO13VFOControllerE:0000000000000000 _ZTVN3VFO13VFOControllerE
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccDl9rV2.s:2153   .bss._ZN3VFOL11_timepassedE:0000000000000000 $d
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccDl9rV2.s:2157   .bss._ZN3VFOL11_timepassedE:0000000000000000 _ZN3VFOL11_timepassedE
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccDl9rV2.s:2160   .data._ZN3VFOL10_memStatusE:0000000000000000 $d
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccDl9rV2.s:2164   .data._ZN3VFOL10_memStatusE:0000000000000000 _ZN3VFOL10_memStatusE
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccDl9rV2.s:2167   .rodata._ZTIN3VFO13VFOControllerE:0000000000000000 $d
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccDl9rV2.s:2174   .rodata._ZTSN3VFO13VFOControllerE:0000000000000000 $d
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccDl9rV2.s:2180   .rodata._ZTVN3VFO13VFOControllerE:0000000000000000 $d
+
+UNDEFINED SYMBOLS
+_ZdlPvj
+_ZN6Si53514initEhml
+_ZN6Si535114set_correctionEl16si5351_pll_input
+_ZN6Si53518set_freqEy12si5351_clock
+_ZN6Si535113output_enableE12si5351_clockh
+__aeabi_unwind_cpp_pr0
+_ZN3VFO13GUIController4drawEv
+HAL_Delay
+_ZN3VFO13GUIController14menuKeyPressedEv
+_ZN3VFO13GUIController11showVoltageEm
+_ZN3VFO13GUIController9showSetupEv
+_ZN3VFO13GUIController8showMainEv
+_ZN3VFO13GUIController20pushEncoderIncrementEst
+_ZN3VFO13Configuration4saveEv
+_ZN3VFO13Configuration4loadEv
+_Znwj
+_ZN3VFO13ConfigurationC1Ev
+_ZN3VFO13GUIControllerC1Ev
+_ZN6Si5351C1Eh
+__cxa_end_cleanup
+__gxx_personality_v0
+HAL_GetTick
+__aeabi_unwind_cpp_pr1
+_ZTVN10__cxxabiv117__class_type_infoE

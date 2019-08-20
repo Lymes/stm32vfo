@@ -1,0 +1,781 @@
+ARM GAS  /var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccskMnIN.s 			page 1
+
+
+   1              		.cpu cortex-m3
+   2              		.eabi_attribute 20, 1
+   3              		.eabi_attribute 21, 1
+   4              		.eabi_attribute 23, 3
+   5              		.eabi_attribute 24, 1
+   6              		.eabi_attribute 25, 1
+   7              		.eabi_attribute 26, 1
+   8              		.eabi_attribute 30, 2
+   9              		.eabi_attribute 34, 1
+  10              		.eabi_attribute 18, 4
+  11              		.file	"FrequencyString.cpp"
+  12              		.text
+  13              	.Ltext0:
+  14              		.cfi_sections	.debug_frame
+  15              		.section	.text._ZN3VFO15FrequencyStringC2EhhPNS_10BackgroundE,"ax",%progbits
+  16              		.align	1
+  17              		.p2align 2,,3
+  18              		.global	_ZN3VFO15FrequencyStringC2EhhPNS_10BackgroundE
+  19              		.arch armv7-m
+  20              		.syntax unified
+  21              		.thumb
+  22              		.thumb_func
+  23              		.fpu softvfp
+  25              	_ZN3VFO15FrequencyStringC2EhhPNS_10BackgroundE:
+  26              		.fnstart
+  27              	.LVL0:
+  28              	.LFB92:
+  29              		.file 1 "Src/VFO/GUI/FrequencyString.cpp"
+   1:Src/VFO/GUI/FrequencyString.cpp **** /*
+   2:Src/VFO/GUI/FrequencyString.cpp ****  * FrequencyString.cpp
+   3:Src/VFO/GUI/FrequencyString.cpp ****  *
+   4:Src/VFO/GUI/FrequencyString.cpp ****  *  Created on: Apr 8, 2018
+   5:Src/VFO/GUI/FrequencyString.cpp ****  *      Author: lymes
+   6:Src/VFO/GUI/FrequencyString.cpp ****  */
+   7:Src/VFO/GUI/FrequencyString.cpp **** 
+   8:Src/VFO/GUI/FrequencyString.cpp **** #include "FrequencyString.h"
+   9:Src/VFO/GUI/FrequencyString.cpp **** #include "ST7735/st7735.h"
+  10:Src/VFO/GUI/FrequencyString.cpp **** #include "Utils.h"
+  11:Src/VFO/GUI/FrequencyString.cpp **** 
+  12:Src/VFO/GUI/FrequencyString.cpp **** namespace VFO
+  13:Src/VFO/GUI/FrequencyString.cpp **** {
+  14:Src/VFO/GUI/FrequencyString.cpp **** 
+  15:Src/VFO/GUI/FrequencyString.cpp **** FrequencyString::FrequencyString(uint8_t x, uint8_t y, Background *b)
+  30              		.loc 1 15 1 view -0
+  31              		.cfi_startproc
+  32              		@ args = 0, pretend = 0, frame = 0
+  33              		@ frame_needed = 0, uses_anonymous_args = 0
+  34              		@ link register save eliminated.
+  35              	.LBB2:
+  16:Src/VFO/GUI/FrequencyString.cpp **** {
+  17:Src/VFO/GUI/FrequencyString.cpp **** 	_back = b;
+  36              		.loc 1 17 2 view .LVU1
+  37              	.LBE2:
+  15:Src/VFO/GUI/FrequencyString.cpp **** {
+  38              		.loc 1 15 1 is_stmt 0 view .LVU2
+  39 0000 30B4     		push	{r4, r5}
+  40              	.LCFI0:
+ARM GAS  /var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccskMnIN.s 			page 2
+
+
+  41              		.cfi_def_cfa_offset 8
+  42              		.cfi_offset 4, -8
+  43              		.cfi_offset 5, -4
+  44              	.LBB3:
+  18:Src/VFO/GUI/FrequencyString.cpp **** 	_x = x;
+  19:Src/VFO/GUI/FrequencyString.cpp **** 	_y = y;
+  20:Src/VFO/GUI/FrequencyString.cpp **** 	memset(_longBuf, 0, sizeof(_longBuf));
+  45              		.loc 1 20 8 view .LVU3
+  46 0002 0025     		movs	r5, #0
+  17:Src/VFO/GUI/FrequencyString.cpp **** 	_x = x;
+  47              		.loc 1 17 8 view .LVU4
+  48 0004 0361     		str	r3, [r0, #16]
+  18:Src/VFO/GUI/FrequencyString.cpp **** 	_x = x;
+  49              		.loc 1 18 2 is_stmt 1 view .LVU5
+  50              		.loc 1 20 8 is_stmt 0 view .LVU6
+  51 0006 0560     		str	r5, [r0]	@ unaligned
+  52 0008 4560     		str	r5, [r0, #4]	@ unaligned
+  53 000a 8560     		str	r5, [r0, #8]	@ unaligned
+  18:Src/VFO/GUI/FrequencyString.cpp **** 	_x = x;
+  54              		.loc 1 18 5 view .LVU7
+  55 000c 0173     		strb	r1, [r0, #12]
+  19:Src/VFO/GUI/FrequencyString.cpp **** 	memset(_longBuf, 0, sizeof(_longBuf));
+  56              		.loc 1 19 2 is_stmt 1 view .LVU8
+  19:Src/VFO/GUI/FrequencyString.cpp **** 	memset(_longBuf, 0, sizeof(_longBuf));
+  57              		.loc 1 19 5 is_stmt 0 view .LVU9
+  58 000e 4273     		strb	r2, [r0, #13]
+  59              		.loc 1 20 2 is_stmt 1 view .LVU10
+  60              	.LBE3:
+  21:Src/VFO/GUI/FrequencyString.cpp **** }
+  61              		.loc 1 21 1 is_stmt 0 view .LVU11
+  62 0010 30BC     		pop	{r4, r5}
+  63              	.LCFI1:
+  64              		.cfi_restore 5
+  65              		.cfi_restore 4
+  66              		.cfi_def_cfa_offset 0
+  67 0012 7047     		bx	lr
+  68              		.cfi_endproc
+  69              	.LFE92:
+  70              		.cantunwind
+  71              		.fnend
+  73              		.global	_ZN3VFO15FrequencyStringC1EhhPNS_10BackgroundE
+  74              		.thumb_set _ZN3VFO15FrequencyStringC1EhhPNS_10BackgroundE,_ZN3VFO15FrequencyStringC2EhhPNS_10Backg
+  75              		.section	.text._ZN3VFO15FrequencyString13setBackgroundEPNS_10BackgroundE,"ax",%progbits
+  76              		.align	1
+  77              		.p2align 2,,3
+  78              		.global	_ZN3VFO15FrequencyString13setBackgroundEPNS_10BackgroundE
+  79              		.syntax unified
+  80              		.thumb
+  81              		.thumb_func
+  82              		.fpu softvfp
+  84              	_ZN3VFO15FrequencyString13setBackgroundEPNS_10BackgroundE:
+  85              		.fnstart
+  86              	.LVL1:
+  87              	.LFB94:
+  22:Src/VFO/GUI/FrequencyString.cpp **** 
+  23:Src/VFO/GUI/FrequencyString.cpp **** void FrequencyString::setBackground(Background *back)
+  24:Src/VFO/GUI/FrequencyString.cpp **** {
+ARM GAS  /var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccskMnIN.s 			page 3
+
+
+  88              		.loc 1 24 1 is_stmt 1 view -0
+  89              		.cfi_startproc
+  90              		@ args = 0, pretend = 0, frame = 0
+  91              		@ frame_needed = 0, uses_anonymous_args = 0
+  92              		@ link register save eliminated.
+  25:Src/VFO/GUI/FrequencyString.cpp **** 	_back = back;
+  93              		.loc 1 25 2 view .LVU13
+  26:Src/VFO/GUI/FrequencyString.cpp **** 	memset(_longBuf, 0, sizeof(_longBuf));
+  94              		.loc 1 26 8 is_stmt 0 view .LVU14
+  95 0000 0023     		movs	r3, #0
+  25:Src/VFO/GUI/FrequencyString.cpp **** 	_back = back;
+  96              		.loc 1 25 8 view .LVU15
+  97 0002 0161     		str	r1, [r0, #16]
+  98              		.loc 1 26 2 is_stmt 1 view .LVU16
+  99              		.loc 1 26 8 is_stmt 0 view .LVU17
+ 100 0004 0360     		str	r3, [r0]	@ unaligned
+ 101 0006 4360     		str	r3, [r0, #4]	@ unaligned
+ 102 0008 8360     		str	r3, [r0, #8]	@ unaligned
+  27:Src/VFO/GUI/FrequencyString.cpp **** }
+ 103              		.loc 1 27 1 view .LVU18
+ 104 000a 7047     		bx	lr
+ 105              		.cfi_endproc
+ 106              	.LFE94:
+ 107              		.cantunwind
+ 108              		.fnend
+ 110              		.section	.text._ZN3VFO15FrequencyString4drawEm,"ax",%progbits
+ 111              		.align	1
+ 112              		.p2align 2,,3
+ 113              		.global	_ZN3VFO15FrequencyString4drawEm
+ 114              		.syntax unified
+ 115              		.thumb
+ 116              		.thumb_func
+ 117              		.fpu softvfp
+ 119              	_ZN3VFO15FrequencyString4drawEm:
+ 120              		.fnstart
+ 121              	.LVL2:
+ 122              	.LFB95:
+  28:Src/VFO/GUI/FrequencyString.cpp **** 
+  29:Src/VFO/GUI/FrequencyString.cpp **** void FrequencyString::draw(uint32_t freq)
+  30:Src/VFO/GUI/FrequencyString.cpp **** {
+ 123              		.loc 1 30 1 is_stmt 1 view -0
+ 124              		.cfi_startproc
+ 125              		@ args = 0, pretend = 0, frame = 16
+ 126              		@ frame_needed = 0, uses_anonymous_args = 0
+  31:Src/VFO/GUI/FrequencyString.cpp **** 	char buff[12];
+ 127              		.loc 1 31 2 view .LVU20
+  32:Src/VFO/GUI/FrequencyString.cpp **** 
+  33:Src/VFO/GUI/FrequencyString.cpp **** 	valToStr(freq, buff, sizeof(buff), '.');
+ 128              		.loc 1 33 2 view .LVU21
+  30:Src/VFO/GUI/FrequencyString.cpp **** 	char buff[12];
+ 129              		.loc 1 30 1 is_stmt 0 view .LVU22
+ 130 0000 30B5     		push	{r4, r5, lr}
+ 131              		.save {r4, r5, lr}
+ 132              	.LCFI2:
+ 133              		.cfi_def_cfa_offset 12
+ 134              		.cfi_offset 4, -12
+ 135              		.cfi_offset 5, -8
+ARM GAS  /var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccskMnIN.s 			page 4
+
+
+ 136              		.cfi_offset 14, -4
+ 137 0002 0446     		mov	r4, r0
+ 138              		.pad #36
+ 139 0004 89B0     		sub	sp, sp, #36
+ 140              	.LCFI3:
+ 141              		.cfi_def_cfa_offset 48
+ 142              		.loc 1 33 10 view .LVU23
+ 143 0006 2E23     		movs	r3, #46
+ 144 0008 0846     		mov	r0, r1
+ 145              	.LVL3:
+ 146              		.loc 1 33 10 view .LVU24
+ 147 000a 0C22     		movs	r2, #12
+ 148 000c 05A9     		add	r1, sp, #20
+ 149              	.LVL4:
+ 150              		.loc 1 33 10 view .LVU25
+ 151 000e FFF7FEFF 		bl	_ZN3VFO8valToStrElPcjc
+ 152              	.LVL5:
+ 153              	.LBB4:
+  34:Src/VFO/GUI/FrequencyString.cpp **** 	uint8_t x_offs;
+  35:Src/VFO/GUI/FrequencyString.cpp **** 	for (uint8_t i = 0; i < sizeof(buff) - 2; i++)
+  36:Src/VFO/GUI/FrequencyString.cpp **** 	{
+  37:Src/VFO/GUI/FrequencyString.cpp **** 		if (buff[i] != _longBuf[i])
+ 154              		.loc 1 37 3 is_stmt 1 view .LVU26
+ 155 0012 2278     		ldrb	r2, [r4]	@ zero_extendqisi2
+ 156              		.loc 1 37 13 is_stmt 0 view .LVU27
+ 157 0014 9DF81430 		ldrb	r3, [sp, #20]	@ zero_extendqisi2
+ 158              		.loc 1 37 3 view .LVU28
+ 159 0018 9A42     		cmp	r2, r3
+ 160 001a 0ED0     		beq	.L6
+  38:Src/VFO/GUI/FrequencyString.cpp **** 		{
+  39:Src/VFO/GUI/FrequencyString.cpp **** 			x_offs = _x + i * 18 - (i / 4) * 12;
+ 161              		.loc 1 39 4 is_stmt 1 view .LVU29
+ 162              	.LVL6:
+  40:Src/VFO/GUI/FrequencyString.cpp **** 			ST7735_PutChar5x7Ex(3, x_offs, _y, buff[i], COLOR565_YELLOW, _back,
+ 163              		.loc 1 40 4 view .LVU30
+ 164              		.loc 1 40 23 is_stmt 0 view .LVU31
+ 165 001c 4FF6E070 		movw	r0, #65504
+ 166 0020 2269     		ldr	r2, [r4, #16]
+ 167 0022 6A49     		ldr	r1, .L17
+ 168 0024 0090     		str	r0, [sp]
+ 169              	.LVL7:
+ 170              		.loc 1 40 23 view .LVU32
+ 171 0026 CDE90121 		strd	r2, r1, [sp, #4]
+ 172 002a 0320     		movs	r0, #3
+ 173 002c 627B     		ldrb	r2, [r4, #13]	@ zero_extendqisi2
+ 174 002e 217B     		ldrb	r1, [r4, #12]	@ zero_extendqisi2
+ 175 0030 FFF7FEFF 		bl	ST7735_PutChar5x7Ex
+ 176              	.LVL8:
+  41:Src/VFO/GUI/FrequencyString.cpp **** 					backgroundColor);
+  42:Src/VFO/GUI/FrequencyString.cpp **** 			_longBuf[i] = buff[i];
+ 177              		.loc 1 42 4 is_stmt 1 view .LVU33
+ 178              		.loc 1 42 16 is_stmt 0 view .LVU34
+ 179 0034 9DF81430 		ldrb	r3, [sp, #20]	@ zero_extendqisi2
+ 180 0038 2370     		strb	r3, [r4]
+ 181              	.L6:
+ 182              	.LVL9:
+  37:Src/VFO/GUI/FrequencyString.cpp **** 		{
+ARM GAS  /var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccskMnIN.s 			page 5
+
+
+ 183              		.loc 1 37 3 is_stmt 1 view .LVU35
+  37:Src/VFO/GUI/FrequencyString.cpp **** 		{
+ 184              		.loc 1 37 13 is_stmt 0 view .LVU36
+ 185 003a 9DF81530 		ldrb	r3, [sp, #21]	@ zero_extendqisi2
+  37:Src/VFO/GUI/FrequencyString.cpp **** 		{
+ 186              		.loc 1 37 3 view .LVU37
+ 187 003e 6278     		ldrb	r2, [r4, #1]	@ zero_extendqisi2
+ 188 0040 9A42     		cmp	r2, r3
+ 189 0042 10D0     		beq	.L7
+  39:Src/VFO/GUI/FrequencyString.cpp **** 			ST7735_PutChar5x7Ex(3, x_offs, _y, buff[i], COLOR565_YELLOW, _back,
+ 190              		.loc 1 39 4 is_stmt 1 view .LVU38
+ 191              	.LVL10:
+  40:Src/VFO/GUI/FrequencyString.cpp **** 					backgroundColor);
+ 192              		.loc 1 40 4 view .LVU39
+  40:Src/VFO/GUI/FrequencyString.cpp **** 					backgroundColor);
+ 193              		.loc 1 40 23 is_stmt 0 view .LVU40
+ 194 0044 4FF6E075 		movw	r5, #65504
+ 195 0048 2269     		ldr	r2, [r4, #16]
+ 196 004a 6048     		ldr	r0, .L17
+  39:Src/VFO/GUI/FrequencyString.cpp **** 			ST7735_PutChar5x7Ex(3, x_offs, _y, buff[i], COLOR565_YELLOW, _back,
+ 197              		.loc 1 39 11 view .LVU41
+ 198 004c 217B     		ldrb	r1, [r4, #12]	@ zero_extendqisi2
+  40:Src/VFO/GUI/FrequencyString.cpp **** 					backgroundColor);
+ 199              		.loc 1 40 23 view .LVU42
+ 200 004e CDE90120 		strd	r2, r0, [sp, #4]
+ 201              	.LVL11:
+  40:Src/VFO/GUI/FrequencyString.cpp **** 					backgroundColor);
+ 202              		.loc 1 40 23 view .LVU43
+ 203 0052 0095     		str	r5, [sp]
+  39:Src/VFO/GUI/FrequencyString.cpp **** 			ST7735_PutChar5x7Ex(3, x_offs, _y, buff[i], COLOR565_YELLOW, _back,
+ 204              		.loc 1 39 11 view .LVU44
+ 205 0054 1231     		adds	r1, r1, #18
+ 206              	.LVL12:
+  40:Src/VFO/GUI/FrequencyString.cpp **** 					backgroundColor);
+ 207              		.loc 1 40 23 view .LVU45
+ 208 0056 C9B2     		uxtb	r1, r1
+ 209              	.LVL13:
+  40:Src/VFO/GUI/FrequencyString.cpp **** 					backgroundColor);
+ 210              		.loc 1 40 23 view .LVU46
+ 211 0058 627B     		ldrb	r2, [r4, #13]	@ zero_extendqisi2
+ 212 005a 0320     		movs	r0, #3
+ 213 005c FFF7FEFF 		bl	ST7735_PutChar5x7Ex
+ 214              	.LVL14:
+ 215              		.loc 1 42 4 is_stmt 1 view .LVU47
+ 216              		.loc 1 42 16 is_stmt 0 view .LVU48
+ 217 0060 9DF81530 		ldrb	r3, [sp, #21]	@ zero_extendqisi2
+ 218 0064 6370     		strb	r3, [r4, #1]
+ 219              	.L7:
+ 220              	.LVL15:
+  37:Src/VFO/GUI/FrequencyString.cpp **** 		{
+ 221              		.loc 1 37 3 is_stmt 1 view .LVU49
+  37:Src/VFO/GUI/FrequencyString.cpp **** 		{
+ 222              		.loc 1 37 13 is_stmt 0 view .LVU50
+ 223 0066 9DF81630 		ldrb	r3, [sp, #22]	@ zero_extendqisi2
+  37:Src/VFO/GUI/FrequencyString.cpp **** 		{
+ 224              		.loc 1 37 3 view .LVU51
+ 225 006a A278     		ldrb	r2, [r4, #2]	@ zero_extendqisi2
+ARM GAS  /var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccskMnIN.s 			page 6
+
+
+ 226 006c 9A42     		cmp	r2, r3
+ 227 006e 10D0     		beq	.L8
+  39:Src/VFO/GUI/FrequencyString.cpp **** 			ST7735_PutChar5x7Ex(3, x_offs, _y, buff[i], COLOR565_YELLOW, _back,
+ 228              		.loc 1 39 4 is_stmt 1 view .LVU52
+ 229              	.LVL16:
+  40:Src/VFO/GUI/FrequencyString.cpp **** 					backgroundColor);
+ 230              		.loc 1 40 4 view .LVU53
+  40:Src/VFO/GUI/FrequencyString.cpp **** 					backgroundColor);
+ 231              		.loc 1 40 23 is_stmt 0 view .LVU54
+ 232 0070 4FF6E075 		movw	r5, #65504
+ 233 0074 2269     		ldr	r2, [r4, #16]
+ 234 0076 5548     		ldr	r0, .L17
+  39:Src/VFO/GUI/FrequencyString.cpp **** 			ST7735_PutChar5x7Ex(3, x_offs, _y, buff[i], COLOR565_YELLOW, _back,
+ 235              		.loc 1 39 11 view .LVU55
+ 236 0078 217B     		ldrb	r1, [r4, #12]	@ zero_extendqisi2
+  40:Src/VFO/GUI/FrequencyString.cpp **** 					backgroundColor);
+ 237              		.loc 1 40 23 view .LVU56
+ 238 007a CDE90120 		strd	r2, r0, [sp, #4]
+ 239              	.LVL17:
+  40:Src/VFO/GUI/FrequencyString.cpp **** 					backgroundColor);
+ 240              		.loc 1 40 23 view .LVU57
+ 241 007e 0095     		str	r5, [sp]
+  39:Src/VFO/GUI/FrequencyString.cpp **** 			ST7735_PutChar5x7Ex(3, x_offs, _y, buff[i], COLOR565_YELLOW, _back,
+ 242              		.loc 1 39 11 view .LVU58
+ 243 0080 2431     		adds	r1, r1, #36
+ 244              	.LVL18:
+  40:Src/VFO/GUI/FrequencyString.cpp **** 					backgroundColor);
+ 245              		.loc 1 40 23 view .LVU59
+ 246 0082 C9B2     		uxtb	r1, r1
+ 247              	.LVL19:
+  40:Src/VFO/GUI/FrequencyString.cpp **** 					backgroundColor);
+ 248              		.loc 1 40 23 view .LVU60
+ 249 0084 627B     		ldrb	r2, [r4, #13]	@ zero_extendqisi2
+ 250 0086 0320     		movs	r0, #3
+ 251 0088 FFF7FEFF 		bl	ST7735_PutChar5x7Ex
+ 252              	.LVL20:
+ 253              		.loc 1 42 4 is_stmt 1 view .LVU61
+ 254              		.loc 1 42 16 is_stmt 0 view .LVU62
+ 255 008c 9DF81630 		ldrb	r3, [sp, #22]	@ zero_extendqisi2
+ 256 0090 A370     		strb	r3, [r4, #2]
+ 257              	.L8:
+ 258              	.LVL21:
+  37:Src/VFO/GUI/FrequencyString.cpp **** 		{
+ 259              		.loc 1 37 3 is_stmt 1 view .LVU63
+  37:Src/VFO/GUI/FrequencyString.cpp **** 		{
+ 260              		.loc 1 37 13 is_stmt 0 view .LVU64
+ 261 0092 9DF81730 		ldrb	r3, [sp, #23]	@ zero_extendqisi2
+  37:Src/VFO/GUI/FrequencyString.cpp **** 		{
+ 262              		.loc 1 37 3 view .LVU65
+ 263 0096 E278     		ldrb	r2, [r4, #3]	@ zero_extendqisi2
+ 264 0098 9A42     		cmp	r2, r3
+ 265 009a 10D0     		beq	.L9
+  39:Src/VFO/GUI/FrequencyString.cpp **** 			ST7735_PutChar5x7Ex(3, x_offs, _y, buff[i], COLOR565_YELLOW, _back,
+ 266              		.loc 1 39 4 is_stmt 1 view .LVU66
+ 267              	.LVL22:
+  40:Src/VFO/GUI/FrequencyString.cpp **** 					backgroundColor);
+ 268              		.loc 1 40 4 view .LVU67
+ARM GAS  /var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccskMnIN.s 			page 7
+
+
+  40:Src/VFO/GUI/FrequencyString.cpp **** 					backgroundColor);
+ 269              		.loc 1 40 23 is_stmt 0 view .LVU68
+ 270 009c 4FF6E075 		movw	r5, #65504
+ 271 00a0 2269     		ldr	r2, [r4, #16]
+ 272 00a2 4A48     		ldr	r0, .L17
+  39:Src/VFO/GUI/FrequencyString.cpp **** 			ST7735_PutChar5x7Ex(3, x_offs, _y, buff[i], COLOR565_YELLOW, _back,
+ 273              		.loc 1 39 16 view .LVU69
+ 274 00a4 217B     		ldrb	r1, [r4, #12]	@ zero_extendqisi2
+  40:Src/VFO/GUI/FrequencyString.cpp **** 					backgroundColor);
+ 275              		.loc 1 40 23 view .LVU70
+ 276 00a6 CDE90120 		strd	r2, r0, [sp, #4]
+ 277              	.LVL23:
+  40:Src/VFO/GUI/FrequencyString.cpp **** 					backgroundColor);
+ 278              		.loc 1 40 23 view .LVU71
+ 279 00aa 0095     		str	r5, [sp]
+  39:Src/VFO/GUI/FrequencyString.cpp **** 			ST7735_PutChar5x7Ex(3, x_offs, _y, buff[i], COLOR565_YELLOW, _back,
+ 280              		.loc 1 39 16 view .LVU72
+ 281 00ac 3631     		adds	r1, r1, #54
+ 282              	.LVL24:
+  40:Src/VFO/GUI/FrequencyString.cpp **** 					backgroundColor);
+ 283              		.loc 1 40 23 view .LVU73
+ 284 00ae C9B2     		uxtb	r1, r1
+ 285              	.LVL25:
+  40:Src/VFO/GUI/FrequencyString.cpp **** 					backgroundColor);
+ 286              		.loc 1 40 23 view .LVU74
+ 287 00b0 627B     		ldrb	r2, [r4, #13]	@ zero_extendqisi2
+ 288 00b2 0320     		movs	r0, #3
+ 289 00b4 FFF7FEFF 		bl	ST7735_PutChar5x7Ex
+ 290              	.LVL26:
+ 291              		.loc 1 42 4 is_stmt 1 view .LVU75
+ 292              		.loc 1 42 16 is_stmt 0 view .LVU76
+ 293 00b8 9DF81730 		ldrb	r3, [sp, #23]	@ zero_extendqisi2
+ 294 00bc E370     		strb	r3, [r4, #3]
+ 295              	.L9:
+ 296              	.LVL27:
+  37:Src/VFO/GUI/FrequencyString.cpp **** 		{
+ 297              		.loc 1 37 3 is_stmt 1 view .LVU77
+  37:Src/VFO/GUI/FrequencyString.cpp **** 		{
+ 298              		.loc 1 37 13 is_stmt 0 view .LVU78
+ 299 00be 9DF81830 		ldrb	r3, [sp, #24]	@ zero_extendqisi2
+  37:Src/VFO/GUI/FrequencyString.cpp **** 		{
+ 300              		.loc 1 37 3 view .LVU79
+ 301 00c2 2279     		ldrb	r2, [r4, #4]	@ zero_extendqisi2
+ 302 00c4 9A42     		cmp	r2, r3
+ 303 00c6 10D0     		beq	.L10
+  39:Src/VFO/GUI/FrequencyString.cpp **** 			ST7735_PutChar5x7Ex(3, x_offs, _y, buff[i], COLOR565_YELLOW, _back,
+ 304              		.loc 1 39 4 is_stmt 1 view .LVU80
+ 305              	.LVL28:
+  40:Src/VFO/GUI/FrequencyString.cpp **** 					backgroundColor);
+ 306              		.loc 1 40 4 view .LVU81
+  40:Src/VFO/GUI/FrequencyString.cpp **** 					backgroundColor);
+ 307              		.loc 1 40 23 is_stmt 0 view .LVU82
+ 308 00c8 4FF6E075 		movw	r5, #65504
+ 309 00cc 2269     		ldr	r2, [r4, #16]
+ 310 00ce 3F48     		ldr	r0, .L17
+  39:Src/VFO/GUI/FrequencyString.cpp **** 			ST7735_PutChar5x7Ex(3, x_offs, _y, buff[i], COLOR565_YELLOW, _back,
+ 311              		.loc 1 39 11 view .LVU83
+ARM GAS  /var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccskMnIN.s 			page 8
+
+
+ 312 00d0 217B     		ldrb	r1, [r4, #12]	@ zero_extendqisi2
+  40:Src/VFO/GUI/FrequencyString.cpp **** 					backgroundColor);
+ 313              		.loc 1 40 23 view .LVU84
+ 314 00d2 CDE90120 		strd	r2, r0, [sp, #4]
+ 315              	.LVL29:
+  40:Src/VFO/GUI/FrequencyString.cpp **** 					backgroundColor);
+ 316              		.loc 1 40 23 view .LVU85
+ 317 00d6 0095     		str	r5, [sp]
+  39:Src/VFO/GUI/FrequencyString.cpp **** 			ST7735_PutChar5x7Ex(3, x_offs, _y, buff[i], COLOR565_YELLOW, _back,
+ 318              		.loc 1 39 11 view .LVU86
+ 319 00d8 3C31     		adds	r1, r1, #60
+ 320              	.LVL30:
+  40:Src/VFO/GUI/FrequencyString.cpp **** 					backgroundColor);
+ 321              		.loc 1 40 23 view .LVU87
+ 322 00da C9B2     		uxtb	r1, r1
+ 323              	.LVL31:
+  40:Src/VFO/GUI/FrequencyString.cpp **** 					backgroundColor);
+ 324              		.loc 1 40 23 view .LVU88
+ 325 00dc 627B     		ldrb	r2, [r4, #13]	@ zero_extendqisi2
+ 326 00de 0320     		movs	r0, #3
+ 327 00e0 FFF7FEFF 		bl	ST7735_PutChar5x7Ex
+ 328              	.LVL32:
+ 329              		.loc 1 42 4 is_stmt 1 view .LVU89
+ 330              		.loc 1 42 16 is_stmt 0 view .LVU90
+ 331 00e4 9DF81830 		ldrb	r3, [sp, #24]	@ zero_extendqisi2
+ 332 00e8 2371     		strb	r3, [r4, #4]
+ 333              	.L10:
+ 334              	.LVL33:
+  37:Src/VFO/GUI/FrequencyString.cpp **** 		{
+ 335              		.loc 1 37 3 is_stmt 1 view .LVU91
+  37:Src/VFO/GUI/FrequencyString.cpp **** 		{
+ 336              		.loc 1 37 13 is_stmt 0 view .LVU92
+ 337 00ea 9DF81930 		ldrb	r3, [sp, #25]	@ zero_extendqisi2
+  37:Src/VFO/GUI/FrequencyString.cpp **** 		{
+ 338              		.loc 1 37 3 view .LVU93
+ 339 00ee 6279     		ldrb	r2, [r4, #5]	@ zero_extendqisi2
+ 340 00f0 9A42     		cmp	r2, r3
+ 341 00f2 10D0     		beq	.L11
+  39:Src/VFO/GUI/FrequencyString.cpp **** 			ST7735_PutChar5x7Ex(3, x_offs, _y, buff[i], COLOR565_YELLOW, _back,
+ 342              		.loc 1 39 4 is_stmt 1 view .LVU94
+ 343              	.LVL34:
+  40:Src/VFO/GUI/FrequencyString.cpp **** 					backgroundColor);
+ 344              		.loc 1 40 4 view .LVU95
+  40:Src/VFO/GUI/FrequencyString.cpp **** 					backgroundColor);
+ 345              		.loc 1 40 23 is_stmt 0 view .LVU96
+ 346 00f4 4FF6E075 		movw	r5, #65504
+ 347 00f8 2269     		ldr	r2, [r4, #16]
+ 348 00fa 3448     		ldr	r0, .L17
+  39:Src/VFO/GUI/FrequencyString.cpp **** 			ST7735_PutChar5x7Ex(3, x_offs, _y, buff[i], COLOR565_YELLOW, _back,
+ 349              		.loc 1 39 11 view .LVU97
+ 350 00fc 217B     		ldrb	r1, [r4, #12]	@ zero_extendqisi2
+  40:Src/VFO/GUI/FrequencyString.cpp **** 					backgroundColor);
+ 351              		.loc 1 40 23 view .LVU98
+ 352 00fe CDE90120 		strd	r2, r0, [sp, #4]
+ 353              	.LVL35:
+  40:Src/VFO/GUI/FrequencyString.cpp **** 					backgroundColor);
+ 354              		.loc 1 40 23 view .LVU99
+ARM GAS  /var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccskMnIN.s 			page 9
+
+
+ 355 0102 0095     		str	r5, [sp]
+  39:Src/VFO/GUI/FrequencyString.cpp **** 			ST7735_PutChar5x7Ex(3, x_offs, _y, buff[i], COLOR565_YELLOW, _back,
+ 356              		.loc 1 39 11 view .LVU100
+ 357 0104 4E31     		adds	r1, r1, #78
+ 358              	.LVL36:
+  40:Src/VFO/GUI/FrequencyString.cpp **** 					backgroundColor);
+ 359              		.loc 1 40 23 view .LVU101
+ 360 0106 C9B2     		uxtb	r1, r1
+ 361              	.LVL37:
+  40:Src/VFO/GUI/FrequencyString.cpp **** 					backgroundColor);
+ 362              		.loc 1 40 23 view .LVU102
+ 363 0108 627B     		ldrb	r2, [r4, #13]	@ zero_extendqisi2
+ 364 010a 0320     		movs	r0, #3
+ 365 010c FFF7FEFF 		bl	ST7735_PutChar5x7Ex
+ 366              	.LVL38:
+ 367              		.loc 1 42 4 is_stmt 1 view .LVU103
+ 368              		.loc 1 42 16 is_stmt 0 view .LVU104
+ 369 0110 9DF81930 		ldrb	r3, [sp, #25]	@ zero_extendqisi2
+ 370 0114 6371     		strb	r3, [r4, #5]
+ 371              	.L11:
+ 372              	.LVL39:
+  37:Src/VFO/GUI/FrequencyString.cpp **** 		{
+ 373              		.loc 1 37 3 is_stmt 1 view .LVU105
+  37:Src/VFO/GUI/FrequencyString.cpp **** 		{
+ 374              		.loc 1 37 13 is_stmt 0 view .LVU106
+ 375 0116 9DF81A30 		ldrb	r3, [sp, #26]	@ zero_extendqisi2
+  37:Src/VFO/GUI/FrequencyString.cpp **** 		{
+ 376              		.loc 1 37 3 view .LVU107
+ 377 011a A279     		ldrb	r2, [r4, #6]	@ zero_extendqisi2
+ 378 011c 9A42     		cmp	r2, r3
+ 379 011e 10D0     		beq	.L12
+  39:Src/VFO/GUI/FrequencyString.cpp **** 			ST7735_PutChar5x7Ex(3, x_offs, _y, buff[i], COLOR565_YELLOW, _back,
+ 380              		.loc 1 39 4 is_stmt 1 view .LVU108
+ 381              	.LVL40:
+  40:Src/VFO/GUI/FrequencyString.cpp **** 					backgroundColor);
+ 382              		.loc 1 40 4 view .LVU109
+  40:Src/VFO/GUI/FrequencyString.cpp **** 					backgroundColor);
+ 383              		.loc 1 40 23 is_stmt 0 view .LVU110
+ 384 0120 4FF6E075 		movw	r5, #65504
+ 385 0124 2269     		ldr	r2, [r4, #16]
+ 386 0126 2948     		ldr	r0, .L17
+  39:Src/VFO/GUI/FrequencyString.cpp **** 			ST7735_PutChar5x7Ex(3, x_offs, _y, buff[i], COLOR565_YELLOW, _back,
+ 387              		.loc 1 39 11 view .LVU111
+ 388 0128 217B     		ldrb	r1, [r4, #12]	@ zero_extendqisi2
+  40:Src/VFO/GUI/FrequencyString.cpp **** 					backgroundColor);
+ 389              		.loc 1 40 23 view .LVU112
+ 390 012a CDE90120 		strd	r2, r0, [sp, #4]
+ 391              	.LVL41:
+  40:Src/VFO/GUI/FrequencyString.cpp **** 					backgroundColor);
+ 392              		.loc 1 40 23 view .LVU113
+ 393 012e 0095     		str	r5, [sp]
+  39:Src/VFO/GUI/FrequencyString.cpp **** 			ST7735_PutChar5x7Ex(3, x_offs, _y, buff[i], COLOR565_YELLOW, _back,
+ 394              		.loc 1 39 11 view .LVU114
+ 395 0130 6031     		adds	r1, r1, #96
+ 396              	.LVL42:
+  40:Src/VFO/GUI/FrequencyString.cpp **** 					backgroundColor);
+ 397              		.loc 1 40 23 view .LVU115
+ARM GAS  /var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccskMnIN.s 			page 10
+
+
+ 398 0132 C9B2     		uxtb	r1, r1
+ 399              	.LVL43:
+  40:Src/VFO/GUI/FrequencyString.cpp **** 					backgroundColor);
+ 400              		.loc 1 40 23 view .LVU116
+ 401 0134 627B     		ldrb	r2, [r4, #13]	@ zero_extendqisi2
+ 402 0136 0320     		movs	r0, #3
+ 403 0138 FFF7FEFF 		bl	ST7735_PutChar5x7Ex
+ 404              	.LVL44:
+ 405              		.loc 1 42 4 is_stmt 1 view .LVU117
+ 406              		.loc 1 42 16 is_stmt 0 view .LVU118
+ 407 013c 9DF81A30 		ldrb	r3, [sp, #26]	@ zero_extendqisi2
+ 408 0140 A371     		strb	r3, [r4, #6]
+ 409              	.L12:
+ 410              	.LVL45:
+  37:Src/VFO/GUI/FrequencyString.cpp **** 		{
+ 411              		.loc 1 37 3 is_stmt 1 view .LVU119
+  37:Src/VFO/GUI/FrequencyString.cpp **** 		{
+ 412              		.loc 1 37 13 is_stmt 0 view .LVU120
+ 413 0142 9DF81B30 		ldrb	r3, [sp, #27]	@ zero_extendqisi2
+  37:Src/VFO/GUI/FrequencyString.cpp **** 		{
+ 414              		.loc 1 37 3 view .LVU121
+ 415 0146 E279     		ldrb	r2, [r4, #7]	@ zero_extendqisi2
+ 416 0148 9A42     		cmp	r2, r3
+ 417 014a 10D0     		beq	.L13
+  39:Src/VFO/GUI/FrequencyString.cpp **** 			ST7735_PutChar5x7Ex(3, x_offs, _y, buff[i], COLOR565_YELLOW, _back,
+ 418              		.loc 1 39 4 is_stmt 1 view .LVU122
+ 419              	.LVL46:
+  40:Src/VFO/GUI/FrequencyString.cpp **** 					backgroundColor);
+ 420              		.loc 1 40 4 view .LVU123
+  40:Src/VFO/GUI/FrequencyString.cpp **** 					backgroundColor);
+ 421              		.loc 1 40 23 is_stmt 0 view .LVU124
+ 422 014c 4FF6E075 		movw	r5, #65504
+ 423 0150 2269     		ldr	r2, [r4, #16]
+ 424 0152 1E48     		ldr	r0, .L17
+  39:Src/VFO/GUI/FrequencyString.cpp **** 			ST7735_PutChar5x7Ex(3, x_offs, _y, buff[i], COLOR565_YELLOW, _back,
+ 425              		.loc 1 39 11 view .LVU125
+ 426 0154 217B     		ldrb	r1, [r4, #12]	@ zero_extendqisi2
+  40:Src/VFO/GUI/FrequencyString.cpp **** 					backgroundColor);
+ 427              		.loc 1 40 23 view .LVU126
+ 428 0156 CDE90120 		strd	r2, r0, [sp, #4]
+ 429              	.LVL47:
+  40:Src/VFO/GUI/FrequencyString.cpp **** 					backgroundColor);
+ 430              		.loc 1 40 23 view .LVU127
+ 431 015a 0095     		str	r5, [sp]
+  39:Src/VFO/GUI/FrequencyString.cpp **** 			ST7735_PutChar5x7Ex(3, x_offs, _y, buff[i], COLOR565_YELLOW, _back,
+ 432              		.loc 1 39 11 view .LVU128
+ 433 015c 7231     		adds	r1, r1, #114
+ 434              	.LVL48:
+  40:Src/VFO/GUI/FrequencyString.cpp **** 					backgroundColor);
+ 435              		.loc 1 40 23 view .LVU129
+ 436 015e C9B2     		uxtb	r1, r1
+ 437              	.LVL49:
+  40:Src/VFO/GUI/FrequencyString.cpp **** 					backgroundColor);
+ 438              		.loc 1 40 23 view .LVU130
+ 439 0160 627B     		ldrb	r2, [r4, #13]	@ zero_extendqisi2
+ 440 0162 0320     		movs	r0, #3
+ 441 0164 FFF7FEFF 		bl	ST7735_PutChar5x7Ex
+ARM GAS  /var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccskMnIN.s 			page 11
+
+
+ 442              	.LVL50:
+ 443              		.loc 1 42 4 is_stmt 1 view .LVU131
+ 444              		.loc 1 42 16 is_stmt 0 view .LVU132
+ 445 0168 9DF81B30 		ldrb	r3, [sp, #27]	@ zero_extendqisi2
+ 446 016c E371     		strb	r3, [r4, #7]
+ 447              	.L13:
+ 448              	.LVL51:
+  37:Src/VFO/GUI/FrequencyString.cpp **** 		{
+ 449              		.loc 1 37 3 is_stmt 1 view .LVU133
+  37:Src/VFO/GUI/FrequencyString.cpp **** 		{
+ 450              		.loc 1 37 13 is_stmt 0 view .LVU134
+ 451 016e 9DF81C30 		ldrb	r3, [sp, #28]	@ zero_extendqisi2
+  37:Src/VFO/GUI/FrequencyString.cpp **** 		{
+ 452              		.loc 1 37 3 view .LVU135
+ 453 0172 227A     		ldrb	r2, [r4, #8]	@ zero_extendqisi2
+ 454 0174 9A42     		cmp	r2, r3
+ 455 0176 10D0     		beq	.L14
+  39:Src/VFO/GUI/FrequencyString.cpp **** 			ST7735_PutChar5x7Ex(3, x_offs, _y, buff[i], COLOR565_YELLOW, _back,
+ 456              		.loc 1 39 4 is_stmt 1 view .LVU136
+ 457              	.LVL52:
+  40:Src/VFO/GUI/FrequencyString.cpp **** 					backgroundColor);
+ 458              		.loc 1 40 4 view .LVU137
+  40:Src/VFO/GUI/FrequencyString.cpp **** 					backgroundColor);
+ 459              		.loc 1 40 23 is_stmt 0 view .LVU138
+ 460 0178 4FF6E075 		movw	r5, #65504
+ 461 017c 2269     		ldr	r2, [r4, #16]
+ 462 017e 1348     		ldr	r0, .L17
+  39:Src/VFO/GUI/FrequencyString.cpp **** 			ST7735_PutChar5x7Ex(3, x_offs, _y, buff[i], COLOR565_YELLOW, _back,
+ 463              		.loc 1 39 11 view .LVU139
+ 464 0180 217B     		ldrb	r1, [r4, #12]	@ zero_extendqisi2
+  40:Src/VFO/GUI/FrequencyString.cpp **** 					backgroundColor);
+ 465              		.loc 1 40 23 view .LVU140
+ 466 0182 CDE90120 		strd	r2, r0, [sp, #4]
+ 467              	.LVL53:
+  40:Src/VFO/GUI/FrequencyString.cpp **** 					backgroundColor);
+ 468              		.loc 1 40 23 view .LVU141
+ 469 0186 0095     		str	r5, [sp]
+  39:Src/VFO/GUI/FrequencyString.cpp **** 			ST7735_PutChar5x7Ex(3, x_offs, _y, buff[i], COLOR565_YELLOW, _back,
+ 470              		.loc 1 39 11 view .LVU142
+ 471 0188 7831     		adds	r1, r1, #120
+ 472              	.LVL54:
+  40:Src/VFO/GUI/FrequencyString.cpp **** 					backgroundColor);
+ 473              		.loc 1 40 23 view .LVU143
+ 474 018a C9B2     		uxtb	r1, r1
+ 475              	.LVL55:
+  40:Src/VFO/GUI/FrequencyString.cpp **** 					backgroundColor);
+ 476              		.loc 1 40 23 view .LVU144
+ 477 018c 627B     		ldrb	r2, [r4, #13]	@ zero_extendqisi2
+ 478 018e 0320     		movs	r0, #3
+ 479 0190 FFF7FEFF 		bl	ST7735_PutChar5x7Ex
+ 480              	.LVL56:
+ 481              		.loc 1 42 4 is_stmt 1 view .LVU145
+ 482              		.loc 1 42 16 is_stmt 0 view .LVU146
+ 483 0194 9DF81C30 		ldrb	r3, [sp, #28]	@ zero_extendqisi2
+ 484 0198 2372     		strb	r3, [r4, #8]
+ 485              	.L14:
+ 486              	.LVL57:
+ARM GAS  /var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccskMnIN.s 			page 12
+
+
+  37:Src/VFO/GUI/FrequencyString.cpp **** 		{
+ 487              		.loc 1 37 3 is_stmt 1 view .LVU147
+  37:Src/VFO/GUI/FrequencyString.cpp **** 		{
+ 488              		.loc 1 37 13 is_stmt 0 view .LVU148
+ 489 019a 9DF81D30 		ldrb	r3, [sp, #29]	@ zero_extendqisi2
+  37:Src/VFO/GUI/FrequencyString.cpp **** 		{
+ 490              		.loc 1 37 3 view .LVU149
+ 491 019e 627A     		ldrb	r2, [r4, #9]	@ zero_extendqisi2
+ 492 01a0 9A42     		cmp	r2, r3
+ 493 01a2 10D0     		beq	.L5
+  39:Src/VFO/GUI/FrequencyString.cpp **** 			ST7735_PutChar5x7Ex(3, x_offs, _y, buff[i], COLOR565_YELLOW, _back,
+ 494              		.loc 1 39 4 is_stmt 1 view .LVU150
+ 495              	.LVL58:
+  40:Src/VFO/GUI/FrequencyString.cpp **** 					backgroundColor);
+ 496              		.loc 1 40 4 view .LVU151
+  40:Src/VFO/GUI/FrequencyString.cpp **** 					backgroundColor);
+ 497              		.loc 1 40 23 is_stmt 0 view .LVU152
+ 498 01a4 4FF6E075 		movw	r5, #65504
+ 499 01a8 2269     		ldr	r2, [r4, #16]
+ 500 01aa 0848     		ldr	r0, .L17
+  39:Src/VFO/GUI/FrequencyString.cpp **** 			ST7735_PutChar5x7Ex(3, x_offs, _y, buff[i], COLOR565_YELLOW, _back,
+ 501              		.loc 1 39 11 view .LVU153
+ 502 01ac 217B     		ldrb	r1, [r4, #12]	@ zero_extendqisi2
+  40:Src/VFO/GUI/FrequencyString.cpp **** 					backgroundColor);
+ 503              		.loc 1 40 23 view .LVU154
+ 504 01ae CDE90120 		strd	r2, r0, [sp, #4]
+ 505              	.LVL59:
+  40:Src/VFO/GUI/FrequencyString.cpp **** 					backgroundColor);
+ 506              		.loc 1 40 23 view .LVU155
+ 507 01b2 0095     		str	r5, [sp]
+  39:Src/VFO/GUI/FrequencyString.cpp **** 			ST7735_PutChar5x7Ex(3, x_offs, _y, buff[i], COLOR565_YELLOW, _back,
+ 508              		.loc 1 39 11 view .LVU156
+ 509 01b4 7639     		subs	r1, r1, #118
+ 510              	.LVL60:
+  40:Src/VFO/GUI/FrequencyString.cpp **** 					backgroundColor);
+ 511              		.loc 1 40 23 view .LVU157
+ 512 01b6 C9B2     		uxtb	r1, r1
+ 513              	.LVL61:
+  40:Src/VFO/GUI/FrequencyString.cpp **** 					backgroundColor);
+ 514              		.loc 1 40 23 view .LVU158
+ 515 01b8 627B     		ldrb	r2, [r4, #13]	@ zero_extendqisi2
+ 516 01ba 0320     		movs	r0, #3
+ 517 01bc FFF7FEFF 		bl	ST7735_PutChar5x7Ex
+ 518              	.LVL62:
+ 519              		.loc 1 42 4 is_stmt 1 view .LVU159
+ 520              		.loc 1 42 16 is_stmt 0 view .LVU160
+ 521 01c0 9DF81D30 		ldrb	r3, [sp, #29]	@ zero_extendqisi2
+ 522 01c4 6372     		strb	r3, [r4, #9]
+ 523              	.LVL63:
+ 524              	.L5:
+ 525              		.loc 1 42 16 view .LVU161
+ 526              	.LBE4:
+  43:Src/VFO/GUI/FrequencyString.cpp **** 		}
+  44:Src/VFO/GUI/FrequencyString.cpp **** 	}
+  45:Src/VFO/GUI/FrequencyString.cpp **** }
+ 527              		.loc 1 45 1 view .LVU162
+ 528 01c6 09B0     		add	sp, sp, #36
+ARM GAS  /var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccskMnIN.s 			page 13
+
+
+ 529              	.LCFI4:
+ 530              		.cfi_def_cfa_offset 12
+ 531              		@ sp needed
+ 532 01c8 30BD     		pop	{r4, r5, pc}
+ 533              	.LVL64:
+ 534              	.L18:
+ 535              		.loc 1 45 1 view .LVU163
+ 536 01ca 00BF     		.align	2
+ 537              	.L17:
+ 538 01cc 00000000 		.word	_ZN3VFO15backgroundColorEPvhh
+ 539              		.cfi_endproc
+ 540              	.LFE95:
+ 541              		.fnend
+ 543              		.text
+ 544              	.Letext0:
+ 545              		.file 2 "/usr/local/gcc-arm-none-eabi-8-2019-q3-update/arm-none-eabi/include/machine/_default_type
+ 546              		.file 3 "/usr/local/gcc-arm-none-eabi-8-2019-q3-update/arm-none-eabi/include/sys/_stdint.h"
+ 547              		.file 4 "Drivers/CMSIS/Include/core_cm3.h"
+ 548              		.file 5 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h"
+ 549              		.file 6 "/usr/local/gcc-arm-none-eabi-8-2019-q3-update/lib/gcc/arm-none-eabi/8.3.1/include/stddef.
+ 550              		.file 7 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h"
+ 551              		.file 8 "/usr/local/gcc-arm-none-eabi-8-2019-q3-update/arm-none-eabi/include/c++/8.3.1/cstdlib"
+ 552              		.file 9 "/usr/local/gcc-arm-none-eabi-8-2019-q3-update/arm-none-eabi/include/c++/8.3.1/bits/std_ab
+ 553              		.file 10 "/usr/local/gcc-arm-none-eabi-8-2019-q3-update/arm-none-eabi/include/c++/8.3.1/arm-none-e
+ 554              		.file 11 "/usr/local/gcc-arm-none-eabi-8-2019-q3-update/arm-none-eabi/include/sys/_types.h"
+ 555              		.file 12 "/usr/local/gcc-arm-none-eabi-8-2019-q3-update/arm-none-eabi/include/sys/reent.h"
+ 556              		.file 13 "/usr/local/gcc-arm-none-eabi-8-2019-q3-update/arm-none-eabi/include/sys/lock.h"
+ 557              		.file 14 "/usr/local/gcc-arm-none-eabi-8-2019-q3-update/arm-none-eabi/include/stdlib.h"
+ 558              		.file 15 "/usr/local/gcc-arm-none-eabi-8-2019-q3-update/arm-none-eabi/include/c++/8.3.1/stdlib.h"
+ 559              		.file 16 "Src/VFO/GUI/FrequencyString.h"
+ 560              		.file 17 "Src/VFO/GUI/Background.h"
+ 561              		.file 18 "Inc/ST7735/font5x7.h"
+ 562              		.file 19 "Inc/ST7735/font7x11.h"
+ 563              		.file 20 "Inc/ST7735/st7735.h"
+ 564              		.file 21 "Src/VFO/GUI/Utils.h"
+ 565              		.file 22 "<built-in>"
+ARM GAS  /var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccskMnIN.s 			page 14
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 FrequencyString.cpp
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccskMnIN.s:16     .text._ZN3VFO15FrequencyStringC2EhhPNS_10BackgroundE:0000000000000000 $t
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccskMnIN.s:25     .text._ZN3VFO15FrequencyStringC2EhhPNS_10BackgroundE:0000000000000000 _ZN3VFO15FrequencyStringC2EhhPNS_10BackgroundE
+.ARM.exidx.text._ZN3VFO15FrequencyStringC2EhhPNS_10BackgroundE:0000000000000000 $d
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccskMnIN.s:25     .text._ZN3VFO15FrequencyStringC2EhhPNS_10BackgroundE:0000000000000000 _ZN3VFO15FrequencyStringC1EhhPNS_10BackgroundE
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccskMnIN.s:76     .text._ZN3VFO15FrequencyString13setBackgroundEPNS_10BackgroundE:0000000000000000 $t
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccskMnIN.s:84     .text._ZN3VFO15FrequencyString13setBackgroundEPNS_10BackgroundE:0000000000000000 _ZN3VFO15FrequencyString13setBackgroundEPNS_10BackgroundE
+.ARM.exidx.text._ZN3VFO15FrequencyString13setBackgroundEPNS_10BackgroundE:0000000000000000 $d
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccskMnIN.s:111    .text._ZN3VFO15FrequencyString4drawEm:0000000000000000 $t
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccskMnIN.s:119    .text._ZN3VFO15FrequencyString4drawEm:0000000000000000 _ZN3VFO15FrequencyString4drawEm
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccskMnIN.s:538    .text._ZN3VFO15FrequencyString4drawEm:00000000000001cc $d
+.ARM.exidx.text._ZN3VFO15FrequencyString4drawEm:0000000000000000 $d
+
+UNDEFINED SYMBOLS
+_ZN3VFO8valToStrElPcjc
+ST7735_PutChar5x7Ex
+_ZN3VFO15backgroundColorEPvhh
+__aeabi_unwind_cpp_pr0

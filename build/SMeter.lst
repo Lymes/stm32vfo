@@ -1,0 +1,576 @@
+ARM GAS  /var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//cc3fL24l.s 			page 1
+
+
+   1              		.cpu cortex-m3
+   2              		.eabi_attribute 20, 1
+   3              		.eabi_attribute 21, 1
+   4              		.eabi_attribute 23, 3
+   5              		.eabi_attribute 24, 1
+   6              		.eabi_attribute 25, 1
+   7              		.eabi_attribute 26, 1
+   8              		.eabi_attribute 30, 2
+   9              		.eabi_attribute 34, 1
+  10              		.eabi_attribute 18, 4
+  11              		.file	"SMeter.cpp"
+  12              		.text
+  13              	.Ltext0:
+  14              		.cfi_sections	.debug_frame
+  15              		.section	.text._ZN3VFO6SMeterD2Ev,"ax",%progbits
+  16              		.align	1
+  17              		.p2align 2,,3
+  18              		.global	_ZN3VFO6SMeterD2Ev
+  19              		.arch armv7-m
+  20              		.syntax unified
+  21              		.thumb
+  22              		.thumb_func
+  23              		.fpu softvfp
+  25              	_ZN3VFO6SMeterD2Ev:
+  26              		.fnstart
+  27              	.LVL0:
+  28              	.LFB95:
+  29              		.file 1 "Src/VFO/GUI/SMeter.cpp"
+   1:Src/VFO/GUI/SMeter.cpp **** /*
+   2:Src/VFO/GUI/SMeter.cpp ****  * SMeter.cpp
+   3:Src/VFO/GUI/SMeter.cpp ****  *
+   4:Src/VFO/GUI/SMeter.cpp ****  *  Created on: Apr 15, 2018
+   5:Src/VFO/GUI/SMeter.cpp ****  *      Author: lymes
+   6:Src/VFO/GUI/SMeter.cpp ****  */
+   7:Src/VFO/GUI/SMeter.cpp **** 
+   8:Src/VFO/GUI/SMeter.cpp **** #include "SMeter.h"
+   9:Src/VFO/GUI/SMeter.cpp **** #include "ST7735/st7735.h"
+  10:Src/VFO/GUI/SMeter.cpp **** 
+  11:Src/VFO/GUI/SMeter.cpp **** 
+  12:Src/VFO/GUI/SMeter.cpp **** namespace VFO
+  13:Src/VFO/GUI/SMeter.cpp **** {
+  14:Src/VFO/GUI/SMeter.cpp **** 
+  15:Src/VFO/GUI/SMeter.cpp **** SMeter::SMeter(uint8_t x, uint8_t y, Background *back)
+  16:Src/VFO/GUI/SMeter.cpp **** {
+  17:Src/VFO/GUI/SMeter.cpp **** 	_back = back;
+  18:Src/VFO/GUI/SMeter.cpp **** 	_x = x; _y = y;
+  19:Src/VFO/GUI/SMeter.cpp **** }
+  20:Src/VFO/GUI/SMeter.cpp **** 
+  21:Src/VFO/GUI/SMeter.cpp **** SMeter::~SMeter()
+  30              		.loc 1 21 1 view -0
+  31              		.cfi_startproc
+  32              		@ args = 0, pretend = 0, frame = 0
+  33              		@ frame_needed = 0, uses_anonymous_args = 0
+  34              		@ link register save eliminated.
+  22:Src/VFO/GUI/SMeter.cpp **** {
+  23:Src/VFO/GUI/SMeter.cpp **** }
+  35              		.loc 1 23 1 is_stmt 0 view .LVU1
+ARM GAS  /var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//cc3fL24l.s 			page 2
+
+
+  36 0000 7047     		bx	lr
+  37              		.cfi_endproc
+  38              	.LFE95:
+  39              		.cantunwind
+  40              		.fnend
+  42              		.global	_ZN3VFO6SMeterD1Ev
+  43              		.thumb_set _ZN3VFO6SMeterD1Ev,_ZN3VFO6SMeterD2Ev
+  44 0002 00BF     		.section	.text._ZN3VFO6SMeterD0Ev,"ax",%progbits
+  45              		.align	1
+  46              		.p2align 2,,3
+  47              		.global	_ZN3VFO6SMeterD0Ev
+  48              		.syntax unified
+  49              		.thumb
+  50              		.thumb_func
+  51              		.fpu softvfp
+  53              	_ZN3VFO6SMeterD0Ev:
+  54              		.fnstart
+  55              	.LVL1:
+  56              	.LFB97:
+  21:Src/VFO/GUI/SMeter.cpp **** {
+  57              		.loc 1 21 1 is_stmt 1 view -0
+  58              		.cfi_startproc
+  59              		@ args = 0, pretend = 0, frame = 0
+  60              		@ frame_needed = 0, uses_anonymous_args = 0
+  21:Src/VFO/GUI/SMeter.cpp **** {
+  61              		.loc 1 21 1 is_stmt 0 view .LVU3
+  62 0000 10B5     		push	{r4, lr}
+  63              	.LCFI0:
+  64              		.cfi_def_cfa_offset 8
+  65              		.cfi_offset 4, -8
+  66              		.cfi_offset 14, -4
+  21:Src/VFO/GUI/SMeter.cpp **** {
+  67              		.loc 1 21 1 view .LVU4
+  68 0002 0446     		mov	r4, r0
+  69              	.LVL2:
+  70              	.LBB5:
+  71              	.LBI5:
+  21:Src/VFO/GUI/SMeter.cpp **** {
+  72              		.loc 1 21 1 is_stmt 1 view .LVU5
+  21:Src/VFO/GUI/SMeter.cpp **** {
+  73              		.loc 1 21 1 is_stmt 0 view .LVU6
+  74              	.LBE5:
+  75              		.loc 1 23 1 view .LVU7
+  76 0004 0C21     		movs	r1, #12
+  77 0006 FFF7FEFF 		bl	_ZdlPvj
+  78              	.LVL3:
+  79              		.loc 1 23 1 view .LVU8
+  80 000a 2046     		mov	r0, r4
+  81 000c 10BD     		pop	{r4, pc}
+  82              		.loc 1 23 1 view .LVU9
+  83              		.cfi_endproc
+  84              	.LFE97:
+  85              		.cantunwind
+  86              		.fnend
+  88 000e 00BF     		.section	.text._ZN3VFO6SMeterC2EhhPNS_10BackgroundE,"ax",%progbits
+  89              		.align	1
+  90              		.p2align 2,,3
+ARM GAS  /var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//cc3fL24l.s 			page 3
+
+
+  91              		.global	_ZN3VFO6SMeterC2EhhPNS_10BackgroundE
+  92              		.syntax unified
+  93              		.thumb
+  94              		.thumb_func
+  95              		.fpu softvfp
+  97              	_ZN3VFO6SMeterC2EhhPNS_10BackgroundE:
+  98              		.fnstart
+  99              	.LVL4:
+ 100              	.LFB92:
+  15:Src/VFO/GUI/SMeter.cpp **** {
+ 101              		.loc 1 15 1 is_stmt 1 view -0
+ 102              		.cfi_startproc
+ 103              		@ args = 0, pretend = 0, frame = 0
+ 104              		@ frame_needed = 0, uses_anonymous_args = 0
+ 105              		@ link register save eliminated.
+  15:Src/VFO/GUI/SMeter.cpp **** {
+ 106              		.loc 1 15 1 is_stmt 0 view .LVU11
+ 107 0000 30B4     		push	{r4, r5}
+ 108              	.LCFI1:
+ 109              		.cfi_def_cfa_offset 8
+ 110              		.cfi_offset 4, -8
+ 111              		.cfi_offset 5, -4
+ 112              	.LBB6:
+  15:Src/VFO/GUI/SMeter.cpp **** {
+ 113              		.loc 1 15 54 view .LVU12
+ 114 0002 034D     		ldr	r5, .L7
+  17:Src/VFO/GUI/SMeter.cpp **** 	_x = x; _y = y;
+ 115              		.loc 1 17 8 view .LVU13
+ 116 0004 8360     		str	r3, [r0, #8]
+  15:Src/VFO/GUI/SMeter.cpp **** {
+ 117              		.loc 1 15 54 view .LVU14
+ 118 0006 0560     		str	r5, [r0]
+  17:Src/VFO/GUI/SMeter.cpp **** 	_x = x; _y = y;
+ 119              		.loc 1 17 2 is_stmt 1 view .LVU15
+  18:Src/VFO/GUI/SMeter.cpp **** }
+ 120              		.loc 1 18 2 view .LVU16
+  18:Src/VFO/GUI/SMeter.cpp **** }
+ 121              		.loc 1 18 10 view .LVU17
+  18:Src/VFO/GUI/SMeter.cpp **** }
+ 122              		.loc 1 18 5 is_stmt 0 view .LVU18
+ 123 0008 0171     		strb	r1, [r0, #4]
+  18:Src/VFO/GUI/SMeter.cpp **** }
+ 124              		.loc 1 18 13 view .LVU19
+ 125 000a 4271     		strb	r2, [r0, #5]
+ 126              	.LBE6:
+  19:Src/VFO/GUI/SMeter.cpp **** 
+ 127              		.loc 1 19 1 view .LVU20
+ 128 000c 30BC     		pop	{r4, r5}
+ 129              	.LCFI2:
+ 130              		.cfi_restore 5
+ 131              		.cfi_restore 4
+ 132              		.cfi_def_cfa_offset 0
+ 133 000e 7047     		bx	lr
+ 134              	.L8:
+ 135              		.align	2
+ 136              	.L7:
+ 137 0010 08000000 		.word	.LANCHOR0+8
+ARM GAS  /var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//cc3fL24l.s 			page 4
+
+
+ 138              		.cfi_endproc
+ 139              	.LFE92:
+ 140              		.cantunwind
+ 141              		.fnend
+ 143              		.global	_ZN3VFO6SMeterC1EhhPNS_10BackgroundE
+ 144              		.thumb_set _ZN3VFO6SMeterC1EhhPNS_10BackgroundE,_ZN3VFO6SMeterC2EhhPNS_10BackgroundE
+ 145              		.section	.text._ZN3VFO6SMeter14drawBackgroundEv,"ax",%progbits
+ 146              		.align	1
+ 147              		.p2align 2,,3
+ 148              		.global	_ZN3VFO6SMeter14drawBackgroundEv
+ 149              		.syntax unified
+ 150              		.thumb
+ 151              		.thumb_func
+ 152              		.fpu softvfp
+ 154              	_ZN3VFO6SMeter14drawBackgroundEv:
+ 155              		.fnstart
+ 156              	.LVL5:
+ 157              	.LFB99:
+  24:Src/VFO/GUI/SMeter.cpp **** 
+  25:Src/VFO/GUI/SMeter.cpp **** 
+  26:Src/VFO/GUI/SMeter.cpp **** void SMeter::draw(uint8_t value)
+  27:Src/VFO/GUI/SMeter.cpp **** {
+  28:Src/VFO/GUI/SMeter.cpp **** 	drawBackground();
+  29:Src/VFO/GUI/SMeter.cpp **** }
+  30:Src/VFO/GUI/SMeter.cpp **** 
+  31:Src/VFO/GUI/SMeter.cpp **** 
+  32:Src/VFO/GUI/SMeter.cpp **** void SMeter::drawBackground()
+  33:Src/VFO/GUI/SMeter.cpp **** {
+ 158              		.loc 1 33 1 is_stmt 1 view -0
+ 159              		.cfi_startproc
+ 160              		@ args = 0, pretend = 0, frame = 0
+ 161              		@ frame_needed = 0, uses_anonymous_args = 0
+  34:Src/VFO/GUI/SMeter.cpp **** 	ST7735_PutStr5x7Ex(1, _x, _y, (char *)"1  3  5  7  9", COLOR565_WHITE, _back,
+ 162              		.loc 1 34 2 view .LVU22
+  33:Src/VFO/GUI/SMeter.cpp **** 	ST7735_PutStr5x7Ex(1, _x, _y, (char *)"1  3  5  7  9", COLOR565_WHITE, _back,
+ 163              		.loc 1 33 1 is_stmt 0 view .LVU23
+ 164 0000 70B5     		push	{r4, r5, r6, lr}
+ 165              		.save {r4, r5, r6, lr}
+ 166              	.LCFI3:
+ 167              		.cfi_def_cfa_offset 16
+ 168              		.cfi_offset 4, -16
+ 169              		.cfi_offset 5, -12
+ 170              		.cfi_offset 6, -8
+ 171              		.cfi_offset 14, -4
+ 172              		.loc 1 34 20 view .LVU24
+ 173 0002 4FF6FF75 		movw	r5, #65535
+ 174 0006 8368     		ldr	r3, [r0, #8]
+  33:Src/VFO/GUI/SMeter.cpp **** 	ST7735_PutStr5x7Ex(1, _x, _y, (char *)"1  3  5  7  9", COLOR565_WHITE, _back,
+ 175              		.loc 1 33 1 view .LVU25
+ 176              		.pad #16
+ 177 0008 84B0     		sub	sp, sp, #16
+ 178              	.LCFI4:
+ 179              		.cfi_def_cfa_offset 32
+  33:Src/VFO/GUI/SMeter.cpp **** 	ST7735_PutStr5x7Ex(1, _x, _y, (char *)"1  3  5  7  9", COLOR565_WHITE, _back,
+ 180              		.loc 1 33 1 view .LVU26
+ 181 000a 0446     		mov	r4, r0
+ 182              		.loc 1 34 20 view .LVU27
+ARM GAS  /var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//cc3fL24l.s 			page 5
+
+
+ 183 000c 374E     		ldr	r6, .L11
+ 184 000e 0193     		str	r3, [sp, #4]
+ 185 0010 4279     		ldrb	r2, [r0, #5]	@ zero_extendqisi2
+ 186 0012 0179     		ldrb	r1, [r0, #4]	@ zero_extendqisi2
+ 187 0014 364B     		ldr	r3, .L11+4
+ 188 0016 0296     		str	r6, [sp, #8]
+ 189 0018 0095     		str	r5, [sp]
+ 190 001a 0120     		movs	r0, #1
+ 191              	.LVL6:
+ 192              		.loc 1 34 20 view .LVU28
+ 193 001c FFF7FEFF 		bl	ST7735_PutStr5x7Ex
+ 194              	.LVL7:
+  35:Src/VFO/GUI/SMeter.cpp **** 			VFO::backgroundColor);
+  36:Src/VFO/GUI/SMeter.cpp **** 	ST7735_PutStr5x7Ex(1, _x + 86, _y, (char *)"+20 +60", COLOR565_RED, _back,
+ 195              		.loc 1 36 2 is_stmt 1 view .LVU29
+ 196              		.loc 1 36 20 is_stmt 0 view .LVU30
+ 197 0020 4FF47843 		mov	r3, #63488
+ 198 0024 2179     		ldrb	r1, [r4, #4]	@ zero_extendqisi2
+ 199 0026 A268     		ldr	r2, [r4, #8]
+ 200 0028 5631     		adds	r1, r1, #86
+ 201 002a 0296     		str	r6, [sp, #8]
+ 202 002c 0192     		str	r2, [sp, #4]
+ 203 002e 6279     		ldrb	r2, [r4, #5]	@ zero_extendqisi2
+ 204 0030 C9B2     		uxtb	r1, r1
+ 205 0032 0093     		str	r3, [sp]
+ 206 0034 0120     		movs	r0, #1
+ 207 0036 2F4B     		ldr	r3, .L11+8
+ 208 0038 FFF7FEFF 		bl	ST7735_PutStr5x7Ex
+ 209              	.LVL8:
+  37:Src/VFO/GUI/SMeter.cpp **** 			VFO::backgroundColor);
+  38:Src/VFO/GUI/SMeter.cpp **** 
+  39:Src/VFO/GUI/SMeter.cpp **** 	ST7735_HLine(_x,  140, _y + 15, COLOR565_WHITE);
+ 210              		.loc 1 39 2 is_stmt 1 view .LVU31
+ 211              		.loc 1 39 25 is_stmt 0 view .LVU32
+ 212 003c 6279     		ldrb	r2, [r4, #5]	@ zero_extendqisi2
+ 213              		.loc 1 39 14 view .LVU33
+ 214 003e 2B46     		mov	r3, r5
+ 215 0040 2079     		ldrb	r0, [r4, #4]	@ zero_extendqisi2
+ 216 0042 0F32     		adds	r2, r2, #15
+ 217 0044 8C21     		movs	r1, #140
+ 218 0046 FFF7FEFF 		bl	ST7735_HLine
+ 219              	.LVL9:
+  40:Src/VFO/GUI/SMeter.cpp **** 	ST7735_HLine(_x,  140, _y + 25, COLOR565_WHITE);
+ 220              		.loc 1 40 2 is_stmt 1 view .LVU34
+ 221              		.loc 1 40 25 is_stmt 0 view .LVU35
+ 222 004a 6279     		ldrb	r2, [r4, #5]	@ zero_extendqisi2
+ 223              		.loc 1 40 14 view .LVU36
+ 224 004c 2B46     		mov	r3, r5
+ 225 004e 2079     		ldrb	r0, [r4, #4]	@ zero_extendqisi2
+ 226 0050 1932     		adds	r2, r2, #25
+ 227 0052 8C21     		movs	r1, #140
+ 228 0054 FFF7FEFF 		bl	ST7735_HLine
+ 229              	.LVL10:
+  41:Src/VFO/GUI/SMeter.cpp **** 
+  42:Src/VFO/GUI/SMeter.cpp **** 	uint8_t xTick = _x + 2;
+ 230              		.loc 1 42 2 is_stmt 1 view .LVU37
+ 231              		.loc 1 42 18 is_stmt 0 view .LVU38
+ARM GAS  /var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//cc3fL24l.s 			page 6
+
+
+ 232 0058 2679     		ldrb	r6, [r4, #4]	@ zero_extendqisi2
+ 233              	.LVL11:
+  43:Src/VFO/GUI/SMeter.cpp **** 	ST7735_VLine(xTick, _y + 10, _y + 15, COLOR565_WHITE);
+ 234              		.loc 1 43 2 is_stmt 1 view .LVU39
+ 235              		.loc 1 43 22 is_stmt 0 view .LVU40
+ 236 005a 6179     		ldrb	r1, [r4, #5]	@ zero_extendqisi2
+  42:Src/VFO/GUI/SMeter.cpp **** 	ST7735_VLine(xTick, _y + 10, _y + 15, COLOR565_WHITE);
+ 237              		.loc 1 42 10 view .LVU41
+ 238 005c B01C     		adds	r0, r6, #2
+ 239              		.loc 1 43 14 view .LVU42
+ 240 005e 01F10F02 		add	r2, r1, #15
+ 241 0062 2B46     		mov	r3, r5
+ 242 0064 C0B2     		uxtb	r0, r0
+ 243 0066 0A31     		adds	r1, r1, #10
+ 244 0068 FFF7FEFF 		bl	ST7735_VLine
+ 245              	.LVL12:
+  44:Src/VFO/GUI/SMeter.cpp **** 	xTick += 18;
+ 246              		.loc 1 44 2 is_stmt 1 view .LVU43
+  45:Src/VFO/GUI/SMeter.cpp **** 	ST7735_VLine(xTick, _y + 10, _y + 15, COLOR565_WHITE);
+ 247              		.loc 1 45 2 view .LVU44
+ 248              		.loc 1 45 22 is_stmt 0 view .LVU45
+ 249 006c 6179     		ldrb	r1, [r4, #5]	@ zero_extendqisi2
+  44:Src/VFO/GUI/SMeter.cpp **** 	xTick += 18;
+ 250              		.loc 1 44 8 view .LVU46
+ 251 006e 06F11400 		add	r0, r6, #20
+ 252              		.loc 1 45 14 view .LVU47
+ 253 0072 01F10F02 		add	r2, r1, #15
+ 254 0076 2B46     		mov	r3, r5
+ 255 0078 C0B2     		uxtb	r0, r0
+ 256 007a 0A31     		adds	r1, r1, #10
+ 257 007c FFF7FEFF 		bl	ST7735_VLine
+ 258              	.LVL13:
+  46:Src/VFO/GUI/SMeter.cpp **** 	xTick += 18;
+ 259              		.loc 1 46 2 is_stmt 1 view .LVU48
+  47:Src/VFO/GUI/SMeter.cpp **** 	ST7735_VLine(xTick, _y + 10, _y + 15, COLOR565_WHITE);
+ 260              		.loc 1 47 2 view .LVU49
+ 261              		.loc 1 47 22 is_stmt 0 view .LVU50
+ 262 0080 6179     		ldrb	r1, [r4, #5]	@ zero_extendqisi2
+  46:Src/VFO/GUI/SMeter.cpp **** 	xTick += 18;
+ 263              		.loc 1 46 8 view .LVU51
+ 264 0082 06F12600 		add	r0, r6, #38
+ 265              		.loc 1 47 14 view .LVU52
+ 266 0086 01F10F02 		add	r2, r1, #15
+ 267 008a 2B46     		mov	r3, r5
+ 268 008c C0B2     		uxtb	r0, r0
+ 269 008e 0A31     		adds	r1, r1, #10
+ 270 0090 FFF7FEFF 		bl	ST7735_VLine
+ 271              	.LVL14:
+  48:Src/VFO/GUI/SMeter.cpp **** 	xTick += 18;
+ 272              		.loc 1 48 2 is_stmt 1 view .LVU53
+  49:Src/VFO/GUI/SMeter.cpp **** 	ST7735_VLine(xTick, _y + 10, _y + 15, COLOR565_WHITE);
+ 273              		.loc 1 49 2 view .LVU54
+ 274              		.loc 1 49 22 is_stmt 0 view .LVU55
+ 275 0094 6179     		ldrb	r1, [r4, #5]	@ zero_extendqisi2
+  48:Src/VFO/GUI/SMeter.cpp **** 	xTick += 18;
+ 276              		.loc 1 48 8 view .LVU56
+ 277 0096 06F13800 		add	r0, r6, #56
+ARM GAS  /var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//cc3fL24l.s 			page 7
+
+
+ 278              		.loc 1 49 14 view .LVU57
+ 279 009a 01F10F02 		add	r2, r1, #15
+ 280 009e 2B46     		mov	r3, r5
+ 281 00a0 C0B2     		uxtb	r0, r0
+ 282 00a2 0A31     		adds	r1, r1, #10
+ 283 00a4 FFF7FEFF 		bl	ST7735_VLine
+ 284              	.LVL15:
+  50:Src/VFO/GUI/SMeter.cpp **** 	xTick += 18;
+ 285              		.loc 1 50 2 is_stmt 1 view .LVU58
+  51:Src/VFO/GUI/SMeter.cpp **** 	ST7735_VLine(xTick, _y + 10, _y + 15, COLOR565_WHITE);
+ 286              		.loc 1 51 2 view .LVU59
+ 287              		.loc 1 51 22 is_stmt 0 view .LVU60
+ 288 00a8 6179     		ldrb	r1, [r4, #5]	@ zero_extendqisi2
+  50:Src/VFO/GUI/SMeter.cpp **** 	xTick += 18;
+ 289              		.loc 1 50 8 view .LVU61
+ 290 00aa 06F14A00 		add	r0, r6, #74
+ 291              		.loc 1 51 14 view .LVU62
+ 292 00ae 01F10F02 		add	r2, r1, #15
+ 293 00b2 2B46     		mov	r3, r5
+ 294 00b4 C0B2     		uxtb	r0, r0
+ 295 00b6 0A31     		adds	r1, r1, #10
+ 296 00b8 FFF7FEFF 		bl	ST7735_VLine
+ 297              	.LVL16:
+  52:Src/VFO/GUI/SMeter.cpp **** 	xTick += 22;
+ 298              		.loc 1 52 2 is_stmt 1 view .LVU63
+  53:Src/VFO/GUI/SMeter.cpp **** 	ST7735_VLine(xTick, _y + 10, _y + 15, COLOR565_WHITE);
+ 299              		.loc 1 53 2 view .LVU64
+ 300              		.loc 1 53 22 is_stmt 0 view .LVU65
+ 301 00bc 6179     		ldrb	r1, [r4, #5]	@ zero_extendqisi2
+  52:Src/VFO/GUI/SMeter.cpp **** 	xTick += 22;
+ 302              		.loc 1 52 8 view .LVU66
+ 303 00be 06F16000 		add	r0, r6, #96
+ 304              		.loc 1 53 14 view .LVU67
+ 305 00c2 01F10F02 		add	r2, r1, #15
+ 306 00c6 2B46     		mov	r3, r5
+ 307 00c8 C0B2     		uxtb	r0, r0
+ 308 00ca 0A31     		adds	r1, r1, #10
+ 309 00cc FFF7FEFF 		bl	ST7735_VLine
+ 310              	.LVL17:
+  54:Src/VFO/GUI/SMeter.cpp **** 	xTick += 24;
+ 311              		.loc 1 54 2 is_stmt 1 view .LVU68
+  55:Src/VFO/GUI/SMeter.cpp **** 	ST7735_VLine(xTick, _y + 10, _y + 15, COLOR565_WHITE);
+ 312              		.loc 1 55 2 view .LVU69
+ 313              		.loc 1 55 14 is_stmt 0 view .LVU70
+ 314 00d0 2B46     		mov	r3, r5
+ 315              		.loc 1 55 22 view .LVU71
+ 316 00d2 6179     		ldrb	r1, [r4, #5]	@ zero_extendqisi2
+  54:Src/VFO/GUI/SMeter.cpp **** 	xTick += 24;
+ 317              		.loc 1 54 8 view .LVU72
+ 318 00d4 06F17800 		add	r0, r6, #120
+ 319              		.loc 1 55 14 view .LVU73
+ 320 00d8 01F10F02 		add	r2, r1, #15
+ 321 00dc C0B2     		uxtb	r0, r0
+ 322 00de 0A31     		adds	r1, r1, #10
+  56:Src/VFO/GUI/SMeter.cpp **** }
+ 323              		.loc 1 56 1 view .LVU74
+ 324 00e0 04B0     		add	sp, sp, #16
+ARM GAS  /var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//cc3fL24l.s 			page 8
+
+
+ 325              	.LCFI5:
+ 326              		.cfi_def_cfa_offset 16
+ 327              		@ sp needed
+ 328 00e2 BDE87040 		pop	{r4, r5, r6, lr}
+ 329              	.LCFI6:
+ 330              		.cfi_restore 14
+ 331              		.cfi_restore 6
+ 332              		.cfi_restore 5
+ 333              		.cfi_restore 4
+ 334              		.cfi_def_cfa_offset 0
+ 335              	.LVL18:
+  55:Src/VFO/GUI/SMeter.cpp **** 	ST7735_VLine(xTick, _y + 10, _y + 15, COLOR565_WHITE);
+ 336              		.loc 1 55 14 view .LVU75
+ 337 00e6 FFF7FEBF 		b	ST7735_VLine
+ 338              	.LVL19:
+ 339              	.L12:
+ 340 00ea 00BF     		.align	2
+ 341              	.L11:
+ 342 00ec 00000000 		.word	_ZN3VFO15backgroundColorEPvhh
+ 343 00f0 00000000 		.word	.LC0
+ 344 00f4 10000000 		.word	.LC1
+ 345              		.cfi_endproc
+ 346              	.LFE99:
+ 347              		.fnend
+ 349              		.section	.text._ZN3VFO6SMeter4drawEh,"ax",%progbits
+ 350              		.align	1
+ 351              		.p2align 2,,3
+ 352              		.global	_ZN3VFO6SMeter4drawEh
+ 353              		.syntax unified
+ 354              		.thumb
+ 355              		.thumb_func
+ 356              		.fpu softvfp
+ 358              	_ZN3VFO6SMeter4drawEh:
+ 359              		.fnstart
+ 360              	.LVL20:
+ 361              	.LFB98:
+  27:Src/VFO/GUI/SMeter.cpp **** 	drawBackground();
+ 362              		.loc 1 27 1 is_stmt 1 view -0
+ 363              		.cfi_startproc
+ 364              		@ args = 0, pretend = 0, frame = 0
+ 365              		@ frame_needed = 0, uses_anonymous_args = 0
+ 366              		@ link register save eliminated.
+  28:Src/VFO/GUI/SMeter.cpp **** }
+ 367              		.loc 1 28 2 view .LVU77
+  28:Src/VFO/GUI/SMeter.cpp **** }
+ 368              		.loc 1 28 16 is_stmt 0 view .LVU78
+ 369 0000 FFF7FEBF 		b	_ZN3VFO6SMeter14drawBackgroundEv
+ 370              	.LVL21:
+  28:Src/VFO/GUI/SMeter.cpp **** }
+ 371              		.loc 1 28 16 view .LVU79
+ 372              		.cfi_endproc
+ 373              	.LFE98:
+ 374              		.cantunwind
+ 375              		.fnend
+ 377              		.global	_ZTSN3VFO6SMeterE
+ 378              		.global	_ZTIN3VFO6SMeterE
+ 379              		.global	_ZTVN3VFO6SMeterE
+ARM GAS  /var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//cc3fL24l.s 			page 9
+
+
+ 380              		.section	.rodata._ZN3VFO6SMeter14drawBackgroundEv.str1.4,"aMS",%progbits,1
+ 381              		.align	2
+ 382              	.LC0:
+ 383 0000 31202033 		.ascii	"1  3  5  7  9\000"
+ 383      20203520 
+ 383      20372020 
+ 383      3900
+ 384 000e 0000     		.space	2
+ 385              	.LC1:
+ 386 0010 2B323020 		.ascii	"+20 +60\000"
+ 386      2B363000 
+ 387              		.section	.rodata._ZTIN3VFO6SMeterE,"a"
+ 388              		.align	2
+ 391              	_ZTIN3VFO6SMeterE:
+ 392 0000 08000000 		.word	_ZTVN10__cxxabiv117__class_type_infoE+8
+ 393 0004 00000000 		.word	_ZTSN3VFO6SMeterE
+ 394              		.section	.rodata._ZTSN3VFO6SMeterE,"a"
+ 395              		.align	2
+ 398              	_ZTSN3VFO6SMeterE:
+ 399 0000 4E335646 		.ascii	"N3VFO6SMeterE\000"
+ 399      4F36534D 
+ 399      65746572 
+ 399      4500
+ 400              		.section	.rodata._ZTVN3VFO6SMeterE,"a"
+ 401              		.align	2
+ 402              		.set	.LANCHOR0,. + 0
+ 405              	_ZTVN3VFO6SMeterE:
+ 406 0000 00000000 		.word	0
+ 407 0004 00000000 		.word	_ZTIN3VFO6SMeterE
+ 408 0008 00000000 		.word	_ZN3VFO6SMeterD1Ev
+ 409 000c 00000000 		.word	_ZN3VFO6SMeterD0Ev
+ 410              		.text
+ 411              	.Letext0:
+ 412              		.file 2 "/usr/local/gcc-arm-none-eabi-8-2019-q3-update/arm-none-eabi/include/machine/_default_type
+ 413              		.file 3 "/usr/local/gcc-arm-none-eabi-8-2019-q3-update/arm-none-eabi/include/sys/_stdint.h"
+ 414              		.file 4 "Drivers/CMSIS/Include/core_cm3.h"
+ 415              		.file 5 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h"
+ 416              		.file 6 "/usr/local/gcc-arm-none-eabi-8-2019-q3-update/lib/gcc/arm-none-eabi/8.3.1/include/stddef.
+ 417              		.file 7 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h"
+ 418              		.file 8 "/usr/local/gcc-arm-none-eabi-8-2019-q3-update/arm-none-eabi/include/c++/8.3.1/cstdlib"
+ 419              		.file 9 "/usr/local/gcc-arm-none-eabi-8-2019-q3-update/arm-none-eabi/include/c++/8.3.1/bits/std_ab
+ 420              		.file 10 "/usr/local/gcc-arm-none-eabi-8-2019-q3-update/arm-none-eabi/include/c++/8.3.1/arm-none-e
+ 421              		.file 11 "/usr/local/gcc-arm-none-eabi-8-2019-q3-update/arm-none-eabi/include/sys/_types.h"
+ 422              		.file 12 "/usr/local/gcc-arm-none-eabi-8-2019-q3-update/arm-none-eabi/include/sys/reent.h"
+ 423              		.file 13 "/usr/local/gcc-arm-none-eabi-8-2019-q3-update/arm-none-eabi/include/sys/lock.h"
+ 424              		.file 14 "/usr/local/gcc-arm-none-eabi-8-2019-q3-update/arm-none-eabi/include/stdlib.h"
+ 425              		.file 15 "/usr/local/gcc-arm-none-eabi-8-2019-q3-update/arm-none-eabi/include/c++/8.3.1/stdlib.h"
+ 426              		.file 16 "Src/VFO/GUI/SMeter.h"
+ 427              		.file 17 "Src/VFO/GUI/Background.h"
+ 428              		.file 18 "Inc/ST7735/font5x7.h"
+ 429              		.file 19 "Inc/ST7735/font7x11.h"
+ 430              		.file 20 "Inc/ST7735/st7735.h"
+ 431              		.file 21 "<built-in>"
+ARM GAS  /var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//cc3fL24l.s 			page 10
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 SMeter.cpp
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//cc3fL24l.s:16     .text._ZN3VFO6SMeterD2Ev:0000000000000000 $t
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//cc3fL24l.s:25     .text._ZN3VFO6SMeterD2Ev:0000000000000000 _ZN3VFO6SMeterD2Ev
+.ARM.exidx.text._ZN3VFO6SMeterD2Ev:0000000000000000 $d
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//cc3fL24l.s:25     .text._ZN3VFO6SMeterD2Ev:0000000000000000 _ZN3VFO6SMeterD1Ev
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//cc3fL24l.s:45     .text._ZN3VFO6SMeterD0Ev:0000000000000000 $t
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//cc3fL24l.s:53     .text._ZN3VFO6SMeterD0Ev:0000000000000000 _ZN3VFO6SMeterD0Ev
+.ARM.exidx.text._ZN3VFO6SMeterD0Ev:0000000000000000 $d
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//cc3fL24l.s:89     .text._ZN3VFO6SMeterC2EhhPNS_10BackgroundE:0000000000000000 $t
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//cc3fL24l.s:97     .text._ZN3VFO6SMeterC2EhhPNS_10BackgroundE:0000000000000000 _ZN3VFO6SMeterC2EhhPNS_10BackgroundE
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//cc3fL24l.s:137    .text._ZN3VFO6SMeterC2EhhPNS_10BackgroundE:0000000000000010 $d
+.ARM.exidx.text._ZN3VFO6SMeterC2EhhPNS_10BackgroundE:0000000000000000 $d
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//cc3fL24l.s:97     .text._ZN3VFO6SMeterC2EhhPNS_10BackgroundE:0000000000000000 _ZN3VFO6SMeterC1EhhPNS_10BackgroundE
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//cc3fL24l.s:146    .text._ZN3VFO6SMeter14drawBackgroundEv:0000000000000000 $t
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//cc3fL24l.s:154    .text._ZN3VFO6SMeter14drawBackgroundEv:0000000000000000 _ZN3VFO6SMeter14drawBackgroundEv
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//cc3fL24l.s:342    .text._ZN3VFO6SMeter14drawBackgroundEv:00000000000000ec $d
+.ARM.exidx.text._ZN3VFO6SMeter14drawBackgroundEv:0000000000000000 $d
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//cc3fL24l.s:350    .text._ZN3VFO6SMeter4drawEh:0000000000000000 $t
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//cc3fL24l.s:358    .text._ZN3VFO6SMeter4drawEh:0000000000000000 _ZN3VFO6SMeter4drawEh
+.ARM.exidx.text._ZN3VFO6SMeter4drawEh:0000000000000000 $d
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//cc3fL24l.s:398    .rodata._ZTSN3VFO6SMeterE:0000000000000000 _ZTSN3VFO6SMeterE
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//cc3fL24l.s:391    .rodata._ZTIN3VFO6SMeterE:0000000000000000 _ZTIN3VFO6SMeterE
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//cc3fL24l.s:405    .rodata._ZTVN3VFO6SMeterE:0000000000000000 _ZTVN3VFO6SMeterE
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//cc3fL24l.s:381    .rodata._ZN3VFO6SMeter14drawBackgroundEv.str1.4:0000000000000000 $d
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//cc3fL24l.s:388    .rodata._ZTIN3VFO6SMeterE:0000000000000000 $d
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//cc3fL24l.s:395    .rodata._ZTSN3VFO6SMeterE:0000000000000000 $d
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//cc3fL24l.s:401    .rodata._ZTVN3VFO6SMeterE:0000000000000000 $d
+
+UNDEFINED SYMBOLS
+_ZdlPvj
+ST7735_PutStr5x7Ex
+ST7735_HLine
+ST7735_VLine
+_ZN3VFO15backgroundColorEPvhh
+__aeabi_unwind_cpp_pr0
+_ZTVN10__cxxabiv117__class_type_infoE

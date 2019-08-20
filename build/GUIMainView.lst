@@ -1,0 +1,1926 @@
+ARM GAS  /var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccuOhyDd.s 			page 1
+
+
+   1              		.cpu cortex-m3
+   2              		.eabi_attribute 20, 1
+   3              		.eabi_attribute 21, 1
+   4              		.eabi_attribute 23, 3
+   5              		.eabi_attribute 24, 1
+   6              		.eabi_attribute 25, 1
+   7              		.eabi_attribute 26, 1
+   8              		.eabi_attribute 30, 2
+   9              		.eabi_attribute 34, 1
+  10              		.eabi_attribute 18, 4
+  11              		.file	"GUIMainView.cpp"
+  12              		.text
+  13              	.Ltext0:
+  14              		.cfi_sections	.debug_frame
+  15              		.section	.text._ZN3VFO11GradientBoxD0Ev,"axG",%progbits,_ZN3VFO11GradientBoxD5Ev,comdat
+  16              		.align	1
+  17              		.p2align 2,,3
+  18              		.weak	_ZN3VFO11GradientBoxD0Ev
+  19              		.arch armv7-m
+  20              		.syntax unified
+  21              		.thumb
+  22              		.thumb_func
+  23              		.fpu softvfp
+  25              	_ZN3VFO11GradientBoxD0Ev:
+  26              		.fnstart
+  27              	.LVL0:
+  28              	.LFB90:
+  29              		.file 1 "Src/VFO/GUI/Background.h"
+   1:Src/VFO/GUI/Background.h **** /*
+   2:Src/VFO/GUI/Background.h ****  * Background.h
+   3:Src/VFO/GUI/Background.h ****  *
+   4:Src/VFO/GUI/Background.h ****  *  Created on: Apr 8, 2018
+   5:Src/VFO/GUI/Background.h ****  *      Author: lymes
+   6:Src/VFO/GUI/Background.h ****  */
+   7:Src/VFO/GUI/Background.h **** 
+   8:Src/VFO/GUI/Background.h **** #ifndef BACKGROUND_H_
+   9:Src/VFO/GUI/Background.h **** #define BACKGROUND_H_
+  10:Src/VFO/GUI/Background.h **** 
+  11:Src/VFO/GUI/Background.h **** #include "stm32f1xx_hal.h"
+  12:Src/VFO/GUI/Background.h **** #include <stdlib.h>
+  13:Src/VFO/GUI/Background.h **** 
+  14:Src/VFO/GUI/Background.h **** #include "Bitmap.h"
+  15:Src/VFO/GUI/Background.h **** 
+  16:Src/VFO/GUI/Background.h **** namespace VFO
+  17:Src/VFO/GUI/Background.h **** {
+  18:Src/VFO/GUI/Background.h **** 
+  19:Src/VFO/GUI/Background.h **** struct RGB
+  20:Src/VFO/GUI/Background.h **** {
+  21:Src/VFO/GUI/Background.h **** 	uint8_t r, g, b;
+  22:Src/VFO/GUI/Background.h **** };
+  23:Src/VFO/GUI/Background.h **** 
+  24:Src/VFO/GUI/Background.h **** class Background
+  25:Src/VFO/GUI/Background.h **** {
+  26:Src/VFO/GUI/Background.h **** 
+  27:Src/VFO/GUI/Background.h **** 	uint16_t _backColor;
+  28:Src/VFO/GUI/Background.h **** 
+  29:Src/VFO/GUI/Background.h **** public:
+ARM GAS  /var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccuOhyDd.s 			page 2
+
+
+  30:Src/VFO/GUI/Background.h **** 	Background()
+  31:Src/VFO/GUI/Background.h **** 	{
+  32:Src/VFO/GUI/Background.h **** 		_backColor = 0;
+  33:Src/VFO/GUI/Background.h **** 	}
+  34:Src/VFO/GUI/Background.h **** 	Background(uint16_t c)
+  35:Src/VFO/GUI/Background.h **** 	{
+  36:Src/VFO/GUI/Background.h **** 		_backColor = c;
+  37:Src/VFO/GUI/Background.h **** 	}
+  38:Src/VFO/GUI/Background.h **** 
+  39:Src/VFO/GUI/Background.h **** 	virtual ~Background()
+  40:Src/VFO/GUI/Background.h **** 	{
+  41:Src/VFO/GUI/Background.h **** 	}
+  42:Src/VFO/GUI/Background.h **** 
+  43:Src/VFO/GUI/Background.h **** 	virtual uint16_t getBackColor(uint8_t x, uint8_t y)
+  44:Src/VFO/GUI/Background.h **** 	{
+  45:Src/VFO/GUI/Background.h **** 		return _backColor;
+  46:Src/VFO/GUI/Background.h **** 	}
+  47:Src/VFO/GUI/Background.h **** 
+  48:Src/VFO/GUI/Background.h **** };
+  49:Src/VFO/GUI/Background.h **** 
+  50:Src/VFO/GUI/Background.h **** class BitmapBox: public Background
+  51:Src/VFO/GUI/Background.h **** {
+  52:Src/VFO/GUI/Background.h **** 	Bitmap *_data;
+  53:Src/VFO/GUI/Background.h **** 	uint8_t _x, _y;
+  54:Src/VFO/GUI/Background.h **** 
+  55:Src/VFO/GUI/Background.h **** public:
+  56:Src/VFO/GUI/Background.h **** 	BitmapBox(uint8_t x, uint8_t y, Bitmap *bitmap);
+  57:Src/VFO/GUI/Background.h **** 	virtual ~BitmapBox()
+  58:Src/VFO/GUI/Background.h **** 	{
+  59:Src/VFO/GUI/Background.h **** 	}
+  60:Src/VFO/GUI/Background.h **** 
+  61:Src/VFO/GUI/Background.h **** 	virtual uint16_t getBackColor(uint8_t x, uint8_t y);
+  62:Src/VFO/GUI/Background.h **** 
+  63:Src/VFO/GUI/Background.h **** 	void draw();
+  64:Src/VFO/GUI/Background.h **** };
+  65:Src/VFO/GUI/Background.h **** 
+  66:Src/VFO/GUI/Background.h **** class GradientBox: public Background
+  67:Src/VFO/GUI/Background.h **** {
+  68:Src/VFO/GUI/Background.h **** 
+  69:Src/VFO/GUI/Background.h **** public:
+  70:Src/VFO/GUI/Background.h **** 	RGB upLeft    = { 0, 40, 80 };
+  71:Src/VFO/GUI/Background.h **** 	RGB upRight   = { 140, 10, 10 };
+  72:Src/VFO/GUI/Background.h **** 	RGB downLeft  = { 140, 128, 0 };
+  73:Src/VFO/GUI/Background.h **** 	RGB downRight = { 0, 128, 140 };
+  74:Src/VFO/GUI/Background.h **** 
+  75:Src/VFO/GUI/Background.h **** 	GradientBox(uint8_t x, uint8_t y, uint8_t w, uint8_t h);
+  76:Src/VFO/GUI/Background.h **** 	virtual ~GradientBox()
+  30              		.loc 1 76 10 view -0
+  31              		.cfi_startproc
+  32              		@ args = 0, pretend = 0, frame = 0
+  33              		@ frame_needed = 0, uses_anonymous_args = 0
+  34              		.loc 1 76 10 is_stmt 0 view .LVU1
+  35 0000 10B5     		push	{r4, lr}
+  36              	.LCFI0:
+  37              		.cfi_def_cfa_offset 8
+  38              		.cfi_offset 4, -8
+  39              		.cfi_offset 14, -4
+ARM GAS  /var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccuOhyDd.s 			page 3
+
+
+  40              		.loc 1 76 10 view .LVU2
+  41 0002 0446     		mov	r4, r0
+  42              	.LVL1:
+  43              	.LBB28:
+  44              	.LBI28:
+  45              		.loc 1 76 10 is_stmt 1 view .LVU3
+  46              	.LBB29:
+  47              	.LBI29:
+  39:Src/VFO/GUI/Background.h **** 	{
+  48              		.loc 1 39 10 view .LVU4
+  39:Src/VFO/GUI/Background.h **** 	{
+  49              		.loc 1 39 10 is_stmt 0 view .LVU5
+  50              	.LBE29:
+  51              	.LBE28:
+  77:Src/VFO/GUI/Background.h **** 	{
+  78:Src/VFO/GUI/Background.h **** 	}
+  52              		.loc 1 78 2 view .LVU6
+  53 0004 1821     		movs	r1, #24
+  54 0006 FFF7FEFF 		bl	_ZdlPvj
+  55              	.LVL2:
+  56              		.loc 1 78 2 view .LVU7
+  57 000a 2046     		mov	r0, r4
+  58 000c 10BD     		pop	{r4, pc}
+  59              		.loc 1 78 2 view .LVU8
+  60              		.cfi_endproc
+  61              	.LFE90:
+  62              		.cantunwind
+  63              		.fnend
+  65 000e 00BF     		.section	.text._ZN3VFO11GUIMainView14menuKeyPressedEv,"ax",%progbits
+  66              		.align	1
+  67              		.p2align 2,,3
+  68              		.global	_ZN3VFO11GUIMainView14menuKeyPressedEv
+  69              		.syntax unified
+  70              		.thumb
+  71              		.thumb_func
+  72              		.fpu softvfp
+  74              	_ZN3VFO11GUIMainView14menuKeyPressedEv:
+  75              		.fnstart
+  76              	.LVL3:
+  77              	.LFB125:
+  78              		.file 2 "Src/VFO/GUIMainView.cpp"
+   1:Src/VFO/GUIMainView.cpp **** /*
+   2:Src/VFO/GUIMainView.cpp ****  * GUIMainView.cpp
+   3:Src/VFO/GUIMainView.cpp ****  *
+   4:Src/VFO/GUIMainView.cpp ****  *  Created on: Apr 1, 2018
+   5:Src/VFO/GUIMainView.cpp ****  *      Author: lymes
+   6:Src/VFO/GUIMainView.cpp ****  */
+   7:Src/VFO/GUIMainView.cpp **** 
+   8:Src/VFO/GUIMainView.cpp **** #include "GUIMainView.h"
+   9:Src/VFO/GUIMainView.cpp **** #include "VFOController.h"
+  10:Src/VFO/GUIMainView.cpp **** 
+  11:Src/VFO/GUIMainView.cpp **** #include "GUI/Utils.h"
+  12:Src/VFO/GUIMainView.cpp **** 
+  13:Src/VFO/GUIMainView.cpp **** extern VFO::VFOController *_mainController;
+  14:Src/VFO/GUIMainView.cpp **** 
+  15:Src/VFO/GUIMainView.cpp **** #define ENCODER_THRESHOLD 4
+  16:Src/VFO/GUIMainView.cpp **** #define DIVIDER_FACTOR 11
+ARM GAS  /var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccuOhyDd.s 			page 4
+
+
+  17:Src/VFO/GUIMainView.cpp **** 
+  18:Src/VFO/GUIMainView.cpp **** 
+  19:Src/VFO/GUIMainView.cpp **** namespace VFO
+  20:Src/VFO/GUIMainView.cpp **** {
+  21:Src/VFO/GUIMainView.cpp **** 
+  22:Src/VFO/GUIMainView.cpp **** GUIMainView::GUIMainView()
+  23:Src/VFO/GUIMainView.cpp **** {
+  24:Src/VFO/GUIMainView.cpp **** 	_window = new GradientBox(0, 0, 160, 128);
+  25:Src/VFO/GUIMainView.cpp **** 
+  26:Src/VFO/GUIMainView.cpp **** 	_btn1 = new GradientBox(10, 50, 40, 25);
+  27:Src/VFO/GUIMainView.cpp **** 	_btn1->downLeft =
+  28:Src/VFO/GUIMainView.cpp **** 	{	10, 10, 10};
+  29:Src/VFO/GUIMainView.cpp **** 	_btn1->downRight =
+  30:Src/VFO/GUIMainView.cpp **** 	{	10, 10, 10};
+  31:Src/VFO/GUIMainView.cpp **** 	_btn1->upLeft =
+  32:Src/VFO/GUIMainView.cpp **** 	{	100, 100, 100};
+  33:Src/VFO/GUIMainView.cpp **** 	_btn1->upRight =
+  34:Src/VFO/GUIMainView.cpp **** 	{	100, 100, 100};
+  35:Src/VFO/GUIMainView.cpp **** 
+  36:Src/VFO/GUIMainView.cpp **** 	_btn2 = new GradientBox(60, 50, 40, 25);
+  37:Src/VFO/GUIMainView.cpp **** 	_btn2->downLeft =
+  38:Src/VFO/GUIMainView.cpp **** 	{	10, 10, 10};
+  39:Src/VFO/GUIMainView.cpp **** 	_btn2->downRight =
+  40:Src/VFO/GUIMainView.cpp **** 	{	10, 10, 10};
+  41:Src/VFO/GUIMainView.cpp **** 	_btn2->upLeft =
+  42:Src/VFO/GUIMainView.cpp **** 	{	100, 100, 100};
+  43:Src/VFO/GUIMainView.cpp **** 	_btn2->upRight =
+  44:Src/VFO/GUIMainView.cpp **** 	{	100, 100, 100};
+  45:Src/VFO/GUIMainView.cpp **** 
+  46:Src/VFO/GUIMainView.cpp **** 	_btn3 = new GradientBox(110, 50, 40, 25);
+  47:Src/VFO/GUIMainView.cpp **** 	_btn3->downLeft =
+  48:Src/VFO/GUIMainView.cpp **** 	{	10, 10, 10};
+  49:Src/VFO/GUIMainView.cpp **** 	_btn3->downRight =
+  50:Src/VFO/GUIMainView.cpp **** 	{	10, 10, 10};
+  51:Src/VFO/GUIMainView.cpp **** 	_btn3->upLeft =
+  52:Src/VFO/GUIMainView.cpp **** 	{	100, 100, 100};
+  53:Src/VFO/GUIMainView.cpp **** 	_btn3->upRight =
+  54:Src/VFO/GUIMainView.cpp **** 	{	100, 100, 100};
+  55:Src/VFO/GUIMainView.cpp **** 
+  56:Src/VFO/GUIMainView.cpp **** 	_freqString = new FrequencyString(0, 10, _window);
+  57:Src/VFO/GUIMainView.cpp **** 	_sMeter = new SMeter(10, 90, _window);
+  58:Src/VFO/GUIMainView.cpp **** }
+  59:Src/VFO/GUIMainView.cpp **** 
+  60:Src/VFO/GUIMainView.cpp **** GUIMainView::~GUIMainView()
+  61:Src/VFO/GUIMainView.cpp **** {
+  62:Src/VFO/GUIMainView.cpp **** 	delete _btn1;
+  63:Src/VFO/GUIMainView.cpp **** 	delete _btn2;
+  64:Src/VFO/GUIMainView.cpp **** 	delete _btn3;
+  65:Src/VFO/GUIMainView.cpp **** 	delete _window;
+  66:Src/VFO/GUIMainView.cpp **** }
+  67:Src/VFO/GUIMainView.cpp **** 
+  68:Src/VFO/GUIMainView.cpp **** void GUIMainView::menuKeyPressed()
+  69:Src/VFO/GUIMainView.cpp **** {
+  79              		.loc 2 69 1 is_stmt 1 view -0
+  80              		.cfi_startproc
+  81              		@ args = 0, pretend = 0, frame = 0
+  82              		@ frame_needed = 0, uses_anonymous_args = 0
+ARM GAS  /var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccuOhyDd.s 			page 5
+
+
+  83              		@ link register save eliminated.
+  70:Src/VFO/GUIMainView.cpp **** 	_mainController->showSetup();
+  84              		.loc 2 70 2 view .LVU10
+  85              		.loc 2 70 28 is_stmt 0 view .LVU11
+  86 0000 014B     		ldr	r3, .L5
+  87 0002 1868     		ldr	r0, [r3]
+  88              	.LVL4:
+  89              		.loc 2 70 28 view .LVU12
+  90 0004 FFF7FEBF 		b	_ZN3VFO13VFOController9showSetupEv
+  91              	.LVL5:
+  92              	.L6:
+  93              		.align	2
+  94              	.L5:
+  95 0008 00000000 		.word	_mainController
+  96              		.cfi_endproc
+  97              	.LFE125:
+  98              		.cantunwind
+  99              		.fnend
+ 101              		.section	.text._ZN3VFO11GUIMainView20pushEncoderIncrementEst,"ax",%progbits
+ 102              		.align	1
+ 103              		.p2align 2,,3
+ 104              		.global	_ZN3VFO11GUIMainView20pushEncoderIncrementEst
+ 105              		.syntax unified
+ 106              		.thumb
+ 107              		.thumb_func
+ 108              		.fpu softvfp
+ 110              	_ZN3VFO11GUIMainView20pushEncoderIncrementEst:
+ 111              		.fnstart
+ 112              	.LVL6:
+ 113              	.LFB128:
+  71:Src/VFO/GUIMainView.cpp **** }
+  72:Src/VFO/GUIMainView.cpp **** 
+  73:Src/VFO/GUIMainView.cpp **** void GUIMainView::draw()
+  74:Src/VFO/GUIMainView.cpp **** {
+  75:Src/VFO/GUIMainView.cpp **** 	this->drawBackground();
+  76:Src/VFO/GUIMainView.cpp **** 
+  77:Src/VFO/GUIMainView.cpp **** 	_freqString->setBackground(_window);
+  78:Src/VFO/GUIMainView.cpp **** 	_freqString->draw(_mainController->getConfig()->getFrequency());
+  79:Src/VFO/GUIMainView.cpp **** }
+  80:Src/VFO/GUIMainView.cpp **** 
+  81:Src/VFO/GUIMainView.cpp **** void GUIMainView::drawBackground()
+  82:Src/VFO/GUIMainView.cpp **** {
+  83:Src/VFO/GUIMainView.cpp **** 	_window->draw();
+  84:Src/VFO/GUIMainView.cpp **** 
+  85:Src/VFO/GUIMainView.cpp **** 	_btn1->draw();
+  86:Src/VFO/GUIMainView.cpp **** 	_btn2->draw();
+  87:Src/VFO/GUIMainView.cpp **** 	_btn3->draw();
+  88:Src/VFO/GUIMainView.cpp **** 
+  89:Src/VFO/GUIMainView.cpp **** 	ST7735_Rect(10, 50, 50, 75, COLOR565_WHITE);
+  90:Src/VFO/GUIMainView.cpp **** 	ST7735_Rect(60, 50, 100, 75, COLOR565_WHITE);
+  91:Src/VFO/GUIMainView.cpp **** 	ST7735_Rect(110, 50, 150, 75, COLOR565_WHITE);
+  92:Src/VFO/GUIMainView.cpp **** 
+  93:Src/VFO/GUIMainView.cpp **** 	char tt[] = "SSB";
+  94:Src/VFO/GUIMainView.cpp **** 	ST7735_PutStr7x11Ex(18, 57, VFO::utf8to1251(tt), COLOR565_YELLOW, _btn1,
+  95:Src/VFO/GUIMainView.cpp **** 			VFO::backgroundColor);
+  96:Src/VFO/GUIMainView.cpp **** 
+  97:Src/VFO/GUIMainView.cpp **** 	_sMeter->draw(255);
+ARM GAS  /var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccuOhyDd.s 			page 6
+
+
+  98:Src/VFO/GUIMainView.cpp **** 
+  99:Src/VFO/GUIMainView.cpp **** 	ST7735_defineScrollArea(100, 160);
+ 100:Src/VFO/GUIMainView.cpp **** 
+ 101:Src/VFO/GUIMainView.cpp **** 
+ 102:Src/VFO/GUIMainView.cpp **** }
+ 103:Src/VFO/GUIMainView.cpp **** 
+ 104:Src/VFO/GUIMainView.cpp **** void GUIMainView::pushEncoderIncrement(int16_t increment, uint16_t period)
+ 105:Src/VFO/GUIMainView.cpp **** {
+ 114              		.loc 2 105 1 is_stmt 1 view -0
+ 115              		.cfi_startproc
+ 116              		@ args = 0, pretend = 0, frame = 0
+ 117              		@ frame_needed = 0, uses_anonymous_args = 0
+ 106:Src/VFO/GUIMainView.cpp **** 	uint32_t freq = _mainController->getConfig()->getFrequency();
+ 118              		.loc 2 106 2 view .LVU14
+ 105:Src/VFO/GUIMainView.cpp **** 	uint32_t freq = _mainController->getConfig()->getFrequency();
+ 119              		.loc 2 105 1 is_stmt 0 view .LVU15
+ 120 0000 F8B5     		push	{r3, r4, r5, r6, r7, lr}
+ 121              		.save {r3, r4, r5, r6, r7, lr}
+ 122              	.LCFI1:
+ 123              		.cfi_def_cfa_offset 24
+ 124              		.cfi_offset 3, -24
+ 125              		.cfi_offset 4, -20
+ 126              		.cfi_offset 5, -16
+ 127              		.cfi_offset 6, -12
+ 128              		.cfi_offset 7, -8
+ 129              		.cfi_offset 14, -4
+ 130              		.loc 2 106 60 view .LVU16
+ 131 0002 144D     		ldr	r5, .L12
+ 105:Src/VFO/GUIMainView.cpp **** 	uint32_t freq = _mainController->getConfig()->getFrequency();
+ 132              		.loc 2 105 1 view .LVU17
+ 133 0004 0646     		mov	r6, r0
+ 134              		.loc 2 106 60 view .LVU18
+ 135 0006 2868     		ldr	r0, [r5]
+ 136              	.LVL7:
+ 107:Src/VFO/GUIMainView.cpp **** 	uint16_t encoderRes = _mainController->getConfig()->getEncoder();
+ 108:Src/VFO/GUIMainView.cpp **** 
+ 109:Src/VFO/GUIMainView.cpp **** 	uint16_t factor = 1;
+ 110:Src/VFO/GUIMainView.cpp **** 	if (abs(increment) > (encoderRes / 2))  // half rotation
+ 137              		.loc 2 110 9 view .LVU19
+ 138 0008 81EAE172 		eor	r2, r1, r1, asr #31
+ 139              	.LVL8:
+ 106:Src/VFO/GUIMainView.cpp **** 	uint16_t encoderRes = _mainController->getConfig()->getEncoder();
+ 140              		.loc 2 106 60 view .LVU20
+ 141 000c 4368     		ldr	r3, [r0, #4]
+ 142              	.LVL9:
+ 143              		.file 3 "Src/VFO/VFOController.h"
+   1:Src/VFO/VFOController.h **** /*
+   2:Src/VFO/VFOController.h ****  * VFOController.h
+   3:Src/VFO/VFOController.h ****  *
+   4:Src/VFO/VFOController.h ****  *  Created on: Apr 1, 2018
+   5:Src/VFO/VFOController.h ****  *      Author: lymes
+   6:Src/VFO/VFOController.h ****  */
+   7:Src/VFO/VFOController.h **** 
+   8:Src/VFO/VFOController.h **** #ifndef VFO_VFOCONTROLLER_H_
+   9:Src/VFO/VFOController.h **** #define VFO_VFOCONTROLLER_H_
+  10:Src/VFO/VFOController.h **** 
+  11:Src/VFO/VFOController.h **** #include "stm32f1xx_hal.h"
+ARM GAS  /var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccuOhyDd.s 			page 7
+
+
+  12:Src/VFO/VFOController.h **** #include "GUIController.h"
+  13:Src/VFO/VFOController.h **** #include "si5351/si5351.h"
+  14:Src/VFO/VFOController.h **** #include "Configuration.h"
+  15:Src/VFO/VFOController.h **** 
+  16:Src/VFO/VFOController.h **** 
+  17:Src/VFO/VFOController.h **** namespace VFO
+  18:Src/VFO/VFOController.h **** {
+  19:Src/VFO/VFOController.h **** 
+  20:Src/VFO/VFOController.h **** class VFOController
+  21:Src/VFO/VFOController.h **** {
+  22:Src/VFO/VFOController.h **** 	Configuration* _conf;
+  23:Src/VFO/VFOController.h **** 	GUIController* _gui;
+  24:Src/VFO/VFOController.h **** 	Si5351* _si5351;
+  25:Src/VFO/VFOController.h **** 	bool _si5351_enabled = true;
+  26:Src/VFO/VFOController.h **** 
+  27:Src/VFO/VFOController.h **** public:
+  28:Src/VFO/VFOController.h **** 	VFOController();
+  29:Src/VFO/VFOController.h **** 	virtual ~VFOController();
+  30:Src/VFO/VFOController.h **** 	void begin();
+  31:Src/VFO/VFOController.h **** 
+  32:Src/VFO/VFOController.h **** 	Configuration *getConfig() { return _conf; }
+ 144              		.loc 3 32 31 is_stmt 1 view .LVU21
+ 145              		.loc 2 110 9 is_stmt 0 view .LVU22
+ 146 000e A2EBE172 		sub	r2, r2, r1, asr #31
+ 107:Src/VFO/GUIMainView.cpp **** 
+ 147              		.loc 2 107 65 view .LVU23
+ 148 0012 1F8B     		ldrh	r7, [r3, #24]
+ 106:Src/VFO/GUIMainView.cpp **** 	uint16_t encoderRes = _mainController->getConfig()->getEncoder();
+ 149              		.loc 2 106 60 view .LVU24
+ 150 0014 DC68     		ldr	r4, [r3, #12]
+ 151              	.LVL10:
+ 152              		.file 4 "Src/VFO/Configuration.h"
+   1:Src/VFO/Configuration.h **** /*
+   2:Src/VFO/Configuration.h ****  * Configuration.h
+   3:Src/VFO/Configuration.h ****  *
+   4:Src/VFO/Configuration.h ****  *  Created on: Apr 4, 2018
+   5:Src/VFO/Configuration.h ****  *      Author: lymes
+   6:Src/VFO/Configuration.h ****  */
+   7:Src/VFO/Configuration.h **** 
+   8:Src/VFO/Configuration.h **** #ifndef VFO_CONFIGURATION_H_
+   9:Src/VFO/Configuration.h **** #define VFO_CONFIGURATION_H_
+  10:Src/VFO/Configuration.h **** 
+  11:Src/VFO/Configuration.h **** #include <stdint.h>
+  12:Src/VFO/Configuration.h **** #include "stm32f1xx_hal.h"
+  13:Src/VFO/Configuration.h **** #include <eeprom/eeprom24xx.h>
+  14:Src/VFO/Configuration.h **** 
+  15:Src/VFO/Configuration.h **** namespace VFO
+  16:Src/VFO/Configuration.h **** {
+  17:Src/VFO/Configuration.h **** 
+  18:Src/VFO/Configuration.h **** struct ConfigData {
+  19:Src/VFO/Configuration.h **** 	uint32_t frequency;
+  20:Src/VFO/Configuration.h **** 	uint32_t iFrequency;
+  21:Src/VFO/Configuration.h **** 	uint32_t bFrequency;
+  22:Src/VFO/Configuration.h **** 	uint32_t encoder;
+  23:Src/VFO/Configuration.h **** 	int32_t calibration;
+  24:Src/VFO/Configuration.h **** 	uint8_t brightness;
+  25:Src/VFO/Configuration.h **** };
+ARM GAS  /var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccuOhyDd.s 			page 8
+
+
+  26:Src/VFO/Configuration.h **** 
+  27:Src/VFO/Configuration.h **** class Configuration
+  28:Src/VFO/Configuration.h **** {
+  29:Src/VFO/Configuration.h **** 	Eeprom24 _mem;
+  30:Src/VFO/Configuration.h **** 	ConfigData _data;
+  31:Src/VFO/Configuration.h **** 
+  32:Src/VFO/Configuration.h **** public:
+  33:Src/VFO/Configuration.h **** 
+  34:Src/VFO/Configuration.h **** 	Configuration();
+  35:Src/VFO/Configuration.h **** 	virtual ~Configuration();
+  36:Src/VFO/Configuration.h **** 
+  37:Src/VFO/Configuration.h **** 	void save();
+  38:Src/VFO/Configuration.h **** 	void load();
+  39:Src/VFO/Configuration.h **** 
+  40:Src/VFO/Configuration.h **** 	uint32_t getFrequency(void) { return _data.frequency; }
+ 153              		.loc 4 40 32 is_stmt 1 view .LVU25
+ 107:Src/VFO/GUIMainView.cpp **** 
+ 154              		.loc 2 107 2 view .LVU26
+ 155              		.loc 3 32 31 view .LVU27
+  41:Src/VFO/Configuration.h **** 	int32_t getCalibration(void) { return _data.calibration; }
+  42:Src/VFO/Configuration.h **** 	uint32_t getIFrequency(void) { return _data.iFrequency; }
+  43:Src/VFO/Configuration.h **** 	uint32_t getBFrequency(void) { return _data.bFrequency; }
+  44:Src/VFO/Configuration.h **** 	uint8_t getBrightness(void) { return _data.brightness; }
+  45:Src/VFO/Configuration.h **** 	uint32_t getEncoder(void) { return _data.encoder; }
+ 156              		.loc 4 45 30 view .LVU28
+ 109:Src/VFO/GUIMainView.cpp **** 	if (abs(increment) > (encoderRes / 2))  // half rotation
+ 157              		.loc 2 109 2 view .LVU29
+ 158              		.loc 2 110 2 view .LVU30
+ 159 0016 B2EB570F 		cmp	r2, r7, lsr #1
+ 160 001a 13DD     		ble	.L8
+ 161 001c 6423     		movs	r3, #100
+ 162              	.LVL11:
+ 163              		.loc 2 110 2 is_stmt 0 view .LVU31
+ 164 001e 03FB01F1 		mul	r1, r3, r1
+ 165              	.LVL12:
+ 166              	.L9:
+ 111:Src/VFO/GUIMainView.cpp **** 	{
+ 112:Src/VFO/GUIMainView.cpp **** 		factor = 100;
+ 113:Src/VFO/GUIMainView.cpp **** 	}
+ 114:Src/VFO/GUIMainView.cpp **** 	else if (abs(increment) > (encoderRes / 4)) // quarter rotation
+ 115:Src/VFO/GUIMainView.cpp **** 	{
+ 116:Src/VFO/GUIMainView.cpp **** 		factor = 10;
+ 117:Src/VFO/GUIMainView.cpp **** 	}
+ 118:Src/VFO/GUIMainView.cpp **** 	freq += increment * factor / ENCODER_THRESHOLD;
+ 167              		.loc 2 118 2 is_stmt 1 view .LVU32
+ 168              		.loc 2 118 29 is_stmt 0 view .LVU33
+ 169 0022 0029     		cmp	r1, #0
+ 170 0024 B8BF     		it	lt
+ 171 0026 0331     		addlt	r1, r1, #3
+ 172              		.loc 2 118 7 view .LVU34
+ 173 0028 04EBA104 		add	r4, r4, r1, asr #2
+ 174              	.LVL13:
+ 119:Src/VFO/GUIMainView.cpp **** 	_mainController->setFrequency(freq);
+ 175              		.loc 2 119 2 is_stmt 1 view .LVU35
+ 176              		.loc 2 119 31 is_stmt 0 view .LVU36
+ 177 002c 2146     		mov	r1, r4
+ 178 002e FFF7FEFF 		bl	_ZN3VFO13VFOController12setFrequencyEm
+ARM GAS  /var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccuOhyDd.s 			page 9
+
+
+ 179              	.LVL14:
+ 120:Src/VFO/GUIMainView.cpp **** 	_mainController->triggerMemoryWrite();
+ 180              		.loc 2 120 2 is_stmt 1 view .LVU37
+ 181              		.loc 2 120 37 is_stmt 0 view .LVU38
+ 182 0032 2868     		ldr	r0, [r5]
+ 183 0034 FFF7FEFF 		bl	_ZN3VFO13VFOController18triggerMemoryWriteEv
+ 184              	.LVL15:
+ 121:Src/VFO/GUIMainView.cpp **** 
+ 122:Src/VFO/GUIMainView.cpp **** 	_freqString->draw(freq);
+ 185              		.loc 2 122 2 is_stmt 1 view .LVU39
+ 186              		.loc 2 122 19 is_stmt 0 view .LVU40
+ 187 0038 2146     		mov	r1, r4
+ 188 003a 7069     		ldr	r0, [r6, #20]
+ 123:Src/VFO/GUIMainView.cpp **** 
+ 124:Src/VFO/GUIMainView.cpp **** 
+ 125:Src/VFO/GUIMainView.cpp **** //	static int tt = 0;
+ 126:Src/VFO/GUIMainView.cpp **** //	tt += increment;
+ 127:Src/VFO/GUIMainView.cpp **** //
+ 128:Src/VFO/GUIMainView.cpp **** //	if (tt > 160)
+ 129:Src/VFO/GUIMainView.cpp **** //	{
+ 130:Src/VFO/GUIMainView.cpp **** //		tt = 100;
+ 131:Src/VFO/GUIMainView.cpp **** //	}
+ 132:Src/VFO/GUIMainView.cpp **** //	if ( tt < 100 )
+ 133:Src/VFO/GUIMainView.cpp **** //	{
+ 134:Src/VFO/GUIMainView.cpp **** //		tt = 160;
+ 135:Src/VFO/GUIMainView.cpp **** //	}
+ 136:Src/VFO/GUIMainView.cpp **** //	ST7735_scroll(tt);
+ 137:Src/VFO/GUIMainView.cpp **** }
+ 189              		.loc 2 137 1 view .LVU41
+ 190 003c BDE8F840 		pop	{r3, r4, r5, r6, r7, lr}
+ 191              	.LCFI2:
+ 192              		.cfi_remember_state
+ 193              		.cfi_restore 14
+ 194              		.cfi_restore 7
+ 195              		.cfi_restore 6
+ 196              		.cfi_restore 5
+ 197              		.cfi_restore 4
+ 198              		.cfi_restore 3
+ 199              		.cfi_def_cfa_offset 0
+ 200              	.LVL16:
+ 122:Src/VFO/GUIMainView.cpp **** 
+ 201              		.loc 2 122 19 view .LVU42
+ 202 0040 FFF7FEBF 		b	_ZN3VFO15FrequencyString4drawEm
+ 203              	.LVL17:
+ 204              	.L8:
+ 205              	.LCFI3:
+ 206              		.cfi_restore_state
+ 114:Src/VFO/GUIMainView.cpp **** 	{
+ 207              		.loc 2 114 7 is_stmt 1 view .LVU43
+ 116:Src/VFO/GUIMainView.cpp **** 	}
+ 208              		.loc 2 116 3 view .LVU44
+ 114:Src/VFO/GUIMainView.cpp **** 	{
+ 209              		.loc 2 114 7 is_stmt 0 view .LVU45
+ 210 0044 B2EB970F 		cmp	r2, r7, lsr #2
+ 211 0048 C4BF     		itt	gt
+ 212 004a 01EB8101 		addgt	r1, r1, r1, lsl #2
+ 213              	.LVL18:
+ARM GAS  /var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccuOhyDd.s 			page 10
+
+
+ 114:Src/VFO/GUIMainView.cpp **** 	{
+ 214              		.loc 2 114 7 view .LVU46
+ 215 004e 4900     		lslgt	r1, r1, #1
+ 216 0050 E7E7     		b	.L9
+ 217              	.L13:
+ 218 0052 00BF     		.align	2
+ 219              	.L12:
+ 220 0054 00000000 		.word	_mainController
+ 221              		.cfi_endproc
+ 222              	.LFE128:
+ 223              		.fnend
+ 225              		.section	.text._ZN3VFO11GUIMainViewD2Ev,"ax",%progbits
+ 226              		.align	1
+ 227              		.p2align 2,,3
+ 228              		.global	_ZN3VFO11GUIMainViewD2Ev
+ 229              		.syntax unified
+ 230              		.thumb
+ 231              		.thumb_func
+ 232              		.fpu softvfp
+ 234              	_ZN3VFO11GUIMainViewD2Ev:
+ 235              		.fnstart
+ 236              	.LVL19:
+ 237              	.LFB122:
+  60:Src/VFO/GUIMainView.cpp **** {
+ 238              		.loc 2 60 1 is_stmt 1 view -0
+ 239              		.cfi_startproc
+ 240              		@ args = 0, pretend = 0, frame = 0
+ 241              		@ frame_needed = 0, uses_anonymous_args = 0
+  60:Src/VFO/GUIMainView.cpp **** {
+ 242              		.loc 2 60 1 is_stmt 0 view .LVU48
+ 243 0000 10B5     		push	{r4, lr}
+ 244              	.LCFI4:
+ 245              		.cfi_def_cfa_offset 8
+ 246              		.cfi_offset 4, -8
+ 247              		.cfi_offset 14, -4
+  60:Src/VFO/GUIMainView.cpp **** {
+ 248              		.loc 2 60 1 view .LVU49
+ 249 0002 0446     		mov	r4, r0
+ 250              	.LBB51:
+  60:Src/VFO/GUIMainView.cpp **** {
+ 251              		.loc 2 60 27 view .LVU50
+ 252 0004 1D4B     		ldr	r3, .L36
+  62:Src/VFO/GUIMainView.cpp **** 	delete _btn2;
+ 253              		.loc 2 62 9 view .LVU51
+ 254 0006 8068     		ldr	r0, [r0, #8]
+ 255              	.LVL20:
+  60:Src/VFO/GUIMainView.cpp **** {
+ 256              		.loc 2 60 27 view .LVU52
+ 257 0008 2360     		str	r3, [r4]
+  62:Src/VFO/GUIMainView.cpp **** 	delete _btn2;
+ 258              		.loc 2 62 2 is_stmt 1 view .LVU53
+  62:Src/VFO/GUIMainView.cpp **** 	delete _btn2;
+ 259              		.loc 2 62 14 is_stmt 0 view .LVU54
+ 260 000a 38B1     		cbz	r0, .L15
+  62:Src/VFO/GUIMainView.cpp **** 	delete _btn2;
+ 261              		.loc 2 62 9 discriminator 1 view .LVU55
+ 262 000c 0368     		ldr	r3, [r0]
+ARM GAS  /var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccuOhyDd.s 			page 11
+
+
+ 263 000e 1C4A     		ldr	r2, .L36+4
+ 264 0010 5B68     		ldr	r3, [r3, #4]
+ 265 0012 9342     		cmp	r3, r2
+ 266 0014 25D1     		bne	.L16
+ 267              	.LVL21:
+ 268              	.LBB52:
+ 269              	.LBI52:
+  76:Src/VFO/GUI/Background.h **** 	{
+ 270              		.loc 1 76 10 is_stmt 1 view .LVU56
+ 271              	.LBB53:
+ 272              	.LBB54:
+ 273              	.LBI54:
+  76:Src/VFO/GUI/Background.h **** 	{
+ 274              		.loc 1 76 10 view .LVU57
+ 275              	.LBB55:
+ 276              	.LBI55:
+  39:Src/VFO/GUI/Background.h **** 	{
+ 277              		.loc 1 39 10 view .LVU58
+  39:Src/VFO/GUI/Background.h **** 	{
+ 278              		.loc 1 39 10 is_stmt 0 view .LVU59
+ 279              	.LBE55:
+ 280              	.LBE54:
+ 281              		.loc 1 78 2 view .LVU60
+ 282 0016 1821     		movs	r1, #24
+ 283 0018 FFF7FEFF 		bl	_ZdlPvj
+ 284              	.LVL22:
+ 285              	.L15:
+ 286              		.loc 1 78 2 view .LVU61
+ 287              	.LBE53:
+ 288              	.LBE52:
+  63:Src/VFO/GUIMainView.cpp **** 	delete _btn3;
+ 289              		.loc 2 63 2 is_stmt 1 view .LVU62
+  63:Src/VFO/GUIMainView.cpp **** 	delete _btn3;
+ 290              		.loc 2 63 9 is_stmt 0 view .LVU63
+ 291 001c E068     		ldr	r0, [r4, #12]
+  63:Src/VFO/GUIMainView.cpp **** 	delete _btn3;
+ 292              		.loc 2 63 14 view .LVU64
+ 293 001e 38B1     		cbz	r0, .L17
+  63:Src/VFO/GUIMainView.cpp **** 	delete _btn3;
+ 294              		.loc 2 63 9 discriminator 1 view .LVU65
+ 295 0020 0368     		ldr	r3, [r0]
+ 296 0022 174A     		ldr	r2, .L36+4
+ 297 0024 5B68     		ldr	r3, [r3, #4]
+ 298 0026 9342     		cmp	r3, r2
+ 299 0028 1DD1     		bne	.L18
+ 300              	.LVL23:
+ 301              	.LBB56:
+ 302              	.LBI56:
+  76:Src/VFO/GUI/Background.h **** 	{
+ 303              		.loc 1 76 10 is_stmt 1 view .LVU66
+ 304              	.LBB57:
+ 305              	.LBB58:
+ 306              	.LBI58:
+  76:Src/VFO/GUI/Background.h **** 	{
+ 307              		.loc 1 76 10 view .LVU67
+ 308              	.LBB59:
+ 309              	.LBI59:
+ARM GAS  /var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccuOhyDd.s 			page 12
+
+
+  39:Src/VFO/GUI/Background.h **** 	{
+ 310              		.loc 1 39 10 view .LVU68
+  39:Src/VFO/GUI/Background.h **** 	{
+ 311              		.loc 1 39 10 is_stmt 0 view .LVU69
+ 312              	.LBE59:
+ 313              	.LBE58:
+ 314              		.loc 1 78 2 view .LVU70
+ 315 002a 1821     		movs	r1, #24
+ 316 002c FFF7FEFF 		bl	_ZdlPvj
+ 317              	.LVL24:
+ 318              	.L17:
+ 319              		.loc 1 78 2 view .LVU71
+ 320              	.LBE57:
+ 321              	.LBE56:
+  64:Src/VFO/GUIMainView.cpp **** 	delete _window;
+ 322              		.loc 2 64 2 is_stmt 1 view .LVU72
+  64:Src/VFO/GUIMainView.cpp **** 	delete _window;
+ 323              		.loc 2 64 9 is_stmt 0 view .LVU73
+ 324 0030 2069     		ldr	r0, [r4, #16]
+  64:Src/VFO/GUIMainView.cpp **** 	delete _window;
+ 325              		.loc 2 64 14 view .LVU74
+ 326 0032 38B1     		cbz	r0, .L19
+  64:Src/VFO/GUIMainView.cpp **** 	delete _window;
+ 327              		.loc 2 64 9 discriminator 1 view .LVU75
+ 328 0034 0368     		ldr	r3, [r0]
+ 329 0036 124A     		ldr	r2, .L36+4
+ 330 0038 5B68     		ldr	r3, [r3, #4]
+ 331 003a 9342     		cmp	r3, r2
+ 332 003c 15D1     		bne	.L20
+ 333              	.LVL25:
+ 334              	.LBB60:
+ 335              	.LBI60:
+  76:Src/VFO/GUI/Background.h **** 	{
+ 336              		.loc 1 76 10 is_stmt 1 view .LVU76
+ 337              	.LBB61:
+ 338              	.LBB62:
+ 339              	.LBI62:
+  76:Src/VFO/GUI/Background.h **** 	{
+ 340              		.loc 1 76 10 view .LVU77
+ 341              	.LBB63:
+ 342              	.LBI63:
+  39:Src/VFO/GUI/Background.h **** 	{
+ 343              		.loc 1 39 10 view .LVU78
+  39:Src/VFO/GUI/Background.h **** 	{
+ 344              		.loc 1 39 10 is_stmt 0 view .LVU79
+ 345              	.LBE63:
+ 346              	.LBE62:
+ 347              		.loc 1 78 2 view .LVU80
+ 348 003e 1821     		movs	r1, #24
+ 349 0040 FFF7FEFF 		bl	_ZdlPvj
+ 350              	.LVL26:
+ 351              	.L19:
+ 352              		.loc 1 78 2 view .LVU81
+ 353              	.LBE61:
+ 354              	.LBE60:
+  65:Src/VFO/GUIMainView.cpp **** }
+ 355              		.loc 2 65 2 is_stmt 1 view .LVU82
+ARM GAS  /var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccuOhyDd.s 			page 13
+
+
+  65:Src/VFO/GUIMainView.cpp **** }
+ 356              		.loc 2 65 9 is_stmt 0 view .LVU83
+ 357 0044 6068     		ldr	r0, [r4, #4]
+  65:Src/VFO/GUIMainView.cpp **** }
+ 358              		.loc 2 65 16 view .LVU84
+ 359 0046 38B1     		cbz	r0, .L21
+  65:Src/VFO/GUIMainView.cpp **** }
+ 360              		.loc 2 65 9 discriminator 1 view .LVU85
+ 361 0048 0368     		ldr	r3, [r0]
+ 362 004a 0D4A     		ldr	r2, .L36+4
+ 363 004c 5B68     		ldr	r3, [r3, #4]
+ 364 004e 9342     		cmp	r3, r2
+ 365 0050 0DD1     		bne	.L22
+ 366              	.LVL27:
+ 367              	.LBB64:
+ 368              	.LBI64:
+  76:Src/VFO/GUI/Background.h **** 	{
+ 369              		.loc 1 76 10 is_stmt 1 view .LVU86
+ 370              	.LBB65:
+ 371              	.LBB66:
+ 372              	.LBI66:
+  76:Src/VFO/GUI/Background.h **** 	{
+ 373              		.loc 1 76 10 view .LVU87
+ 374              	.LBB67:
+ 375              	.LBI67:
+  39:Src/VFO/GUI/Background.h **** 	{
+ 376              		.loc 1 39 10 view .LVU88
+  39:Src/VFO/GUI/Background.h **** 	{
+ 377              		.loc 1 39 10 is_stmt 0 view .LVU89
+ 378              	.LBE67:
+ 379              	.LBE66:
+ 380              		.loc 1 78 2 view .LVU90
+ 381 0052 1821     		movs	r1, #24
+ 382 0054 FFF7FEFF 		bl	_ZdlPvj
+ 383              	.LVL28:
+ 384              	.L21:
+ 385              		.loc 1 78 2 view .LVU91
+ 386              	.LBE65:
+ 387              	.LBE64:
+  60:Src/VFO/GUIMainView.cpp **** {
+ 388              		.loc 2 60 27 view .LVU92
+ 389 0058 2046     		mov	r0, r4
+ 390 005a FFF7FEFF 		bl	_ZN3VFO7GUIViewD2Ev
+ 391              	.LVL29:
+ 392              	.LBE51:
+  66:Src/VFO/GUIMainView.cpp **** 
+ 393              		.loc 2 66 1 view .LVU93
+ 394 005e 2046     		mov	r0, r4
+ 395 0060 10BD     		pop	{r4, pc}
+ 396              	.LVL30:
+ 397              	.L16:
+ 398              	.LBB68:
+  62:Src/VFO/GUIMainView.cpp **** 	delete _btn2;
+ 399              		.loc 2 62 9 discriminator 1 view .LVU94
+ 400 0062 9847     		blx	r3
+ 401              	.LVL31:
+ 402 0064 DAE7     		b	.L15
+ARM GAS  /var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccuOhyDd.s 			page 14
+
+
+ 403              	.L18:
+  63:Src/VFO/GUIMainView.cpp **** 	delete _btn3;
+ 404              		.loc 2 63 9 discriminator 1 view .LVU95
+ 405 0066 9847     		blx	r3
+ 406              	.LVL32:
+ 407 0068 E2E7     		b	.L17
+ 408              	.L20:
+  64:Src/VFO/GUIMainView.cpp **** 	delete _window;
+ 409              		.loc 2 64 9 discriminator 1 view .LVU96
+ 410 006a 9847     		blx	r3
+ 411              	.LVL33:
+ 412 006c EAE7     		b	.L19
+ 413              	.L22:
+  65:Src/VFO/GUIMainView.cpp **** }
+ 414              		.loc 2 65 9 discriminator 1 view .LVU97
+ 415 006e 9847     		blx	r3
+ 416              	.LVL34:
+  60:Src/VFO/GUIMainView.cpp **** {
+ 417              		.loc 2 60 27 discriminator 1 view .LVU98
+ 418 0070 2046     		mov	r0, r4
+ 419 0072 FFF7FEFF 		bl	_ZN3VFO7GUIViewD2Ev
+ 420              	.LVL35:
+ 421              	.LBE68:
+  66:Src/VFO/GUIMainView.cpp **** 
+ 422              		.loc 2 66 1 discriminator 1 view .LVU99
+ 423 0076 2046     		mov	r0, r4
+ 424 0078 10BD     		pop	{r4, pc}
+ 425              	.LVL36:
+ 426              	.L37:
+  66:Src/VFO/GUIMainView.cpp **** 
+ 427              		.loc 2 66 1 discriminator 1 view .LVU100
+ 428 007a 00BF     		.align	2
+ 429              	.L36:
+ 430 007c 08000000 		.word	.LANCHOR0+8
+ 431 0080 00000000 		.word	_ZN3VFO11GradientBoxD0Ev
+ 432              		.cfi_endproc
+ 433              	.LFE122:
+ 434              		.cantunwind
+ 435              		.fnend
+ 437              		.global	_ZN3VFO11GUIMainViewD1Ev
+ 438              		.thumb_set _ZN3VFO11GUIMainViewD1Ev,_ZN3VFO11GUIMainViewD2Ev
+ 439              		.section	.text._ZN3VFO11GUIMainViewD0Ev,"ax",%progbits
+ 440              		.align	1
+ 441              		.p2align 2,,3
+ 442              		.global	_ZN3VFO11GUIMainViewD0Ev
+ 443              		.syntax unified
+ 444              		.thumb
+ 445              		.thumb_func
+ 446              		.fpu softvfp
+ 448              	_ZN3VFO11GUIMainViewD0Ev:
+ 449              		.fnstart
+ 450              	.LVL37:
+ 451              	.LFB124:
+  60:Src/VFO/GUIMainView.cpp **** {
+ 452              		.loc 2 60 1 is_stmt 1 view -0
+ 453              		.cfi_startproc
+ 454              		@ args = 0, pretend = 0, frame = 0
+ARM GAS  /var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccuOhyDd.s 			page 15
+
+
+ 455              		@ frame_needed = 0, uses_anonymous_args = 0
+  60:Src/VFO/GUIMainView.cpp **** {
+ 456              		.loc 2 60 1 is_stmt 0 view .LVU102
+ 457 0000 10B5     		push	{r4, lr}
+ 458              	.LCFI5:
+ 459              		.cfi_def_cfa_offset 8
+ 460              		.cfi_offset 4, -8
+ 461              		.cfi_offset 14, -4
+  60:Src/VFO/GUIMainView.cpp **** {
+ 462              		.loc 2 60 1 view .LVU103
+ 463 0002 0446     		mov	r4, r0
+  66:Src/VFO/GUIMainView.cpp **** 
+ 464              		.loc 2 66 1 view .LVU104
+ 465 0004 FFF7FEFF 		bl	_ZN3VFO11GUIMainViewD1Ev
+ 466              	.LVL38:
+  66:Src/VFO/GUIMainView.cpp **** 
+ 467              		.loc 2 66 1 view .LVU105
+ 468 0008 2046     		mov	r0, r4
+ 469 000a 1C21     		movs	r1, #28
+ 470 000c FFF7FEFF 		bl	_ZdlPvj
+ 471              	.LVL39:
+ 472 0010 2046     		mov	r0, r4
+ 473 0012 10BD     		pop	{r4, pc}
+  66:Src/VFO/GUIMainView.cpp **** 
+ 474              		.loc 2 66 1 view .LVU106
+ 475              		.cfi_endproc
+ 476              	.LFE124:
+ 477              		.cantunwind
+ 478              		.fnend
+ 480              		.section	.text._ZN3VFO11GradientBoxD2Ev,"axG",%progbits,_ZN3VFO11GradientBoxD5Ev,comdat
+ 481              		.align	1
+ 482              		.p2align 2,,3
+ 483              		.weak	_ZN3VFO11GradientBoxD2Ev
+ 484              		.syntax unified
+ 485              		.thumb
+ 486              		.thumb_func
+ 487              		.fpu softvfp
+ 489              	_ZN3VFO11GradientBoxD2Ev:
+ 490              		.fnstart
+ 491              	.LVL40:
+ 492              	.LFB88:
+  76:Src/VFO/GUI/Background.h **** 	{
+ 493              		.loc 1 76 10 is_stmt 1 view -0
+ 494              		.cfi_startproc
+ 495              		@ args = 0, pretend = 0, frame = 0
+ 496              		@ frame_needed = 0, uses_anonymous_args = 0
+ 497              		@ link register save eliminated.
+ 498              	.LBB69:
+ 499              	.LBI69:
+  39:Src/VFO/GUI/Background.h **** 	{
+ 500              		.loc 1 39 10 view .LVU108
+  39:Src/VFO/GUI/Background.h **** 	{
+ 501              		.loc 1 39 10 is_stmt 0 view .LVU109
+ 502              	.LBE69:
+ 503              		.loc 1 78 2 view .LVU110
+ 504 0000 7047     		bx	lr
+ 505              		.cfi_endproc
+ARM GAS  /var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccuOhyDd.s 			page 16
+
+
+ 506              	.LFE88:
+ 507              		.cantunwind
+ 508              		.fnend
+ 510              		.weak	_ZN3VFO11GradientBoxD1Ev
+ 511              		.thumb_set _ZN3VFO11GradientBoxD1Ev,_ZN3VFO11GradientBoxD2Ev
+ 512 0002 00BF     		.section	.text._ZN3VFO11GUIMainViewC2Ev,"ax",%progbits
+ 513              		.align	1
+ 514              		.p2align 2,,3
+ 515              		.global	_ZN3VFO11GUIMainViewC2Ev
+ 516              		.syntax unified
+ 517              		.thumb
+ 518              		.thumb_func
+ 519              		.fpu softvfp
+ 521              	_ZN3VFO11GUIMainViewC2Ev:
+ 522              		.fnstart
+ 523              	.LVL41:
+ 524              	.LFB119:
+  22:Src/VFO/GUIMainView.cpp **** {
+ 525              		.loc 2 22 1 is_stmt 1 view -0
+ 526              		.cfi_startproc
+ 527              		@ args = 0, pretend = 0, frame = 0
+ 528              		@ frame_needed = 0, uses_anonymous_args = 0
+  22:Src/VFO/GUIMainView.cpp **** {
+ 529              		.loc 2 22 1 is_stmt 0 view .LVU112
+ 530 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 531              		.save {r4, r5, r6, r7, lr}
+ 532              	.LCFI6:
+ 533              		.cfi_def_cfa_offset 20
+ 534              		.cfi_offset 4, -20
+ 535              		.cfi_offset 5, -16
+ 536              		.cfi_offset 6, -12
+ 537              		.cfi_offset 7, -8
+ 538              		.cfi_offset 14, -4
+ 539 0002 0446     		mov	r4, r0
+ 540              		.pad #12
+ 541 0004 83B0     		sub	sp, sp, #12
+ 542              	.LCFI7:
+ 543              		.cfi_def_cfa_offset 32
+ 544              	.LEHB0:
+ 545              	.LBB70:
+  22:Src/VFO/GUIMainView.cpp **** {
+ 546              		.loc 2 22 26 view .LVU113
+ 547 0006 FFF7FEFF 		bl	_ZN3VFO7GUIViewC2Ev
+ 548              	.LVL42:
+ 549              	.LEHE0:
+  22:Src/VFO/GUIMainView.cpp **** {
+ 550              		.loc 2 22 26 view .LVU114
+ 551 000a 4B4B     		ldr	r3, .L60
+  24:Src/VFO/GUIMainView.cpp **** 
+ 552              		.loc 2 24 42 view .LVU115
+ 553 000c 1820     		movs	r0, #24
+  22:Src/VFO/GUIMainView.cpp **** {
+ 554              		.loc 2 22 26 view .LVU116
+ 555 000e 2360     		str	r3, [r4]
+  24:Src/VFO/GUIMainView.cpp **** 
+ 556              		.loc 2 24 2 is_stmt 1 view .LVU117
+ 557              	.LEHB1:
+ARM GAS  /var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccuOhyDd.s 			page 17
+
+
+  24:Src/VFO/GUIMainView.cpp **** 
+ 558              		.loc 2 24 42 is_stmt 0 view .LVU118
+ 559 0010 FFF7FEFF 		bl	_Znwj
+ 560              	.LVL43:
+ 561              	.LEHE1:
+ 562 0014 8023     		movs	r3, #128
+ 563 0016 0022     		movs	r2, #0
+ 564 0018 0093     		str	r3, [sp]
+ 565 001a 1146     		mov	r1, r2
+ 566 001c A023     		movs	r3, #160
+ 567 001e 0546     		mov	r5, r0
+ 568              	.LEHB2:
+ 569 0020 FFF7FEFF 		bl	_ZN3VFO11GradientBoxC1Ehhhh
+ 570              	.LVL44:
+ 571              	.LEHE2:
+  24:Src/VFO/GUIMainView.cpp **** 
+ 572              		.loc 2 24 10 discriminator 3 view .LVU119
+ 573 0024 6560     		str	r5, [r4, #4]
+  26:Src/VFO/GUIMainView.cpp **** 	_btn1->downLeft =
+ 574              		.loc 2 26 2 is_stmt 1 discriminator 3 view .LVU120
+  26:Src/VFO/GUIMainView.cpp **** 	_btn1->downLeft =
+ 575              		.loc 2 26 40 is_stmt 0 discriminator 3 view .LVU121
+ 576 0026 1820     		movs	r0, #24
+ 577              	.LEHB3:
+ 578 0028 FFF7FEFF 		bl	_Znwj
+ 579              	.LVL45:
+ 580              	.LEHE3:
+ 581 002c 1922     		movs	r2, #25
+ 582 002e 2823     		movs	r3, #40
+ 583 0030 0092     		str	r2, [sp]
+ 584 0032 0A21     		movs	r1, #10
+ 585 0034 3222     		movs	r2, #50
+ 586 0036 0646     		mov	r6, r0
+ 587              	.LEHB4:
+ 588 0038 FFF7FEFF 		bl	_ZN3VFO11GradientBoxC1Ehhhh
+ 589              	.LVL46:
+ 590              	.LEHE4:
+  27:Src/VFO/GUIMainView.cpp **** 	{	10, 10, 10};
+ 591              		.loc 2 27 18 discriminator 3 view .LVU122
+ 592 003c 3F4D     		ldr	r5, .L60+4
+  26:Src/VFO/GUIMainView.cpp **** 	_btn1->downLeft =
+ 593              		.loc 2 26 8 discriminator 3 view .LVU123
+ 594 003e A660     		str	r6, [r4, #8]
+  27:Src/VFO/GUIMainView.cpp **** 	{	10, 10, 10};
+ 595              		.loc 2 27 2 is_stmt 1 discriminator 3 view .LVU124
+  31:Src/VFO/GUIMainView.cpp **** 	{	100, 100, 100};
+ 596              		.loc 2 31 16 is_stmt 0 discriminator 3 view .LVU125
+ 597 0040 2F46     		mov	r7, r5
+  27:Src/VFO/GUIMainView.cpp **** 	{	10, 10, 10};
+ 598              		.loc 2 27 18 discriminator 3 view .LVU126
+ 599 0042 2B68     		ldr	r3, [r5]
+  31:Src/VFO/GUIMainView.cpp **** 	{	100, 100, 100};
+ 600              		.loc 2 31 16 discriminator 3 view .LVU127
+ 601 0044 37F8041F 		ldrh	r1, [r7, #4]!	@ unaligned
+  27:Src/VFO/GUIMainView.cpp **** 	{	10, 10, 10};
+ 602              		.loc 2 27 18 discriminator 3 view .LVU128
+ 603 0048 B381     		strh	r3, [r6, #12]	@ movhi
+ARM GAS  /var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccuOhyDd.s 			page 18
+
+
+ 604 004a 1B0C     		lsrs	r3, r3, #16
+  31:Src/VFO/GUIMainView.cpp **** 	{	100, 100, 100};
+ 605              		.loc 2 31 16 discriminator 3 view .LVU129
+ 606 004c BA78     		ldrb	r2, [r7, #2]	@ zero_extendqisi2
+ 607 004e F180     		strh	r1, [r6, #6]	@ unaligned
+  33:Src/VFO/GUIMainView.cpp **** 	{	100, 100, 100};
+ 608              		.loc 2 33 17 discriminator 3 view .LVU130
+ 609 0050 A6F80910 		strh	r1, [r6, #9]	@ unaligned
+  27:Src/VFO/GUIMainView.cpp **** 	{	10, 10, 10};
+ 610              		.loc 2 27 18 discriminator 3 view .LVU131
+ 611 0054 B373     		strb	r3, [r6, #14]
+  29:Src/VFO/GUIMainView.cpp **** 	{	10, 10, 10};
+ 612              		.loc 2 29 2 is_stmt 1 discriminator 3 view .LVU132
+  29:Src/VFO/GUIMainView.cpp **** 	{	10, 10, 10};
+ 613              		.loc 2 29 19 is_stmt 0 discriminator 3 view .LVU133
+ 614 0056 2988     		ldrh	r1, [r5]	@ unaligned
+ 615 0058 AB78     		ldrb	r3, [r5, #2]	@ zero_extendqisi2
+  31:Src/VFO/GUIMainView.cpp **** 	{	100, 100, 100};
+ 616              		.loc 2 31 16 discriminator 3 view .LVU134
+ 617 005a 3272     		strb	r2, [r6, #8]
+  33:Src/VFO/GUIMainView.cpp **** 	{	100, 100, 100};
+ 618              		.loc 2 33 17 discriminator 3 view .LVU135
+ 619 005c F272     		strb	r2, [r6, #11]
+  29:Src/VFO/GUIMainView.cpp **** 	{	10, 10, 10};
+ 620              		.loc 2 29 19 discriminator 3 view .LVU136
+ 621 005e A6F80F10 		strh	r1, [r6, #15]	@ unaligned
+  36:Src/VFO/GUIMainView.cpp **** 	_btn2->downLeft =
+ 622              		.loc 2 36 40 discriminator 3 view .LVU137
+ 623 0062 1820     		movs	r0, #24
+  29:Src/VFO/GUIMainView.cpp **** 	{	10, 10, 10};
+ 624              		.loc 2 29 19 discriminator 3 view .LVU138
+ 625 0064 7374     		strb	r3, [r6, #17]
+  31:Src/VFO/GUIMainView.cpp **** 	{	100, 100, 100};
+ 626              		.loc 2 31 2 is_stmt 1 discriminator 3 view .LVU139
+  33:Src/VFO/GUIMainView.cpp **** 	{	100, 100, 100};
+ 627              		.loc 2 33 2 discriminator 3 view .LVU140
+  36:Src/VFO/GUIMainView.cpp **** 	_btn2->downLeft =
+ 628              		.loc 2 36 2 discriminator 3 view .LVU141
+ 629              	.LEHB5:
+  36:Src/VFO/GUIMainView.cpp **** 	_btn2->downLeft =
+ 630              		.loc 2 36 40 is_stmt 0 discriminator 3 view .LVU142
+ 631 0066 FFF7FEFF 		bl	_Znwj
+ 632              	.LVL47:
+ 633              	.LEHE5:
+ 634 006a 1922     		movs	r2, #25
+ 635 006c 2823     		movs	r3, #40
+ 636 006e 0092     		str	r2, [sp]
+ 637 0070 3C21     		movs	r1, #60
+ 638 0072 3222     		movs	r2, #50
+ 639 0074 0646     		mov	r6, r0
+ 640              	.LEHB6:
+ 641 0076 FFF7FEFF 		bl	_ZN3VFO11GradientBoxC1Ehhhh
+ 642              	.LVL48:
+ 643              	.LEHE6:
+  37:Src/VFO/GUIMainView.cpp **** 	{	10, 10, 10};
+ 644              		.loc 2 37 18 discriminator 3 view .LVU143
+ 645 007a 2B68     		ldr	r3, [r5]
+ARM GAS  /var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccuOhyDd.s 			page 19
+
+
+  39:Src/VFO/GUIMainView.cpp **** 	{	10, 10, 10};
+ 646              		.loc 2 39 19 discriminator 3 view .LVU144
+ 647 007c 2A88     		ldrh	r2, [r5]	@ unaligned
+  37:Src/VFO/GUIMainView.cpp **** 	{	10, 10, 10};
+ 648              		.loc 2 37 18 discriminator 3 view .LVU145
+ 649 007e B381     		strh	r3, [r6, #12]	@ movhi
+ 650 0080 1B0C     		lsrs	r3, r3, #16
+ 651 0082 B373     		strb	r3, [r6, #14]
+  39:Src/VFO/GUIMainView.cpp **** 	{	10, 10, 10};
+ 652              		.loc 2 39 19 discriminator 3 view .LVU146
+ 653 0084 AB78     		ldrb	r3, [r5, #2]	@ zero_extendqisi2
+ 654 0086 A6F80F20 		strh	r2, [r6, #15]	@ unaligned
+ 655 008a 7374     		strb	r3, [r6, #17]
+  41:Src/VFO/GUIMainView.cpp **** 	{	100, 100, 100};
+ 656              		.loc 2 41 16 discriminator 3 view .LVU147
+ 657 008c 3A88     		ldrh	r2, [r7]	@ unaligned
+ 658 008e BB78     		ldrb	r3, [r7, #2]	@ zero_extendqisi2
+  36:Src/VFO/GUIMainView.cpp **** 	_btn2->downLeft =
+ 659              		.loc 2 36 8 discriminator 3 view .LVU148
+ 660 0090 E660     		str	r6, [r4, #12]
+  37:Src/VFO/GUIMainView.cpp **** 	{	10, 10, 10};
+ 661              		.loc 2 37 2 is_stmt 1 discriminator 3 view .LVU149
+  39:Src/VFO/GUIMainView.cpp **** 	{	10, 10, 10};
+ 662              		.loc 2 39 2 discriminator 3 view .LVU150
+  41:Src/VFO/GUIMainView.cpp **** 	{	100, 100, 100};
+ 663              		.loc 2 41 2 discriminator 3 view .LVU151
+  41:Src/VFO/GUIMainView.cpp **** 	{	100, 100, 100};
+ 664              		.loc 2 41 16 is_stmt 0 discriminator 3 view .LVU152
+ 665 0092 F280     		strh	r2, [r6, #6]	@ unaligned
+  43:Src/VFO/GUIMainView.cpp **** 	{	100, 100, 100};
+ 666              		.loc 2 43 17 discriminator 3 view .LVU153
+ 667 0094 A6F80920 		strh	r2, [r6, #9]	@ unaligned
+  46:Src/VFO/GUIMainView.cpp **** 	_btn3->downLeft =
+ 668              		.loc 2 46 41 discriminator 3 view .LVU154
+ 669 0098 1820     		movs	r0, #24
+  41:Src/VFO/GUIMainView.cpp **** 	{	100, 100, 100};
+ 670              		.loc 2 41 16 discriminator 3 view .LVU155
+ 671 009a 3372     		strb	r3, [r6, #8]
+  43:Src/VFO/GUIMainView.cpp **** 	{	100, 100, 100};
+ 672              		.loc 2 43 2 is_stmt 1 discriminator 3 view .LVU156
+  43:Src/VFO/GUIMainView.cpp **** 	{	100, 100, 100};
+ 673              		.loc 2 43 17 is_stmt 0 discriminator 3 view .LVU157
+ 674 009c F372     		strb	r3, [r6, #11]
+  46:Src/VFO/GUIMainView.cpp **** 	_btn3->downLeft =
+ 675              		.loc 2 46 2 is_stmt 1 discriminator 3 view .LVU158
+ 676              	.LEHB7:
+  46:Src/VFO/GUIMainView.cpp **** 	_btn3->downLeft =
+ 677              		.loc 2 46 41 is_stmt 0 discriminator 3 view .LVU159
+ 678 009e FFF7FEFF 		bl	_Znwj
+ 679              	.LVL49:
+ 680              	.LEHE7:
+ 681 00a2 1922     		movs	r2, #25
+ 682 00a4 2823     		movs	r3, #40
+ 683 00a6 0092     		str	r2, [sp]
+ 684 00a8 6E21     		movs	r1, #110
+ 685 00aa 3222     		movs	r2, #50
+ 686 00ac 0646     		mov	r6, r0
+ARM GAS  /var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccuOhyDd.s 			page 20
+
+
+ 687              	.LEHB8:
+ 688 00ae FFF7FEFF 		bl	_ZN3VFO11GradientBoxC1Ehhhh
+ 689              	.LVL50:
+ 690              	.LEHE8:
+  47:Src/VFO/GUIMainView.cpp **** 	{	10, 10, 10};
+ 691              		.loc 2 47 18 discriminator 3 view .LVU160
+ 692 00b2 2B68     		ldr	r3, [r5]
+  49:Src/VFO/GUIMainView.cpp **** 	{	10, 10, 10};
+ 693              		.loc 2 49 19 discriminator 3 view .LVU161
+ 694 00b4 2888     		ldrh	r0, [r5]	@ unaligned
+  47:Src/VFO/GUIMainView.cpp **** 	{	10, 10, 10};
+ 695              		.loc 2 47 18 discriminator 3 view .LVU162
+ 696 00b6 B381     		strh	r3, [r6, #12]	@ movhi
+ 697 00b8 1B0C     		lsrs	r3, r3, #16
+  51:Src/VFO/GUIMainView.cpp **** 	{	100, 100, 100};
+ 698              		.loc 2 51 16 discriminator 3 view .LVU163
+ 699 00ba 3A88     		ldrh	r2, [r7]	@ unaligned
+  49:Src/VFO/GUIMainView.cpp **** 	{	10, 10, 10};
+ 700              		.loc 2 49 19 discriminator 3 view .LVU164
+ 701 00bc A978     		ldrb	r1, [r5, #2]	@ zero_extendqisi2
+  47:Src/VFO/GUIMainView.cpp **** 	{	10, 10, 10};
+ 702              		.loc 2 47 18 discriminator 3 view .LVU165
+ 703 00be B373     		strb	r3, [r6, #14]
+  51:Src/VFO/GUIMainView.cpp **** 	{	100, 100, 100};
+ 704              		.loc 2 51 16 discriminator 3 view .LVU166
+ 705 00c0 BB78     		ldrb	r3, [r7, #2]	@ zero_extendqisi2
+  49:Src/VFO/GUIMainView.cpp **** 	{	10, 10, 10};
+ 706              		.loc 2 49 19 discriminator 3 view .LVU167
+ 707 00c2 A6F80F00 		strh	r0, [r6, #15]	@ unaligned
+  46:Src/VFO/GUIMainView.cpp **** 	_btn3->downLeft =
+ 708              		.loc 2 46 8 discriminator 3 view .LVU168
+ 709 00c6 2661     		str	r6, [r4, #16]
+  47:Src/VFO/GUIMainView.cpp **** 	{	10, 10, 10};
+ 710              		.loc 2 47 2 is_stmt 1 discriminator 3 view .LVU169
+  49:Src/VFO/GUIMainView.cpp **** 	{	10, 10, 10};
+ 711              		.loc 2 49 2 discriminator 3 view .LVU170
+  56:Src/VFO/GUIMainView.cpp **** 	_sMeter = new SMeter(10, 90, _window);
+ 712              		.loc 2 56 50 is_stmt 0 discriminator 3 view .LVU171
+ 713 00c8 1420     		movs	r0, #20
+  49:Src/VFO/GUIMainView.cpp **** 	{	10, 10, 10};
+ 714              		.loc 2 49 19 discriminator 3 view .LVU172
+ 715 00ca 7174     		strb	r1, [r6, #17]
+  51:Src/VFO/GUIMainView.cpp **** 	{	100, 100, 100};
+ 716              		.loc 2 51 2 is_stmt 1 discriminator 3 view .LVU173
+  51:Src/VFO/GUIMainView.cpp **** 	{	100, 100, 100};
+ 717              		.loc 2 51 16 is_stmt 0 discriminator 3 view .LVU174
+ 718 00cc F280     		strh	r2, [r6, #6]	@ unaligned
+  53:Src/VFO/GUIMainView.cpp **** 	{	100, 100, 100};
+ 719              		.loc 2 53 17 discriminator 3 view .LVU175
+ 720 00ce A6F80920 		strh	r2, [r6, #9]	@ unaligned
+  51:Src/VFO/GUIMainView.cpp **** 	{	100, 100, 100};
+ 721              		.loc 2 51 16 discriminator 3 view .LVU176
+ 722 00d2 3372     		strb	r3, [r6, #8]
+  53:Src/VFO/GUIMainView.cpp **** 	{	100, 100, 100};
+ 723              		.loc 2 53 2 is_stmt 1 discriminator 3 view .LVU177
+  53:Src/VFO/GUIMainView.cpp **** 	{	100, 100, 100};
+ 724              		.loc 2 53 17 is_stmt 0 discriminator 3 view .LVU178
+ARM GAS  /var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccuOhyDd.s 			page 21
+
+
+ 725 00d4 F372     		strb	r3, [r6, #11]
+  56:Src/VFO/GUIMainView.cpp **** 	_sMeter = new SMeter(10, 90, _window);
+ 726              		.loc 2 56 2 is_stmt 1 discriminator 3 view .LVU179
+ 727              	.LEHB9:
+  56:Src/VFO/GUIMainView.cpp **** 	_sMeter = new SMeter(10, 90, _window);
+ 728              		.loc 2 56 50 is_stmt 0 discriminator 3 view .LVU180
+ 729 00d6 FFF7FEFF 		bl	_Znwj
+ 730              	.LVL51:
+ 731              	.LEHE9:
+ 732 00da 6368     		ldr	r3, [r4, #4]
+ 733 00dc 0A22     		movs	r2, #10
+ 734 00de 0021     		movs	r1, #0
+ 735 00e0 0546     		mov	r5, r0
+ 736              	.LEHB10:
+ 737 00e2 FFF7FEFF 		bl	_ZN3VFO15FrequencyStringC1EhhPNS_10BackgroundE
+ 738              	.LVL52:
+ 739              	.LEHE10:
+  56:Src/VFO/GUIMainView.cpp **** 	_sMeter = new SMeter(10, 90, _window);
+ 740              		.loc 2 56 14 discriminator 3 view .LVU181
+ 741 00e6 6561     		str	r5, [r4, #20]
+  57:Src/VFO/GUIMainView.cpp **** }
+ 742              		.loc 2 57 2 is_stmt 1 discriminator 3 view .LVU182
+  57:Src/VFO/GUIMainView.cpp **** }
+ 743              		.loc 2 57 38 is_stmt 0 discriminator 3 view .LVU183
+ 744 00e8 0C20     		movs	r0, #12
+ 745              	.LEHB11:
+ 746 00ea FFF7FEFF 		bl	_Znwj
+ 747              	.LVL53:
+ 748              	.LEHE11:
+ 749 00ee 6368     		ldr	r3, [r4, #4]
+ 750 00f0 5A22     		movs	r2, #90
+ 751 00f2 0A21     		movs	r1, #10
+ 752 00f4 0546     		mov	r5, r0
+ 753              	.LEHB12:
+ 754 00f6 FFF7FEFF 		bl	_ZN3VFO6SMeterC1EhhPNS_10BackgroundE
+ 755              	.LVL54:
+ 756              	.LEHE12:
+ 757              	.LBE70:
+  58:Src/VFO/GUIMainView.cpp **** 
+ 758              		.loc 2 58 1 discriminator 3 view .LVU184
+ 759 00fa 2046     		mov	r0, r4
+ 760              	.LBB71:
+  57:Src/VFO/GUIMainView.cpp **** }
+ 761              		.loc 2 57 10 discriminator 3 view .LVU185
+ 762 00fc A561     		str	r5, [r4, #24]
+ 763              	.LBE71:
+  58:Src/VFO/GUIMainView.cpp **** 
+ 764              		.loc 2 58 1 discriminator 3 view .LVU186
+ 765 00fe 03B0     		add	sp, sp, #12
+ 766              	.LCFI8:
+ 767              		.cfi_remember_state
+ 768              		.cfi_def_cfa_offset 20
+ 769              		@ sp needed
+ 770 0100 F0BD     		pop	{r4, r5, r6, r7, pc}
+ 771              	.LVL55:
+ 772              	.L49:
+ 773              	.LCFI9:
+ARM GAS  /var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccuOhyDd.s 			page 22
+
+
+ 774              		.cfi_restore_state
+  58:Src/VFO/GUIMainView.cpp **** 
+ 775              		.loc 2 58 1 discriminator 3 view .LVU187
+ 776 0102 03E0     		b	.L43
+ 777              	.L55:
+ 778              	.LBB72:
+  57:Src/VFO/GUIMainView.cpp **** }
+ 779              		.loc 2 57 38 view .LVU188
+ 780 0104 2846     		mov	r0, r5
+ 781 0106 0C21     		movs	r1, #12
+ 782 0108 FFF7FEFF 		bl	_ZdlPvj
+ 783              	.LVL56:
+ 784              	.L43:
+  22:Src/VFO/GUIMainView.cpp **** {
+ 785              		.loc 2 22 26 view .LVU189
+ 786 010c 2046     		mov	r0, r4
+ 787 010e FFF7FEFF 		bl	_ZN3VFO7GUIViewD2Ev
+ 788              	.LVL57:
+ 789              	.LEHB13:
+ 790 0112 FFF7FEFF 		bl	__cxa_end_cleanup
+ 791              	.LVL58:
+ 792              	.LEHE13:
+ 793              	.L54:
+  56:Src/VFO/GUIMainView.cpp **** 	_sMeter = new SMeter(10, 90, _window);
+ 794              		.loc 2 56 50 view .LVU190
+ 795 0116 2846     		mov	r0, r5
+ 796 0118 1421     		movs	r1, #20
+ 797 011a FFF7FEFF 		bl	_ZdlPvj
+ 798              	.LVL59:
+ 799 011e F5E7     		b	.L43
+ 800              	.L53:
+ 801              	.L59:
+  46:Src/VFO/GUIMainView.cpp **** 	_btn3->downLeft =
+ 802              		.loc 2 46 41 view .LVU191
+ 803 0120 3046     		mov	r0, r6
+ 804 0122 1821     		movs	r1, #24
+ 805 0124 FFF7FEFF 		bl	_ZdlPvj
+ 806              	.LVL60:
+ 807 0128 F0E7     		b	.L43
+ 808              	.L52:
+ 809 012a F9E7     		b	.L59
+ 810              	.L51:
+ 811 012c F8E7     		b	.L59
+ 812              	.L50:
+  24:Src/VFO/GUIMainView.cpp **** 
+ 813              		.loc 2 24 42 view .LVU192
+ 814 012e 2846     		mov	r0, r5
+ 815 0130 1821     		movs	r1, #24
+ 816 0132 FFF7FEFF 		bl	_ZdlPvj
+ 817              	.LVL61:
+ 818 0136 E9E7     		b	.L43
+ 819              	.L61:
+ 820              		.align	2
+ 821              	.L60:
+ 822 0138 08000000 		.word	.LANCHOR0+8
+ 823 013c 00000000 		.word	.LANCHOR1
+ 824              	.LBE72:
+ARM GAS  /var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccuOhyDd.s 			page 23
+
+
+ 825              		.cfi_endproc
+ 826              	.LFE119:
+ 827              		.global	__gxx_personality_v0
+ 828              		.personality	__gxx_personality_v0
+ 829              		.handlerdata
+ 830              	.LLSDA119:
+ 831 0008 FF       		.byte	0xff
+ 832 0009 FF       		.byte	0xff
+ 833 000a 01       		.byte	0x1
+ 834 000b 4B       		.uleb128 .LLSDACSE119-.LLSDACSB119
+ 835              	.LLSDACSB119:
+ 836 000c 06       		.uleb128 .LEHB0-.LFB119
+ 837 000d 04       		.uleb128 .LEHE0-.LEHB0
+ 838 000e 00       		.uleb128 0
+ 839 000f 00       		.uleb128 0
+ 840 0010 10       		.uleb128 .LEHB1-.LFB119
+ 841 0011 04       		.uleb128 .LEHE1-.LEHB1
+ 842 0012 8202     		.uleb128 .L49-.LFB119
+ 843 0014 00       		.uleb128 0
+ 844 0015 20       		.uleb128 .LEHB2-.LFB119
+ 845 0016 04       		.uleb128 .LEHE2-.LEHB2
+ 846 0017 AE02     		.uleb128 .L50-.LFB119
+ 847 0019 00       		.uleb128 0
+ 848 001a 28       		.uleb128 .LEHB3-.LFB119
+ 849 001b 04       		.uleb128 .LEHE3-.LEHB3
+ 850 001c 8202     		.uleb128 .L49-.LFB119
+ 851 001e 00       		.uleb128 0
+ 852 001f 38       		.uleb128 .LEHB4-.LFB119
+ 853 0020 04       		.uleb128 .LEHE4-.LEHB4
+ 854 0021 AC02     		.uleb128 .L51-.LFB119
+ 855 0023 00       		.uleb128 0
+ 856 0024 66       		.uleb128 .LEHB5-.LFB119
+ 857 0025 04       		.uleb128 .LEHE5-.LEHB5
+ 858 0026 8202     		.uleb128 .L49-.LFB119
+ 859 0028 00       		.uleb128 0
+ 860 0029 76       		.uleb128 .LEHB6-.LFB119
+ 861 002a 04       		.uleb128 .LEHE6-.LEHB6
+ 862 002b AA02     		.uleb128 .L52-.LFB119
+ 863 002d 00       		.uleb128 0
+ 864 002e 9E01     		.uleb128 .LEHB7-.LFB119
+ 865 0030 04       		.uleb128 .LEHE7-.LEHB7
+ 866 0031 8202     		.uleb128 .L49-.LFB119
+ 867 0033 00       		.uleb128 0
+ 868 0034 AE01     		.uleb128 .LEHB8-.LFB119
+ 869 0036 04       		.uleb128 .LEHE8-.LEHB8
+ 870 0037 A002     		.uleb128 .L53-.LFB119
+ 871 0039 00       		.uleb128 0
+ 872 003a D601     		.uleb128 .LEHB9-.LFB119
+ 873 003c 04       		.uleb128 .LEHE9-.LEHB9
+ 874 003d 8202     		.uleb128 .L49-.LFB119
+ 875 003f 00       		.uleb128 0
+ 876 0040 E201     		.uleb128 .LEHB10-.LFB119
+ 877 0042 04       		.uleb128 .LEHE10-.LEHB10
+ 878 0043 9602     		.uleb128 .L54-.LFB119
+ 879 0045 00       		.uleb128 0
+ 880 0046 EA01     		.uleb128 .LEHB11-.LFB119
+ 881 0048 04       		.uleb128 .LEHE11-.LEHB11
+ARM GAS  /var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccuOhyDd.s 			page 24
+
+
+ 882 0049 8202     		.uleb128 .L49-.LFB119
+ 883 004b 00       		.uleb128 0
+ 884 004c F601     		.uleb128 .LEHB12-.LFB119
+ 885 004e 04       		.uleb128 .LEHE12-.LEHB12
+ 886 004f 8402     		.uleb128 .L55-.LFB119
+ 887 0051 00       		.uleb128 0
+ 888 0052 9202     		.uleb128 .LEHB13-.LFB119
+ 889 0054 04       		.uleb128 .LEHE13-.LEHB13
+ 890 0055 00       		.uleb128 0
+ 891 0056 00       		.uleb128 0
+ 892              	.LLSDACSE119:
+ 893              		.section	.text._ZN3VFO11GUIMainViewC2Ev
+ 894              		.fnend
+ 896              		.global	_ZN3VFO11GUIMainViewC1Ev
+ 897              		.thumb_set _ZN3VFO11GUIMainViewC1Ev,_ZN3VFO11GUIMainViewC2Ev
+ 898              		.section	.text._ZN3VFO11GUIMainView14drawBackgroundEv,"ax",%progbits
+ 899              		.align	1
+ 900              		.p2align 2,,3
+ 901              		.global	_ZN3VFO11GUIMainView14drawBackgroundEv
+ 902              		.syntax unified
+ 903              		.thumb
+ 904              		.thumb_func
+ 905              		.fpu softvfp
+ 907              	_ZN3VFO11GUIMainView14drawBackgroundEv:
+ 908              		.fnstart
+ 909              	.LVL62:
+ 910              	.LFB127:
+  82:Src/VFO/GUIMainView.cpp **** 	_window->draw();
+ 911              		.loc 2 82 1 is_stmt 1 view -0
+ 912              		.cfi_startproc
+ 913              		@ args = 0, pretend = 0, frame = 8
+ 914              		@ frame_needed = 0, uses_anonymous_args = 0
+  83:Src/VFO/GUIMainView.cpp **** 
+ 915              		.loc 2 83 2 view .LVU194
+  82:Src/VFO/GUIMainView.cpp **** 	_window->draw();
+ 916              		.loc 2 82 1 is_stmt 0 view .LVU195
+ 917 0000 30B5     		push	{r4, r5, lr}
+ 918              		.save {r4, r5, lr}
+ 919              	.LCFI10:
+ 920              		.cfi_def_cfa_offset 12
+ 921              		.cfi_offset 4, -12
+ 922              		.cfi_offset 5, -8
+ 923              		.cfi_offset 14, -4
+ 924 0002 0446     		mov	r4, r0
+ 925              		.pad #20
+ 926 0004 85B0     		sub	sp, sp, #20
+ 927              	.LCFI11:
+ 928              		.cfi_def_cfa_offset 32
+  83:Src/VFO/GUIMainView.cpp **** 
+ 929              		.loc 2 83 15 view .LVU196
+ 930 0006 4068     		ldr	r0, [r0, #4]
+ 931              	.LVL63:
+  83:Src/VFO/GUIMainView.cpp **** 
+ 932              		.loc 2 83 15 view .LVU197
+ 933 0008 FFF7FEFF 		bl	_ZN3VFO11GradientBox4drawEv
+ 934              	.LVL64:
+  85:Src/VFO/GUIMainView.cpp **** 	_btn2->draw();
+ARM GAS  /var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccuOhyDd.s 			page 25
+
+
+ 935              		.loc 2 85 2 is_stmt 1 view .LVU198
+  85:Src/VFO/GUIMainView.cpp **** 	_btn2->draw();
+ 936              		.loc 2 85 13 is_stmt 0 view .LVU199
+ 937 000c A068     		ldr	r0, [r4, #8]
+ 938 000e FFF7FEFF 		bl	_ZN3VFO11GradientBox4drawEv
+ 939              	.LVL65:
+  86:Src/VFO/GUIMainView.cpp **** 	_btn3->draw();
+ 940              		.loc 2 86 2 is_stmt 1 view .LVU200
+  86:Src/VFO/GUIMainView.cpp **** 	_btn3->draw();
+ 941              		.loc 2 86 13 is_stmt 0 view .LVU201
+ 942 0012 E068     		ldr	r0, [r4, #12]
+ 943 0014 FFF7FEFF 		bl	_ZN3VFO11GradientBox4drawEv
+ 944              	.LVL66:
+  87:Src/VFO/GUIMainView.cpp **** 
+ 945              		.loc 2 87 2 is_stmt 1 view .LVU202
+  87:Src/VFO/GUIMainView.cpp **** 
+ 946              		.loc 2 87 13 is_stmt 0 view .LVU203
+ 947 0018 2069     		ldr	r0, [r4, #16]
+ 948 001a FFF7FEFF 		bl	_ZN3VFO11GradientBox4drawEv
+ 949              	.LVL67:
+  89:Src/VFO/GUIMainView.cpp **** 	ST7735_Rect(60, 50, 100, 75, COLOR565_WHITE);
+ 950              		.loc 2 89 2 is_stmt 1 view .LVU204
+  89:Src/VFO/GUIMainView.cpp **** 	ST7735_Rect(60, 50, 100, 75, COLOR565_WHITE);
+ 951              		.loc 2 89 13 is_stmt 0 view .LVU205
+ 952 001e 4FF6FF75 		movw	r5, #65535
+ 953 0022 3222     		movs	r2, #50
+ 954 0024 0095     		str	r5, [sp]
+ 955 0026 1146     		mov	r1, r2
+ 956 0028 4B23     		movs	r3, #75
+ 957 002a 0A20     		movs	r0, #10
+ 958 002c FFF7FEFF 		bl	ST7735_Rect
+ 959              	.LVL68:
+  90:Src/VFO/GUIMainView.cpp **** 	ST7735_Rect(110, 50, 150, 75, COLOR565_WHITE);
+ 960              		.loc 2 90 2 is_stmt 1 view .LVU206
+  90:Src/VFO/GUIMainView.cpp **** 	ST7735_Rect(110, 50, 150, 75, COLOR565_WHITE);
+ 961              		.loc 2 90 13 is_stmt 0 view .LVU207
+ 962 0030 0095     		str	r5, [sp]
+ 963 0032 4B23     		movs	r3, #75
+ 964 0034 6422     		movs	r2, #100
+ 965 0036 3221     		movs	r1, #50
+ 966 0038 3C20     		movs	r0, #60
+ 967 003a FFF7FEFF 		bl	ST7735_Rect
+ 968              	.LVL69:
+  91:Src/VFO/GUIMainView.cpp **** 
+ 969              		.loc 2 91 2 is_stmt 1 view .LVU208
+  91:Src/VFO/GUIMainView.cpp **** 
+ 970              		.loc 2 91 13 is_stmt 0 view .LVU209
+ 971 003e 9622     		movs	r2, #150
+ 972 0040 3221     		movs	r1, #50
+ 973 0042 0095     		str	r5, [sp]
+ 974 0044 4B23     		movs	r3, #75
+ 975 0046 6E20     		movs	r0, #110
+ 976 0048 FFF7FEFF 		bl	ST7735_Rect
+ 977              	.LVL70:
+  93:Src/VFO/GUIMainView.cpp **** 	ST7735_PutStr7x11Ex(18, 57, VFO::utf8to1251(tt), COLOR565_YELLOW, _btn1,
+ 978              		.loc 2 93 2 is_stmt 1 view .LVU210
+  93:Src/VFO/GUIMainView.cpp **** 	ST7735_PutStr7x11Ex(18, 57, VFO::utf8to1251(tt), COLOR565_YELLOW, _btn1,
+ARM GAS  /var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccuOhyDd.s 			page 26
+
+
+ 979              		.loc 2 93 7 is_stmt 0 view .LVU211
+ 980 004c 0C4B     		ldr	r3, .L64
+  94:Src/VFO/GUIMainView.cpp **** 			VFO::backgroundColor);
+ 981              		.loc 2 94 21 view .LVU212
+ 982 004e 03A8     		add	r0, sp, #12
+  93:Src/VFO/GUIMainView.cpp **** 	ST7735_PutStr7x11Ex(18, 57, VFO::utf8to1251(tt), COLOR565_YELLOW, _btn1,
+ 983              		.loc 2 93 7 view .LVU213
+ 984 0050 0393     		str	r3, [sp, #12]
+  94:Src/VFO/GUIMainView.cpp **** 			VFO::backgroundColor);
+ 985              		.loc 2 94 2 is_stmt 1 view .LVU214
+  94:Src/VFO/GUIMainView.cpp **** 			VFO::backgroundColor);
+ 986              		.loc 2 94 21 is_stmt 0 view .LVU215
+ 987 0052 FFF7FEFF 		bl	_ZN3VFO10utf8to1251EPc
+ 988              	.LVL71:
+ 989 0056 A168     		ldr	r1, [r4, #8]
+ 990 0058 0A4B     		ldr	r3, .L64+4
+ 991 005a 0246     		mov	r2, r0
+ 992 005c CDE90013 		strd	r1, r3, [sp]
+ 993 0060 1220     		movs	r0, #18
+ 994 0062 4FF6E073 		movw	r3, #65504
+ 995 0066 3921     		movs	r1, #57
+ 996 0068 FFF7FEFF 		bl	ST7735_PutStr7x11Ex
+ 997              	.LVL72:
+  97:Src/VFO/GUIMainView.cpp **** 
+ 998              		.loc 2 97 2 is_stmt 1 view .LVU216
+  97:Src/VFO/GUIMainView.cpp **** 
+ 999              		.loc 2 97 15 is_stmt 0 view .LVU217
+ 1000 006c A069     		ldr	r0, [r4, #24]
+ 1001 006e FF21     		movs	r1, #255
+ 1002 0070 FFF7FEFF 		bl	_ZN3VFO6SMeter4drawEh
+ 1003              	.LVL73:
+  99:Src/VFO/GUIMainView.cpp **** 
+ 1004              		.loc 2 99 2 is_stmt 1 view .LVU218
+  99:Src/VFO/GUIMainView.cpp **** 
+ 1005              		.loc 2 99 25 is_stmt 0 view .LVU219
+ 1006 0074 A021     		movs	r1, #160
+ 1007 0076 6420     		movs	r0, #100
+ 1008 0078 FFF7FEFF 		bl	ST7735_defineScrollArea
+ 1009              	.LVL74:
+ 102:Src/VFO/GUIMainView.cpp **** 
+ 1010              		.loc 2 102 1 view .LVU220
+ 1011 007c 05B0     		add	sp, sp, #20
+ 1012              	.LCFI12:
+ 1013              		.cfi_def_cfa_offset 12
+ 1014              		@ sp needed
+ 1015 007e 30BD     		pop	{r4, r5, pc}
+ 1016              	.LVL75:
+ 1017              	.L65:
+ 102:Src/VFO/GUIMainView.cpp **** 
+ 1018              		.loc 2 102 1 view .LVU221
+ 1019              		.align	2
+ 1020              	.L64:
+ 1021 0080 53534200 		.word	4346707
+ 1022 0084 00000000 		.word	_ZN3VFO15backgroundColorEPvhh
+ 1023              		.cfi_endproc
+ 1024              	.LFE127:
+ 1025              		.fnend
+ARM GAS  /var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccuOhyDd.s 			page 27
+
+
+ 1027              		.section	.text._ZN3VFO11GUIMainView4drawEv,"ax",%progbits
+ 1028              		.align	1
+ 1029              		.p2align 2,,3
+ 1030              		.global	_ZN3VFO11GUIMainView4drawEv
+ 1031              		.syntax unified
+ 1032              		.thumb
+ 1033              		.thumb_func
+ 1034              		.fpu softvfp
+ 1036              	_ZN3VFO11GUIMainView4drawEv:
+ 1037              		.fnstart
+ 1038              	.LVL76:
+ 1039              	.LFB126:
+  74:Src/VFO/GUIMainView.cpp **** 	this->drawBackground();
+ 1040              		.loc 2 74 1 is_stmt 1 view -0
+ 1041              		.cfi_startproc
+ 1042              		@ args = 0, pretend = 0, frame = 0
+ 1043              		@ frame_needed = 0, uses_anonymous_args = 0
+  75:Src/VFO/GUIMainView.cpp **** 
+ 1044              		.loc 2 75 2 view .LVU223
+  74:Src/VFO/GUIMainView.cpp **** 	this->drawBackground();
+ 1045              		.loc 2 74 1 is_stmt 0 view .LVU224
+ 1046 0000 10B5     		push	{r4, lr}
+ 1047              		.save {r4, lr}
+ 1048              	.LCFI13:
+ 1049              		.cfi_def_cfa_offset 8
+ 1050              		.cfi_offset 4, -8
+ 1051              		.cfi_offset 14, -4
+  74:Src/VFO/GUIMainView.cpp **** 	this->drawBackground();
+ 1052              		.loc 2 74 1 view .LVU225
+ 1053 0002 0446     		mov	r4, r0
+  75:Src/VFO/GUIMainView.cpp **** 
+ 1054              		.loc 2 75 22 view .LVU226
+ 1055 0004 FFF7FEFF 		bl	_ZN3VFO11GUIMainView14drawBackgroundEv
+ 1056              	.LVL77:
+  77:Src/VFO/GUIMainView.cpp **** 	_freqString->draw(_mainController->getConfig()->getFrequency());
+ 1057              		.loc 2 77 2 is_stmt 1 view .LVU227
+  77:Src/VFO/GUIMainView.cpp **** 	_freqString->draw(_mainController->getConfig()->getFrequency());
+ 1058              		.loc 2 77 28 is_stmt 0 view .LVU228
+ 1059 0008 6168     		ldr	r1, [r4, #4]
+ 1060 000a 6069     		ldr	r0, [r4, #20]
+ 1061 000c FFF7FEFF 		bl	_ZN3VFO15FrequencyString13setBackgroundEPNS_10BackgroundE
+ 1062              	.LVL78:
+  78:Src/VFO/GUIMainView.cpp **** }
+ 1063              		.loc 2 78 2 is_stmt 1 view .LVU229
+ 1064              		.loc 3 32 31 view .LVU230
+  40:Src/VFO/Configuration.h **** 	int32_t getCalibration(void) { return _data.calibration; }
+ 1065              		.loc 4 40 32 view .LVU231
+  78:Src/VFO/GUIMainView.cpp **** }
+ 1066              		.loc 2 78 19 is_stmt 0 view .LVU232
+ 1067 0010 044B     		ldr	r3, .L68
+ 1068              	.LVL79:
+  78:Src/VFO/GUIMainView.cpp **** }
+ 1069              		.loc 2 78 19 view .LVU233
+ 1070 0012 6069     		ldr	r0, [r4, #20]
+ 1071 0014 1B68     		ldr	r3, [r3]
+ 1072              	.LVL80:
+  79:Src/VFO/GUIMainView.cpp **** 
+ARM GAS  /var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccuOhyDd.s 			page 28
+
+
+ 1073              		.loc 2 79 1 view .LVU234
+ 1074 0016 BDE81040 		pop	{r4, lr}
+ 1075              	.LCFI14:
+ 1076              		.cfi_restore 14
+ 1077              		.cfi_restore 4
+ 1078              		.cfi_def_cfa_offset 0
+ 1079              	.LVL81:
+  78:Src/VFO/GUIMainView.cpp **** }
+ 1080              		.loc 2 78 19 view .LVU235
+ 1081 001a 5B68     		ldr	r3, [r3, #4]
+ 1082              	.LVL82:
+  78:Src/VFO/GUIMainView.cpp **** }
+ 1083              		.loc 2 78 19 view .LVU236
+ 1084 001c D968     		ldr	r1, [r3, #12]
+ 1085 001e FFF7FEBF 		b	_ZN3VFO15FrequencyString4drawEm
+ 1086              	.LVL83:
+ 1087              	.L69:
+  78:Src/VFO/GUIMainView.cpp **** }
+ 1088              		.loc 2 78 19 view .LVU237
+ 1089 0022 00BF     		.align	2
+ 1090              	.L68:
+ 1091 0024 00000000 		.word	_mainController
+ 1092              		.cfi_endproc
+ 1093              	.LFE126:
+ 1094              		.fnend
+ 1096              		.section	.text._ZN3VFO11GUIMainView11showVoltageEm,"ax",%progbits
+ 1097              		.align	1
+ 1098              		.p2align 2,,3
+ 1099              		.global	_ZN3VFO11GUIMainView11showVoltageEm
+ 1100              		.syntax unified
+ 1101              		.thumb
+ 1102              		.thumb_func
+ 1103              		.fpu softvfp
+ 1105              	_ZN3VFO11GUIMainView11showVoltageEm:
+ 1106              		.fnstart
+ 1107              	.LVL84:
+ 1108              	.LFB129:
+ 138:Src/VFO/GUIMainView.cpp **** 
+ 139:Src/VFO/GUIMainView.cpp **** void GUIMainView::showVoltage(uint32_t value)
+ 140:Src/VFO/GUIMainView.cpp **** {
+ 1109              		.loc 2 140 1 is_stmt 1 view -0
+ 1110              		.cfi_startproc
+ 1111              		@ args = 0, pretend = 0, frame = 8
+ 1112              		@ frame_needed = 0, uses_anonymous_args = 0
+ 141:Src/VFO/GUIMainView.cpp **** 	char buf[6];
+ 1113              		.loc 2 141 2 view .LVU239
+ 142:Src/VFO/GUIMainView.cpp **** 	value = value * DIVIDER_FACTOR;
+ 1114              		.loc 2 142 2 view .LVU240
+ 143:Src/VFO/GUIMainView.cpp **** 
+ 144:Src/VFO/GUIMainView.cpp **** 	static uint32_t oldValue = 0;
+ 1115              		.loc 2 144 2 view .LVU241
+ 145:Src/VFO/GUIMainView.cpp **** 	value = ( oldValue * 7 + value ) >> 3;  // cumulative moving average filter
+ 1116              		.loc 2 145 2 view .LVU242
+ 140:Src/VFO/GUIMainView.cpp **** 	char buf[6];
+ 1117              		.loc 2 140 1 is_stmt 0 view .LVU243
+ 1118 0000 30B5     		push	{r4, r5, lr}
+ 1119              		.save {r4, r5, lr}
+ARM GAS  /var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccuOhyDd.s 			page 29
+
+
+ 1120              	.LCFI15:
+ 1121              		.cfi_def_cfa_offset 12
+ 1122              		.cfi_offset 4, -12
+ 1123              		.cfi_offset 5, -8
+ 1124              		.cfi_offset 14, -4
+ 1125              		.loc 2 145 21 view .LVU244
+ 1126 0002 104C     		ldr	r4, .L72
+ 142:Src/VFO/GUIMainView.cpp **** 
+ 1127              		.loc 2 142 8 view .LVU245
+ 1128 0004 01EB8103 		add	r3, r1, r1, lsl #2
+ 1129              		.loc 2 145 21 view .LVU246
+ 1130 0008 2268     		ldr	r2, [r4]
+ 142:Src/VFO/GUIMainView.cpp **** 
+ 1131              		.loc 2 142 8 view .LVU247
+ 1132 000a 01EB4303 		add	r3, r1, r3, lsl #1
+ 1133              		.loc 2 145 21 view .LVU248
+ 1134 000e C2EBC202 		rsb	r2, r2, r2, lsl #3
+ 1135              		.loc 2 145 25 view .LVU249
+ 1136 0012 1A44     		add	r2, r2, r3
+ 140:Src/VFO/GUIMainView.cpp **** 	char buf[6];
+ 1137              		.loc 2 140 1 view .LVU250
+ 1138              		.pad #28
+ 1139 0014 87B0     		sub	sp, sp, #28
+ 1140              	.LCFI16:
+ 1141              		.cfi_def_cfa_offset 40
+ 1142              		.loc 2 145 8 view .LVU251
+ 1143 0016 D308     		lsrs	r3, r2, #3
+ 1144              	.LVL85:
+ 146:Src/VFO/GUIMainView.cpp **** 	oldValue = value;
+ 1145              		.loc 2 146 2 is_stmt 1 view .LVU252
+ 140:Src/VFO/GUIMainView.cpp **** 	char buf[6];
+ 1146              		.loc 2 140 1 is_stmt 0 view .LVU253
+ 1147 0018 0546     		mov	r5, r0
+ 147:Src/VFO/GUIMainView.cpp **** 
+ 148:Src/VFO/GUIMainView.cpp **** 	ST7735_PutStr5x7Ex(1, 116, 60, VFO::voltageToStr(value, buf, 6),
+ 1148              		.loc 2 148 20 view .LVU254
+ 1149 001a 04A9     		add	r1, sp, #16
+ 1150 001c 1846     		mov	r0, r3
+ 1151              	.LVL86:
+ 1152              		.loc 2 148 20 view .LVU255
+ 1153 001e 0622     		movs	r2, #6
+ 146:Src/VFO/GUIMainView.cpp **** 	oldValue = value;
+ 1154              		.loc 2 146 11 view .LVU256
+ 1155 0020 2360     		str	r3, [r4]
+ 1156              		.loc 2 148 2 is_stmt 1 view .LVU257
+ 1157              		.loc 2 148 20 is_stmt 0 view .LVU258
+ 1158 0022 FFF7FEFF 		bl	_ZN3VFO12voltageToStrElPcj
+ 1159              	.LVL87:
+ 1160              		.loc 2 148 20 view .LVU259
+ 1161 0026 4FF6FF71 		movw	r1, #65535
+ 1162 002a 2C69     		ldr	r4, [r5, #16]
+ 1163 002c 064A     		ldr	r2, .L72+4
+ 1164 002e 0346     		mov	r3, r0
+ 1165 0030 CDE90014 		strd	r1, r4, [sp]
+ 1166 0034 0292     		str	r2, [sp, #8]
+ 1167 0036 7421     		movs	r1, #116
+ 1168 0038 3C22     		movs	r2, #60
+ARM GAS  /var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccuOhyDd.s 			page 30
+
+
+ 1169 003a 0120     		movs	r0, #1
+ 1170 003c FFF7FEFF 		bl	ST7735_PutStr5x7Ex
+ 1171              	.LVL88:
+ 149:Src/VFO/GUIMainView.cpp **** 				COLOR565_WHITE, _btn3, VFO::backgroundColor);
+ 150:Src/VFO/GUIMainView.cpp **** 
+ 151:Src/VFO/GUIMainView.cpp **** }
+ 1172              		.loc 2 151 1 view .LVU260
+ 1173 0040 07B0     		add	sp, sp, #28
+ 1174              	.LCFI17:
+ 1175              		.cfi_def_cfa_offset 12
+ 1176              		@ sp needed
+ 1177 0042 30BD     		pop	{r4, r5, pc}
+ 1178              	.LVL89:
+ 1179              	.L73:
+ 1180              		.loc 2 151 1 view .LVU261
+ 1181              		.align	2
+ 1182              	.L72:
+ 1183 0044 00000000 		.word	.LANCHOR2
+ 1184 0048 00000000 		.word	_ZN3VFO15backgroundColorEPvhh
+ 1185              		.cfi_endproc
+ 1186              	.LFE129:
+ 1187              		.fnend
+ 1189              		.global	_ZTSN3VFO11GUIMainViewE
+ 1190              		.global	_ZTIN3VFO11GUIMainViewE
+ 1191              		.global	_ZTVN3VFO11GUIMainViewE
+ 1192              		.section	.rodata
+ 1193              		.align	2
+ 1194              		.set	.LANCHOR1,. + 0
+ 1195              	.LC0:
+ 1196 0000 0A       		.byte	10
+ 1197 0001 0A       		.byte	10
+ 1198 0002 0A       		.byte	10
+ 1199 0003 00       		.space	1
+ 1200              	.LC1:
+ 1201 0004 64       		.byte	100
+ 1202 0005 64       		.byte	100
+ 1203 0006 64       		.byte	100
+ 1204              		.section	.bss._ZZN3VFO11GUIMainView11showVoltageEmE8oldValue,"aw",%nobits
+ 1205              		.align	2
+ 1206              		.set	.LANCHOR2,. + 0
+ 1209              	_ZZN3VFO11GUIMainView11showVoltageEmE8oldValue:
+ 1210 0000 00000000 		.space	4
+ 1211              		.section	.rodata._ZTIN3VFO11GUIMainViewE,"a"
+ 1212              		.align	2
+ 1215              	_ZTIN3VFO11GUIMainViewE:
+ 1216 0000 08000000 		.word	_ZTVN10__cxxabiv120__si_class_type_infoE+8
+ 1217 0004 00000000 		.word	_ZTSN3VFO11GUIMainViewE
+ 1218 0008 00000000 		.word	_ZTIN3VFO7GUIViewE
+ 1219              		.section	.rodata._ZTSN3VFO11GUIMainViewE,"a"
+ 1220              		.align	2
+ 1223              	_ZTSN3VFO11GUIMainViewE:
+ 1224 0000 4E335646 		.ascii	"N3VFO11GUIMainViewE\000"
+ 1224      4F313147 
+ 1224      55494D61 
+ 1224      696E5669 
+ 1224      65774500 
+ 1225              		.section	.rodata._ZTVN3VFO11GUIMainViewE,"a"
+ARM GAS  /var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccuOhyDd.s 			page 31
+
+
+ 1226              		.align	2
+ 1227              		.set	.LANCHOR0,. + 0
+ 1230              	_ZTVN3VFO11GUIMainViewE:
+ 1231 0000 00000000 		.word	0
+ 1232 0004 00000000 		.word	_ZTIN3VFO11GUIMainViewE
+ 1233 0008 00000000 		.word	_ZN3VFO11GUIMainViewD1Ev
+ 1234 000c 00000000 		.word	_ZN3VFO11GUIMainViewD0Ev
+ 1235 0010 00000000 		.word	_ZN3VFO11GUIMainView4drawEv
+ 1236 0014 00000000 		.word	_ZN3VFO11GUIMainView20pushEncoderIncrementEst
+ 1237 0018 00000000 		.word	_ZN3VFO11GUIMainView14menuKeyPressedEv
+ 1238              		.text
+ 1239              	.Letext0:
+ 1240              		.file 5 "/usr/local/gcc-arm-none-eabi-8-2019-q3-update/arm-none-eabi/include/machine/_default_type
+ 1241              		.file 6 "/usr/local/gcc-arm-none-eabi-8-2019-q3-update/arm-none-eabi/include/sys/_stdint.h"
+ 1242              		.file 7 "Drivers/CMSIS/Include/core_cm3.h"
+ 1243              		.file 8 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h"
+ 1244              		.file 9 "/usr/local/gcc-arm-none-eabi-8-2019-q3-update/lib/gcc/arm-none-eabi/8.3.1/include/stddef.
+ 1245              		.file 10 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h"
+ 1246              		.file 11 "/usr/local/gcc-arm-none-eabi-8-2019-q3-update/arm-none-eabi/include/sys/_types.h"
+ 1247              		.file 12 "/usr/local/gcc-arm-none-eabi-8-2019-q3-update/arm-none-eabi/include/sys/reent.h"
+ 1248              		.file 13 "/usr/local/gcc-arm-none-eabi-8-2019-q3-update/arm-none-eabi/include/sys/lock.h"
+ 1249              		.file 14 "Inc/st7735/font5x7.h"
+ 1250              		.file 15 "Inc/st7735/font7x11.h"
+ 1251              		.file 16 "Inc/st7735/st7735.h"
+ 1252              		.file 17 "/usr/local/gcc-arm-none-eabi-8-2019-q3-update/arm-none-eabi/include/c++/8.3.1/cstdlib"
+ 1253              		.file 18 "/usr/local/gcc-arm-none-eabi-8-2019-q3-update/arm-none-eabi/include/c++/8.3.1/bits/std_a
+ 1254              		.file 19 "/usr/local/gcc-arm-none-eabi-8-2019-q3-update/arm-none-eabi/include/c++/8.3.1/arm-none-e
+ 1255              		.file 20 "/usr/local/gcc-arm-none-eabi-8-2019-q3-update/arm-none-eabi/include/stdlib.h"
+ 1256              		.file 21 "/usr/local/gcc-arm-none-eabi-8-2019-q3-update/arm-none-eabi/include/c++/8.3.1/stdlib.h"
+ 1257              		.file 22 "Src/VFO/GUI/FrequencyString.h"
+ 1258              		.file 23 "Src/VFO/GUIMainView.h"
+ 1259              		.file 24 "Src/VFO/GUI/SMeter.h"
+ 1260              		.file 25 "Src/VFO/GUI/Utils.h"
+ 1261              		.file 26 "<built-in>"
+ 1262              		.file 27 "Src/VFO/GUIView.h"
+ARM GAS  /var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccuOhyDd.s 			page 32
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 GUIMainView.cpp
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccuOhyDd.s:16     .text._ZN3VFO11GradientBoxD0Ev:0000000000000000 $t
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccuOhyDd.s:25     .text._ZN3VFO11GradientBoxD0Ev:0000000000000000 _ZN3VFO11GradientBoxD0Ev
+.ARM.exidx.text._ZN3VFO11GradientBoxD0Ev:0000000000000000 $d
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccuOhyDd.s:66     .text._ZN3VFO11GUIMainView14menuKeyPressedEv:0000000000000000 $t
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccuOhyDd.s:74     .text._ZN3VFO11GUIMainView14menuKeyPressedEv:0000000000000000 _ZN3VFO11GUIMainView14menuKeyPressedEv
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccuOhyDd.s:95     .text._ZN3VFO11GUIMainView14menuKeyPressedEv:0000000000000008 $d
+.ARM.exidx.text._ZN3VFO11GUIMainView14menuKeyPressedEv:0000000000000000 $d
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccuOhyDd.s:102    .text._ZN3VFO11GUIMainView20pushEncoderIncrementEst:0000000000000000 $t
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccuOhyDd.s:110    .text._ZN3VFO11GUIMainView20pushEncoderIncrementEst:0000000000000000 _ZN3VFO11GUIMainView20pushEncoderIncrementEst
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccuOhyDd.s:220    .text._ZN3VFO11GUIMainView20pushEncoderIncrementEst:0000000000000054 $d
+.ARM.exidx.text._ZN3VFO11GUIMainView20pushEncoderIncrementEst:0000000000000000 $d
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccuOhyDd.s:226    .text._ZN3VFO11GUIMainViewD2Ev:0000000000000000 $t
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccuOhyDd.s:234    .text._ZN3VFO11GUIMainViewD2Ev:0000000000000000 _ZN3VFO11GUIMainViewD2Ev
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccuOhyDd.s:430    .text._ZN3VFO11GUIMainViewD2Ev:000000000000007c $d
+.ARM.exidx.text._ZN3VFO11GUIMainViewD2Ev:0000000000000000 $d
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccuOhyDd.s:234    .text._ZN3VFO11GUIMainViewD2Ev:0000000000000000 _ZN3VFO11GUIMainViewD1Ev
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccuOhyDd.s:440    .text._ZN3VFO11GUIMainViewD0Ev:0000000000000000 $t
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccuOhyDd.s:448    .text._ZN3VFO11GUIMainViewD0Ev:0000000000000000 _ZN3VFO11GUIMainViewD0Ev
+.ARM.exidx.text._ZN3VFO11GUIMainViewD0Ev:0000000000000000 $d
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccuOhyDd.s:481    .text._ZN3VFO11GradientBoxD2Ev:0000000000000000 $t
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccuOhyDd.s:489    .text._ZN3VFO11GradientBoxD2Ev:0000000000000000 _ZN3VFO11GradientBoxD2Ev
+.ARM.exidx.text._ZN3VFO11GradientBoxD2Ev:0000000000000000 $d
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccuOhyDd.s:489    .text._ZN3VFO11GradientBoxD2Ev:0000000000000000 _ZN3VFO11GradientBoxD1Ev
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccuOhyDd.s:513    .text._ZN3VFO11GUIMainViewC2Ev:0000000000000000 $t
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccuOhyDd.s:521    .text._ZN3VFO11GUIMainViewC2Ev:0000000000000000 _ZN3VFO11GUIMainViewC2Ev
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccuOhyDd.s:822    .text._ZN3VFO11GUIMainViewC2Ev:0000000000000138 $d
+.ARM.extab.text._ZN3VFO11GUIMainViewC2Ev:0000000000000000 $d
+.ARM.exidx.text._ZN3VFO11GUIMainViewC2Ev:0000000000000000 $d
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccuOhyDd.s:521    .text._ZN3VFO11GUIMainViewC2Ev:0000000000000000 _ZN3VFO11GUIMainViewC1Ev
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccuOhyDd.s:899    .text._ZN3VFO11GUIMainView14drawBackgroundEv:0000000000000000 $t
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccuOhyDd.s:907    .text._ZN3VFO11GUIMainView14drawBackgroundEv:0000000000000000 _ZN3VFO11GUIMainView14drawBackgroundEv
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccuOhyDd.s:1021   .text._ZN3VFO11GUIMainView14drawBackgroundEv:0000000000000080 $d
+.ARM.exidx.text._ZN3VFO11GUIMainView14drawBackgroundEv:0000000000000000 $d
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccuOhyDd.s:1028   .text._ZN3VFO11GUIMainView4drawEv:0000000000000000 $t
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccuOhyDd.s:1036   .text._ZN3VFO11GUIMainView4drawEv:0000000000000000 _ZN3VFO11GUIMainView4drawEv
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccuOhyDd.s:1091   .text._ZN3VFO11GUIMainView4drawEv:0000000000000024 $d
+.ARM.exidx.text._ZN3VFO11GUIMainView4drawEv:0000000000000000 $d
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccuOhyDd.s:1097   .text._ZN3VFO11GUIMainView11showVoltageEm:0000000000000000 $t
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccuOhyDd.s:1105   .text._ZN3VFO11GUIMainView11showVoltageEm:0000000000000000 _ZN3VFO11GUIMainView11showVoltageEm
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccuOhyDd.s:1183   .text._ZN3VFO11GUIMainView11showVoltageEm:0000000000000044 $d
+.ARM.exidx.text._ZN3VFO11GUIMainView11showVoltageEm:0000000000000000 $d
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccuOhyDd.s:1223   .rodata._ZTSN3VFO11GUIMainViewE:0000000000000000 _ZTSN3VFO11GUIMainViewE
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccuOhyDd.s:1215   .rodata._ZTIN3VFO11GUIMainViewE:0000000000000000 _ZTIN3VFO11GUIMainViewE
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccuOhyDd.s:1230   .rodata._ZTVN3VFO11GUIMainViewE:0000000000000000 _ZTVN3VFO11GUIMainViewE
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccuOhyDd.s:1193   .rodata:0000000000000000 $d
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccuOhyDd.s:1205   .bss._ZZN3VFO11GUIMainView11showVoltageEmE8oldValue:0000000000000000 $d
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccuOhyDd.s:1209   .bss._ZZN3VFO11GUIMainView11showVoltageEmE8oldValue:0000000000000000 _ZZN3VFO11GUIMainView11showVoltageEmE8oldValue
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccuOhyDd.s:1212   .rodata._ZTIN3VFO11GUIMainViewE:0000000000000000 $d
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccuOhyDd.s:1220   .rodata._ZTSN3VFO11GUIMainViewE:0000000000000000 $d
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccuOhyDd.s:1226   .rodata._ZTVN3VFO11GUIMainViewE:0000000000000000 $d
+                           .group:0000000000000000 _ZN3VFO11GradientBoxD5Ev
+
+UNDEFINED SYMBOLS
+_ZdlPvj
+_ZN3VFO13VFOController9showSetupEv
+ARM GAS  /var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccuOhyDd.s 			page 33
+
+
+_mainController
+_ZN3VFO13VFOController12setFrequencyEm
+_ZN3VFO13VFOController18triggerMemoryWriteEv
+_ZN3VFO15FrequencyString4drawEm
+__aeabi_unwind_cpp_pr0
+_ZN3VFO7GUIViewD2Ev
+_ZN3VFO7GUIViewC2Ev
+_Znwj
+_ZN3VFO11GradientBoxC1Ehhhh
+_ZN3VFO15FrequencyStringC1EhhPNS_10BackgroundE
+_ZN3VFO6SMeterC1EhhPNS_10BackgroundE
+__cxa_end_cleanup
+__gxx_personality_v0
+_ZN3VFO11GradientBox4drawEv
+ST7735_Rect
+_ZN3VFO10utf8to1251EPc
+ST7735_PutStr7x11Ex
+_ZN3VFO6SMeter4drawEh
+ST7735_defineScrollArea
+_ZN3VFO15backgroundColorEPvhh
+_ZN3VFO15FrequencyString13setBackgroundEPNS_10BackgroundE
+_ZN3VFO12voltageToStrElPcj
+ST7735_PutStr5x7Ex
+_ZTVN10__cxxabiv120__si_class_type_infoE
+_ZTIN3VFO7GUIViewE

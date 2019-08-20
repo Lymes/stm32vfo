@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"stm32-for-vscode.armToolchainPath": "/usr/local/gcc-arm-none-eabi-8-2019-q3-update/bin",
+		"files.associations": {
+			"stm32f1xx_hal.h": "c"
+		}
+	}
+}

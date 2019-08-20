@@ -1,0 +1,817 @@
+ARM GAS  /var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//cckzx6iu.s 			page 1
+
+
+   1              		.cpu cortex-m3
+   2              		.eabi_attribute 20, 1
+   3              		.eabi_attribute 21, 1
+   4              		.eabi_attribute 23, 3
+   5              		.eabi_attribute 24, 1
+   6              		.eabi_attribute 25, 1
+   7              		.eabi_attribute 26, 1
+   8              		.eabi_attribute 30, 2
+   9              		.eabi_attribute 34, 1
+  10              		.eabi_attribute 18, 4
+  11              		.file	"ConfigHelpers.cpp"
+  12              		.text
+  13              	.Ltext0:
+  14              		.cfi_sections	.debug_frame
+  15              		.section	.text._ZN3VFO15_getCalibrationEv,"ax",%progbits
+  16              		.align	1
+  17              		.p2align 2,,3
+  18              		.global	_ZN3VFO15_getCalibrationEv
+  19              		.arch armv7-m
+  20              		.syntax unified
+  21              		.thumb
+  22              		.thumb_func
+  23              		.fpu softvfp
+  25              	_ZN3VFO15_getCalibrationEv:
+  26              		.fnstart
+  27              	.LFB118:
+  28              		.file 1 "Src/VFO/ConfigHelpers.cpp"
+   1:Src/VFO/ConfigHelpers.cpp **** /*
+   2:Src/VFO/ConfigHelpers.cpp ****  * ConfigHelpers.cpp
+   3:Src/VFO/ConfigHelpers.cpp ****  *
+   4:Src/VFO/ConfigHelpers.cpp ****  *  Created on: Apr 13, 2018
+   5:Src/VFO/ConfigHelpers.cpp ****  *      Author: lymes
+   6:Src/VFO/ConfigHelpers.cpp ****  */
+   7:Src/VFO/ConfigHelpers.cpp **** 
+   8:Src/VFO/ConfigHelpers.cpp **** #include "ConfigHelpers.h"
+   9:Src/VFO/ConfigHelpers.cpp **** 
+  10:Src/VFO/ConfigHelpers.cpp **** namespace VFO
+  11:Src/VFO/ConfigHelpers.cpp **** {
+  12:Src/VFO/ConfigHelpers.cpp **** 
+  13:Src/VFO/ConfigHelpers.cpp **** int32_t _getCalibration()
+  14:Src/VFO/ConfigHelpers.cpp **** {
+  29              		.loc 1 14 1 view -0
+  30              		.cfi_startproc
+  31              		@ args = 0, pretend = 0, frame = 0
+  32              		@ frame_needed = 0, uses_anonymous_args = 0
+  33              		@ link register save eliminated.
+  15:Src/VFO/ConfigHelpers.cpp **** 	return _mainController->getConfig()->getCalibration();
+  34              		.loc 1 15 2 view .LVU1
+  35              	.LVL0:
+  36              		.file 2 "Src/VFO/VFOController.h"
+   1:Src/VFO/VFOController.h **** /*
+   2:Src/VFO/VFOController.h ****  * VFOController.h
+   3:Src/VFO/VFOController.h ****  *
+   4:Src/VFO/VFOController.h ****  *  Created on: Apr 1, 2018
+   5:Src/VFO/VFOController.h ****  *      Author: lymes
+   6:Src/VFO/VFOController.h ****  */
+   7:Src/VFO/VFOController.h **** 
+ARM GAS  /var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//cckzx6iu.s 			page 2
+
+
+   8:Src/VFO/VFOController.h **** #ifndef VFO_VFOCONTROLLER_H_
+   9:Src/VFO/VFOController.h **** #define VFO_VFOCONTROLLER_H_
+  10:Src/VFO/VFOController.h **** 
+  11:Src/VFO/VFOController.h **** #include "stm32f1xx_hal.h"
+  12:Src/VFO/VFOController.h **** #include "GUIController.h"
+  13:Src/VFO/VFOController.h **** #include "si5351/si5351.h"
+  14:Src/VFO/VFOController.h **** #include "Configuration.h"
+  15:Src/VFO/VFOController.h **** 
+  16:Src/VFO/VFOController.h **** 
+  17:Src/VFO/VFOController.h **** namespace VFO
+  18:Src/VFO/VFOController.h **** {
+  19:Src/VFO/VFOController.h **** 
+  20:Src/VFO/VFOController.h **** class VFOController
+  21:Src/VFO/VFOController.h **** {
+  22:Src/VFO/VFOController.h **** 	Configuration* _conf;
+  23:Src/VFO/VFOController.h **** 	GUIController* _gui;
+  24:Src/VFO/VFOController.h **** 	Si5351* _si5351;
+  25:Src/VFO/VFOController.h **** 	bool _si5351_enabled = true;
+  26:Src/VFO/VFOController.h **** 
+  27:Src/VFO/VFOController.h **** public:
+  28:Src/VFO/VFOController.h **** 	VFOController();
+  29:Src/VFO/VFOController.h **** 	virtual ~VFOController();
+  30:Src/VFO/VFOController.h **** 	void begin();
+  31:Src/VFO/VFOController.h **** 
+  32:Src/VFO/VFOController.h **** 	Configuration *getConfig() { return _conf; }
+  37              		.loc 2 32 31 view .LVU2
+  38              		.file 3 "Src/VFO/Configuration.h"
+   1:Src/VFO/Configuration.h **** /*
+   2:Src/VFO/Configuration.h ****  * Configuration.h
+   3:Src/VFO/Configuration.h ****  *
+   4:Src/VFO/Configuration.h ****  *  Created on: Apr 4, 2018
+   5:Src/VFO/Configuration.h ****  *      Author: lymes
+   6:Src/VFO/Configuration.h ****  */
+   7:Src/VFO/Configuration.h **** 
+   8:Src/VFO/Configuration.h **** #ifndef VFO_CONFIGURATION_H_
+   9:Src/VFO/Configuration.h **** #define VFO_CONFIGURATION_H_
+  10:Src/VFO/Configuration.h **** 
+  11:Src/VFO/Configuration.h **** #include <stdint.h>
+  12:Src/VFO/Configuration.h **** #include "stm32f1xx_hal.h"
+  13:Src/VFO/Configuration.h **** #include <eeprom/eeprom24xx.h>
+  14:Src/VFO/Configuration.h **** 
+  15:Src/VFO/Configuration.h **** namespace VFO
+  16:Src/VFO/Configuration.h **** {
+  17:Src/VFO/Configuration.h **** 
+  18:Src/VFO/Configuration.h **** struct ConfigData {
+  19:Src/VFO/Configuration.h **** 	uint32_t frequency;
+  20:Src/VFO/Configuration.h **** 	uint32_t iFrequency;
+  21:Src/VFO/Configuration.h **** 	uint32_t bFrequency;
+  22:Src/VFO/Configuration.h **** 	uint32_t encoder;
+  23:Src/VFO/Configuration.h **** 	int32_t calibration;
+  24:Src/VFO/Configuration.h **** 	uint8_t brightness;
+  25:Src/VFO/Configuration.h **** };
+  26:Src/VFO/Configuration.h **** 
+  27:Src/VFO/Configuration.h **** class Configuration
+  28:Src/VFO/Configuration.h **** {
+  29:Src/VFO/Configuration.h **** 	Eeprom24 _mem;
+  30:Src/VFO/Configuration.h **** 	ConfigData _data;
+ARM GAS  /var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//cckzx6iu.s 			page 3
+
+
+  31:Src/VFO/Configuration.h **** 
+  32:Src/VFO/Configuration.h **** public:
+  33:Src/VFO/Configuration.h **** 
+  34:Src/VFO/Configuration.h **** 	Configuration();
+  35:Src/VFO/Configuration.h **** 	virtual ~Configuration();
+  36:Src/VFO/Configuration.h **** 
+  37:Src/VFO/Configuration.h **** 	void save();
+  38:Src/VFO/Configuration.h **** 	void load();
+  39:Src/VFO/Configuration.h **** 
+  40:Src/VFO/Configuration.h **** 	uint32_t getFrequency(void) { return _data.frequency; }
+  41:Src/VFO/Configuration.h **** 	int32_t getCalibration(void) { return _data.calibration; }
+  39              		.loc 3 41 33 view .LVU3
+  40              		.loc 1 15 53 is_stmt 0 view .LVU4
+  41 0000 024B     		ldr	r3, .L3
+  42              	.LVL1:
+  43              		.loc 1 15 53 view .LVU5
+  44 0002 1B68     		ldr	r3, [r3]
+  45              	.LVL2:
+  46              		.loc 1 15 53 view .LVU6
+  47 0004 5B68     		ldr	r3, [r3, #4]
+  48              	.LVL3:
+  16:Src/VFO/ConfigHelpers.cpp **** }
+  49              		.loc 1 16 1 view .LVU7
+  50 0006 D869     		ldr	r0, [r3, #28]
+  51 0008 7047     		bx	lr
+  52              	.L4:
+  53 000a 00BF     		.align	2
+  54              	.L3:
+  55 000c 00000000 		.word	_mainController
+  56              		.cfi_endproc
+  57              	.LFE118:
+  58              		.cantunwind
+  59              		.fnend
+  61              		.section	.text._ZN3VFO15_setCalibrationEl,"ax",%progbits
+  62              		.align	1
+  63              		.p2align 2,,3
+  64              		.global	_ZN3VFO15_setCalibrationEl
+  65              		.syntax unified
+  66              		.thumb
+  67              		.thumb_func
+  68              		.fpu softvfp
+  70              	_ZN3VFO15_setCalibrationEl:
+  71              		.fnstart
+  72              	.LVL4:
+  73              	.LFB119:
+  17:Src/VFO/ConfigHelpers.cpp **** 
+  18:Src/VFO/ConfigHelpers.cpp **** void _setCalibration(int32_t value)
+  19:Src/VFO/ConfigHelpers.cpp **** {
+  74              		.loc 1 19 1 is_stmt 1 view -0
+  75              		.cfi_startproc
+  76              		@ args = 0, pretend = 0, frame = 0
+  77              		@ frame_needed = 0, uses_anonymous_args = 0
+  78              		@ link register save eliminated.
+  20:Src/VFO/ConfigHelpers.cpp **** 	_mainController->getConfig()->setCalibration(value);
+  79              		.loc 1 20 2 view .LVU9
+  19:Src/VFO/ConfigHelpers.cpp **** 	_mainController->getConfig()->setCalibration(value);
+  80              		.loc 1 19 1 is_stmt 0 view .LVU10
+ARM GAS  /var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//cckzx6iu.s 			page 4
+
+
+  81 0000 0346     		mov	r3, r0
+  82              		.loc 1 20 46 view .LVU11
+  83 0002 034A     		ldr	r2, .L6
+  21:Src/VFO/ConfigHelpers.cpp **** 	_mainController->setCalibration(value);
+  84              		.loc 1 21 33 view .LVU12
+  85 0004 0146     		mov	r1, r0
+  20:Src/VFO/ConfigHelpers.cpp **** 	_mainController->getConfig()->setCalibration(value);
+  86              		.loc 1 20 46 view .LVU13
+  87 0006 1068     		ldr	r0, [r2]
+  88              	.LVL5:
+  89              		.loc 2 32 31 is_stmt 1 view .LVU14
+  90              	.LBB42:
+  91              	.LBI42:
+  42:Src/VFO/Configuration.h **** 	uint32_t getIFrequency(void) { return _data.iFrequency; }
+  43:Src/VFO/Configuration.h **** 	uint32_t getBFrequency(void) { return _data.bFrequency; }
+  44:Src/VFO/Configuration.h **** 	uint8_t getBrightness(void) { return _data.brightness; }
+  45:Src/VFO/Configuration.h **** 	uint32_t getEncoder(void) { return _data.encoder; }
+  46:Src/VFO/Configuration.h **** 
+  47:Src/VFO/Configuration.h **** 	void setFrequency(uint32_t frequency) { _data.frequency = frequency; }
+  48:Src/VFO/Configuration.h **** 	void setCalibration(uint32_t value) { _data.calibration = value; }
+  92              		.loc 3 48 7 view .LVU15
+  93              	.LBB43:
+  94              		.loc 3 48 40 view .LVU16
+  95              		.loc 3 48 58 is_stmt 0 view .LVU17
+  96 0008 4268     		ldr	r2, [r0, #4]
+  97 000a D361     		str	r3, [r2, #28]
+  98              	.LVL6:
+  99              		.loc 3 48 58 view .LVU18
+ 100              	.LBE43:
+ 101              	.LBE42:
+ 102              		.loc 1 21 2 is_stmt 1 view .LVU19
+ 103              		.loc 1 21 33 is_stmt 0 view .LVU20
+ 104 000c FFF7FEBF 		b	_ZN3VFO13VFOController14setCalibrationEl
+ 105              	.LVL7:
+ 106              	.L7:
+ 107              		.loc 1 21 33 view .LVU21
+ 108              		.align	2
+ 109              	.L6:
+ 110 0010 00000000 		.word	_mainController
+ 111              		.cfi_endproc
+ 112              	.LFE119:
+ 113              		.cantunwind
+ 114              		.fnend
+ 116              		.section	.text._ZN3VFO14_getIFrequencyEv,"ax",%progbits
+ 117              		.align	1
+ 118              		.p2align 2,,3
+ 119              		.global	_ZN3VFO14_getIFrequencyEv
+ 120              		.syntax unified
+ 121              		.thumb
+ 122              		.thumb_func
+ 123              		.fpu softvfp
+ 125              	_ZN3VFO14_getIFrequencyEv:
+ 126              		.fnstart
+ 127              	.LFB120:
+  22:Src/VFO/ConfigHelpers.cpp **** }
+  23:Src/VFO/ConfigHelpers.cpp **** 
+  24:Src/VFO/ConfigHelpers.cpp **** int32_t _getIFrequency()
+ARM GAS  /var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//cckzx6iu.s 			page 5
+
+
+  25:Src/VFO/ConfigHelpers.cpp **** {
+ 128              		.loc 1 25 1 is_stmt 1 view -0
+ 129              		.cfi_startproc
+ 130              		@ args = 0, pretend = 0, frame = 0
+ 131              		@ frame_needed = 0, uses_anonymous_args = 0
+ 132              		@ link register save eliminated.
+  26:Src/VFO/ConfigHelpers.cpp **** 	return _mainController->getConfig()->getIFrequency();
+ 133              		.loc 1 26 2 view .LVU23
+ 134              	.LVL8:
+ 135              		.loc 2 32 31 view .LVU24
+  42:Src/VFO/Configuration.h **** 	uint32_t getIFrequency(void) { return _data.iFrequency; }
+ 136              		.loc 3 42 33 view .LVU25
+ 137              		.loc 1 26 52 is_stmt 0 view .LVU26
+ 138 0000 024B     		ldr	r3, .L9
+ 139              	.LVL9:
+ 140              		.loc 1 26 52 view .LVU27
+ 141 0002 1B68     		ldr	r3, [r3]
+ 142              	.LVL10:
+ 143              		.loc 1 26 52 view .LVU28
+ 144 0004 5B68     		ldr	r3, [r3, #4]
+ 145              	.LVL11:
+  27:Src/VFO/ConfigHelpers.cpp **** }
+ 146              		.loc 1 27 1 view .LVU29
+ 147 0006 1869     		ldr	r0, [r3, #16]
+ 148 0008 7047     		bx	lr
+ 149              	.L10:
+ 150 000a 00BF     		.align	2
+ 151              	.L9:
+ 152 000c 00000000 		.word	_mainController
+ 153              		.cfi_endproc
+ 154              	.LFE120:
+ 155              		.cantunwind
+ 156              		.fnend
+ 158              		.section	.text._ZN3VFO14_setIFrequencyEl,"ax",%progbits
+ 159              		.align	1
+ 160              		.p2align 2,,3
+ 161              		.global	_ZN3VFO14_setIFrequencyEl
+ 162              		.syntax unified
+ 163              		.thumb
+ 164              		.thumb_func
+ 165              		.fpu softvfp
+ 167              	_ZN3VFO14_setIFrequencyEl:
+ 168              		.fnstart
+ 169              	.LVL12:
+ 170              	.LFB121:
+  28:Src/VFO/ConfigHelpers.cpp **** 
+  29:Src/VFO/ConfigHelpers.cpp **** void _setIFrequency(int32_t value)
+  30:Src/VFO/ConfigHelpers.cpp **** {
+ 171              		.loc 1 30 1 is_stmt 1 view -0
+ 172              		.cfi_startproc
+ 173              		@ args = 0, pretend = 0, frame = 0
+ 174              		@ frame_needed = 0, uses_anonymous_args = 0
+ 175              		@ link register save eliminated.
+  31:Src/VFO/ConfigHelpers.cpp **** 	_mainController->getConfig()->setIFrequency(value);
+ 176              		.loc 1 31 2 view .LVU31
+ 177              		.loc 2 32 31 view .LVU32
+ 178              	.LBB44:
+ARM GAS  /var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//cckzx6iu.s 			page 6
+
+
+ 179              	.LBI44:
+  49:Src/VFO/Configuration.h **** 	void setIFrequency(uint32_t frequency) { _data.iFrequency = frequency; }
+ 180              		.loc 3 49 7 view .LVU33
+ 181              	.LBB45:
+ 182              		.loc 3 49 43 view .LVU34
+ 183              	.LBE45:
+ 184              	.LBE44:
+ 185              		.loc 1 31 45 is_stmt 0 view .LVU35
+ 186 0000 024B     		ldr	r3, .L12
+ 187              	.LVL13:
+ 188              		.loc 1 31 45 view .LVU36
+ 189 0002 1B68     		ldr	r3, [r3]
+ 190              	.LVL14:
+ 191              	.LBB47:
+ 192              	.LBB46:
+ 193              		.loc 3 49 60 view .LVU37
+ 194 0004 5B68     		ldr	r3, [r3, #4]
+ 195              	.LVL15:
+ 196              		.loc 3 49 60 view .LVU38
+ 197 0006 1861     		str	r0, [r3, #16]
+ 198              	.LVL16:
+ 199              		.loc 3 49 60 view .LVU39
+ 200              	.LBE46:
+ 201              	.LBE47:
+  32:Src/VFO/ConfigHelpers.cpp **** }
+ 202              		.loc 1 32 1 view .LVU40
+ 203 0008 7047     		bx	lr
+ 204              	.L13:
+ 205 000a 00BF     		.align	2
+ 206              	.L12:
+ 207 000c 00000000 		.word	_mainController
+ 208              		.cfi_endproc
+ 209              	.LFE121:
+ 210              		.cantunwind
+ 211              		.fnend
+ 213              		.section	.text._ZN3VFO14_getBFrequencyEv,"ax",%progbits
+ 214              		.align	1
+ 215              		.p2align 2,,3
+ 216              		.global	_ZN3VFO14_getBFrequencyEv
+ 217              		.syntax unified
+ 218              		.thumb
+ 219              		.thumb_func
+ 220              		.fpu softvfp
+ 222              	_ZN3VFO14_getBFrequencyEv:
+ 223              		.fnstart
+ 224              	.LFB122:
+  33:Src/VFO/ConfigHelpers.cpp **** 
+  34:Src/VFO/ConfigHelpers.cpp **** int32_t _getBFrequency()
+  35:Src/VFO/ConfigHelpers.cpp **** {
+ 225              		.loc 1 35 1 is_stmt 1 view -0
+ 226              		.cfi_startproc
+ 227              		@ args = 0, pretend = 0, frame = 0
+ 228              		@ frame_needed = 0, uses_anonymous_args = 0
+ 229              		@ link register save eliminated.
+  36:Src/VFO/ConfigHelpers.cpp **** 	return _mainController->getConfig()->getBFrequency();
+ 230              		.loc 1 36 2 view .LVU42
+ 231              	.LVL17:
+ARM GAS  /var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//cckzx6iu.s 			page 7
+
+
+ 232              		.loc 2 32 31 view .LVU43
+  43:Src/VFO/Configuration.h **** 	uint8_t getBrightness(void) { return _data.brightness; }
+ 233              		.loc 3 43 33 view .LVU44
+ 234              		.loc 1 36 52 is_stmt 0 view .LVU45
+ 235 0000 024B     		ldr	r3, .L15
+ 236              	.LVL18:
+ 237              		.loc 1 36 52 view .LVU46
+ 238 0002 1B68     		ldr	r3, [r3]
+ 239              	.LVL19:
+ 240              		.loc 1 36 52 view .LVU47
+ 241 0004 5B68     		ldr	r3, [r3, #4]
+ 242              	.LVL20:
+  37:Src/VFO/ConfigHelpers.cpp **** }
+ 243              		.loc 1 37 1 view .LVU48
+ 244 0006 5869     		ldr	r0, [r3, #20]
+ 245 0008 7047     		bx	lr
+ 246              	.L16:
+ 247 000a 00BF     		.align	2
+ 248              	.L15:
+ 249 000c 00000000 		.word	_mainController
+ 250              		.cfi_endproc
+ 251              	.LFE122:
+ 252              		.cantunwind
+ 253              		.fnend
+ 255              		.section	.text._ZN3VFO14_setBFrequencyEl,"ax",%progbits
+ 256              		.align	1
+ 257              		.p2align 2,,3
+ 258              		.global	_ZN3VFO14_setBFrequencyEl
+ 259              		.syntax unified
+ 260              		.thumb
+ 261              		.thumb_func
+ 262              		.fpu softvfp
+ 264              	_ZN3VFO14_setBFrequencyEl:
+ 265              		.fnstart
+ 266              	.LVL21:
+ 267              	.LFB123:
+  38:Src/VFO/ConfigHelpers.cpp **** 
+  39:Src/VFO/ConfigHelpers.cpp **** void _setBFrequency(int32_t value)
+  40:Src/VFO/ConfigHelpers.cpp **** {
+ 268              		.loc 1 40 1 is_stmt 1 view -0
+ 269              		.cfi_startproc
+ 270              		@ args = 0, pretend = 0, frame = 0
+ 271              		@ frame_needed = 0, uses_anonymous_args = 0
+ 272              		@ link register save eliminated.
+  41:Src/VFO/ConfigHelpers.cpp **** 	_mainController->getConfig()->setBFrequency(value);
+ 273              		.loc 1 41 2 view .LVU50
+  40:Src/VFO/ConfigHelpers.cpp **** 	_mainController->getConfig()->setBFrequency(value);
+ 274              		.loc 1 40 1 is_stmt 0 view .LVU51
+ 275 0000 0346     		mov	r3, r0
+ 276              		.loc 1 41 45 view .LVU52
+ 277 0002 034A     		ldr	r2, .L18
+  42:Src/VFO/ConfigHelpers.cpp **** 	_mainController->setBFrequency(value);
+ 278              		.loc 1 42 32 view .LVU53
+ 279 0004 0146     		mov	r1, r0
+  41:Src/VFO/ConfigHelpers.cpp **** 	_mainController->getConfig()->setBFrequency(value);
+ 280              		.loc 1 41 45 view .LVU54
+ 281 0006 1068     		ldr	r0, [r2]
+ARM GAS  /var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//cckzx6iu.s 			page 8
+
+
+ 282              	.LVL22:
+ 283              		.loc 2 32 31 is_stmt 1 view .LVU55
+ 284              	.LBB48:
+ 285              	.LBI48:
+  50:Src/VFO/Configuration.h **** 	void setBFrequency(uint32_t frequency) { _data.bFrequency = frequency; }
+ 286              		.loc 3 50 7 view .LVU56
+ 287              	.LBB49:
+ 288              		.loc 3 50 43 view .LVU57
+ 289              		.loc 3 50 60 is_stmt 0 view .LVU58
+ 290 0008 4268     		ldr	r2, [r0, #4]
+ 291 000a 5361     		str	r3, [r2, #20]
+ 292              	.LVL23:
+ 293              		.loc 3 50 60 view .LVU59
+ 294              	.LBE49:
+ 295              	.LBE48:
+ 296              		.loc 1 42 2 is_stmt 1 view .LVU60
+ 297              		.loc 1 42 32 is_stmt 0 view .LVU61
+ 298 000c FFF7FEBF 		b	_ZN3VFO13VFOController13setBFrequencyEm
+ 299              	.LVL24:
+ 300              	.L19:
+ 301              		.loc 1 42 32 view .LVU62
+ 302              		.align	2
+ 303              	.L18:
+ 304 0010 00000000 		.word	_mainController
+ 305              		.cfi_endproc
+ 306              	.LFE123:
+ 307              		.cantunwind
+ 308              		.fnend
+ 310              		.section	.text._ZN3VFO14_getBrightnessEv,"ax",%progbits
+ 311              		.align	1
+ 312              		.p2align 2,,3
+ 313              		.global	_ZN3VFO14_getBrightnessEv
+ 314              		.syntax unified
+ 315              		.thumb
+ 316              		.thumb_func
+ 317              		.fpu softvfp
+ 319              	_ZN3VFO14_getBrightnessEv:
+ 320              		.fnstart
+ 321              	.LFB124:
+  43:Src/VFO/ConfigHelpers.cpp **** }
+  44:Src/VFO/ConfigHelpers.cpp **** 
+  45:Src/VFO/ConfigHelpers.cpp **** int32_t _getBrightness()
+  46:Src/VFO/ConfigHelpers.cpp **** {
+ 322              		.loc 1 46 1 is_stmt 1 view -0
+ 323              		.cfi_startproc
+ 324              		@ args = 0, pretend = 0, frame = 0
+ 325              		@ frame_needed = 0, uses_anonymous_args = 0
+ 326              		@ link register save eliminated.
+  47:Src/VFO/ConfigHelpers.cpp **** 	return _mainController->getConfig()->getBrightness();
+ 327              		.loc 1 47 2 view .LVU64
+ 328              	.LVL25:
+ 329              		.loc 2 32 31 view .LVU65
+  44:Src/VFO/Configuration.h **** 	uint32_t getEncoder(void) { return _data.encoder; }
+ 330              		.loc 3 44 32 view .LVU66
+ 331              		.loc 1 47 52 is_stmt 0 view .LVU67
+ 332 0000 024B     		ldr	r3, .L21
+ 333              	.LVL26:
+ARM GAS  /var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//cckzx6iu.s 			page 9
+
+
+ 334              		.loc 1 47 52 view .LVU68
+ 335 0002 1B68     		ldr	r3, [r3]
+ 336              	.LVL27:
+ 337              		.loc 1 47 52 view .LVU69
+ 338 0004 5B68     		ldr	r3, [r3, #4]
+ 339              	.LVL28:
+  48:Src/VFO/ConfigHelpers.cpp **** }
+ 340              		.loc 1 48 1 view .LVU70
+ 341 0006 93F82000 		ldrb	r0, [r3, #32]	@ zero_extendqisi2
+ 342 000a 7047     		bx	lr
+ 343              	.L22:
+ 344              		.align	2
+ 345              	.L21:
+ 346 000c 00000000 		.word	_mainController
+ 347              		.cfi_endproc
+ 348              	.LFE124:
+ 349              		.cantunwind
+ 350              		.fnend
+ 352              		.section	.text._ZN3VFO14_setBrightnessEl,"ax",%progbits
+ 353              		.align	1
+ 354              		.p2align 2,,3
+ 355              		.global	_ZN3VFO14_setBrightnessEl
+ 356              		.syntax unified
+ 357              		.thumb
+ 358              		.thumb_func
+ 359              		.fpu softvfp
+ 361              	_ZN3VFO14_setBrightnessEl:
+ 362              		.fnstart
+ 363              	.LVL29:
+ 364              	.LFB125:
+  49:Src/VFO/ConfigHelpers.cpp **** 
+  50:Src/VFO/ConfigHelpers.cpp **** void _setBrightness(int32_t value)
+  51:Src/VFO/ConfigHelpers.cpp **** {
+ 365              		.loc 1 51 1 is_stmt 1 view -0
+ 366              		.cfi_startproc
+ 367              		@ args = 0, pretend = 0, frame = 0
+ 368              		@ frame_needed = 0, uses_anonymous_args = 0
+ 369              		@ link register save eliminated.
+  52:Src/VFO/ConfigHelpers.cpp **** 	if ( value > 255 || value < 0 )
+ 370              		.loc 1 52 2 view .LVU72
+ 371 0000 FF28     		cmp	r0, #255
+ 372 0002 00D9     		bls	.L25
+  53:Src/VFO/ConfigHelpers.cpp **** 	{
+  54:Src/VFO/ConfigHelpers.cpp **** 		return;
+  55:Src/VFO/ConfigHelpers.cpp **** 	}
+  56:Src/VFO/ConfigHelpers.cpp **** 	_mainController->getConfig()->setBrightness(value);
+  57:Src/VFO/ConfigHelpers.cpp **** 	_mainController->setBrightness(value);
+  58:Src/VFO/ConfigHelpers.cpp **** }
+ 373              		.loc 1 58 1 is_stmt 0 view .LVU73
+ 374 0004 7047     		bx	lr
+ 375              	.L25:
+  56:Src/VFO/ConfigHelpers.cpp **** 	_mainController->setBrightness(value);
+ 376              		.loc 1 56 2 is_stmt 1 view .LVU74
+  56:Src/VFO/ConfigHelpers.cpp **** 	_mainController->setBrightness(value);
+ 377              		.loc 1 56 45 is_stmt 0 view .LVU75
+ 378 0006 044A     		ldr	r2, .L26
+ 379 0008 C3B2     		uxtb	r3, r0
+ARM GAS  /var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//cckzx6iu.s 			page 10
+
+
+ 380 000a 1068     		ldr	r0, [r2]
+ 381              	.LVL30:
+  57:Src/VFO/ConfigHelpers.cpp **** }
+ 382              		.loc 1 57 32 view .LVU76
+ 383 000c 1946     		mov	r1, r3
+  56:Src/VFO/ConfigHelpers.cpp **** 	_mainController->setBrightness(value);
+ 384              		.loc 1 56 45 view .LVU77
+ 385 000e 4268     		ldr	r2, [r0, #4]
+ 386              	.LVL31:
+ 387              		.loc 2 32 31 is_stmt 1 view .LVU78
+ 388              	.LBB50:
+ 389              	.LBI50:
+  51:Src/VFO/Configuration.h **** 	void setBrightness(uint8_t value) { _data.brightness = value; }
+ 390              		.loc 3 51 7 view .LVU79
+ 391              	.LBB51:
+ 392              		.loc 3 51 38 view .LVU80
+ 393              		.loc 3 51 55 is_stmt 0 view .LVU81
+ 394 0010 82F82030 		strb	r3, [r2, #32]
+ 395              	.LVL32:
+ 396              		.loc 3 51 55 view .LVU82
+ 397              	.LBE51:
+ 398              	.LBE50:
+  57:Src/VFO/ConfigHelpers.cpp **** }
+ 399              		.loc 1 57 2 is_stmt 1 view .LVU83
+  57:Src/VFO/ConfigHelpers.cpp **** }
+ 400              		.loc 1 57 32 is_stmt 0 view .LVU84
+ 401 0014 FFF7FEBF 		b	_ZN3VFO13VFOController13setBrightnessEh
+ 402              	.LVL33:
+ 403              	.L27:
+  57:Src/VFO/ConfigHelpers.cpp **** }
+ 404              		.loc 1 57 32 view .LVU85
+ 405              		.align	2
+ 406              	.L26:
+ 407 0018 00000000 		.word	_mainController
+ 408              		.cfi_endproc
+ 409              	.LFE125:
+ 410              		.cantunwind
+ 411              		.fnend
+ 413              		.section	.text._ZN3VFO11_getEncoderEv,"ax",%progbits
+ 414              		.align	1
+ 415              		.p2align 2,,3
+ 416              		.global	_ZN3VFO11_getEncoderEv
+ 417              		.syntax unified
+ 418              		.thumb
+ 419              		.thumb_func
+ 420              		.fpu softvfp
+ 422              	_ZN3VFO11_getEncoderEv:
+ 423              		.fnstart
+ 424              	.LFB126:
+  59:Src/VFO/ConfigHelpers.cpp **** 
+  60:Src/VFO/ConfigHelpers.cpp **** int32_t _getEncoder()
+  61:Src/VFO/ConfigHelpers.cpp **** {
+ 425              		.loc 1 61 1 is_stmt 1 view -0
+ 426              		.cfi_startproc
+ 427              		@ args = 0, pretend = 0, frame = 0
+ 428              		@ frame_needed = 0, uses_anonymous_args = 0
+ 429              		@ link register save eliminated.
+ARM GAS  /var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//cckzx6iu.s 			page 11
+
+
+  62:Src/VFO/ConfigHelpers.cpp **** 	return _mainController->getConfig()->getEncoder();
+ 430              		.loc 1 62 2 view .LVU87
+ 431              	.LVL34:
+ 432              		.loc 2 32 31 view .LVU88
+  45:Src/VFO/Configuration.h **** 
+ 433              		.loc 3 45 30 view .LVU89
+ 434              		.loc 1 62 49 is_stmt 0 view .LVU90
+ 435 0000 024B     		ldr	r3, .L29
+ 436              	.LVL35:
+ 437              		.loc 1 62 49 view .LVU91
+ 438 0002 1B68     		ldr	r3, [r3]
+ 439              	.LVL36:
+ 440              		.loc 1 62 49 view .LVU92
+ 441 0004 5B68     		ldr	r3, [r3, #4]
+ 442              	.LVL37:
+  63:Src/VFO/ConfigHelpers.cpp **** }
+ 443              		.loc 1 63 1 view .LVU93
+ 444 0006 9869     		ldr	r0, [r3, #24]
+ 445 0008 7047     		bx	lr
+ 446              	.L30:
+ 447 000a 00BF     		.align	2
+ 448              	.L29:
+ 449 000c 00000000 		.word	_mainController
+ 450              		.cfi_endproc
+ 451              	.LFE126:
+ 452              		.cantunwind
+ 453              		.fnend
+ 455              		.section	.text._ZN3VFO11_setEncoderEl,"ax",%progbits
+ 456              		.align	1
+ 457              		.p2align 2,,3
+ 458              		.global	_ZN3VFO11_setEncoderEl
+ 459              		.syntax unified
+ 460              		.thumb
+ 461              		.thumb_func
+ 462              		.fpu softvfp
+ 464              	_ZN3VFO11_setEncoderEl:
+ 465              		.fnstart
+ 466              	.LVL38:
+ 467              	.LFB127:
+  64:Src/VFO/ConfigHelpers.cpp **** 
+  65:Src/VFO/ConfigHelpers.cpp **** void _setEncoder(int32_t value)
+  66:Src/VFO/ConfigHelpers.cpp **** {
+ 468              		.loc 1 66 1 is_stmt 1 view -0
+ 469              		.cfi_startproc
+ 470              		@ args = 0, pretend = 0, frame = 0
+ 471              		@ frame_needed = 0, uses_anonymous_args = 0
+ 472              		@ link register save eliminated.
+  67:Src/VFO/ConfigHelpers.cpp **** 	if ( value < 0 )
+ 473              		.loc 1 67 2 view .LVU95
+ 474 0000 0028     		cmp	r0, #0
+ 475              		.loc 1 67 2 is_stmt 0 view .LVU96
+ 476 0002 03DB     		blt	.L31
+  68:Src/VFO/ConfigHelpers.cpp **** 	{
+  69:Src/VFO/ConfigHelpers.cpp **** 		return;
+  70:Src/VFO/ConfigHelpers.cpp **** 	}
+  71:Src/VFO/ConfigHelpers.cpp **** 	_mainController->getConfig()->setEncoder(value);
+ 477              		.loc 1 71 2 is_stmt 1 view .LVU97
+ARM GAS  /var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//cckzx6iu.s 			page 12
+
+
+ 478              	.LVL39:
+ 479              		.loc 2 32 31 view .LVU98
+ 480              	.LBB52:
+ 481              	.LBI52:
+  52:Src/VFO/Configuration.h **** 	void setEncoder(uint32_t value) { _data.encoder = value; }
+ 482              		.loc 3 52 7 view .LVU99
+ 483              	.LBB53:
+ 484              		.loc 3 52 36 view .LVU100
+ 485              	.LBE53:
+ 486              	.LBE52:
+ 487              		.loc 1 71 42 is_stmt 0 view .LVU101
+ 488 0004 024B     		ldr	r3, .L33
+ 489              	.LVL40:
+ 490              		.loc 1 71 42 view .LVU102
+ 491 0006 1B68     		ldr	r3, [r3]
+ 492              	.LVL41:
+ 493              	.LBB55:
+ 494              	.LBB54:
+ 495              		.loc 3 52 50 view .LVU103
+ 496 0008 5B68     		ldr	r3, [r3, #4]
+ 497              	.LVL42:
+ 498              		.loc 3 52 50 view .LVU104
+ 499 000a 9861     		str	r0, [r3, #24]
+ 500              	.LVL43:
+ 501              	.L31:
+ 502              		.loc 3 52 50 view .LVU105
+ 503              	.LBE54:
+ 504              	.LBE55:
+  72:Src/VFO/ConfigHelpers.cpp **** }
+ 505              		.loc 1 72 1 view .LVU106
+ 506 000c 7047     		bx	lr
+ 507              	.L34:
+ 508 000e 00BF     		.align	2
+ 509              	.L33:
+ 510 0010 00000000 		.word	_mainController
+ 511              		.cfi_endproc
+ 512              	.LFE127:
+ 513              		.cantunwind
+ 514              		.fnend
+ 516              		.section	.text._ZN3VFO12_resetConfigEv,"ax",%progbits
+ 517              		.align	1
+ 518              		.p2align 2,,3
+ 519              		.global	_ZN3VFO12_resetConfigEv
+ 520              		.syntax unified
+ 521              		.thumb
+ 522              		.thumb_func
+ 523              		.fpu softvfp
+ 525              	_ZN3VFO12_resetConfigEv:
+ 526              		.fnstart
+ 527              	.LFB128:
+  73:Src/VFO/ConfigHelpers.cpp **** 
+  74:Src/VFO/ConfigHelpers.cpp **** void _resetConfig(void)
+  75:Src/VFO/ConfigHelpers.cpp **** {
+ 528              		.loc 1 75 1 is_stmt 1 view -0
+ 529              		.cfi_startproc
+ 530              		@ args = 0, pretend = 0, frame = 0
+ 531              		@ frame_needed = 0, uses_anonymous_args = 0
+ARM GAS  /var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//cckzx6iu.s 			page 13
+
+
+ 532              		@ link register save eliminated.
+  76:Src/VFO/ConfigHelpers.cpp **** 	_mainController->reset();
+ 533              		.loc 1 76 2 view .LVU108
+ 534              		.loc 1 76 24 is_stmt 0 view .LVU109
+ 535 0000 014B     		ldr	r3, .L36
+ 536 0002 1868     		ldr	r0, [r3]
+ 537 0004 FFF7FEBF 		b	_ZN3VFO13VFOController5resetEv
+ 538              	.LVL44:
+ 539              	.L37:
+ 540              		.align	2
+ 541              	.L36:
+ 542 0008 00000000 		.word	_mainController
+ 543              		.cfi_endproc
+ 544              	.LFE128:
+ 545              		.cantunwind
+ 546              		.fnend
+ 548              		.text
+ 549              	.Letext0:
+ 550              		.file 4 "/usr/local/gcc-arm-none-eabi-8-2019-q3-update/arm-none-eabi/include/machine/_default_type
+ 551              		.file 5 "/usr/local/gcc-arm-none-eabi-8-2019-q3-update/arm-none-eabi/include/sys/_stdint.h"
+ 552              		.file 6 "Drivers/CMSIS/Include/core_cm3.h"
+ 553              		.file 7 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h"
+ 554              		.file 8 "/usr/local/gcc-arm-none-eabi-8-2019-q3-update/lib/gcc/arm-none-eabi/8.3.1/include/stddef.
+ 555              		.file 9 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h"
+ 556              		.file 10 "/usr/local/gcc-arm-none-eabi-8-2019-q3-update/arm-none-eabi/include/sys/_types.h"
+ 557              		.file 11 "/usr/local/gcc-arm-none-eabi-8-2019-q3-update/arm-none-eabi/include/sys/reent.h"
+ 558              		.file 12 "/usr/local/gcc-arm-none-eabi-8-2019-q3-update/arm-none-eabi/include/sys/lock.h"
+ 559              		.file 13 "Inc/st7735/font5x7.h"
+ 560              		.file 14 "Inc/st7735/font7x11.h"
+ 561              		.file 15 "Inc/st7735/st7735.h"
+ 562              		.file 16 "/usr/local/gcc-arm-none-eabi-8-2019-q3-update/arm-none-eabi/include/c++/8.3.1/cstdlib"
+ 563              		.file 17 "/usr/local/gcc-arm-none-eabi-8-2019-q3-update/arm-none-eabi/include/c++/8.3.1/bits/std_a
+ 564              		.file 18 "/usr/local/gcc-arm-none-eabi-8-2019-q3-update/arm-none-eabi/include/c++/8.3.1/arm-none-e
+ 565              		.file 19 "/usr/local/gcc-arm-none-eabi-8-2019-q3-update/arm-none-eabi/include/stdlib.h"
+ 566              		.file 20 "/usr/local/gcc-arm-none-eabi-8-2019-q3-update/arm-none-eabi/include/c++/8.3.1/stdlib.h"
+ 567              		.file 21 "Src/VFO/ConfigHelpers.h"
+ 568              		.file 22 "<built-in>"
+ 569              		.file 23 "Src/VFO/GUIView.h"
+ARM GAS  /var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//cckzx6iu.s 			page 14
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 ConfigHelpers.cpp
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//cckzx6iu.s:16     .text._ZN3VFO15_getCalibrationEv:0000000000000000 $t
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//cckzx6iu.s:25     .text._ZN3VFO15_getCalibrationEv:0000000000000000 _ZN3VFO15_getCalibrationEv
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//cckzx6iu.s:55     .text._ZN3VFO15_getCalibrationEv:000000000000000c $d
+.ARM.exidx.text._ZN3VFO15_getCalibrationEv:0000000000000000 $d
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//cckzx6iu.s:62     .text._ZN3VFO15_setCalibrationEl:0000000000000000 $t
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//cckzx6iu.s:70     .text._ZN3VFO15_setCalibrationEl:0000000000000000 _ZN3VFO15_setCalibrationEl
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//cckzx6iu.s:110    .text._ZN3VFO15_setCalibrationEl:0000000000000010 $d
+.ARM.exidx.text._ZN3VFO15_setCalibrationEl:0000000000000000 $d
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//cckzx6iu.s:117    .text._ZN3VFO14_getIFrequencyEv:0000000000000000 $t
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//cckzx6iu.s:125    .text._ZN3VFO14_getIFrequencyEv:0000000000000000 _ZN3VFO14_getIFrequencyEv
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//cckzx6iu.s:152    .text._ZN3VFO14_getIFrequencyEv:000000000000000c $d
+.ARM.exidx.text._ZN3VFO14_getIFrequencyEv:0000000000000000 $d
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//cckzx6iu.s:159    .text._ZN3VFO14_setIFrequencyEl:0000000000000000 $t
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//cckzx6iu.s:167    .text._ZN3VFO14_setIFrequencyEl:0000000000000000 _ZN3VFO14_setIFrequencyEl
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//cckzx6iu.s:207    .text._ZN3VFO14_setIFrequencyEl:000000000000000c $d
+.ARM.exidx.text._ZN3VFO14_setIFrequencyEl:0000000000000000 $d
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//cckzx6iu.s:214    .text._ZN3VFO14_getBFrequencyEv:0000000000000000 $t
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//cckzx6iu.s:222    .text._ZN3VFO14_getBFrequencyEv:0000000000000000 _ZN3VFO14_getBFrequencyEv
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//cckzx6iu.s:249    .text._ZN3VFO14_getBFrequencyEv:000000000000000c $d
+.ARM.exidx.text._ZN3VFO14_getBFrequencyEv:0000000000000000 $d
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//cckzx6iu.s:256    .text._ZN3VFO14_setBFrequencyEl:0000000000000000 $t
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//cckzx6iu.s:264    .text._ZN3VFO14_setBFrequencyEl:0000000000000000 _ZN3VFO14_setBFrequencyEl
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//cckzx6iu.s:304    .text._ZN3VFO14_setBFrequencyEl:0000000000000010 $d
+.ARM.exidx.text._ZN3VFO14_setBFrequencyEl:0000000000000000 $d
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//cckzx6iu.s:311    .text._ZN3VFO14_getBrightnessEv:0000000000000000 $t
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//cckzx6iu.s:319    .text._ZN3VFO14_getBrightnessEv:0000000000000000 _ZN3VFO14_getBrightnessEv
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//cckzx6iu.s:346    .text._ZN3VFO14_getBrightnessEv:000000000000000c $d
+.ARM.exidx.text._ZN3VFO14_getBrightnessEv:0000000000000000 $d
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//cckzx6iu.s:353    .text._ZN3VFO14_setBrightnessEl:0000000000000000 $t
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//cckzx6iu.s:361    .text._ZN3VFO14_setBrightnessEl:0000000000000000 _ZN3VFO14_setBrightnessEl
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//cckzx6iu.s:407    .text._ZN3VFO14_setBrightnessEl:0000000000000018 $d
+.ARM.exidx.text._ZN3VFO14_setBrightnessEl:0000000000000000 $d
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//cckzx6iu.s:414    .text._ZN3VFO11_getEncoderEv:0000000000000000 $t
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//cckzx6iu.s:422    .text._ZN3VFO11_getEncoderEv:0000000000000000 _ZN3VFO11_getEncoderEv
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//cckzx6iu.s:449    .text._ZN3VFO11_getEncoderEv:000000000000000c $d
+.ARM.exidx.text._ZN3VFO11_getEncoderEv:0000000000000000 $d
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//cckzx6iu.s:456    .text._ZN3VFO11_setEncoderEl:0000000000000000 $t
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//cckzx6iu.s:464    .text._ZN3VFO11_setEncoderEl:0000000000000000 _ZN3VFO11_setEncoderEl
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//cckzx6iu.s:510    .text._ZN3VFO11_setEncoderEl:0000000000000010 $d
+.ARM.exidx.text._ZN3VFO11_setEncoderEl:0000000000000000 $d
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//cckzx6iu.s:517    .text._ZN3VFO12_resetConfigEv:0000000000000000 $t
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//cckzx6iu.s:525    .text._ZN3VFO12_resetConfigEv:0000000000000000 _ZN3VFO12_resetConfigEv
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//cckzx6iu.s:542    .text._ZN3VFO12_resetConfigEv:0000000000000008 $d
+.ARM.exidx.text._ZN3VFO12_resetConfigEv:0000000000000000 $d
+
+UNDEFINED SYMBOLS
+_mainController
+_ZN3VFO13VFOController14setCalibrationEl
+_ZN3VFO13VFOController13setBFrequencyEm
+_ZN3VFO13VFOController13setBrightnessEh
+_ZN3VFO13VFOController5resetEv

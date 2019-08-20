@@ -1,0 +1,222 @@
+ARM GAS  /var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccUb21Vg.s 			page 1
+
+
+   1              		.cpu cortex-m3
+   2              		.eabi_attribute 20, 1
+   3              		.eabi_attribute 21, 1
+   4              		.eabi_attribute 23, 3
+   5              		.eabi_attribute 24, 1
+   6              		.eabi_attribute 25, 1
+   7              		.eabi_attribute 26, 1
+   8              		.eabi_attribute 30, 2
+   9              		.eabi_attribute 34, 1
+  10              		.eabi_attribute 18, 4
+  11              		.file	"GUIView.cpp"
+  12              		.text
+  13              	.Ltext0:
+  14              		.cfi_sections	.debug_frame
+  15              		.section	.text._ZN3VFO7GUIViewC2Ev,"ax",%progbits
+  16              		.align	1
+  17              		.p2align 2,,3
+  18              		.global	_ZN3VFO7GUIViewC2Ev
+  19              		.arch armv7-m
+  20              		.syntax unified
+  21              		.thumb
+  22              		.thumb_func
+  23              		.fpu softvfp
+  25              	_ZN3VFO7GUIViewC2Ev:
+  26              		.fnstart
+  27              	.LVL0:
+  28              	.LFB66:
+  29              		.file 1 "Src/VFO/GUIView.cpp"
+   1:Src/VFO/GUIView.cpp **** /*
+   2:Src/VFO/GUIView.cpp ****  * GUIView.cpp
+   3:Src/VFO/GUIView.cpp ****  *
+   4:Src/VFO/GUIView.cpp ****  *  Created on: Apr 6, 2018
+   5:Src/VFO/GUIView.cpp ****  *      Author: lymes
+   6:Src/VFO/GUIView.cpp ****  */
+   7:Src/VFO/GUIView.cpp **** 
+   8:Src/VFO/GUIView.cpp **** #include "GUIView.h"
+   9:Src/VFO/GUIView.cpp **** 
+  10:Src/VFO/GUIView.cpp **** namespace VFO
+  11:Src/VFO/GUIView.cpp **** {
+  12:Src/VFO/GUIView.cpp **** 
+  13:Src/VFO/GUIView.cpp **** GUIView::GUIView()
+  30              		.loc 1 13 1 view -0
+  31              		.cfi_startproc
+  32              		@ args = 0, pretend = 0, frame = 0
+  33              		@ frame_needed = 0, uses_anonymous_args = 0
+  34              		@ link register save eliminated.
+  35              	.LBB5:
+  36              		.loc 1 13 18 is_stmt 0 view .LVU1
+  37 0000 014B     		ldr	r3, .L3
+  38 0002 0360     		str	r3, [r0]
+  39              	.LBE5:
+  14:Src/VFO/GUIView.cpp **** {
+  15:Src/VFO/GUIView.cpp **** }
+  40              		.loc 1 15 1 view .LVU2
+  41 0004 7047     		bx	lr
+  42              	.L4:
+  43 0006 00BF     		.align	2
+ARM GAS  /var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccUb21Vg.s 			page 2
+
+
+  44              	.L3:
+  45 0008 08000000 		.word	.LANCHOR0+8
+  46              		.cfi_endproc
+  47              	.LFE66:
+  48              		.cantunwind
+  49              		.fnend
+  51              		.global	_ZN3VFO7GUIViewC1Ev
+  52              		.thumb_set _ZN3VFO7GUIViewC1Ev,_ZN3VFO7GUIViewC2Ev
+  53              		.section	.text._ZN3VFO7GUIViewD2Ev,"ax",%progbits
+  54              		.align	1
+  55              		.p2align 2,,3
+  56              		.global	_ZN3VFO7GUIViewD2Ev
+  57              		.syntax unified
+  58              		.thumb
+  59              		.thumb_func
+  60              		.fpu softvfp
+  62              	_ZN3VFO7GUIViewD2Ev:
+  63              		.fnstart
+  64              	.LVL1:
+  65              	.LFB69:
+  16:Src/VFO/GUIView.cpp **** 
+  17:Src/VFO/GUIView.cpp **** GUIView::~GUIView()
+  66              		.loc 1 17 1 is_stmt 1 view -0
+  67              		.cfi_startproc
+  68              		@ args = 0, pretend = 0, frame = 0
+  69              		@ frame_needed = 0, uses_anonymous_args = 0
+  70              		@ link register save eliminated.
+  18:Src/VFO/GUIView.cpp **** {
+  19:Src/VFO/GUIView.cpp **** }
+  71              		.loc 1 19 1 is_stmt 0 view .LVU4
+  72 0000 7047     		bx	lr
+  73              		.cfi_endproc
+  74              	.LFE69:
+  75              		.cantunwind
+  76              		.fnend
+  78              		.global	_ZN3VFO7GUIViewD1Ev
+  79              		.thumb_set _ZN3VFO7GUIViewD1Ev,_ZN3VFO7GUIViewD2Ev
+  80 0002 00BF     		.section	.text._ZN3VFO7GUIViewD0Ev,"ax",%progbits
+  81              		.align	1
+  82              		.p2align 2,,3
+  83              		.global	_ZN3VFO7GUIViewD0Ev
+  84              		.syntax unified
+  85              		.thumb
+  86              		.thumb_func
+  87              		.fpu softvfp
+  89              	_ZN3VFO7GUIViewD0Ev:
+  90              		.fnstart
+  91              	.LVL2:
+  92              	.LFB71:
+  17:Src/VFO/GUIView.cpp **** {
+  93              		.loc 1 17 1 is_stmt 1 view -0
+  94              		.cfi_startproc
+  95              		@ args = 0, pretend = 0, frame = 0
+  96              		@ frame_needed = 0, uses_anonymous_args = 0
+  17:Src/VFO/GUIView.cpp **** {
+  97              		.loc 1 17 1 is_stmt 0 view .LVU6
+  98 0000 10B5     		push	{r4, lr}
+ARM GAS  /var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccUb21Vg.s 			page 3
+
+
+  99              	.LCFI0:
+ 100              		.cfi_def_cfa_offset 8
+ 101              		.cfi_offset 4, -8
+ 102              		.cfi_offset 14, -4
+  17:Src/VFO/GUIView.cpp **** {
+ 103              		.loc 1 17 1 view .LVU7
+ 104 0002 0446     		mov	r4, r0
+ 105              	.LVL3:
+ 106              	.LBB6:
+ 107              	.LBI6:
+  17:Src/VFO/GUIView.cpp **** {
+ 108              		.loc 1 17 1 is_stmt 1 view .LVU8
+  17:Src/VFO/GUIView.cpp **** {
+ 109              		.loc 1 17 1 is_stmt 0 view .LVU9
+ 110              	.LBE6:
+ 111              		.loc 1 19 1 view .LVU10
+ 112 0004 0421     		movs	r1, #4
+ 113 0006 FFF7FEFF 		bl	_ZdlPvj
+ 114              	.LVL4:
+ 115              		.loc 1 19 1 view .LVU11
+ 116 000a 2046     		mov	r0, r4
+ 117 000c 10BD     		pop	{r4, pc}
+ 118              		.loc 1 19 1 view .LVU12
+ 119              		.cfi_endproc
+ 120              	.LFE71:
+ 121              		.cantunwind
+ 122              		.fnend
+ 124              		.global	_ZTSN3VFO7GUIViewE
+ 125              		.global	_ZTIN3VFO7GUIViewE
+ 126              		.global	_ZTVN3VFO7GUIViewE
+ 127 000e 00BF     		.section	.rodata._ZTIN3VFO7GUIViewE,"a"
+ 128              		.align	2
+ 131              	_ZTIN3VFO7GUIViewE:
+ 132 0000 08000000 		.word	_ZTVN10__cxxabiv117__class_type_infoE+8
+ 133 0004 00000000 		.word	_ZTSN3VFO7GUIViewE
+ 134              		.section	.rodata._ZTSN3VFO7GUIViewE,"a"
+ 135              		.align	2
+ 138              	_ZTSN3VFO7GUIViewE:
+ 139 0000 4E335646 		.ascii	"N3VFO7GUIViewE\000"
+ 139      4F374755 
+ 139      49566965 
+ 139      774500
+ 140              		.section	.rodata._ZTVN3VFO7GUIViewE,"a"
+ 141              		.align	2
+ 142              		.set	.LANCHOR0,. + 0
+ 145              	_ZTVN3VFO7GUIViewE:
+ 146 0000 00000000 		.word	0
+ 147 0004 00000000 		.word	_ZTIN3VFO7GUIViewE
+ 148 0008 00000000 		.word	0
+ 149 000c 00000000 		.word	0
+ 150 0010 00000000 		.word	__cxa_pure_virtual
+ 151 0014 00000000 		.word	__cxa_pure_virtual
+ 152 0018 00000000 		.word	__cxa_pure_virtual
+ 153              		.text
+ 154              	.Letext0:
+ 155              		.file 2 "/usr/local/gcc-arm-none-eabi-8-2019-q3-update/arm-none-eabi/include/machine/_default_type
+ 156              		.file 3 "/usr/local/gcc-arm-none-eabi-8-2019-q3-update/arm-none-eabi/include/sys/_stdint.h"
+ARM GAS  /var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccUb21Vg.s 			page 4
+
+
+ 157              		.file 4 "Drivers/CMSIS/Include/core_cm3.h"
+ 158              		.file 5 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h"
+ 159              		.file 6 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h"
+ 160              		.file 7 "/usr/local/gcc-arm-none-eabi-8-2019-q3-update/lib/gcc/arm-none-eabi/8.3.1/include/stddef.
+ 161              		.file 8 "/usr/local/gcc-arm-none-eabi-8-2019-q3-update/arm-none-eabi/include/sys/_types.h"
+ 162              		.file 9 "/usr/local/gcc-arm-none-eabi-8-2019-q3-update/arm-none-eabi/include/sys/reent.h"
+ 163              		.file 10 "/usr/local/gcc-arm-none-eabi-8-2019-q3-update/arm-none-eabi/include/sys/lock.h"
+ 164              		.file 11 "Inc/st7735/font5x7.h"
+ 165              		.file 12 "Inc/st7735/font7x11.h"
+ 166              		.file 13 "Inc/st7735/st7735.h"
+ 167              		.file 14 "Src/VFO/GUIView.h"
+ARM GAS  /var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccUb21Vg.s 			page 5
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 GUIView.cpp
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccUb21Vg.s:16     .text._ZN3VFO7GUIViewC2Ev:0000000000000000 $t
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccUb21Vg.s:25     .text._ZN3VFO7GUIViewC2Ev:0000000000000000 _ZN3VFO7GUIViewC2Ev
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccUb21Vg.s:45     .text._ZN3VFO7GUIViewC2Ev:0000000000000008 $d
+.ARM.exidx.text._ZN3VFO7GUIViewC2Ev:0000000000000000 $d
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccUb21Vg.s:25     .text._ZN3VFO7GUIViewC2Ev:0000000000000000 _ZN3VFO7GUIViewC1Ev
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccUb21Vg.s:54     .text._ZN3VFO7GUIViewD2Ev:0000000000000000 $t
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccUb21Vg.s:62     .text._ZN3VFO7GUIViewD2Ev:0000000000000000 _ZN3VFO7GUIViewD2Ev
+.ARM.exidx.text._ZN3VFO7GUIViewD2Ev:0000000000000000 $d
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccUb21Vg.s:62     .text._ZN3VFO7GUIViewD2Ev:0000000000000000 _ZN3VFO7GUIViewD1Ev
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccUb21Vg.s:81     .text._ZN3VFO7GUIViewD0Ev:0000000000000000 $t
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccUb21Vg.s:89     .text._ZN3VFO7GUIViewD0Ev:0000000000000000 _ZN3VFO7GUIViewD0Ev
+.ARM.exidx.text._ZN3VFO7GUIViewD0Ev:0000000000000000 $d
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccUb21Vg.s:138    .rodata._ZTSN3VFO7GUIViewE:0000000000000000 _ZTSN3VFO7GUIViewE
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccUb21Vg.s:131    .rodata._ZTIN3VFO7GUIViewE:0000000000000000 _ZTIN3VFO7GUIViewE
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccUb21Vg.s:145    .rodata._ZTVN3VFO7GUIViewE:0000000000000000 _ZTVN3VFO7GUIViewE
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccUb21Vg.s:128    .rodata._ZTIN3VFO7GUIViewE:0000000000000000 $d
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccUb21Vg.s:135    .rodata._ZTSN3VFO7GUIViewE:0000000000000000 $d
+/var/folders/20/cstyxln53wn53rr40gj353bh0000gn/T//ccUb21Vg.s:141    .rodata._ZTVN3VFO7GUIViewE:0000000000000000 $d
+
+UNDEFINED SYMBOLS
+_ZdlPvj
+_ZTVN10__cxxabiv117__class_type_infoE
+__cxa_pure_virtual
