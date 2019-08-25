@@ -15,8 +15,18 @@
 namespace VFO
 {
 
+static VFOController *_sharedInstance;
 static uint32_t _timepassed = HAL_GetTick(); // int to hold the STM32 miilis since startup
 static int _memStatus = 1;					 // value to notify if memory is current or old. 0=old,
+
+VFOController *VFOController::shared()
+{
+	if (!_sharedInstance)
+	{
+		_sharedInstance = new VFOController;
+	}
+	return _sharedInstance;
+}
 
 VFOController::VFOController()
 {

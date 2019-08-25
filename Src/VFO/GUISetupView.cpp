@@ -175,8 +175,8 @@ void GUISetupView::menuKeyPressed()
 		}
 		else
 		{
-			_mainController->storeConfiguration();
-			_mainController->showMain();
+			VFOC->storeConfiguration();
+			VFOC->showMain();
 			return;
 		}
 	}

@@ -10,10 +10,8 @@
 
 #include "VFOController.h"
 
-
-extern VFO::VFOController *_mainController;
-
-namespace VFO {
+namespace VFO
+{
 
 int32_t _getCalibration();
 void _setCalibration(int32_t value);
@@ -35,6 +33,6 @@ void _setCalibrationUin(int32_t value);
 
 void _resetConfig(void);
 
-}
+} // namespace VFO
 
 #endif /* VFO_CONFIGHELPERS_H_ */

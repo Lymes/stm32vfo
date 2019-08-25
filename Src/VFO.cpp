@@ -12,7 +12,6 @@
 
 #define delay_us(microseconds) DWT_Delay_us(microseconds)
 
-VFO::VFOController *_mainController;
 volatile uint32_t _ticks = 0;
 
 void _vfoSetup(void);
@@ -52,11 +51,11 @@ void KBDCallBack(int key, int action)
 	switch (action)
 	{
 	case KEY:
-		_mainController->menuKeyPressed();
-		//_mainController->initSI();
+		VFOC->menuKeyPressed();
+		//VFOC->initSI();
 		break;
 	case LONGKEY:
-		_mainController->menuKeyPressed();
+		VFOC->menuKeyPressed();
 		break;
 	case DOUBLECLICK:
 		break;
@@ -66,26 +65,26 @@ void KBDCallBack(int key, int action)
 // Initial Setup
 void _vfoSetup(void)
 {
+	// start TIM4 interrupts
 	HAL_TIM_Encoder_Start_IT(&htim4, TIM_CHANNEL_1);
 	__HAL_TIM_SET_COUNTER(&htim4, ENC_VALUE);
 
+	// start TIM3 interrupts & PWM
 	HAL_TIM_Base_Start_IT(&htim3);
 	HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_1);
 
+	// init keys
 	KBD_addKey(GPIOB, 5, LO, KBDCallBack);
 
+	// start ADC
 	LL_ADC_REG_StartConversionSWStart(ADC1);
-
-	_mainController = new VFO::VFOController;
 
 	if (HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_5) == 0)
 	{
-		_mainController->reset();
+		VFOC->reset();
 	}
-	_mainController->begin();
+	VFOC->begin();
 }
-
-extern uint16_t ADCbuff[2];
 
 // Loop Iteration
 void _vfoLoopIteration(void)
@@ -94,16 +93,12 @@ void _vfoLoopIteration(void)
 	if (encCounter != ENC_VALUE)
 	{
 		__HAL_TIM_SET_COUNTER(&htim4, ENC_VALUE);
-		_mainController->pushEncoderIncrement(encCounter - ENC_VALUE, _ticks);
+		VFOC->pushEncoderIncrement(encCounter - ENC_VALUE, _ticks);
 	}
 	_ticks = 0;
 
-	// 4084, 2543 
-
-	uint32_t voltage = readVoltage(ADC1);
-	_mainController->showVoltage(voltage);
-
-	_mainController->checkMemoryState();
+	VFOC->showVoltage(readVoltage(ADC1));
+	VFOC->checkMemoryState();
 	delay_us(10000);
 }
 

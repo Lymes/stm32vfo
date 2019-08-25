@@ -18,7 +18,7 @@ int32_t _getCalibration()
 void _setCalibration(int32_t value)
 {
 	Config->setCalibration(value);
-	_mainController->setCalibration(value);
+	VFOC->setCalibration(value);
 }
 
 int32_t _getCalibrationUin()
@@ -53,7 +53,7 @@ int32_t _getBFrequency()
 void _setBFrequency(int32_t value)
 {
 	Config->setBFrequency(value);
-	_mainController->setBFrequency(value);
+	VFOC->setBFrequency(value);
 }
 
 int32_t _getBrightness()
@@ -68,7 +68,7 @@ void _setBrightness(int32_t value)
 		return;
 	}
 	Config->setBrightness(value);
-	_mainController->setBrightness(value);
+	VFOC->setBrightness(value);
 }
 
 int32_t _getEncoder()
@@ -87,8 +87,8 @@ void _setEncoder(int32_t value)
 
 void _resetConfig(void)
 {
-	_mainController->reset();
-	//_mainController->triggerMemoryWrite();
+	VFOC->reset();
+	//VFOC->triggerMemoryWrite();
 }
 
 } // namespace VFO

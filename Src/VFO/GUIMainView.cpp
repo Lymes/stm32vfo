@@ -10,8 +10,6 @@
 
 #include "GUI/Utils.h"
 
-extern VFO::VFOController *_mainController;
-
 #define ENCODER_THRESHOLD 4
 #define DIVIDER_FACTOR 11
 
@@ -66,7 +64,7 @@ GUIMainView::~GUIMainView()
 
 void GUIMainView::menuKeyPressed()
 {
-	_mainController->showSetup();
+	VFOC->showSetup();
 }
 
 void GUIMainView::draw()
@@ -113,8 +111,8 @@ void GUIMainView::pushEncoderIncrement(int16_t increment, uint16_t period)
 		factor = 10;
 	}
 	freq += increment * factor / ENCODER_THRESHOLD;
-	_mainController->setFrequency(freq);
-	_mainController->triggerMemoryWrite();
+	VFOC->setFrequency(freq);
+	VFOC->triggerMemoryWrite();
 
 	_freqString->draw(freq);
 

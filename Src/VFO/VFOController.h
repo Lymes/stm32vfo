@@ -13,17 +13,20 @@
 #include "si5351/si5351.h"
 #include "Configuration.h"
 
+#define VFOC VFO::VFOController::shared()
 
 namespace VFO
 {
 
 class VFOController
 {
-	GUIController* _gui;
-	Si5351* _si5351;
+	GUIController *_gui;
+	Si5351 *_si5351;
 	bool _si5351_enabled = true;
 
 public:
+	static VFOController *shared();
+
 	VFOController();
 	virtual ~VFOController();
 	void begin();
@@ -51,10 +54,6 @@ public:
 	void loadConfiguration();
 };
 
-
 } /* namespace VFO */
-
-
-
 
 #endif /* VFO_VFOCONTROLLER_H_ */
