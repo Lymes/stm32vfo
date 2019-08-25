@@ -8,6 +8,9 @@
 #include "VFOController.h"
 #include <stdio.h>
 #include "stm32f103xb.h"
+#include "dwt_stm32_delay.h"
+
+#define delay_us(microseconds) DWT_Delay_us(microseconds)
 
 namespace VFO
 {
@@ -17,12 +20,11 @@ static int _memStatus = 1;					 // value to notify if memory is current or old. 
 
 VFOController::VFOController()
 {
-	_conf = new Configuration;
 	_gui = new GUIController;
 	_si5351 = new Si5351;
 
-	_conf->load();
-	if (_conf->getBrightness() == 0)
+	VFO::Configuration::shared()->load();
+	if (Config->getBrightness() == 0)
 	{
 		reset();
 	}
@@ -34,9 +36,9 @@ void VFOController::initSI()
 {
 	if (_si5351->init(SI5351_CRYSTAL_LOAD_8PF, 0, 0))
 	{
-		_si5351->set_correction(_conf->getCalibration(), SI5351_PLL_INPUT_XO);
-		_si5351->set_freq((_conf->getFrequency() + _conf->getIFrequency()) * 100, SI5351_CLK0);
-		_si5351->set_freq(_conf->getBFrequency() * 100, SI5351_CLK1);
+		_si5351->set_correction(Config->getCalibration(), SI5351_PLL_INPUT_XO);
+		_si5351->set_freq((Config->getFrequency() + Config->getIFrequency()) * 100, SI5351_CLK0);
+		_si5351->set_freq(Config->getBFrequency() * 100, SI5351_CLK1);
 		_si5351->output_enable(SI5351_CLK2, 0);
 	}
 	else
@@ -47,7 +49,6 @@ void VFOController::initSI()
 
 VFOController::~VFOController()
 {
-	delete _conf;
 	delete _gui;
 	delete _si5351;
 }
@@ -55,10 +56,11 @@ VFOController::~VFOController()
 void VFOController::begin()
 {
 	_gui->draw();
-	for (int i = 0; i < _conf->getBrightness(); i++)
+	uint8_t brightness = Config->getBrightness();
+	for (int i = 0; i < brightness; i++)
 	{
 		setBrightness(i);
-		HAL_Delay(1);
+		delay_us(1000);
 	}
 }
 
@@ -91,9 +93,9 @@ void VFOController::setFrequency(uint32_t frequency)
 {
 	if (_si5351_enabled)
 	{
-		_si5351->set_freq((frequency + _conf->getIFrequency()) * 100, SI5351_CLK0);
+		_si5351->set_freq((frequency + Config->getIFrequency()) * 100, SI5351_CLK0);
 	}
-	_conf->setFrequency(frequency);
+	Config->setFrequency(frequency);
 }
 
 void VFOController::setBFrequency(uint32_t frequency)
@@ -119,28 +121,29 @@ void VFOController::setCalibration(int32_t value)
 
 void VFOController::storeConfiguration()
 {
-	_conf->save();
+	Config->save();
 }
 
 void VFOController::loadConfiguration()
 {
-	_conf->load();
-	setFrequency(_conf->getFrequency());
-	setCalibration(_conf->getCalibration());
-	setBFrequency(_conf->getBFrequency());
-	setFrequency(_conf->getFrequency());
-	setBrightness(_conf->getBrightness());
+	Config->load();
+	setFrequency(Config->getFrequency());
+	setCalibration(Config->getCalibration());
+	setBFrequency(Config->getBFrequency());
+	setFrequency(Config->getFrequency());
+	setBrightness(Config->getBrightness());
 }
 
 void VFOController::reset()
 {
-	_conf->setFrequency(7125000);
-	_conf->setCalibration(22334);
-	//_conf->setCalibration(406000);
-	_conf->setIFrequency(5000000);
-	_conf->setBFrequency(5000000);
-	_conf->setBrightness(255);
-	_conf->setEncoder(128);
+	Config->setFrequency(7125000);
+	Config->setCalibration(22334);
+	//Config->setCalibration(406000);
+	Config->setIFrequency(5000000);
+	Config->setBFrequency(5000000);
+	Config->setBrightness(255);
+	Config->setEncoder(128);
+	Config->setCalibrationUin(8);
 	storeConfiguration();
 	loadConfiguration();
 }

@@ -4,7 +4,7 @@
             "name": "Mac",
             "includePath": [
                 "${workspaceFolder}/**",
-                "/Users/lymes/Development/Electronics/VSCodeTest/**"
+                "/Users/lymes/Development/Electronics/STM32VFO/**"
             ],
             "defines": [],
             "macFrameworkPath": [

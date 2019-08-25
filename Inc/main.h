@@ -92,14 +92,15 @@ void Error_Handler(void);
 #define ENC2_GPIO_Port GPIOB
 /* USER CODE BEGIN Private defines */
 
-#define STM32F103C8           // board type definition
+#define STM32F103C8 // board type definition
 
-#define GET_MACRO( _0, _1, NAME, ... ) NAME
-#define Error_Handler(...) GET_MACRO( _0, ##__VA_ARGS__, Error_Handler1, Error_Handler0 )()
-#define Error_Handler0() _Error_Handler( (char*)__FILE__, __LINE__ )
-#define Error_Handler1(unused) _Error_Handler( char * file, int line )
+#define GET_MACRO(_0, _1, NAME, ...) NAME
+#define Error_Handler(...) GET_MACRO(_0, ##__VA_ARGS__, Error_Handler1, Error_Handler0) \
+()
+#define Error_Handler0() _Error_Handler((char *)__FILE__, __LINE__)
+#define Error_Handler1(unused) _Error_Handler(char *file, int line)
 
-extern void _Error_Handler(char *, int);
+  extern void _Error_Handler(char *, int);
 
 /* USER CODE END Private defines */
 

@@ -10,6 +10,7 @@
 
 #include "VFOController.h"
 
+
 extern VFO::VFOController *_mainController;
 
 namespace VFO {
@@ -28,6 +29,9 @@ void _setBrightness(int32_t value);
 
 int32_t _getEncoder();
 void _setEncoder(int32_t value);
+
+int32_t _getCalibrationUin();
+void _setCalibrationUin(int32_t value);
 
 void _resetConfig(void);
 

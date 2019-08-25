@@ -19,7 +19,6 @@ namespace VFO
 
 class VFOController
 {
-	Configuration* _conf;
 	GUIController* _gui;
 	Si5351* _si5351;
 	bool _si5351_enabled = true;
@@ -28,8 +27,6 @@ public:
 	VFOController();
 	virtual ~VFOController();
 	void begin();
-
-	Configuration *getConfig() { return _conf; }
 
 	void initSI();
 

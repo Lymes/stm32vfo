@@ -10,80 +10,64 @@
 
 #include "GUI/Utils.h"
 
+#include "stm32f103xb.h"
+#include "stm32f1xx_ll_adc.h"
+
+extern uint16_t readVoltage(ADC_TypeDef *ADCx, uint8_t channel);
+
 namespace VFO
 {
 
 const struct SetupItem menu =
-{
-	"Установки",
-	NULL,
-	NULL,
-	NULL,
-	4,
-	(struct SetupItem[])
 	{
-		{
-			"Калибровка",
-			_getCalibration,
-			_setCalibration,
-			NULL,
-			0,
-			NULL
-		},
-		{
-			"Промежуточная",
-			_getIFrequency,
-			_setIFrequency,
-			NULL,
-			0,
-			NULL
-		},
-		{
-			"Опорная",
-			_getBFrequency,
-			_setBFrequency,
-			NULL,
-			0,
-			NULL
-		},
-		{
-			"Разное",
-			NULL,
-			NULL,
-			NULL,
-			3,
-			(struct SetupItem[])
-			{
-				{
-					"Яркость экрана",
-					_getBrightness,
-					_setBrightness,
-					NULL,
-					0,
-					NULL
-				},
-				{
-					"Энкодер",
-					_getEncoder,
-					_setEncoder,
-					NULL,
-					0,
-					NULL
-				},
-				{
-					"Сброс настроек",
-					NULL,
-					NULL,
-					_resetConfig,
-					0,
-					NULL
-				}
-			}
-		}
-	}
-};
-
-
+		"Установки",
+		NULL,
+		NULL,
+		NULL,
+		4,
+		(struct SetupItem[]){
+			{"Калибровка",
+			 _getCalibration,
+			 _setCalibration,
+			 NULL,
+			 0,
+			 NULL},
+			{"Промежуточная",
+			 _getIFrequency,
+			 _setIFrequency,
+			 NULL,
+			 0,
+			 NULL},
+			{"Опорная",
+			 _getBFrequency,
+			 _setBFrequency,
+			 NULL,
+			 0,
+			 NULL},
+			{"Разное",
+			 NULL,
+			 NULL,
+			 NULL,
+			 3,
+			 (struct SetupItem[]){
+				 {"Яркость экрана",
+				  _getBrightness,
+				  _setBrightness,
+				  NULL,
+				  0,
+				  NULL},
+				 {"Энкодер",
+				  _getEncoder,
+				  _setEncoder,
+				  NULL,
+				  0,
+				  NULL},
+				 {"Сброс настроек",
+				  NULL,
+				  NULL,
+				  _resetConfig,
+				  0,
+				  NULL}}}}};
 
 GUISetupView::GUISetupView()
 {
@@ -104,28 +88,28 @@ GUISetupView::GUISetupView(SetupItem *item, GUISetupView *parent)
 void GUISetupView::init()
 {
 	_window = new GradientBox(0, 0, 160, 128);
-	_window->downLeft  = { 200, 10, 20 };
-	_window->downRight = { 150, 0, 200 };
-	_window->upLeft    = { 60, 0, 40 };
-	_window->upRight   = { 200, 160, 20 };
+	_window->downLeft = {200, 10, 20};
+	_window->downRight = {150, 0, 200};
+	_window->upLeft = {60, 0, 40};
+	_window->upRight = {200, 160, 20};
 
 	_header = new GradientBox(2, 2, 156, 25);
-	_header->downLeft  = { 10, 10, 10 };
-	_header->downRight = { 10, 10, 10 };
-	_header->upLeft    = { 100, 100, 100 };
-	_header->upRight   = { 100, 100, 100};
+	_header->downLeft = {10, 10, 10};
+	_header->downRight = {10, 10, 10};
+	_header->upLeft = {100, 100, 100};
+	_header->upRight = {100, 100, 100};
 
 	_selection = new GradientBox(2, 2, 156, 15);
-	_selection->upLeft  = { 10, 160, 10 };
-	_selection->upRight = { 10, 160, 10 };
-	_selection->downLeft  = { 10, 10, 100 };
-	_selection->downRight = { 10, 10, 100 };
+	_selection->upLeft = {10, 160, 10};
+	_selection->upRight = {10, 160, 10};
+	_selection->downLeft = {10, 10, 100};
+	_selection->downRight = {10, 10, 100};
 
 	_btnBack = new GradientBox(6, 105, 60, 20);
-	_btnBack->downLeft  = { 10, 10, 10 };
-	_btnBack->downRight = { 10, 10, 10 };
-	_btnBack->upLeft    = { 100, 100, 100 };
-	_btnBack->upRight   = { 100, 100, 100};
+	_btnBack->downLeft = {10, 10, 10};
+	_btnBack->downRight = {10, 10, 10};
+	_btnBack->upLeft = {100, 100, 100};
+	_btnBack->upRight = {100, 100, 100};
 }
 
 GUISetupView::~GUISetupView()
@@ -135,12 +119,11 @@ GUISetupView::~GUISetupView()
 	delete _btnBack;
 }
 
-
 // Callbacks
 
 void GUISetupView::pushEncoderIncrement(int16_t increment, uint16_t period)
 {
-	if ( _selectedChild )
+	if (_selectedChild)
 	{
 		_selectedChild->pushEncoderIncrement(increment, period);
 		return;
@@ -149,7 +132,7 @@ void GUISetupView::pushEncoderIncrement(int16_t increment, uint16_t period)
 	if (!_editing)
 	{
 		_encCounter += increment;
-		if (abs(_encCounter) < _getEncoder() / 2) /* half rotation step */
+		if (abs(_encCounter) < _getEncoder()) /* half rotation step */
 		{
 			return;
 		}
@@ -168,46 +151,46 @@ void GUISetupView::pushEncoderIncrement(int16_t increment, uint16_t period)
 	}
 	else
 	{
-		uint32_t value = _currentItem->children[ _selectedItem ].getter();
+		uint32_t value = _currentItem->children[_selectedItem].getter();
 		value += increment;
-		_currentItem->children[ _selectedItem ].setter(value);
+		_currentItem->children[_selectedItem].setter(value);
 		updateValues();
 	}
 }
 
 void GUISetupView::menuKeyPressed()
 {
-	if ( _selectedChild )
+	if (_selectedChild)
 	{
 		_selectedChild->menuKeyPressed();
 		return;
 	}
 
-	if ( _selectedItem >= _currentItem->numChildren )
+	if (_selectedItem >= _currentItem->numChildren)
 	{
-		if ( _parent )
+		if (_parent)
 		{
 			_parent->draw();
 			_parent->setSelectedChild(NULL);
 		}
 		else
 		{
-			_mainController->triggerMemoryWrite();
+			_mainController->storeConfiguration();
 			_mainController->showMain();
 			return;
 		}
 	}
 	else
 	{
-		if ( _currentItem->children[ _selectedItem ].getter == NULL && _currentItem->children[ _selectedItem ].cmd == NULL) // submenu
+		if (_currentItem->children[_selectedItem].getter == NULL && _currentItem->children[_selectedItem].cmd == NULL) // submenu
 		{
-			GUISetupView *submenu = new GUISetupView( &_currentItem->children[ _selectedItem ], this );
-			setSelectedChild( submenu );
+			GUISetupView *submenu = new GUISetupView(&_currentItem->children[_selectedItem], this);
+			setSelectedChild(submenu);
 			submenu->draw();
 		}
-		else if ( _currentItem->children[ _selectedItem ].cmd ) // command
+		else if (_currentItem->children[_selectedItem].cmd) // command
 		{
-			_currentItem->children[ _selectedItem ].cmd();
+			_currentItem->children[_selectedItem].cmd();
 			updateValues();
 		}
 		else
@@ -218,13 +201,12 @@ void GUISetupView::menuKeyPressed()
 	}
 }
 
-
 // Utilities
 
 void GUISetupView::setSelected(uint8_t selected)
 {
 	// clear old selection
-	if ( _selectedItem == _currentItem->numChildren )
+	if (_selectedItem == _currentItem->numChildren)
 	{
 		drawBackButton(false);
 	}
@@ -236,7 +218,7 @@ void GUISetupView::setSelected(uint8_t selected)
 	_selectedItem = selected;
 
 	// draw new selection
-	if ( _selectedItem == _currentItem->numChildren )
+	if (_selectedItem == _currentItem->numChildren)
 	{
 		drawBackButton(true);
 	}
@@ -248,7 +230,6 @@ void GUISetupView::setSelected(uint8_t selected)
 	this->updateValues();
 }
 
-
 void GUISetupView::updateValues()
 {
 	uint8_t i = 0;
@@ -258,9 +239,9 @@ void GUISetupView::updateValues()
 	}
 }
 
-void GUISetupView::setSelectedChild( GUISetupView *child )
+void GUISetupView::setSelectedChild(GUISetupView *child)
 {
-	if ( !child && _selectedChild )
+	if (!child && _selectedChild)
 	{
 		delete _selectedChild;
 	}
@@ -310,37 +291,35 @@ void GUISetupView::drawItemTitle(uint8_t itemIndex, bool selected)
 	}
 	const SetupItem *item = &(_currentItem->children[itemIndex]);
 	ST7735_PutStr5x7Ex(1, 6, 40 + itemIndex * 15, VFO::utf8to1251Dest(item->name, str1, sizeof(str1)),
-			selected ? COLOR565_WHITE : COLOR565_YELLOW, selected ? _selection : _window, VFO::backgroundColor);
-
+					   selected ? COLOR565_WHITE : COLOR565_YELLOW, selected ? _selection : _window, VFO::backgroundColor);
 }
 
 void GUISetupView::drawValue(uint8_t itemIndex, bool selected, bool edited)
 {
 	char str[10];
 	uint16_t color = COLOR565_YELLOW;
-	if ( selected )
+	if (selected)
 	{
 		color = edited ? COLOR565_RED : COLOR565_WHITE;
 	}
 	const SetupItem *item = &(_currentItem->children[itemIndex]);
-	if ( item->getter )
+	if (item->getter)
 	{
 		uint32_t value = item->getter();
-		ST7735_PutStr5x7Ex(1, 100, 40 + itemIndex * 15, (char *) valToStr(value, str, sizeof(str), 0),
-			color,
-			selected ? _selection : _window,
-			VFO::backgroundColor);
+		ST7735_PutStr5x7Ex(1, 100, 40 + itemIndex * 15, (char *)valToStr(value, str, sizeof(str), 0),
+						   color,
+						   selected ? _selection : _window,
+						   VFO::backgroundColor);
 	}
-	else if (item->cmd ) // command
+	else if (item->cmd) // command
 	{
-
 	}
 	else // submenu
 	{
 		ST7735_PutStr5x7Ex(1, 148, 40 + itemIndex * 15, (char *)">",
-			selected ? COLOR565_WHITE : COLOR565_YELLOW,
-			selected ? _selection : _window,
-			VFO::backgroundColor);
+						   selected ? COLOR565_WHITE : COLOR565_YELLOW,
+						   selected ? _selection : _window,
+						   VFO::backgroundColor);
 	}
 }
 
@@ -348,24 +327,24 @@ void GUISetupView::drawBackButton(bool selected)
 {
 	char str1[6];
 	uint16_t color = COLOR565_YELLOW;
-	if ( selected )
+	if (selected)
 	{
-		_btnBack->upLeft  = { 10, 160, 10 };
-		_btnBack->upRight = { 10, 160, 10 };
-		_btnBack->downLeft    = { 10, 10, 100 };
-		_btnBack->downRight   = { 10, 10, 100 };
+		_btnBack->upLeft = {10, 160, 10};
+		_btnBack->upRight = {10, 160, 10};
+		_btnBack->downLeft = {10, 10, 100};
+		_btnBack->downRight = {10, 10, 100};
 		color = COLOR565_WHITE;
 	}
 	else
 	{
-		_btnBack->downLeft  = { 10, 10, 10 };
-		_btnBack->downRight = { 10, 10, 10 };
-		_btnBack->upLeft    = { 100, 100, 100 };
-		_btnBack->upRight   = { 100, 100, 100};
+		_btnBack->downLeft = {10, 10, 10};
+		_btnBack->downRight = {10, 10, 10};
+		_btnBack->upLeft = {100, 100, 100};
+		_btnBack->upRight = {100, 100, 100};
 	}
 	_btnBack->draw();
 	ST7735_PutStr5x7Ex(1, 21, 111, VFO::utf8to1251Dest("Назад", str1, sizeof(str1)),
-			color, _btnBack, VFO::backgroundColor);
+					   color, _btnBack, VFO::backgroundColor);
 }
 
 } /* namespace VFO */

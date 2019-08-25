@@ -1,7 +1,7 @@
 [PreviousGenFiles]
-HeaderPath=/Users/lymes/Development/Electronics/VSCodeTest/Inc
+HeaderPath=/Users/lymes/Development/Electronics/STM32VFO/Inc
 HeaderFiles=stm32f1xx_it.h;stm32_assert.h;stm32f1xx_hal_conf.h;main.h;
-SourcePath=/Users/lymes/Development/Electronics/VSCodeTest/Src
+SourcePath=/Users/lymes/Development/Electronics/STM32VFO/Src
 SourceFiles=stm32f1xx_it.c;stm32f1xx_hal_msp.c;main.c;
 
 [PreviousLibFiles]

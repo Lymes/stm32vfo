@@ -73,7 +73,6 @@ Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_gpio.c \
 Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_rcc.c \
 Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_spi.c \
 Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_utils.c \
-Src/adc.c \
 Src/eeprom/eeprom24xx.c \
 Src/st7735/dwt_stm32_delay.c \
 Src/st7735/st7735.c \
@@ -98,6 +97,7 @@ Src/VFO/GUIView.cpp \
 Src/VFO/VFOController.cpp \
 Src/kbd/kbd.cpp \
 Src/main.cpp \
+Src/adc.cpp \
 Src/si5351/si5351.cpp
 
 

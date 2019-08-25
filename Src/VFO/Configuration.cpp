@@ -9,14 +9,27 @@
 
 namespace VFO
 {
+static Configuration *_sharedInstance = NULL;
+
+
+Configuration *Configuration::shared()
+{
+	if ( !_sharedInstance )
+	{
+		_sharedInstance = new Configuration;
+	}
+	return _sharedInstance;
+}
+
 
 Configuration::Configuration()
 {
 	// TODO Auto-generated constructor stub
 	_data.frequency   = 7100000;
-	_data.iFrequency  = 4000000;
-	_data.bFrequency  = 4000000;
+	_data.iFrequency  = 5000000;
+	_data.bFrequency  = 5000000;
 	_data.calibration = 22334;
+	_data.calibrationUin = 8;
 	_data.brightness  = 255;
 }
 
