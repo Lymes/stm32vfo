@@ -34,7 +34,7 @@ public:
 	virtual void pushEncoderIncrement(int16_t increment, uint16_t period);
 	virtual void menuKeyPressed();
 
-	void showVoltage(uint32_t value);
+	virtual void showVoltage(uint32_t value);
 
 private:
 	void drawBackground();

@@ -32,8 +32,8 @@ uint16_t readVoltage(ADC_TypeDef *ADCx)
 	uint32_t REF_value = LL_ADC_INJ_ReadConversionData12(ADCx, LL_ADC_INJ_RANK_2);
 
 	static uint32_t oldValue = 0;
-	uint32_t voltage = (116 * 12 * ADC_value) / REF_value; /*   calculate voltage   */
-	voltage = (oldValue * 15 + voltage) >> 4;			   // cumulative moving average filter
+	uint32_t voltage = (Config->getCalibrationUin() * 12 * ADC_value) / REF_value; /*   calculate voltage   */
+	voltage = (oldValue * 15 + voltage) >> 4;									   // cumulative moving average filter
 	oldValue = voltage;
 
 	return voltage;

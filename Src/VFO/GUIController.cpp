@@ -60,11 +60,7 @@ void GUIController::showMain()
 
 void GUIController::showVoltage(uint32_t value)
 {
-	if ( _currentView == _mainView )
-	{
-		_mainView->showVoltage(value);
-	}
+	_currentView->showVoltage(value);
 }
-
 
 } /* namespace VFO */

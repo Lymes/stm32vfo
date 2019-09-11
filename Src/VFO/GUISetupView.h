@@ -24,6 +24,7 @@ struct SetupItem {
 	GetConfigValue getter;
 	SetConfigValue setter;
 	CommandPtr cmd;
+	bool slow = false;
 	int numChildren;
 	SetupItem *children;
 };
@@ -50,6 +51,7 @@ public:
 	virtual ~GUISetupView();
 	void init();
 
+	virtual void showVoltage(uint32_t value);
 	virtual void draw();
 	virtual void pushEncoderIncrement(int16_t increment, uint16_t period);
 	virtual void menuKeyPressed();

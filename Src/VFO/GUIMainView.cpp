@@ -7,11 +7,9 @@
 
 #include "GUIMainView.h"
 #include "VFOController.h"
-
 #include "GUI/Utils.h"
 
 #define ENCODER_THRESHOLD 4
-#define DIVIDER_FACTOR 11
 
 namespace VFO
 {
@@ -102,11 +100,11 @@ void GUIMainView::pushEncoderIncrement(int16_t increment, uint16_t period)
 	uint16_t encoderRes = Config->getEncoder();
 
 	uint16_t factor = 1;
-	if (abs(increment) > (encoderRes / 2)) // half rotation
-	{
-		factor = 100;
-	}
-	else if (abs(increment) > (encoderRes / 4)) // quarter rotation
+	// if (abs(increment) > (encoderRes / 2)) // half rotation
+	// {
+	// 	factor = 100;
+	// }
+	if (abs(increment) > (encoderRes / 4)) // quarter rotation
 	{
 		factor = 10;
 	}
@@ -133,12 +131,6 @@ void GUIMainView::pushEncoderIncrement(int16_t increment, uint16_t period)
 void GUIMainView::showVoltage(uint32_t value)
 {
 	char buf[6];
-	//value = value * DIVIDER_FACTOR;
-
-	//static uint32_t oldValue = 0;
-	//value = (oldValue * 7 + value) >> 3; // cumulative moving average filter
-	//oldValue = value;
-
 	ST7735_PutStr5x7Ex(1, 116, 60, VFO::voltageToStr(value, buf, 6),
 					   COLOR565_WHITE, _btn3, VFO::backgroundColor);
 }

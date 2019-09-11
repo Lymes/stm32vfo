@@ -48,8 +48,10 @@ void VFOController::initSI()
 	{
 		_si5351->set_correction(Config->getCalibration(), SI5351_PLL_INPUT_XO);
 		_si5351->set_freq((Config->getFrequency() + Config->getIFrequency()) * 100, SI5351_CLK0);
-		_si5351->set_freq(Config->getBFrequency() * 100, SI5351_CLK1);
-		_si5351->output_enable(SI5351_CLK2, 0);
+		_si5351->set_freq(Config->getBFrequency() * 100, SI5351_CLK2);
+		_si5351->drive_strength(SI5351_CLK0, SI5351_DRIVE_2MA);
+		_si5351->drive_strength(SI5351_CLK2, SI5351_DRIVE_2MA);
+		_si5351->output_enable(SI5351_CLK1, 0);
 	}
 	else
 	{
@@ -112,7 +114,7 @@ void VFOController::setBFrequency(uint32_t frequency)
 {
 	if (_si5351_enabled)
 	{
-		_si5351->set_freq(frequency * 100, SI5351_CLK1);
+		_si5351->set_freq(frequency * 100, SI5351_CLK2);
 	}
 }
 
@@ -144,16 +146,27 @@ void VFOController::loadConfiguration()
 	setBrightness(Config->getBrightness());
 }
 
-void VFOController::reset()
+void VFOController::softReset()
 {
 	Config->setFrequency(7125000);
 	Config->setCalibration(22334);
 	//Config->setCalibration(406000);
-	Config->setIFrequency(5000000);
-	Config->setBFrequency(5000000);
-	Config->setBrightness(255);
+	Config->setIFrequency(4913811);
+	Config->setBFrequency(4913511);
+	Config->setBrightness(250);
 	Config->setEncoder(128);
-	Config->setCalibrationUin(8);
+	Config->setCalibrationUin(10);
+
+	setFrequency(Config->getFrequency());
+	setCalibration(Config->getCalibration());
+	setBFrequency(Config->getBFrequency());
+	setFrequency(Config->getFrequency());
+	setBrightness(Config->getBrightness());
+}
+
+void VFOController::reset()
+{
+	this->softReset();
 	storeConfiguration();
 	loadConfiguration();
 }

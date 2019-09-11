@@ -99,7 +99,8 @@ void _vfoLoopIteration(void)
 
 	VFOC->showVoltage(readVoltage(ADC1));
 	VFOC->checkMemoryState();
-	delay_us(10000);
+	//delay_us(10000);
+	HAL_Delay(10);
 }
 
 // Tick from sys timer

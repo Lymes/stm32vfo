@@ -6,6 +6,9 @@
  */
 
 #include "GUIView.h"
+#include "GUI/Utils.h"
+#include "si5351/si5351.h"
+#include "GUI/Background.h"
 
 namespace VFO
 {

@@ -42,6 +42,7 @@ public:
 	void showMain();
 
 	void reset();
+	void softReset();
 	void setFrequency(uint32_t frequency);
 	void setBFrequency(uint32_t frequency);
 	void setBrightness(uint8_t value);

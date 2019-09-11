@@ -7,7 +7,6 @@
 
 #include "GUISetupView.h"
 #include "ConfigHelpers.h"
-
 #include "GUI/Utils.h"
 
 #include "stm32f103xb.h"
@@ -24,48 +23,63 @@ const struct SetupItem menu =
 		NULL,
 		NULL,
 		NULL,
+		false, 
 		4,
 		(struct SetupItem[]){
 			{"Калибровка",
 			 _getCalibration,
 			 _setCalibration,
 			 NULL,
+			 false,
 			 0,
 			 NULL},
 			{"Промежуточная",
 			 _getIFrequency,
 			 _setIFrequency,
 			 NULL,
+			 false,
 			 0,
 			 NULL},
 			{"Опорная",
 			 _getBFrequency,
 			 _setBFrequency,
 			 NULL,
+			 false,
 			 0,
 			 NULL},
 			{"Разное",
 			 NULL,
 			 NULL,
 			 NULL,
-			 3,
+			 false,
+			 4,
 			 (struct SetupItem[]){
 				 {"Яркость экрана",
 				  _getBrightness,
 				  _setBrightness,
 				  NULL,
+				  true,
 				  0,
 				  NULL},
 				 {"Энкодер",
 				  _getEncoder,
 				  _setEncoder,
 				  NULL,
+				  true,
+				  0,
+				  NULL},
+				 {"Делитель Uin",
+				  _getCalibrationUin,
+				  _setCalibrationUin,
+				  NULL,
+				  true,
 				  0,
 				  NULL},
 				 {"Сброс настроек",
 				  NULL,
 				  NULL,
 				  _resetConfig,
+				  false,
 				  0,
 				  NULL}}}}};
 
@@ -150,7 +164,18 @@ void GUISetupView::pushEncoderIncrement(int16_t increment, uint16_t period)
 		setSelected(selection);
 	}
 	else
-	{
+	{	
+		if ( _currentItem->children[_selectedItem].slow )
+		{
+			_encCounter += increment;
+			if (abs(_encCounter) < _getEncoder()) /* half rotation step */
+			{
+				return;
+			}
+			_encCounter = 0;
+			increment = increment > 0 ? 1 : -1;
+		}
+
 		uint32_t value = _currentItem->children[_selectedItem].getter();
 		value += increment;
 		_currentItem->children[_selectedItem].setter(value);
@@ -175,7 +200,7 @@ void GUISetupView::menuKeyPressed()
 		}
 		else
 		{
-			VFOC->storeConfiguration();
+			VFOC->triggerMemoryWrite();
 			VFOC->showMain();
 			return;
 		}
@@ -346,5 +371,13 @@ void GUISetupView::drawBackButton(bool selected)
 	ST7735_PutStr5x7Ex(1, 21, 111, VFO::utf8to1251Dest("Назад", str1, sizeof(str1)),
 					   color, _btnBack, VFO::backgroundColor);
 }
+
+void GUISetupView::showVoltage(uint32_t value)
+{
+	char buf[6];
+	ST7735_PutStr5x7Ex(1, 120, 110, VFO::voltageToStr(value, buf, 6),
+					   COLOR565_WHITE, _window, VFO::backgroundColor);
+}
+
 
 } /* namespace VFO */

@@ -28,7 +28,7 @@ int32_t _getCalibrationUin()
 
 void _setCalibrationUin(int32_t value)
 {
-	if (value > 100 || value < 1)
+	if (value > 200 || value < 1)
 	{
 		return;
 	}
@@ -43,6 +43,7 @@ int32_t _getIFrequency()
 void _setIFrequency(int32_t value)
 {
 	Config->setIFrequency(value);
+	VFOC->setFrequency(Config->getFrequency());
 }
 
 int32_t _getBFrequency()
@@ -87,8 +88,8 @@ void _setEncoder(int32_t value)
 
 void _resetConfig(void)
 {
-	VFOC->reset();
-	//VFOC->triggerMemoryWrite();
+	VFOC->softReset();
+	VFOC->triggerMemoryWrite();
 }
 
 } // namespace VFO

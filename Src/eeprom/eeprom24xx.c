@@ -1,14 +1,12 @@
 #include "eeprom/eeprom24xx.h"
 #include <stdint.h>
-#include "dwt_stm32_delay.h"
-
-#define delay_us(microseconds) DWT_Delay_us(microseconds)
+#include <stdio.h>
 
 extern I2C_HandleTypeDef hi2c2;
 
 #define EEPROM_I2C hi2c2
 #define EEPROM_ADDRESS 0xA0
-#define EEPROM_PAGESIZE 16
+#define EEPROM_PAGESIZE 64
 #define EEPROM_TIMEOUT 100
 
 bool EEPROM24XX_IsConnected(void)
@@ -16,12 +14,14 @@ bool EEPROM24XX_IsConnected(void)
 	uint8_t numTrials = 0;
 	while (HAL_I2C_IsDeviceReady(&EEPROM_I2C, EEPROM_ADDRESS, 50, EEPROM_TIMEOUT) != HAL_OK)
 	{
-		delay_us(2000);
+		HAL_Delay(2);
 		if (numTrials++ > 5)
 		{
+			printf("Mazzzz\n");
 			return false;
 		}
 	}
+	printf("Cazzzz\n");
 	return true;
 }
 
@@ -35,7 +35,7 @@ bool EEPROM24XX_Save(uint16_t Address, uint8_t *data, size_t size_of_data)
 		if (diff >= EEPROM_PAGESIZE)
 		{
 			if (HAL_I2C_Mem_Write(&EEPROM_I2C, EEPROM_ADDRESS,
-								  Address + counter, I2C_MEMADD_SIZE_8BIT,
+								  Address + counter, I2C_MEMADD_SIZE_16BIT,
 								  &data[counter], EEPROM_PAGESIZE, EEPROM_TIMEOUT) != HAL_OK)
 			{
 				if (numTrials++ > 5)
@@ -50,7 +50,7 @@ bool EEPROM24XX_Save(uint16_t Address, uint8_t *data, size_t size_of_data)
 		{
 			//and the remaining ones...low packet size
 			if (HAL_I2C_Mem_Write(&EEPROM_I2C, EEPROM_ADDRESS,
-								  Address + counter, I2C_MEMADD_SIZE_8BIT,
+								  Address + counter, I2C_MEMADD_SIZE_16BIT,
 								  &data[counter], diff, EEPROM_TIMEOUT) != HAL_OK)
 			{
 				if (numTrials++ > 5)
@@ -61,9 +61,8 @@ bool EEPROM24XX_Save(uint16_t Address, uint8_t *data, size_t size_of_data)
 			}
 			counter += diff;
 		}
-		delay_us(2000);
+		HAL_Delay(10);
 	}
-
 	return true;
 }
 
@@ -78,7 +77,7 @@ bool EEPROM24XX_Load(uint16_t Address, uint8_t *data, size_t size_of_data)
 		if (diff >= EEPROM_PAGESIZE)
 		{
 			if (HAL_I2C_Mem_Read(&EEPROM_I2C, EEPROM_ADDRESS,
-								 Address + counter, I2C_MEMADD_SIZE_8BIT,
+								 Address + counter, I2C_MEMADD_SIZE_16BIT,
 								 &data[counter], EEPROM_PAGESIZE, EEPROM_TIMEOUT) != HAL_OK)
 			{
 				if (numTrials++ > 5)
@@ -93,7 +92,7 @@ bool EEPROM24XX_Load(uint16_t Address, uint8_t *data, size_t size_of_data)
 		{
 			// and the remaining ones...low packet size
 			if (HAL_I2C_Mem_Read(&EEPROM_I2C, EEPROM_ADDRESS,
-								 Address + counter, I2C_MEMADD_SIZE_8BIT,
+								 Address + counter, I2C_MEMADD_SIZE_16BIT,
 								 &data[counter], diff, EEPROM_TIMEOUT) != HAL_OK)
 			{
 				if (numTrials++ > 5)
@@ -104,8 +103,9 @@ bool EEPROM24XX_Load(uint16_t Address, uint8_t *data, size_t size_of_data)
 			}
 			counter += diff;
 		}
-		delay_us(2000);
+		HAL_Delay(10);
 	}
 
+	printf("xxxxxxxx");
 	return true;
 }
