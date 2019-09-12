@@ -18,8 +18,15 @@
 namespace VFO
 {
 
+enum OpMode
+{
+	OP_LSB,
+	OP_USB
+};
+
 class VFOController
 {
+	OpMode _mode = OP_LSB;
 	GUIController *_gui;
 	Si5351 *_si5351;
 	bool _si5351_enabled = true;
@@ -41,10 +48,16 @@ public:
 	void showSetup();
 	void showMain();
 
+	void scrollAnimation();
+
 	void reset();
 	void softReset();
 	void setFrequency(uint32_t frequency);
-	void setBFrequency(uint32_t frequency);
+
+	void setQFilter1(uint32_t frequency);
+	void setQFilter2(uint32_t frequency);
+	void setBFOffset(uint32_t frequency);
+
 	void setBrightness(uint8_t value);
 	void setCalibration(int32_t value);
 

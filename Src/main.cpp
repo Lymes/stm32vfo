@@ -251,9 +251,9 @@ static void MX_I2C2_Init(void)
   /*Configure GPIO pins : I2C2_SCL_Pin I2C2_SDA_Pin */
   GPIO_InitTypeDef GPIO_InitStruct = {0};
   GPIO_InitStruct.Pin = I2C2_SCL_Pin | I2C2_SDA_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_AF_OD;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
-  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
+  GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
+  //GPIO_InitStruct.Pull = GPIO_NOPULL;
+  //GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
   /* USER CODE END I2C2_Init 0 */

@@ -17,10 +17,12 @@
 namespace VFO
 {
 
-struct ConfigData {
+struct ConfigData
+{
 	uint32_t frequency;
-	uint32_t iFrequency;
-	uint32_t bFrequency;
+	uint32_t qFilter1;
+	uint32_t qFilter2;
+	uint32_t bfoOffset;
 	uint32_t encoder;
 	int32_t calibration;
 	uint8_t brightness;
@@ -33,7 +35,6 @@ class Configuration
 	ConfigData _data;
 
 public:
-
 	Configuration();
 	virtual ~Configuration();
 
@@ -45,16 +46,18 @@ public:
 	uint32_t getFrequency(void) { return _data.frequency; }
 	int32_t getCalibration(void) { return _data.calibration; }
 	int8_t getCalibrationUin(void) { return _data.calibrationUin; }
-	uint32_t getIFrequency(void) { return _data.iFrequency; }
-	uint32_t getBFrequency(void) { return _data.bFrequency; }
+	uint32_t getQFilter1(void) { return _data.qFilter1; }
+	uint32_t getQFilter2(void) { return _data.qFilter2; }
+	uint32_t getBFOffset(void) { return _data.bfoOffset; }
 	uint8_t getBrightness(void) { return _data.brightness; }
 	uint32_t getEncoder(void) { return _data.encoder; }
 
 	void setFrequency(uint32_t frequency) { _data.frequency = frequency; }
 	void setCalibration(uint32_t value) { _data.calibration = value; }
 	void setCalibrationUin(int8_t value) { _data.calibrationUin = value; }
-	void setIFrequency(uint32_t frequency) { _data.iFrequency = frequency; }
-	void setBFrequency(uint32_t frequency) { _data.bFrequency = frequency; }
+	void setQFilter1(uint32_t frequency) { _data.qFilter1 = frequency; }
+	void setQFilter2(uint32_t frequency) { _data.qFilter2 = frequency; }
+	void setBFOffset(uint32_t frequency) { _data.bfoOffset = frequency; }
 	void setBrightness(uint8_t value) { _data.brightness = value; }
 	void setEncoder(uint32_t value) { _data.encoder = value; }
 };

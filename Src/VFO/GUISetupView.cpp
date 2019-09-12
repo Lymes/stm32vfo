@@ -12,6 +12,9 @@
 #include "stm32f103xb.h"
 #include "stm32f1xx_ll_adc.h"
 
+#define TOP_OFFS 34
+#define ITEM_HEIGHT 14
+
 extern uint16_t readVoltage(ADC_TypeDef *ADCx, uint8_t channel);
 
 namespace VFO
@@ -23,8 +26,8 @@ const struct SetupItem menu =
 		NULL,
 		NULL,
 		NULL,
-		false, 
-		4,
+		false,
+		5,
 		(struct SetupItem[]){
 			{"Калибровка",
 			 _getCalibration,
@@ -33,16 +36,23 @@ const struct SetupItem menu =
 			 false,
 			 0,
 			 NULL},
-			{"Промежуточная",
-			 _getIFrequency,
-			 _setIFrequency,
+			{"Ниж. скат",
+			 _getQFilter1,
+			 _setQFilter1,
 			 NULL,
 			 false,
 			 0,
 			 NULL},
-			{"Опорная",
-			 _getBFrequency,
-			 _setBFrequency,
+			{"Верх. скат",
+			 _getQFilter2,
+			 _setQFilter2,
+			 NULL,
+			 false,
+			 0,
+			 NULL},
+			{"Шифт опор.",
+			 _getBFOffset,
+			 _setBFOffset,
 			 NULL,
 			 false,
 			 0,
@@ -164,8 +174,8 @@ void GUISetupView::pushEncoderIncrement(int16_t increment, uint16_t period)
 		setSelected(selection);
 	}
 	else
-	{	
-		if ( _currentItem->children[_selectedItem].slow )
+	{
+		if (_currentItem->children[_selectedItem].slow)
 		{
 			_encCounter += increment;
 			if (abs(_encCounter) < _getEncoder()) /* half rotation step */
@@ -195,6 +205,7 @@ void GUISetupView::menuKeyPressed()
 	{
 		if (_parent)
 		{
+			VFOC->scrollAnimation();
 			_parent->draw();
 			_parent->setSelectedChild(NULL);
 		}
@@ -211,6 +222,7 @@ void GUISetupView::menuKeyPressed()
 		{
 			GUISetupView *submenu = new GUISetupView(&_currentItem->children[_selectedItem], this);
 			setSelectedChild(submenu);
+			VFOC->scrollAnimation();
 			submenu->draw();
 		}
 		else if (_currentItem->children[_selectedItem].cmd) // command
@@ -308,14 +320,14 @@ void GUISetupView::drawItemTitle(uint8_t itemIndex, bool selected)
 	char str1[20];
 	if (selected)
 	{
-		_selection->draw(2, 36 + itemIndex * 15, 156, 15);
+		_selection->draw(2, TOP_OFFS - 4 + itemIndex * ITEM_HEIGHT, 156, ITEM_HEIGHT);
 	}
 	else
 	{
-		_window->clear(2, 36 + itemIndex * 15, 156, 15);
+		_window->clear(2, TOP_OFFS - 4 + itemIndex * ITEM_HEIGHT, 156, ITEM_HEIGHT);
 	}
 	const SetupItem *item = &(_currentItem->children[itemIndex]);
-	ST7735_PutStr5x7Ex(1, 6, 40 + itemIndex * 15, VFO::utf8to1251Dest(item->name, str1, sizeof(str1)),
+	ST7735_PutStr5x7Ex(1, 6, TOP_OFFS + itemIndex * ITEM_HEIGHT, VFO::utf8to1251Dest(item->name, str1, sizeof(str1)),
 					   selected ? COLOR565_WHITE : COLOR565_YELLOW, selected ? _selection : _window, VFO::backgroundColor);
 }
 
@@ -331,7 +343,7 @@ void GUISetupView::drawValue(uint8_t itemIndex, bool selected, bool edited)
 	if (item->getter)
 	{
 		uint32_t value = item->getter();
-		ST7735_PutStr5x7Ex(1, 100, 40 + itemIndex * 15, (char *)valToStr(value, str, sizeof(str), 0),
+		ST7735_PutStr5x7Ex(1, 100, TOP_OFFS + itemIndex * ITEM_HEIGHT, (char *)valToStr(value, str, sizeof(str), 0),
 						   color,
 						   selected ? _selection : _window,
 						   VFO::backgroundColor);
@@ -341,7 +353,7 @@ void GUISetupView::drawValue(uint8_t itemIndex, bool selected, bool edited)
 	}
 	else // submenu
 	{
-		ST7735_PutStr5x7Ex(1, 148, 40 + itemIndex * 15, (char *)">",
+		ST7735_PutStr5x7Ex(1, 148, TOP_OFFS + itemIndex * ITEM_HEIGHT, (char *)">",
 						   selected ? COLOR565_WHITE : COLOR565_YELLOW,
 						   selected ? _selection : _window,
 						   VFO::backgroundColor);
@@ -378,6 +390,5 @@ void GUISetupView::showVoltage(uint32_t value)
 	ST7735_PutStr5x7Ex(1, 120, 110, VFO::voltageToStr(value, buf, 6),
 					   COLOR565_WHITE, _window, VFO::backgroundColor);
 }
-
 
 } /* namespace VFO */

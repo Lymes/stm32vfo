@@ -35,26 +35,37 @@ void _setCalibrationUin(int32_t value)
 	Config->setCalibrationUin(value);
 }
 
-int32_t _getIFrequency()
+int32_t _getQFilter1()
 {
-	return Config->getIFrequency();
+	return Config->getQFilter1();
 }
 
-void _setIFrequency(int32_t value)
+void _setQFilter1(int32_t value)
 {
-	Config->setIFrequency(value);
+	Config->setQFilter1(value);
 	VFOC->setFrequency(Config->getFrequency());
 }
 
-int32_t _getBFrequency()
+int32_t _getQFilter2()
 {
-	return Config->getBFrequency();
+	return Config->getQFilter2();
 }
 
-void _setBFrequency(int32_t value)
+void _setQFilter2(int32_t value)
 {
-	Config->setBFrequency(value);
-	VFOC->setBFrequency(value);
+	Config->setQFilter2(value);
+	VFOC->setFrequency(Config->getFrequency());
+}
+
+int32_t _getBFOffset()
+{
+	return Config->getBFOffset();
+}
+
+void _setBFOffset(int32_t value)
+{
+	Config->setBFOffset(value);
+	VFOC->setBFOffset(value);
 }
 
 int32_t _getBrightness()

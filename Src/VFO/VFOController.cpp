@@ -47,8 +47,8 @@ void VFOController::initSI()
 	if (_si5351->init(SI5351_CRYSTAL_LOAD_8PF, 0, 0))
 	{
 		_si5351->set_correction(Config->getCalibration(), SI5351_PLL_INPUT_XO);
-		_si5351->set_freq((Config->getFrequency() + Config->getIFrequency()) * 100, SI5351_CLK0);
-		_si5351->set_freq(Config->getBFrequency() * 100, SI5351_CLK2);
+		_si5351->set_freq((_mode == OP_LSB ? (Config->getFrequency() + Config->getQFilter1()) : (Config->getFrequency() + Config->getQFilter2())) * 100, SI5351_CLK0);
+		_si5351->set_freq((_mode == OP_LSB ? (Config->getQFilter1() - Config->getBFOffset()) : (Config->getQFilter2() + Config->getBFOffset())) * 100, SI5351_CLK2);
 		_si5351->drive_strength(SI5351_CLK0, SI5351_DRIVE_2MA);
 		_si5351->drive_strength(SI5351_CLK2, SI5351_DRIVE_2MA);
 		_si5351->output_enable(SI5351_CLK1, 0);
@@ -96,6 +96,11 @@ void VFOController::showMain()
 	_gui->showMain();
 }
 
+void VFOController::scrollAnimation()
+{
+	_gui->scrollAnimation();
+}
+
 void VFOController::pushEncoderIncrement(int16_t increment, uint16_t period)
 {
 	_gui->pushEncoderIncrement(increment, period);
@@ -105,16 +110,32 @@ void VFOController::setFrequency(uint32_t frequency)
 {
 	if (_si5351_enabled)
 	{
-		_si5351->set_freq((frequency + Config->getIFrequency()) * 100, SI5351_CLK0);
+		_si5351->set_freq((_mode == OP_LSB ? (frequency + Config->getQFilter1()) : (frequency + Config->getQFilter2())) * 100, SI5351_CLK0);
 	}
 	Config->setFrequency(frequency);
 }
 
-void VFOController::setBFrequency(uint32_t frequency)
+void VFOController::setBFOffset(uint32_t frequency)
 {
 	if (_si5351_enabled)
 	{
-		_si5351->set_freq(frequency * 100, SI5351_CLK2);
+		_si5351->set_freq((_mode == OP_LSB ? (Config->getQFilter1() - frequency) : (Config->getQFilter2() + frequency)) * 100, SI5351_CLK2);
+	}
+}
+
+void VFOController::setQFilter1(uint32_t frequency)
+{
+	if (_si5351_enabled && _mode == OP_LSB)
+	{
+		_si5351->set_freq((frequency - Config->getBFOffset()) * 100, SI5351_CLK2);
+	}
+}
+
+void VFOController::setQFilter2(uint32_t frequency)
+{
+	if (_si5351_enabled && _mode == OP_USB)
+	{
+		_si5351->set_freq((frequency + Config->getBFOffset()) * 100, SI5351_CLK2);
 	}
 }
 
@@ -141,7 +162,9 @@ void VFOController::loadConfiguration()
 	Config->load();
 	setFrequency(Config->getFrequency());
 	setCalibration(Config->getCalibration());
-	setBFrequency(Config->getBFrequency());
+	setQFilter1(Config->getQFilter1());
+	setQFilter2(Config->getQFilter2());
+	setBFOffset(Config->getBFOffset());
 	setFrequency(Config->getFrequency());
 	setBrightness(Config->getBrightness());
 }
@@ -151,15 +174,18 @@ void VFOController::softReset()
 	Config->setFrequency(7125000);
 	Config->setCalibration(22334);
 	//Config->setCalibration(406000);
-	Config->setIFrequency(4913811);
-	Config->setBFrequency(4913511);
+	Config->setQFilter1(4913811);
+	Config->setQFilter2(4916611);
+	Config->setBFOffset(300);
 	Config->setBrightness(250);
 	Config->setEncoder(128);
 	Config->setCalibrationUin(10);
 
 	setFrequency(Config->getFrequency());
 	setCalibration(Config->getCalibration());
-	setBFrequency(Config->getBFrequency());
+	setQFilter1(Config->getQFilter1());
+	setQFilter2(Config->getQFilter2());
+	setBFOffset(Config->getBFOffset());
 	setFrequency(Config->getFrequency());
 	setBrightness(Config->getBrightness());
 }

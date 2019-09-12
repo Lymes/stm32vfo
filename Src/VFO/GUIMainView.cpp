@@ -85,13 +85,11 @@ void GUIMainView::drawBackground()
 	ST7735_Rect(60, 50, 100, 75, COLOR565_WHITE);
 	ST7735_Rect(110, 50, 150, 75, COLOR565_WHITE);
 
-	char tt[] = "SSB";
+	char tt[] = "LSB";
 	ST7735_PutStr7x11Ex(18, 57, VFO::utf8to1251(tt), COLOR565_YELLOW, _btn1,
 						VFO::backgroundColor);
 
 	_sMeter->draw(255);
-
-	ST7735_defineScrollArea(100, 160);
 }
 
 void GUIMainView::pushEncoderIncrement(int16_t increment, uint16_t period)
@@ -113,19 +111,6 @@ void GUIMainView::pushEncoderIncrement(int16_t increment, uint16_t period)
 	VFOC->triggerMemoryWrite();
 
 	_freqString->draw(freq);
-
-	//	static int tt = 0;
-	//	tt += increment;
-	//
-	//	if (tt > 160)
-	//	{
-	//		tt = 100;
-	//	}
-	//	if ( tt < 100 )
-	//	{
-	//		tt = 160;
-	//	}
-	//	ST7735_scroll(tt);
 }
 
 void GUIMainView::showVoltage(uint32_t value)
