@@ -39,6 +39,14 @@ void GUIController::draw()
 	_currentView->draw();
 }
 
+void GUIController::drawOpMode()
+{
+	if (_currentView == _mainView)
+	{
+		_mainView->drawOpMode();
+	}
+}
+
 void GUIController::pushEncoderIncrement(int16_t increment, uint16_t period)
 {
 	_currentView->pushEncoderIncrement(increment, period);
@@ -65,16 +73,24 @@ void GUIController::showMain()
 
 void GUIController::scrollAnimation()
 {
-	for (int t = 1; t < 161; t++)
-	{
-		ST7735_scroll(t);
-		DWT_Delay_us(1000);
-	}
+	// for (int t = 1; t < 161; t++)
+	// {
+	// 	ST7735_scroll(t);
+	// 	DWT_Delay_us(1000);
+	// }
 }
 
 void GUIController::showVoltage(uint32_t value)
 {
 	_currentView->showVoltage(value);
+}
+
+void GUIController::showSMeter(uint32_t value)
+{
+	if (_currentView == _mainView)
+	{
+		_currentView->showSMeter(value);
+	}
 }
 
 } /* namespace VFO */

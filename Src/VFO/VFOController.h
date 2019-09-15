@@ -44,11 +44,14 @@ public:
 	void pushEncoderIncrement(int16_t increment, uint16_t period);
 
 	void showVoltage(uint32_t value);
+	void showSMeter(uint32_t value);
 
 	void showSetup();
 	void showMain();
 
 	void scrollAnimation();
+	void invertMode();
+	OpMode opMode() { return _mode; }
 
 	void reset();
 	void softReset();

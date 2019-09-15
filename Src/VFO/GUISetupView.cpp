@@ -54,7 +54,7 @@ const struct SetupItem menu =
 			 _getBFOffset,
 			 _setBFOffset,
 			 NULL,
-			 false,
+			 true,
 			 0,
 			 NULL},
 			{"Разное",
@@ -156,7 +156,7 @@ void GUISetupView::pushEncoderIncrement(int16_t increment, uint16_t period)
 	if (!_editing)
 	{
 		_encCounter += increment;
-		if (abs(_encCounter) < _getEncoder()) /* half rotation step */
+		if (abs(_encCounter) < _getEncoder() * 3) /* full rotation step */
 		{
 			return;
 		}
@@ -178,7 +178,7 @@ void GUISetupView::pushEncoderIncrement(int16_t increment, uint16_t period)
 		if (_currentItem->children[_selectedItem].slow)
 		{
 			_encCounter += increment;
-			if (abs(_encCounter) < _getEncoder()) /* half rotation step */
+			if (abs(_encCounter) < _getEncoder() * 3) /* half rotation step */
 			{
 				return;
 			}

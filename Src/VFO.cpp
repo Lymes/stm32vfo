@@ -7,6 +7,7 @@
 #include "VFO/VFOController.h"
 #include "dwt_stm32_delay.h"
 #include "kbd/kbd.h"
+#include "adc.h"
 
 #define ENC_VALUE 500
 
@@ -17,8 +18,6 @@ volatile uint32_t _ticks = 0;
 void _vfoSetup(void);
 void _vfoLoopIteration(void);
 void _vfoSystick(void);
-
-extern uint16_t readVoltage(ADC_TypeDef *ADCx);
 
 extern "C"
 {
@@ -51,11 +50,20 @@ void KBDCallBack(int key, int action)
 	switch (action)
 	{
 	case KEY:
-		VFOC->menuKeyPressed();
-		//VFOC->initSI();
+		if (key == 0)
+		{
+			VFOC->menuKeyPressed();
+		}
+		else if (key == 1)
+		{
+			VFOC->invertMode();
+		}
 		break;
 	case LONGKEY:
-		VFOC->menuKeyPressed();
+		if (key == 0)
+		{
+			VFOC->menuKeyPressed();
+		}
 		break;
 	case DOUBLECLICK:
 		break;
@@ -75,6 +83,7 @@ void _vfoSetup(void)
 
 	// init keys
 	KBD_addKey(GPIOB, 5, LO, KBDCallBack);
+	KBD_addKey(GPIOB, 4, LO, KBDCallBack);
 
 	// start ADC
 	LL_ADC_REG_StartConversionSWStart(ADC1);
@@ -97,7 +106,10 @@ void _vfoLoopIteration(void)
 	}
 	_ticks = 0;
 
-	VFOC->showVoltage(readVoltage(ADC1));
+	ADC_values vals;
+	readVoltage(ADC1, &vals);
+	VFOC->showVoltage(vals.voltage);
+	VFOC->showSMeter(vals.s_meter);
 	VFOC->checkMemoryState();
 	//delay_us(10000);
 	HAL_Delay(10);

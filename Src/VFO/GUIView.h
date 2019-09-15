@@ -21,6 +21,7 @@ public:
 	virtual ~GUIView();
 
 	virtual void showVoltage(uint32_t value) = 0;
+	virtual void showSMeter(uint32_t value) {}
 
 	virtual void draw() = 0;
 	virtual void pushEncoderIncrement(int16_t increment, uint16_t period) = 0;

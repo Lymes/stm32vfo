@@ -73,6 +73,14 @@ void GUIMainView::draw()
 	_freqString->draw(Config->getFrequency());
 }
 
+void GUIMainView::drawOpMode()
+{
+	char tt[4];
+	strcpy(tt, ((VFOC->opMode() == OP_LSB) ? "LSB" : "USB"));
+	ST7735_PutStr7x11Ex(18, 57, VFO::utf8to1251(tt), COLOR565_YELLOW, _btn1,
+						VFO::backgroundColor);
+}
+
 void GUIMainView::drawBackground()
 {
 	_window->draw();
@@ -85,11 +93,9 @@ void GUIMainView::drawBackground()
 	ST7735_Rect(60, 50, 100, 75, COLOR565_WHITE);
 	ST7735_Rect(110, 50, 150, 75, COLOR565_WHITE);
 
-	char tt[] = "LSB";
-	ST7735_PutStr7x11Ex(18, 57, VFO::utf8to1251(tt), COLOR565_YELLOW, _btn1,
-						VFO::backgroundColor);
+	drawOpMode();
 
-	_sMeter->draw(255);
+	_sMeter->draw();
 }
 
 void GUIMainView::pushEncoderIncrement(int16_t increment, uint16_t period)
@@ -118,6 +124,11 @@ void GUIMainView::showVoltage(uint32_t value)
 	char buf[6];
 	ST7735_PutStr5x7Ex(1, 116, 60, VFO::voltageToStr(value, buf, 6),
 					   COLOR565_WHITE, _btn3, VFO::backgroundColor);
+}
+
+void GUIMainView::showSMeter(uint32_t value)
+{
+	_sMeter->setValue(value);
 }
 
 } /* namespace VFO */

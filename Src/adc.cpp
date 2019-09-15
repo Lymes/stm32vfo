@@ -1,10 +1,12 @@
+#include "adc.h"
+
 #include "stm32f1xx_hal.h"
 #include "stm32f103xb.h"
 #include "stm32f1xx_ll_adc.h"
 #include <stdint.h>
 #include "Configuration.h"
 
-uint16_t readVoltage(ADC_TypeDef *ADCx)
+void readVoltage(ADC_TypeDef *ADCx, struct ADC_values *values)
 {
 	if (LL_ADC_IsEnabled(ADCx) == 0)
 	{
@@ -30,11 +32,17 @@ uint16_t readVoltage(ADC_TypeDef *ADCx)
 
 	uint32_t ADC_value = LL_ADC_INJ_ReadConversionData12(ADCx, LL_ADC_INJ_RANK_1);
 	uint32_t REF_value = LL_ADC_INJ_ReadConversionData12(ADCx, LL_ADC_INJ_RANK_2);
+	uint32_t SMTR_value = LL_ADC_INJ_ReadConversionData12(ADCx, LL_ADC_INJ_RANK_3);
 
-	static uint32_t oldValue = 0;
+	static uint32_t oldVValue = 0;
 	uint32_t voltage = (Config->getCalibrationUin() * 12 * ADC_value) / REF_value; /*   calculate voltage   */
-	voltage = (oldValue * 15 + voltage) >> 4;									   // cumulative moving average filter
-	oldValue = voltage;
+	voltage = (oldVValue * 15 + voltage) >> 4;									   // cumulative moving average filter
+	oldVValue = voltage;
+	values->voltage = voltage;
 
-	return voltage;
+	static uint32_t oldSValue = 0;
+	uint32_t sValue = (120 * SMTR_value) / REF_value; /*   calculate s-meter  */
+	sValue = (oldSValue * 15 + sValue) >> 4;		  // cumulative moving average filter
+	oldSValue = sValue;
+	values->s_meter = sValue;
 }

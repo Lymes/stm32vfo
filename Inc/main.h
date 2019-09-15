@@ -84,6 +84,10 @@ void Error_Handler(void);
 #define TFT_RESET_GPIO_Port GPIOA
 #define TFT_CS_Pin GPIO_PIN_12
 #define TFT_CS_GPIO_Port GPIOA
+#define BTN_SSB_Pin GPIO_PIN_3
+#define BTN_SSB_GPIO_Port GPIOB
+#define BTN_BAND_Pin GPIO_PIN_4
+#define BTN_BAND_GPIO_Port GPIOB
 #define BTN_STP_Pin GPIO_PIN_5
 #define BTN_STP_GPIO_Port GPIOB
 #define ENC1_Pin GPIO_PIN_6

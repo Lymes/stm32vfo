@@ -9,11 +9,11 @@ uint16_t scr_height;
 
 void ST7735_write(uint8_t data)
 {
-//	while (LL_DMA_IsEnabledChannel(DMA1, LL_DMA_CHANNEL_5)) {}
-//	uint8_t tt = data;
-//	LL_DMA_SetMemoryAddress(DMA1, LL_DMA_CHANNEL_5, (uint32_t) &tt);
-//	LL_DMA_SetDataLength(DMA1, LL_DMA_CHANNEL_5, 1);
-//	LL_DMA_EnableChannel(DMA1, LL_DMA_CHANNEL_5);
+	//	while (LL_DMA_IsEnabledChannel(DMA1, LL_DMA_CHANNEL_5)) {}
+	//	uint8_t tt = data;
+	//	LL_DMA_SetMemoryAddress(DMA1, LL_DMA_CHANNEL_5, (uint32_t) &tt);
+	//	LL_DMA_SetDataLength(DMA1, LL_DMA_CHANNEL_5, 1);
+	//	LL_DMA_EnableChannel(DMA1, LL_DMA_CHANNEL_5);
 
 	while (!LL_SPI_IsActiveFlag_TXE(SPI_PORT))
 	{
@@ -25,8 +25,6 @@ void ST7735_write(uint8_t data)
 	{
 	}
 }
-
-
 
 void ST7735_cmd(uint8_t cmd)
 {
@@ -49,11 +47,11 @@ void ST7735_Init(void)
 {
 	DWT_Delay_Init();
 	LL_SPI_Enable(SPI_PORT);
-//	LL_SPI_EnableDMAReq_TX(SPI_PORT);
-//	LL_SPI_EnableDMAReq_RX(SPI_PORT);
-//	LL_DMA_EnableIT_TC(DMA1, LL_DMA_CHANNEL_5);
-//	LL_DMA_EnableIT_HT(DMA1, LL_DMA_CHANNEL_5);
-//	LL_DMA_EnableIT_TE(DMA1, LL_DMA_CHANNEL_5);
+	//	LL_SPI_EnableDMAReq_TX(SPI_PORT);
+	//	LL_SPI_EnableDMAReq_RX(SPI_PORT);
+	//	LL_DMA_EnableIT_TC(DMA1, LL_DMA_CHANNEL_5);
+	//	LL_DMA_EnableIT_HT(DMA1, LL_DMA_CHANNEL_5);
+	//	LL_DMA_EnableIT_TE(DMA1, LL_DMA_CHANNEL_5);
 
 	// Reset display
 	CS_H();
@@ -66,44 +64,44 @@ void ST7735_Init(void)
 	delay_us(500);
 	CS_L();
 
-	ST7735_cmd(0x11);     // Sleep out, booster on
+	ST7735_cmd(0x11); // Sleep out, booster on
 	delay_us(20);
 
-	ST7735_cmd(0xb1);     // In normal mode (full colors):
+	ST7735_cmd(0xb1); // In normal mode (full colors):
 	A0_H();
-//	ST7735_write(0x05);   //   RTNA set 1-line period: RTNA2, RTNA0
-//	ST7735_write(0x3c);   //   Front porch: FPA5,FPA4,FPA3,FPA2
-//	ST7735_write(0x3c);   //   Back porch: BPA5,BPA4,BPA3,BPA2
-	ST7735_write(0x00);   //   fastest refresh
-	ST7735_write(0x06);   //   6 lines front porch
-	ST7735_write(0x03);   //   3 lines backporch
+	//	ST7735_write(0x05);   //   RTNA set 1-line period: RTNA2, RTNA0
+	//	ST7735_write(0x3c);   //   Front porch: FPA5,FPA4,FPA3,FPA2
+	//	ST7735_write(0x3c);   //   Back porch: BPA5,BPA4,BPA3,BPA2
+	ST7735_write(0x00); //   fastest refresh
+	ST7735_write(0x06); //   6 lines front porch
+	ST7735_write(0x03); //   3 lines backporch
 
-	ST7735_cmd(0xb2);     // In idle mode (8-colors):
+	ST7735_cmd(0xb2); // In idle mode (8-colors):
 	A0_H();
-	ST7735_write(0x05);   //   RTNB set 1-line period: RTNAB, RTNB0
-	ST7735_write(0x3c);   //   Front porch: FPB5,FPB4,FPB3,FPB2
-	ST7735_write(0x3c);   //   Back porch: BPB5,BPB4,BPB3,BPB2
+	ST7735_write(0x05); //   RTNB set 1-line period: RTNAB, RTNB0
+	ST7735_write(0x3c); //   Front porch: FPB5,FPB4,FPB3,FPB2
+	ST7735_write(0x3c); //   Back porch: BPB5,BPB4,BPB3,BPB2
 
-	ST7735_cmd(0xb3);     // In partial mode + full colors:
+	ST7735_cmd(0xb3); // In partial mode + full colors:
 	A0_H();
-	ST7735_write(0x05);   //   RTNC set 1-line period: RTNC2, RTNC0
-	ST7735_write(0x3c);   //   Front porch: FPC5,FPC4,FPC3,FPC2
-	ST7735_write(0x3c);   //   Back porch: BPC5,BPC4,BPC3,BPC2
-	ST7735_write(0x05);   //   RTND set 1-line period: RTND2, RTND0
-	ST7735_write(0x3c);   //   Front porch: FPD5,FPD4,FPD3,FPD2
-	ST7735_write(0x3c);   //   Back porch: BPD5,BPD4,BPD3,BPD2
+	ST7735_write(0x05); //   RTNC set 1-line period: RTNC2, RTNC0
+	ST7735_write(0x3c); //   Front porch: FPC5,FPC4,FPC3,FPC2
+	ST7735_write(0x3c); //   Back porch: BPC5,BPC4,BPC3,BPC2
+	ST7735_write(0x05); //   RTND set 1-line period: RTND2, RTND0
+	ST7735_write(0x3c); //   Front porch: FPD5,FPD4,FPD3,FPD2
+	ST7735_write(0x3c); //   Back porch: BPD5,BPD4,BPD3,BPD2
 
 	ST7735_cmd(0xb6); // display settings #5
 	A0_H();
-	ST7735_write(0x15);          // 1 clock cycle nonoverlap, 2 cycle gate rise, 3 cycle oscil. equalize
-	ST7735_write(0x02);          // fix on VTL
+	ST7735_write(0x15); // 1 clock cycle nonoverlap, 2 cycle gate rise, 3 cycle oscil. equalize
+	ST7735_write(0x02); // fix on VTL
 
-	ST7735_cmd(0xB4);     // Display dot inversion control:
-	ST7735_data(0x03);    //   NLB,NLC
+	ST7735_cmd(0xB4);  // Display dot inversion control:
+	ST7735_data(0x03); //   NLB,NLC
 
-	ST7735_cmd(0x3a);     // Interface pixel format
+	ST7735_cmd(0x3a); // Interface pixel format
 	//ST7735_data(0x03);    // 12-bit/pixel RGB 4-4-4 (4k colors)
-	ST7735_data(0x05);    // 16-bit/pixel RGB 5-6-5 (65k colors)
+	ST7735_data(0x05); // 16-bit/pixel RGB 5-6-5 (65k colors)
 	//ST7735_data(0x06);    // 18-bit/pixel RGB 6-6-6 (256k colors)
 
 	//ST7735_cmd(0x36);     // Memory data access control:
@@ -117,18 +115,18 @@ void ST7735_Init(void)
 	//ST7735_data(0x60);    // X-Y Exchange,X-Mirror
 	//ST7735_data(0xE0);    // X-Y Exchange,X-Mirror,Y-Mirror
 
-	ST7735_cmd(0x20);     // Display inversion off
+	ST7735_cmd(0x20); // Display inversion off
 	//ST7735_cmd(0x21);     // Display inversion on
 
-	ST7735_cmd(0x13);     // Partial mode off
+	ST7735_cmd(0x13); // Partial mode off
 
-	ST7735_cmd(0x26);     // Gamma curve set:
+	ST7735_cmd(0x26); // Gamma curve set:
 	//ST7735_data(0x01);    // Gamma curve 1 (G2.2) or (G1.0)
-	ST7735_data(0x02);    // Gamma curve 2 (G1.8) or (G2.5)
+	ST7735_data(0x02); // Gamma curve 2 (G1.8) or (G2.5)
 	//ST7735_data(0x04);    // Gamma curve 3 (G2.5) or (G2.2)
 	//ST7735_data(0x08);    // Gamma curve 4 (G1.0) or (G1.8)
 
-	ST7735_cmd(0x29);     // Display on
+	ST7735_cmd(0x29); // Display on
 
 	CS_H();
 
@@ -190,7 +188,7 @@ void ST7735_Clear(uint16_t color)
 	uint8_t CH, CL;
 
 	CH = color >> 8;
-	CL = (uint8_t) color;
+	CL = (uint8_t)color;
 
 	CS_L();
 	ST7735_AddrSet(0, 0, scr_width - 1, scr_height - 1);
@@ -209,7 +207,7 @@ void ST7735_Pixel(uint16_t X, uint16_t Y, uint16_t color)
 	ST7735_AddrSet(X, Y, X, Y);
 	A0_H();
 	ST7735_write(color >> 8);
-	ST7735_write((uint8_t) color);
+	ST7735_write((uint8_t)color);
 	CS_H();
 }
 
@@ -217,7 +215,7 @@ void ST7735_HLine(uint16_t X1, uint16_t X2, uint16_t Y, uint16_t color)
 {
 	uint16_t i;
 	uint8_t CH = color >> 8;
-	uint8_t CL = (uint8_t) color;
+	uint8_t CL = (uint8_t)color;
 
 	CS_L();
 	ST7735_AddrSet(X1, Y, X2, Y);
@@ -234,7 +232,7 @@ void ST7735_VLine(uint16_t X, uint16_t Y1, uint16_t Y2, uint16_t color)
 {
 	uint16_t i;
 	uint8_t CH = color >> 8;
-	uint8_t CL = (uint8_t) color;
+	uint8_t CL = (uint8_t)color;
 
 	CS_L();
 	ST7735_AddrSet(X, Y1, X, Y2);
@@ -316,8 +314,8 @@ void ST7735_Line(int16_t X1, int16_t Y1, int16_t X2, int16_t Y2, uint16_t color)
 	ST7735_Pixel(X1, Y1, color);
 }
 
-void ST7735_LineA(int16_t X1, int16_t Y1, int16_t X2, int16_t Y2, void* ptr,
-		void (*setPix)(void *, uint16_t, uint16_t))
+void ST7735_LineA(int16_t X1, int16_t Y1, int16_t X2, int16_t Y2, void *ptr,
+				  void (*setPix)(void *, uint16_t, uint16_t))
 {
 	int16_t dX = X2 - X1;
 	int16_t dY = Y2 - Y1;
@@ -370,7 +368,7 @@ void ST7735_LineA(int16_t X1, int16_t Y1, int16_t X2, int16_t Y2, void* ptr,
 }
 
 void ST7735_Rect(uint16_t X1, uint16_t Y1, uint16_t X2, uint16_t Y2,
-		uint16_t color)
+				 uint16_t color)
 {
 	ST7735_HLine(X1, X2, Y1, color);
 	ST7735_HLine(X1, X2, Y2, color);
@@ -379,12 +377,12 @@ void ST7735_Rect(uint16_t X1, uint16_t Y1, uint16_t X2, uint16_t Y2,
 }
 
 void ST7735_FillRect(uint16_t X1, uint16_t Y1, uint16_t X2, uint16_t Y2,
-		uint16_t color)
+					 uint16_t color)
 {
 	uint16_t i;
 	uint16_t FS = (X2 - X1 + 1) * (Y2 - Y1 + 1);
 	uint8_t CH = color >> 8;
-	uint8_t CL = (uint8_t) color;
+	uint8_t CL = (uint8_t)color;
 
 	CS_L();
 	ST7735_AddrSet(X1, Y1, X2, Y2);
@@ -397,9 +395,8 @@ void ST7735_FillRect(uint16_t X1, uint16_t Y1, uint16_t X2, uint16_t Y2,
 	CS_H();
 }
 
-
 void ST7735_FillRectEx(uint16_t X1, uint16_t Y1, uint16_t X2, uint16_t Y2,
-		void *ptr, uint16_t (*bgcolor)(void *, uint8_t, uint8_t))
+					   void *ptr, uint16_t (*bgcolor)(void *, uint8_t, uint8_t))
 {
 	uint16_t row, col;
 	//uint16_t FS = (X2 - X1 + 1) * (Y2 - Y1 + 1);
@@ -411,26 +408,25 @@ void ST7735_FillRectEx(uint16_t X1, uint16_t Y1, uint16_t X2, uint16_t Y2,
 	{
 		for (col = X1; col <= X2; col++)
 		{
-		uint16_t color = bgcolor(ptr, col, row);
-		uint8_t CH = color >> 8;
-		uint8_t CL = (uint8_t) color;
-		ST7735_write(CH);
-		ST7735_write(CL);
+			uint16_t color = bgcolor(ptr, col, row);
+			uint8_t CH = color >> 8;
+			uint8_t CL = (uint8_t)color;
+			ST7735_write(CH);
+			ST7735_write(CL);
 		}
 	}
 	CS_H();
 }
 
-
 void ST7735_PutChar5x7(uint8_t scale, uint16_t X, uint16_t Y, uint8_t chr,
-		uint16_t color, uint16_t bgcolor)
+					   uint16_t color, uint16_t bgcolor)
 {
 	uint16_t i, j;
 	uint8_t buffer[5];
 	uint8_t CH = color >> 8;
-	uint8_t CL = (uint8_t) color;
+	uint8_t CL = (uint8_t)color;
 	uint8_t BCH = bgcolor >> 8;
-	uint8_t BCL = (uint8_t) bgcolor;
+	uint8_t BCL = (uint8_t)bgcolor;
 
 	if ((chr >= 0x20) && (chr <= 0x7F))
 	{
@@ -492,9 +488,9 @@ void ST7735_PutChar5x7(uint8_t scale, uint16_t X, uint16_t Y, uint8_t chr,
 				// pixel group
 				if ((buffer[i] >> j) & 0x01)
 					ST7735_FillRect(X + (i * scale), Y + (j * scale),
-							X + (i * scale) + scale - 1,
-							Y + (j * scale) + scale - 1,
-							((buffer[i] >> j) & 0x01) ? color : bgcolor);
+									X + (i * scale) + scale - 1,
+									Y + (j * scale) + scale - 1,
+									((buffer[i] >> j) & 0x01) ? color : bgcolor);
 			}
 			// vertical spacing
 			//      ST7735_FillRect(X + (i * scale), Y + (j * scale), X + (i * scale) + scale - 1, Y + (j * scale) + scale - 1, V_SEP);
@@ -508,7 +504,7 @@ void ST7735_PutChar5x7(uint8_t scale, uint16_t X, uint16_t Y, uint8_t chr,
 }
 
 void ST7735_PutStr5x7(uint8_t scale, uint8_t X, uint8_t Y, char *str,
-		uint16_t color, uint16_t bgcolor)
+					  uint16_t color, uint16_t bgcolor)
 {
 	// scale equals 1 drawing faster
 	if (scale == 1)
@@ -556,14 +552,14 @@ void ST7735_PutStr5x7(uint8_t scale, uint8_t X, uint8_t Y, char *str,
 }
 
 void ST7735_PutChar7x11(uint16_t X, uint16_t Y, uint8_t chr, uint16_t color,
-		uint16_t bgcolor)
+						uint16_t bgcolor)
 {
 	uint16_t i, j;
 	uint8_t buffer[11];
 	uint8_t CH = color >> 8;
-	uint8_t CL = (uint8_t) color;
+	uint8_t CL = (uint8_t)color;
 	uint8_t BCH = bgcolor >> 8;
-	uint8_t BCL = (uint8_t) bgcolor;
+	uint8_t BCL = (uint8_t)bgcolor;
 
 	if ((chr >= 0x20) && (chr <= 0x7F))
 	{
@@ -615,7 +611,7 @@ void ST7735_PutChar7x11(uint16_t X, uint16_t Y, uint8_t chr, uint16_t color,
 }
 
 void ST7735_PutStr7x11(uint8_t X, uint8_t Y, char *str, uint16_t color,
-		uint16_t bgcolor)
+					   uint16_t bgcolor)
 {
 	while (*str)
 	{
@@ -638,7 +634,7 @@ void ST7735_PutStr7x11(uint8_t X, uint8_t Y, char *str, uint16_t color,
 }
 
 void ST7735_PutStr7x11Ex(uint8_t X, uint8_t Y, char *str, uint16_t color,
-		void *ptr, uint16_t (*bgcolor)(void *, uint8_t, uint8_t))
+						 void *ptr, uint16_t (*bgcolor)(void *, uint8_t, uint8_t))
 {
 	while (*str)
 	{
@@ -661,12 +657,12 @@ void ST7735_PutStr7x11Ex(uint8_t X, uint8_t Y, char *str, uint16_t color,
 }
 
 void ST7735_PutChar7x11Ex(uint16_t X, uint16_t Y, uint8_t chr, uint16_t color,
-		void *ptr, uint16_t (*bgcolor)(void *, uint8_t, uint8_t))
+						  void *ptr, uint16_t (*bgcolor)(void *, uint8_t, uint8_t))
 {
 	uint16_t i, j;
 	uint8_t buffer[11];
 	uint8_t CH = color >> 8;
-	uint8_t CL = (uint8_t) color;
+	uint8_t CL = (uint8_t)color;
 
 	if ((chr >= 0x20) && (chr <= 0x7F))
 	{
@@ -700,7 +696,7 @@ void ST7735_PutChar7x11Ex(uint16_t X, uint16_t Y, uint8_t chr, uint16_t color,
 			{
 				uint16_t bg = bgcolor(ptr, X + j, Y + i);
 				uint8_t BCH = bg >> 8;
-				uint8_t BCL = (uint8_t) bg;
+				uint8_t BCL = (uint8_t)bg;
 				ST7735_write(BCH);
 				ST7735_write(BCL);
 			}
@@ -708,7 +704,7 @@ void ST7735_PutChar7x11Ex(uint16_t X, uint16_t Y, uint8_t chr, uint16_t color,
 		// vertical spacing
 		uint16_t bg = bgcolor(ptr, X + 7, Y + i);
 		uint8_t BCH = bg >> 8;
-		uint8_t BCL = (uint8_t) bg;
+		uint8_t BCL = (uint8_t)bg;
 		ST7735_write(BCH);
 		ST7735_write(BCL);
 	}
@@ -718,7 +714,7 @@ void ST7735_PutChar7x11Ex(uint16_t X, uint16_t Y, uint8_t chr, uint16_t color,
 	{
 		uint16_t bg = bgcolor(ptr, X + i, Y + 11);
 		uint8_t BCH = bg >> 8;
-		uint8_t BCL = (uint8_t) bg;
+		uint8_t BCL = (uint8_t)bg;
 		ST7735_write(BCH);
 		ST7735_write(BCL);
 	}
@@ -727,13 +723,13 @@ void ST7735_PutChar7x11Ex(uint16_t X, uint16_t Y, uint8_t chr, uint16_t color,
 }
 
 void ST7735_PutChar5x7Ex(uint8_t scale, uint16_t X, uint16_t Y, uint8_t chr,
-		uint16_t color, void *ptr,
-		uint16_t (*bgcolor)(void *, uint8_t, uint8_t))
+						 uint16_t color, void *ptr,
+						 uint16_t (*bgcolor)(void *, uint8_t, uint8_t))
 {
 	uint16_t i, j;
 	uint8_t buffer[5];
 	uint8_t CH = color >> 8;
-	uint8_t CL = (uint8_t) color;
+	uint8_t CL = (uint8_t)color;
 
 	if ((chr >= 0x20) && (chr <= 0x7F))
 	{
@@ -771,7 +767,7 @@ void ST7735_PutChar5x7Ex(uint8_t scale, uint16_t X, uint16_t Y, uint8_t chr,
 				{
 					uint16_t bg = bgcolor(ptr, X + i, Y + j);
 					uint8_t BCH = bg >> 8;
-					uint8_t BCL = (uint8_t) bg;
+					uint8_t BCL = (uint8_t)bg;
 					ST7735_write(BCH);
 					ST7735_write(BCL);
 				}
@@ -779,7 +775,7 @@ void ST7735_PutChar5x7Ex(uint8_t scale, uint16_t X, uint16_t Y, uint8_t chr,
 			// vertical spacing
 			uint16_t bg = bgcolor(ptr, X + 5, Y + j);
 			uint8_t BCH = bg >> 8;
-			uint8_t BCL = (uint8_t) bg;
+			uint8_t BCL = (uint8_t)bg;
 			ST7735_write(BCH);
 			ST7735_write(BCL);
 		}
@@ -789,7 +785,7 @@ void ST7735_PutChar5x7Ex(uint8_t scale, uint16_t X, uint16_t Y, uint8_t chr,
 		{
 			uint16_t bg = bgcolor(ptr, X + i, Y + 7);
 			uint8_t BCH = bg >> 8;
-			uint8_t BCL = (uint8_t) bg;
+			uint8_t BCL = (uint8_t)bg;
 			ST7735_write(BCH);
 			ST7735_write(BCL);
 		}
@@ -805,16 +801,16 @@ void ST7735_PutChar5x7Ex(uint8_t scale, uint16_t X, uint16_t Y, uint8_t chr,
 				if ((buffer[i] >> j) & 0x01)
 				{
 					ST7735_FillRect(X + (i * scale), Y + (j * scale),
-							X + (i * scale) + scale - 1,
-							Y + (j * scale) + scale - 1,
-							color);
+									X + (i * scale) + scale - 1,
+									Y + (j * scale) + scale - 1,
+									color);
 				}
 				else
 				{
 					ST7735_FillRectEx(X + (i * scale), Y + (j * scale),
-							X + (i * scale) + scale - 1,
-							Y + (j * scale) + scale - 1,
-							ptr, bgcolor);
+									  X + (i * scale) + scale - 1,
+									  Y + (j * scale) + scale - 1,
+									  ptr, bgcolor);
 				}
 			}
 			// vertical spacing
@@ -829,8 +825,8 @@ void ST7735_PutChar5x7Ex(uint8_t scale, uint16_t X, uint16_t Y, uint8_t chr,
 }
 
 void ST7735_PutStr5x7Ex(uint8_t scale, uint8_t X, uint8_t Y, char *str,
-		uint16_t color, void *ptr,
-		uint16_t (*bgcolor)(void *, uint8_t, uint8_t))
+						uint16_t color, void *ptr,
+						uint16_t (*bgcolor)(void *, uint8_t, uint8_t))
 {
 	// scale equals 1 drawing faster
 	if (scale == 1)
@@ -877,7 +873,6 @@ void ST7735_PutStr5x7Ex(uint8_t scale, uint8_t X, uint8_t Y, char *str,
 	}
 }
 
-
 void ST7735_defineScrollArea(int16_t tfa, int16_t bfa)
 {
 	CS_L();
@@ -889,7 +884,6 @@ void ST7735_defineScrollArea(int16_t tfa, int16_t bfa)
 	ST7735_write((uint8_t)bfa);
 	CS_H();
 }
-
 
 void ST7735_scroll(int16_t addr)
 {

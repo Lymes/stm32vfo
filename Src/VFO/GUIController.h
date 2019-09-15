@@ -29,9 +29,11 @@ public:
 	void showSetup();
 	void showMain();
 	void showVoltage(uint32_t value);
+	void showSMeter(uint32_t value);
 	void scrollAnimation();
 
 	void draw();
+	void drawOpMode();
 	void pushEncoderIncrement(int16_t increment, uint16_t period);
 
 	void menuKeyPressed();

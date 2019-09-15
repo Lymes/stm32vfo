@@ -86,6 +86,11 @@ void VFOController::showVoltage(uint32_t value)
 	_gui->showVoltage(value);
 }
 
+void VFOController::showSMeter(uint32_t value)
+{
+	_gui->showSMeter(value);
+}
+
 void VFOController::showSetup()
 {
 	_gui->showSetup();
@@ -99,6 +104,14 @@ void VFOController::showMain()
 void VFOController::scrollAnimation()
 {
 	_gui->scrollAnimation();
+}
+
+void VFOController::invertMode()
+{
+	_mode = (_mode == OP_LSB) ? OP_USB : OP_LSB;
+	setFrequency(Config->getFrequency());
+	setBFOffset(Config->getBFOffset());
+	_gui->drawOpMode();
 }
 
 void VFOController::pushEncoderIncrement(int16_t increment, uint16_t period)

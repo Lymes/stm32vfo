@@ -13,7 +13,6 @@
 #include "GUI/FrequencyString.h"
 #include "GUI/SMeter.h"
 
-
 namespace VFO
 {
 
@@ -30,18 +29,20 @@ public:
 	GUIMainView();
 	virtual ~GUIMainView();
 
+	void drawOpMode();
+
 	virtual void draw();
 	virtual void pushEncoderIncrement(int16_t increment, uint16_t period);
 	virtual void menuKeyPressed();
 
 	virtual void showVoltage(uint32_t value);
+	virtual void showSMeter(uint32_t value);
 
 private:
 	void drawBackground();
 	void drawFrequency(unsigned long frequency);
 
 	void drawFrequency(uint8_t x, uint8_t y, unsigned long frequency);
-
 };
 
 } /* namespace VFO */
